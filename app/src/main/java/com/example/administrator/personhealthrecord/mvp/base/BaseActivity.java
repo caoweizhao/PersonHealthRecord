@@ -1,4 +1,4 @@
-package com.example.administrator.personhealthrecord.Acitvity;
+package com.example.administrator.personhealthrecord.mvp.base;
 
 import android.app.Activity;
 import android.os.Bundle;
