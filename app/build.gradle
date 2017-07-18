@@ -30,4 +30,5 @@ dependencies {
     //BottomBar
     compile 'com.roughike:bottom-bar:2.3.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.jakewharton:butterknife:8.1.0'
 }
