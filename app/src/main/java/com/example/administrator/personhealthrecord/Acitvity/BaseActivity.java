@@ -6,8 +6,6 @@ import android.os.PersistableBundle;
 
 import com.example.administrator.personhealthrecord.Application.MyApplication;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by andy on 2017/7/18.
@@ -16,12 +14,10 @@ import butterknife.Unbinder;
 public class BaseActivity extends Activity{
     protected final String TAG = getClass().getSimpleName();
     public static BaseActivity activity;
-    public Unbinder unbinder;
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         // TODO: 16/9/1  add the third service. eg.umeng ...
-         unbinder=ButterKnife.bind(this);
         activity = this;
         ((MyApplication) MyApplication.getContext()).addActivity(this);
         init();
@@ -38,6 +34,7 @@ public class BaseActivity extends Activity{
     protected void onPause() {
         super.onPause();
         activity = null;
+
     }
 
     private void init() {
@@ -63,7 +60,7 @@ public class BaseActivity extends Activity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
         ((MyApplication) MyApplication.getContext()).removeActivity(this);
     }
+
 }
