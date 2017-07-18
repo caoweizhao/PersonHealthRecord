@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/ic_home_page"
+        id="@+id/tab_home_page"
+        title="@string/home_page"/>
+    <tab
+        icon="@drawable/ic_community"
+        id="@+id/tab_community"
+        title="@string/community"/>
+    <tab
+        icon="@drawable/ic_health"
+        id="@+id/tab_health"
+        title="@string/health"/>
+    <tab
+        icon="@drawable/ic_physical_examination"
+        id="@+id/tab_physical_examination"
+        title="@string/physical_examination"/>
+
+</tabs>

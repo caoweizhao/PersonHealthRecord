@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">PersonHealthRecord</string>
+
+    <string name="home_page">首页</string>
+    <string name="health">健康</string>
+    <string name="physical_examination">体检</string>
+    <string name="community">社区</string>
+
+    <!--menu-->
+    <string name="my_book">我的预约</string>
+    <string name="account_info">账户信息</string>
+    <string name="my_medical_record_folder">我的病历夹</string>
+    <string name="my_phr_management">个人PHR管理</string>
+    <string name="health_assessment">健康指数评估</string>
 </resources>
