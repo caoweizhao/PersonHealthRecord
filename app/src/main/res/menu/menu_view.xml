@@ -4,23 +4,28 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/my_book"
+            android:icon="@drawable/ic_book"
             android:title="@string/my_book"
             />
 
         <item
             android:id="@+id/account_info"
+            android:icon="@drawable/ic_account_info"
             android:title="@string/account_info"/>
 
         <item
             android:id="@+id/my_medical_record_folder"
+            android:icon="@drawable/ic_medical_record_folder"
             android:title="@string/my_medical_record_folder"/>
 
         <item
             android:id="@+id/my_phr_management"
+            android:icon="@drawable/ic_phr_management"
             android:title="@string/my_phr_management"/>
 
         <item
             android:id="@+id/health_assessment"
+            android:icon="@drawable/ic_assessment"
             android:title="@string/health_assessment"/>
     </group>
 </menu>
