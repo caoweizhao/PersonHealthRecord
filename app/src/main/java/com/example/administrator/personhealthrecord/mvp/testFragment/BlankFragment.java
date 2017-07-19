@@ -16,6 +16,9 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.HealthInfo;
 import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
+import com.example.administrator.personhealthrecord.others.GlideImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,11 +97,32 @@ public class BlankFragment extends MvpFragment<BlankPresenter> {
             healthInfos.add(healthInfo);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            mRecyclerView.setAdapter(new AbstractItemAdapter<HealthInfo>(R.layout.health_info_item, healthInfos));
+            mRecyclerView.setAdapter(new AbstractItemAdapter<HealthInfo>(R.layout.abstract_item, healthInfos));
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         }
 
         mPresenter.presenterMethod();
+
+        List images = new ArrayList();
+        images.add("http://img06.tooopen.com/images/20160921/tooopen_sy_179583447187.jpg");
+        images.add("http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg");
+        images.add("http://img02.tooopen.com/images/20160509/tooopen_sy_161967094653.jpg");
+        images.add("http://pic.sc.chinaz.com/files/pic/pic9/201208/xpic6813.jpg");
+        List titles = new ArrayList();
+        titles.add("Title1");
+        titles.add("Title2");
+        titles.add("Title3");
+        titles.add("Title4");
+        Banner banner = (Banner) view.findViewById(R.id.banner);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(images);
+        //banner设置方法全部调用完毕时最后调用
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+        banner.setBannerTitles(titles);
+        banner.start();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -121,12 +145,12 @@ public class BlankFragment extends MvpFragment<BlankPresenter> {
 
     @Override
     public void showLoading() {
-        Log.d("BlankFragment","showLoading");
+        Log.d("BlankFragment", "showLoading");
     }
 
     @Override
     public void dismissLoading() {
-        Log.d("BlankFragment","dismissLoading");
+        Log.d("BlankFragment", "dismissLoading");
     }
 
     /**

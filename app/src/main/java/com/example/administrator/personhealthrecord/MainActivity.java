@@ -2,7 +2,6 @@ package com.example.administrator.personhealthrecord;
 
 import android.os.Build;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.administrator.personhealthrecord.mvp.testFragment.BlankFragment;
@@ -19,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container,blankFragment)
+                    .replace(R.id.main_container, blankFragment)
                     .commit();
         }
+
         /*SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
         // enable status bar tint
         systemBarTintManager.setStatusBarTintEnabled(true);
@@ -29,4 +29,6 @@ public class MainActivity extends AppCompatActivity {
         //systemBarTintManager.setNavigationBarTintEnabled(true);
         systemBarTintManager.setNavigationBarTintColor(R.color.colorPrimary);*/
     }
+
+
 }

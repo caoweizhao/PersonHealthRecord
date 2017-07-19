@@ -23,11 +23,11 @@ public class HealthInfoAdapter extends BaseQuickAdapter<HealthInfo, BaseViewHold
 
     @Override
     protected void convert(BaseViewHolder helper, HealthInfo item) {
-        helper.setText(R.id.health_info_item_title, item.getTitle())
-                .setText(R.id.health_info_item_summary, item.getSummary())
+        helper.setText(R.id.abstract_item__title, item.getTitle())
+                .setText(R.id.abstract_item__summary, item.getSummary())
                 .setText(R.id.health_info_item_like_count, "10")
                 .setText(R.id.health_info_item_comment, "20")
-                .setImageResource(R.id.health_info_item_img, R.mipmap.ic_launcher_round)
+                .setImageResource(R.id.abstract_item__img, R.mipmap.ic_launcher_round)
                 .setOnClickListener(R.id.health_info_item_like_count, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

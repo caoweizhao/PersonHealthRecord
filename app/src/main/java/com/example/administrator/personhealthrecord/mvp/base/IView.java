@@ -4,7 +4,7 @@ package com.example.administrator.personhealthrecord.mvp.base;
  * Created by Administrator on 2017-7-17.
  */
 
-interface IView<P> {
+public interface IView<P> {
      P createPresenter();
 
      void showLoading();

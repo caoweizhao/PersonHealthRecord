@@ -1,7 +1,5 @@
 package com.example.administrator.personhealthrecord.bean;
 
-import com.example.administrator.personhealthrecord.adapter.AbstractItem;
-
 /**
  * Created by Administrator on 2017-7-19.
  */

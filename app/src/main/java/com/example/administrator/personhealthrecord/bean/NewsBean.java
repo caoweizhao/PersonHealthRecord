@@ -1,6 +1,5 @@
 package com.example.administrator.personhealthrecord.bean;
 
-import com.example.administrator.personhealthrecord.adapter.AbstractItem;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
