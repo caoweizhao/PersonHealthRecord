@@ -8,6 +8,7 @@ import com.example.administrator.personhealthrecord.mvp.testFragment.apidemo.New
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.net.HttpCookie;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -17,6 +18,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -44,6 +48,21 @@ public class BlankModel extends BaseModel<BlankPresenter> {
     }
 
     public void doGet() {
+
+        Call<Boolean> login=mNewService.login("saber","123456");
+        login.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("Test",response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+
+
         mNewService.getNews()
                 .subscribeOn(Schedulers.io())
                 .flatMap(new Function<List<NewsBean>, ObservableSource<NewsBean>>() {

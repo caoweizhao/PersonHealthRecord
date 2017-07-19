@@ -53,7 +53,15 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void setFragment(int position) {
+        switch(position)
+            {
+                case 1:
 
+                    break;
+                default:
+
+                    break;
+            }
     }
 
 }

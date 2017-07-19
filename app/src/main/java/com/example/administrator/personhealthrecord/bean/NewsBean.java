@@ -87,6 +87,11 @@ public class NewsBean extends AbstractItem {
         return imageUrl;
     }
 
+    @Override
+    public String getDate() {
+        return null;
+    }
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
