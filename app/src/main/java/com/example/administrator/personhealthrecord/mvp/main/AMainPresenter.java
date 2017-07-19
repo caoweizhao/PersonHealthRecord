@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
 
+import android.support.annotation.IdRes;
+
 import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
 
 /**
@@ -9,8 +11,6 @@ import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
 
 public abstract class AMainPresenter extends BasePresenter<AMainActivity,AMainModel> {
 
-    public abstract void mainPresenterMethod();
 
-    public abstract void mainPresenterMethod2();
-
+    public abstract void onTabSelected(@IdRes int id);
 }

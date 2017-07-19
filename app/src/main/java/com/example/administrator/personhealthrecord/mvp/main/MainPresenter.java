@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
-import android.util.Log;
+import android.support.annotation.IdRes;
+
+import com.example.administrator.personhealthrecord.R;
 
 /**
  * Created by Administrator on 2017-7-17.
@@ -9,22 +11,29 @@ import android.util.Log;
 public class MainPresenter extends AMainPresenter {
 
     @Override
-    public void mainPresenterMethod() {
-        Log.d("MainPresenter","mainPresenterMethod");
-
-        mView.showLoading();
-        mView.mainViewMethod();
-        mModel.mainModelMethod();
-    }
-
-    @Override
-    public void mainPresenterMethod2() {
-        Log.d("MainPresenter","mainPresenterMethod2");
-        mView.dismissLoading();
-    }
-
-    @Override
     public AMainModel createModel() {
         return new MainModel(this);
+    }
+
+    @Override
+    public void onTabSelected(@IdRes int id) {
+        int index = 0;
+        switch (id) {
+            case R.id.tab_home_page:
+                index = 0;
+                break;
+            case R.id.tab_community:
+                index = 1;
+                break;
+            case R.id.tab_health:
+                index = 2;
+                break;
+            case R.id.tab_physical_examination:
+                index = 3;
+                break;
+            default:
+                break;
+        }
+        mView.setFragment(index);
     }
 }

@@ -1,14 +1,42 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.widget.FrameLayout;
+
+import com.example.administrator.personhealthrecord.R;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
+import butterknife.BindView;
 
 /**
  * Created by Administrator on 2017-7-17.
  */
 
 public class MainActivity extends AMainActivity {
+
+    @BindView(R.id.main_container)
+    FrameLayout mFrameLayout;
+    @BindView(R.id.bottomBar)
+    BottomBar mBottomBar;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+    }
+
+    @Override
+    protected void initEvents() {
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                mPresenter.onTabSelected(tabId);
+            }
+        });
+    }
 
     @Override
     public AMainPresenter createPresenter() {
@@ -17,24 +45,15 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void showLoading() {
-        Log.d("MainActivity", "showLoading");
     }
 
     @Override
     public void dismissLoading() {
-        Log.d("MainActivity", "dismissLoading");
     }
 
     @Override
-    public void mainViewMethod() {
-        Log.d("MainActivity", "showLoading");
+    public void setFragment(int position) {
+
     }
 
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("MainActivity","onCreate");
-        mPresenter.mainPresenterMethod();
-    }
 }

@@ -8,21 +8,21 @@ import android.support.annotation.Nullable;
  * Created by Administrator on 2017-7-17.
  */
 
-public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity implements IView<P> {
+public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment implements IView<P> {
 
     public P mPresenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
         if (mPresenter != null) {
-            mPresenter.attach(MvpActivity.this);
+            mPresenter.attach(MvpFragment.this);
         }
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         if (mPresenter != null) {
             mPresenter.detach();
         }

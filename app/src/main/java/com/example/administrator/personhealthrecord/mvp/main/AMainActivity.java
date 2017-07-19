@@ -8,7 +8,7 @@ import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
  */
 
 public abstract class AMainActivity extends MvpActivity<AMainPresenter> {
-    //定义main里关于view的方法
+    //setFragment
+    public abstract void setFragment(int position);
 
-    public abstract void mainViewMethod();
 }

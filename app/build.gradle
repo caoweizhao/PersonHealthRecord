@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -24,6 +27,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //RecycleView的Adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 
     compile 'com.android.support:appcompat-v7:25.3.0'
@@ -37,7 +41,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.1.0'
     //RXjava
     compile 'io.reactivex.rxjava2:rxjava:2.0.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
@@ -45,9 +48,10 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 
+    // 针对rxjava2.x（adapter-rxjava2的版本要 >= 2.2.0）
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
     //Gilde
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
-    //Recycleview的Adapter
 
 }

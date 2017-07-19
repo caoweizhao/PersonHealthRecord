@@ -1,4 +1,4 @@
-package com.example.administrator.personhealthrecord.Application;
+package com.example.administrator.personhealthrecord.application;
 
 import android.app.Application;
 import android.content.Context;

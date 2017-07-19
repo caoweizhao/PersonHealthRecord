@@ -13,5 +13,4 @@ public abstract class AMainModel extends BaseModel<AMainPresenter> {
         super(presenter);
     }
 
-    public abstract void mainModelMethod();
 }

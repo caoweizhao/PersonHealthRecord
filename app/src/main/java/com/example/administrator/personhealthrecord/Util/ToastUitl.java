@@ -2,7 +2,7 @@ package com.example.administrator.personhealthrecord.Util;
 
 import android.widget.Toast;
 
-import com.example.administrator.personhealthrecord.Application.MyApplication;
+import com.example.administrator.personhealthrecord.application.MyApplication;
 
 /**
  * Created by andy on 2017/7/18.
