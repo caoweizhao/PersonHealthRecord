@@ -1,7 +1,7 @@
-package com.example.administrator.personhealthrecord.mvp.homepage;
+package com.example.administrator.personhealthrecord.mvp.checkpage;
 
-import com.example.administrator.personhealthrecord.bean.ExpertBean;
-import com.example.administrator.personhealthrecord.mvp.homepage.api.HomePageService;
+import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.mvp.checkpage.api.CheckPageService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import java.util.List;
@@ -14,18 +14,18 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017-7-19.
  */
 
-public class HomePageModel extends AHomePageModel {
+public class CheckPageModel extends ACheckPageModel {
 
-    private HomePageService mHomePageService;
+    private CheckPageService mCheckPageService;
 
-    public HomePageModel(AHomePagePresenter presenter) {
+    public CheckPageModel(ACheckPagePresenter presenter) {
         super(presenter);
-        mHomePageService = RetrofitUtil.getRetrofit().create(HomePageService.class);
+        mCheckPageService = RetrofitUtil.getRetrofit().create(CheckPageService.class);
     }
 
     @Override
     public void getImageRes() {
-        mHomePageService.getImagesUrl()
+        mCheckPageService.getImagesUrl()
                 .observeOn(Schedulers.newThread())
                 .subscribe(new Observer<List<String>>() {
                     @Override
@@ -50,19 +50,20 @@ public class HomePageModel extends AHomePageModel {
                 });
     }
 
+
     @Override
-    public void getExperts() {
-        mHomePageService.getExperts()
+    public void getCheckItems() {
+        mCheckPageService.getCheckItems()
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(new Observer<List<ExpertBean>>() {
+                .subscribe(new Observer<List<CheckBean>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<ExpertBean> value) {
-                        mPresenter.onExperssReady(value);
+                    public void onNext(List<CheckBean> value) {
+                        mPresenter.onDataReady(value);
                     }
 
                     @Override
@@ -75,10 +76,5 @@ public class HomePageModel extends AHomePageModel {
 
                     }
                 });
-    }
-
-    @Override
-    public void getHospitals() {
-
     }
 }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -25,15 +26,20 @@ public class MainActivity extends AMainActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.main;
     }
 
     @Override
     protected void initEvents() {
+        mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                mPresenter.onTabSelected(tabId);
+                   mPresenter.onTabSelected(tabId);
             }
         });
     }
@@ -53,15 +59,10 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void setFragment(int position) {
-        switch(position)
-            {
-                case 1:
-
-                    break;
-                default:
-
-                    break;
-            }
+        // TODO: 2017-7-20
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))
+                .commit();
     }
-
 }

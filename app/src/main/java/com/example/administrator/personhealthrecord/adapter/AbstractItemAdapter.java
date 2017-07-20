@@ -60,7 +60,7 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                     }
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .centerCrop()
+                .fitCenter()
                 .into((ImageView)helper.getView(R.id.abstract_item__img));
 
     }

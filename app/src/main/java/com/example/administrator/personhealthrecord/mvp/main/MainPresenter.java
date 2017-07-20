@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
 import android.support.annotation.IdRes;
+import android.util.Log;
 
 import com.example.administrator.personhealthrecord.R;
 
@@ -34,6 +35,7 @@ public class MainPresenter extends AMainPresenter {
             default:
                 break;
         }
+        Log.d("MainPresenter", "onTabSelected" + index);
         mView.setFragment(index);
     }
 }

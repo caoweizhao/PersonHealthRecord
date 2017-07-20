@@ -13,6 +13,9 @@ public abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
     }
 
     public abstract void getImageRes();
+
     public abstract void getExperts();
+
+    public abstract void getHospitals();
 
 }

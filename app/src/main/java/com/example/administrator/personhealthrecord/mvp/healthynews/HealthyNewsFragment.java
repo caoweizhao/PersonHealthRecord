@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.application.MyApplication;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by andy on 2017/7/19.
  */
-public class HealthyNewsFragement extends Fragment implements IHealthyNewsFragment {
+public class HealthyNewsFragment extends Fragment implements IHealthyNewsFragment {
 
     IHealthyNewsPresenter presenter;
 
@@ -33,7 +34,7 @@ public class HealthyNewsFragement extends Fragment implements IHealthyNewsFragme
 
     private AbstractItemAdapter adapter;
     private List<NewsBean> list;
-    private Handler handler;
+    private Handler handler=new Handler();
     private RecyclerView.LayoutManager manager;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +62,12 @@ public class HealthyNewsFragement extends Fragment implements IHealthyNewsFragme
         adapter=new AbstractItemAdapter(R.layout.abstract_item,list,this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                presenter.getNewsList("");
+            }
+        });
     }
 
     @Override
@@ -80,8 +87,9 @@ public class HealthyNewsFragement extends Fragment implements IHealthyNewsFragme
             @Override
             public void run() {
                 adapter.addData(list1);
+                adapter.loadMoreComplete();
             }
-        },1000);
+        },2000);
 
     }
 }

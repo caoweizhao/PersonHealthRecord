@@ -38,6 +38,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
                          {
                              Log.d(TAG, "onNext: "+value.get(i).getTitle());
                          }
+                         fragment.updateListItem(TestDate.excute());
             }
 
             @Override

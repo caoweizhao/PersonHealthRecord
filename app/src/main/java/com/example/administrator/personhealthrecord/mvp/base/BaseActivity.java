@@ -1,26 +1,48 @@
 package com.example.administrator.personhealthrecord.mvp.base;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.administrator.personhealthrecord.application.MyApplication;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
  * Created by andy on 2017/7/18.
  */
 
-public class BaseActivity extends Activity{
+public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
     public static BaseActivity activity;
+    private Unbinder mUnbinder;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
         ((MyApplication) MyApplication.getContext()).addActivity(this);
+        setContentView(getLayoutRes());
         init();
     }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+        mUnbinder = ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        mUnbinder = ButterKnife.bind(this);
+    }
+
+    protected abstract int getLayoutRes();
 
     @Override
     protected void onResume() {
@@ -57,6 +79,7 @@ public class BaseActivity extends Activity{
      */
     @Override
     protected void onDestroy() {
+        mUnbinder.unbind();
         super.onDestroy();
         ((MyApplication) MyApplication.getContext()).removeActivity(this);
     }
