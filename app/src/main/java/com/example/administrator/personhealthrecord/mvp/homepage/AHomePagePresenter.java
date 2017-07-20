@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
+import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
 
 import java.util.List;
@@ -11,4 +12,11 @@ import java.util.List;
 public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment, AHomePageModel> {
 
     public abstract void onImagesReady(List<String> urls);
+
+    public abstract void onExperssReady(List<ExpertBean> expertBeanList);
+
+    public abstract void onDataReady();
+
+    public abstract void onRequestData();
+
 }

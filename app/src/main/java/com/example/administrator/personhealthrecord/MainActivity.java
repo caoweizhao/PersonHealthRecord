@@ -4,7 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.administrator.personhealthrecord.mvp.testFragment.BlankFragment;
+import com.example.administrator.personhealthrecord.mvp.checkpage.CheckPageFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,11 +14,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        BlankFragment blankFragment = BlankFragment.newInstance("", "");
+        //BlankFragment blankFragment = BlankFragment.newInstance("", "");
+        CheckPageFragment checkPageFragment = CheckPageFragment.newInstance();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, blankFragment)
+                    .replace(R.id.main_container, checkPageFragment)
                     .commit();
         }
 

@@ -1,6 +1,6 @@
-package com.example.administrator.personhealthrecord.mvp.homepage;
+package com.example.administrator.personhealthrecord.mvp.checkpage;
 
-import com.example.administrator.personhealthrecord.bean.ExpertBean;
+import com.example.administrator.personhealthrecord.bean.CheckBean;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import java.util.List;
  * Created by Administrator on 2017-7-19.
  */
 
-public class HomePagePresenter extends AHomePagePresenter {
+public class CheckPagePresenter extends ACheckPagePresenter {
 
     @Override
-    public AHomePageModel createModel() {
+    public ACheckPageModel createModel() {
         // TODO: 2017-7-19
         //return new CheckPageModel(this);
         return new TestModel(this);
@@ -23,13 +23,9 @@ public class HomePagePresenter extends AHomePagePresenter {
     }
 
     @Override
-    public void onExperssReady(List<ExpertBean> expertBeanList) {
-        mView.updateExperts(expertBeanList);
-    }
-
-    @Override
-    public void onDataReady() {
+    public void onDataReady(List<CheckBean> checkBeanList) {
         mView.dismissLoading();
+        mView.updateCheckItems(checkBeanList);
     }
 
 
@@ -37,7 +33,7 @@ public class HomePagePresenter extends AHomePagePresenter {
     public void onRequestData() {
         mView.showLoading();
         mModel.getImageRes();
-        mModel.getExperts();
+        mModel.getCheckItems();
     }
 
 

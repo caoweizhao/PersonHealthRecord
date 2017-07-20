@@ -1,4 +1,4 @@
-package com.example.administrator.personhealthrecord.mvp.homepage;
+package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.bean.ExpertBean;
+import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -17,15 +17,14 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomePageFragment#newInstance} factory method to
+ * Use the {@link CheckPageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomePageFragment extends AHomePageFragment {
+public class CheckPageFragment extends ACheckPageFragment {
 
     private Banner mImageBanner;
-    private Banner mExpertsBanner;
 
-    public HomePageFragment() {
+    public CheckPageFragment() {
         // Required empty public constructor
     }
 
@@ -36,8 +35,8 @@ public class HomePageFragment extends AHomePageFragment {
      * @return A new instance of fragment CheckPageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomePageFragment newInstance() {
-        return new HomePageFragment();
+    public static CheckPageFragment newInstance() {
+        return new CheckPageFragment();
     }
 
     @Override
@@ -49,7 +48,7 @@ public class HomePageFragment extends AHomePageFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_check_page, container, false);
         mImageBanner = (Banner) view.findViewById(R.id.banner);
         //设置图片加载器
         mImageBanner.setImageLoader(new GlideImageLoader());
@@ -62,8 +61,8 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public AHomePagePresenter createPresenter() {
-        return new HomePagePresenter();
+    public ACheckPagePresenter createPresenter() {
+        return new CheckPagePresenter();
     }
 
     @Override
@@ -81,7 +80,7 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void updateExperts(List<ExpertBean> expertBeenF) {
+    public void updateCheckItems(List<CheckBean> checkBeanList) {
 
     }
 }

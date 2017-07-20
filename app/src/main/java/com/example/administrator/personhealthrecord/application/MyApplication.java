@@ -75,7 +75,8 @@ public class MyApplication extends Application {
      * @param activity
      */
     public void removeActivity(BaseActivity activity) {
-        activities.remove(activity);
+        if (activity != null)
+            activities.remove(activity);
     }
 
     /**

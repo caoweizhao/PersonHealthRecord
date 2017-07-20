@@ -1,5 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.homepage.api;
 
+import com.example.administrator.personhealthrecord.bean.ExpertBean;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -15,5 +17,8 @@ public interface HomePageService {
     Observable<List<String>> getImagesUrl();
 
     @GET("")
-    Observable<List<String>> getExperts();
+    Observable<List<ExpertBean>> getExperts();
+
+    @GET("")
+    Observable<List<ExpertBean>> getHostipals();
 }
