@@ -27,7 +27,7 @@ public class HealthInfo extends AbstractItem{
     }
 
     @Override
-    public String getDate() {
+    public String getTime() {
         return null;
     }
 

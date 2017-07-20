@@ -11,6 +11,6 @@ public abstract class AbstractItem {
 
     public abstract String getImageUrl();
 
-    public abstract String getDate();
+    public abstract String getTime();
 
 }
