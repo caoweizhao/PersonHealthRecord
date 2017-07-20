@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews;
 
 
+import android.util.Log;
+
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
+    private static final String TAG="HealthyNewsPresenter";
     IHealthyNewsFragment fragment;
     IHealthyNewsModle healthyNewsModle;
     public HealthyNewsPresenterImpl(IHealthyNewsFragment fragments)
@@ -30,17 +33,21 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
 
             @Override
             public void onNext(List<NewsBean> value) {
-
+                 int i;
+                         for(i=0;i<value.size();i++)
+                         {
+                             Log.d(TAG, "onNext: "+value.get(i).getTitle());
+                         }
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Log.d(TAG, "onError: "+e.toString());
             }
 
             @Override
             public void onComplete() {
-
+                Log.d(TAG, "onComplete: ");
             }
         };
 

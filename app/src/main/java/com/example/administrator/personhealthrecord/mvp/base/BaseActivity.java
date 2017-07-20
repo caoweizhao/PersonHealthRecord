@@ -15,8 +15,8 @@ public class BaseActivity extends Activity{
     protected final String TAG = getClass().getSimpleName();
     public static BaseActivity activity;
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         activity = this;
         ((MyApplication) MyApplication.getContext()).addActivity(this);
         init();

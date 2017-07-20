@@ -57,4 +57,5 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                 .into((ImageView)helper.getView(R.id.abstract_item__img));
 
     }
+
 }

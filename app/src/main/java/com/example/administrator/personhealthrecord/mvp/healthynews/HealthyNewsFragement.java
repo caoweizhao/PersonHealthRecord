@@ -22,6 +22,7 @@ public class HealthyNewsFragement extends Fragment implements IHealthyNewsFragme
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter=new HealthyNewsPresenterImpl(this);
+        presenter.getNewsList("");
     }
 
     @Nullable

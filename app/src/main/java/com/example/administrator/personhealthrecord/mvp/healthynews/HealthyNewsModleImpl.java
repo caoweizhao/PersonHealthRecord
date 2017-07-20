@@ -30,7 +30,7 @@ public class HealthyNewsModleImpl implements IHealthyNewsModle{
     public void getNews(Observer<List<NewsBean>> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
         HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
-        api.getNews(date)
+        api.getNews()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

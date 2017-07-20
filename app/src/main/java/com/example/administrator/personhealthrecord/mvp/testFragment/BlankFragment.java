@@ -96,7 +96,7 @@ public class BlankFragment extends MvpFragment<BlankPresenter> {
             healthInfo.setSummary("This is summary of health info article");
             healthInfos.add(healthInfo);
         }
-        myAdapter=new AbstractItemAdapter<HealthInfo>(R.layout.abstract_item, healthInfos);
+//        myAdapter=new AbstractItemAdapter<HealthInfo>(R.layout.abstract_item, healthInfos);
         myAdapter.setUpFetchEnable(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             mRecyclerView.setAdapter(myAdapter);

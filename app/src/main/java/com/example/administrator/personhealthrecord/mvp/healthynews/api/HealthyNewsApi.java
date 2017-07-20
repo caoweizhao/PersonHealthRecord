@@ -15,5 +15,5 @@ import retrofit2.http.GET;
 
 public interface HealthyNewsApi {
     @GET("information/information_list")
-    Observable<List<NewsBean>> getNews(String date);
+    Observable<List<NewsBean>> getNews();
 }
