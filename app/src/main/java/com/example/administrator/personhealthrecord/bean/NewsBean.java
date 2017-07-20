@@ -1,5 +1,8 @@
 package com.example.administrator.personhealthrecord.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
@@ -8,7 +11,7 @@ import java.text.SimpleDateFormat;
  * Created by Administrator on 2017-7-19.
  */
 
-public class NewsBean extends AbstractItem {
+public class NewsBean extends AbstractItem implements Parcelable{
     /**
      * id : 1
      * title : 习近平：加快建设开放型经济新体制
@@ -79,6 +82,10 @@ public class NewsBean extends AbstractItem {
         return sdf.format(time);
     }
 
+    public NewsBean()
+    {
+
+    }
     public void setTime(long time) {
         this.time = time;
     }
@@ -91,5 +98,38 @@ public class NewsBean extends AbstractItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(content);
+        dest.writeString(imageUrl);
+        dest.writeLong(time);
+    }
+
+    public static final Parcelable.Creator<NewsBean> CREATOR= new Creator<NewsBean>() {
+        @Override
+        public NewsBean createFromParcel(Parcel source) {
+            return new NewsBean(source);
+        }
+
+        @Override
+        public NewsBean[] newArray(int size) {
+            return new NewsBean[size];
+        }
+    };
+
+    private NewsBean(Parcel in)
+    {
+        title=in.readString();
+        content=in.readString();
+        imageUrl=in.readString();
+        time=in.readLong();
     }
 }
