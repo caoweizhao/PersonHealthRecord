@@ -2,10 +2,8 @@ package com.example.administrator.personhealthrecord.mvp.main;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
@@ -28,15 +26,20 @@ public class MainActivity extends AMainActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.main;
     }
 
     @Override
     protected void initEvents() {
+        mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                mPresenter.onTabSelected(tabId);
+                   mPresenter.onTabSelected(tabId);
             }
         });
     }
@@ -57,7 +60,6 @@ public class MainActivity extends AMainActivity {
     @Override
     public void setFragment(int position) {
         // TODO: 2017-7-20
-        Toast.makeText(this, "pos" + position, Toast.LENGTH_SHORT).show();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))

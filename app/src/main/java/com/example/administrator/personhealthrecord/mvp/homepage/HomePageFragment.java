@@ -33,7 +33,7 @@ public class HomePageFragment extends AHomePageFragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment CheckPageFragment.
+     * @return A new instance of fragment SocialPageFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static HomePageFragment newInstance() {

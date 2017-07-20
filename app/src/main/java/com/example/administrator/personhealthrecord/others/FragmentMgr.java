@@ -3,6 +3,7 @@ package com.example.administrator.personhealthrecord.others;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.personhealthrecord.mvp.checkpage.CheckPageFragment;
+import com.example.administrator.personhealthrecord.mvp.healthynews.HealthyNewsFragment;
 import com.example.administrator.personhealthrecord.mvp.homepage.HomePageFragment;
 
 /**
@@ -12,6 +13,7 @@ import com.example.administrator.personhealthrecord.mvp.homepage.HomePageFragmen
 public class FragmentMgr {
     public CheckPageFragment mCheckPageFragment;
     public HomePageFragment mHomePageFragment;
+    public HealthyNewsFragment mHealthyNewsFragement;
 
     public static FragmentMgr getInstance() {
         return FragmentMgrHolder.INSTANCE;

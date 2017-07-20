@@ -73,7 +73,7 @@ public class NewsBean extends AbstractItem {
     public void setCategory(String category) {
         this.category = category;
     }
-
+     @Override
     public String getTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(time);
@@ -86,6 +86,8 @@ public class NewsBean extends AbstractItem {
     public String getImageUrl() {
         return imageUrl;
     }
+
+
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;

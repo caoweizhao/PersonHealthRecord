@@ -26,6 +26,11 @@ public class HealthInfo extends AbstractItem{
         return null;
     }
 
+    @Override
+    public String getTime() {
+        return null;
+    }
+
     public void setSummary(String summary) {
         this.summary = summary;
     }

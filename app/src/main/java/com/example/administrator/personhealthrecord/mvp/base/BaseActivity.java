@@ -16,7 +16,7 @@ import butterknife.Unbinder;
  * Created by andy on 2017/7/18.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
     public static BaseActivity activity;
     private Unbinder mUnbinder;
@@ -26,6 +26,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = this;
         ((MyApplication) MyApplication.getContext()).addActivity(this);
+        setContentView(getLayoutRes());
         init();
     }
 
@@ -40,6 +41,8 @@ public class BaseActivity extends AppCompatActivity {
         super.setContentView(view);
         mUnbinder = ButterKnife.bind(this);
     }
+
+    protected abstract int getLayoutRes();
 
     @Override
     protected void onResume() {

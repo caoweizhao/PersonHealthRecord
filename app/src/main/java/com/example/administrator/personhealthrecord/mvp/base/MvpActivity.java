@@ -14,11 +14,11 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
         if (mPresenter != null) {
             mPresenter.attach(MvpActivity.this);
         }
+        super.onCreate(savedInstanceState);
     }
 
     @Override

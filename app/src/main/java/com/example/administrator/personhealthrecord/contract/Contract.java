@@ -5,5 +5,5 @@ package com.example.administrator.personhealthrecord.contract;
  */
 
 public class Contract {
-    public static final String BASE_URL = "192.168.13.210:8080/";
+    public static final String BASE_URL = "http://192.168.13.210:8080/";
 }
