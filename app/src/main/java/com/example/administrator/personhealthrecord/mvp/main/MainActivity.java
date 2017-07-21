@@ -34,6 +34,7 @@ public class MainActivity extends AMainActivity {
     @BindView(R.id.main_drawerLayout)
     DrawerLayout mDrawerLayout;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class MainActivity extends AMainActivity {
 
     @Override
     protected void initEvents() {
+        fragmentMgr=new FragmentMgr(this,mFrameLayout);
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -94,10 +96,11 @@ public class MainActivity extends AMainActivity {
     @Override
     public void setFragment(int position) {
         // TODO: 2017-7-20
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))
-                .commit();
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))
+//                .commit();
+        fragmentMgr.getFragment(position);
     }
 
     @Override

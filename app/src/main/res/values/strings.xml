@@ -18,7 +18,7 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
     <string name="search_hint">搜索医生/医院/药品</string>
-
+    <string name="healthy_news_datail">健康新闻</string>
 
     <string-array name="expert_type">
         <item>心血管内科</item>
@@ -27,4 +27,8 @@
         <item>皮肤科</item>
     </string-array>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="resover_examintion">预约体检</string>
+    <string name="resover_order">预定订单</string>
+    <string name="my_report">我的报告</string>
+    <string name="rent_device">设备租赁</string>
 </resources>

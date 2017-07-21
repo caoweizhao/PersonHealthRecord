@@ -1,5 +1,7 @@
 package com.example.administrator.personhealthrecord.contract;
 
+import android.support.annotation.IntDef;
+
 /**
  * Created by Administrator on 2017-7-19.
  */

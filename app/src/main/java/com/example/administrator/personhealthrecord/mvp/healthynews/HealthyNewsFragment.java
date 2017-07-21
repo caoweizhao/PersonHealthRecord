@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.healthynewsdetali.HealthyNewsDetaliActivity;
+import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ import butterknife.ButterKnife;
 /**
  * Created by andy on 2017/7/19.
  */
-public class HealthyNewsFragment extends Fragment implements IHealthyNewsFragment {
+public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFragment {
     private static HealthyNewsFragment mHealthyNewsFragment =null;
     private HealthyNewsFragment(){
 
@@ -50,7 +53,8 @@ public class HealthyNewsFragment extends Fragment implements IHealthyNewsFragmen
 
     @BindView(R.id.health_news_recycleview)
     RecyclerView recyclerView;
-
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private AbstractItemAdapter adapter;
     private List<NewsBean> list;
     private Handler handler=new Handler();
@@ -96,6 +100,19 @@ public class HealthyNewsFragment extends Fragment implements IHealthyNewsFragmen
                 startActivity(intent);
             }
         });
+
+        initToolbar("健康");
+        setUpWithActivity(view);
+    }
+
+    @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override
@@ -119,5 +136,15 @@ public class HealthyNewsFragment extends Fragment implements IHealthyNewsFragmen
             }
         },2000);
 
+    }
+    private void setUpWithActivity(View view) {
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openMenu();
+            }
+        });
     }
 }

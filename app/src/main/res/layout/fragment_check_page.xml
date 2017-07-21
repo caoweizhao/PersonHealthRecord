@@ -25,7 +25,7 @@
             android:background="#ffffff"
             android:layout_margin="1dp"
             android:gravity="center"
-            android:text="预约体检"
+            android:text="@string/resover_examintion"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -34,7 +34,7 @@
             android:background="#ffffff"
             android:layout_margin="1dp"
             android:gravity="center"
-            android:text="预定订单"
+            android:text="@string/resover_order"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -49,7 +49,7 @@
             android:background="#ffffff"
             android:layout_margin="1dp"
             android:gravity="center"
-            android:text="我的报告"
+            android:text="@string/my_report"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -58,7 +58,7 @@
             android:background="#ffffff"
             android:layout_margin="1dp"
             android:gravity="center"
-            android:text="设备租赁"
+            android:text="@string/rent_device"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
