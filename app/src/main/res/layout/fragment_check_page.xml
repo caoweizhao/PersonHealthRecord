@@ -7,7 +7,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
+    <include layout="@layout/toolbar"/>
     <com.youth.banner.Banner
         android:background="#cccc"
         android:id="@+id/heath_check_banner01"

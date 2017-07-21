@@ -35,7 +35,6 @@ public class MainPresenter extends AMainPresenter {
             default:
                 break;
         }
-        Log.d("MainPresenter", "onTabSelected" + index);
         mView.setFragment(index);
     }
 }

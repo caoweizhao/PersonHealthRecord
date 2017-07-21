@@ -120,6 +120,7 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d("as", "onCreateOptionsMenu: ");
         super.onCreateOptionsMenu(menu, inflater);
         MenuInflater menuInflater = getActivity().getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);

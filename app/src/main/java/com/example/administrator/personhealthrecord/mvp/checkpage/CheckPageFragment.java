@@ -2,16 +2,22 @@ package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -29,6 +35,7 @@ import butterknife.ButterKnife;
  */
 public class CheckPageFragment extends ACheckPageFragment {
 
+    private static final String TAG="CheckPageFragment";
     private AbstractItemAdapter<CheckBean> adapter;
     private List<CheckBean> checkBeanList;
 
@@ -38,6 +45,8 @@ public class CheckPageFragment extends ACheckPageFragment {
     Banner banner02;
     @BindView(R.id.healthy_check_projectlsit)
     RecyclerView recyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
             public CheckPageFragment() {
         // Required empty public constructor
     }
@@ -56,6 +65,7 @@ public class CheckPageFragment extends ACheckPageFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
 
@@ -82,6 +92,13 @@ public class CheckPageFragment extends ACheckPageFragment {
         recyclerView.setAdapter(adapter);
         mPresenter.onRequestData();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initToolbar("体检");
+        setUpWithActivity(view);
     }
 
     @Override
@@ -117,5 +134,23 @@ public class CheckPageFragment extends ACheckPageFragment {
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d(TAG, "onCreateOptionsMenu: "+"Check");
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+    }
+
+    private void setUpWithActivity(View view) {
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openMenu();
+            }
+        });
     }
 }

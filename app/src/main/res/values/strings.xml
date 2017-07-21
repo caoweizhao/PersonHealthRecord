@@ -12,13 +12,13 @@
     <string name="my_medical_record_folder">我的病历夹</string>
     <string name="my_phr_management">个人PHR管理</string>
     <string name="health_assessment">健康指数评估</string>
-
+    <string name="healthy_news_datail">健康新闻</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
     <string name="search_hint">搜索医生/医院/药品</string>
-    <string name="healthy_news_datail">健康新闻</string>
+
 
     <string-array name="expert_type">
         <item>心血管内科</item>
