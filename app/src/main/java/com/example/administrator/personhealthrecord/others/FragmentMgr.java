@@ -5,9 +5,7 @@ import android.support.v4.app.Fragment;
 import com.example.administrator.personhealthrecord.mvp.checkpage.CheckPageFragment;
 import com.example.administrator.personhealthrecord.mvp.healthynews.HealthyNewsFragment;
 import com.example.administrator.personhealthrecord.mvp.homepage.HomePageFragment;
-
 import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageFragment;
-
 
 /**
  * Created by Administrator on 2017-7-20.
@@ -17,9 +15,7 @@ public class FragmentMgr {
     public CheckPageFragment mCheckPageFragment;
     public HomePageFragment mHomePageFragment;
     public HealthyNewsFragment mHealthyNewsFragement;
-
     public SocialPageFragment mSocialPageFragment;
-
 
     public static FragmentMgr getInstance() {
         return FragmentMgrHolder.INSTANCE;
@@ -32,19 +28,17 @@ public class FragmentMgr {
             }
             return mHomePageFragment;
         }
-        if (pos == 2) {
-            if (mHealthyNewsFragement == null) {
-                mHealthyNewsFragement =HealthyNewsFragment.getInstance();
-            }
-            return mHealthyNewsFragement;
-
-        }
-
         if(pos == 1){
             if(mSocialPageFragment == null){
                 mSocialPageFragment = SocialPageFragment.newInstance();
             }
             return mSocialPageFragment;
+        }
+        if(pos == 2){
+            if(mHealthyNewsFragement == null){
+                mHealthyNewsFragement = new HealthyNewsFragment();
+            }
+            return mHealthyNewsFragement;
         }
         if (pos == 3) {
             if (mCheckPageFragment == null) {

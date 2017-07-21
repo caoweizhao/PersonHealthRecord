@@ -10,5 +10,6 @@ import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
 public abstract class AMainActivity extends MvpActivity<AMainPresenter> {
     //setFragment
     public abstract void setFragment(int position);
+    public abstract void openMenu();
 
 }

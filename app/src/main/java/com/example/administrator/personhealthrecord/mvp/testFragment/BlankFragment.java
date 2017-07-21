@@ -113,6 +113,16 @@ public class BlankFragment extends MvpFragment<BlankPresenter> {
         });
     }
 
+    @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

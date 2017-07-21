@@ -2,7 +2,14 @@ package com.example.administrator.personhealthrecord.mvp.main;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
@@ -22,6 +29,10 @@ public class MainActivity extends AMainActivity {
     FrameLayout mFrameLayout;
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
+    @BindView(R.id.main_navigationView)
+    NavigationView mMainNavigationView;
+    @BindView(R.id.main_drawerLayout)
+    DrawerLayout mDrawerLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +50,30 @@ public class MainActivity extends AMainActivity {
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                   mPresenter.onTabSelected(tabId);
+                mPresenter.onTabSelected(tabId);
+            }
+        });
+
+        mMainNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // TODO: 2017-7-20
+                switch (item.getItemId()) {
+                    case R.id.menu_my_book:
+                        break;
+                    case R.id.menu_account_info:
+                        break;
+                    case R.id.menu_my_medical_record_folder:
+                        break;
+                    case R.id.menu_my_phr_management:
+                        break;
+                    case R.id.menu_health_assessment:
+                        break;
+                    default:
+                        break;
+                }
+                mDrawerLayout.closeDrawer(Gravity.START);
+                return true;
             }
         });
     }
@@ -64,5 +98,30 @@ public class MainActivity extends AMainActivity {
                 .beginTransaction()
                 .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))
                 .commit();
+    }
+
+    @Override
+    public void openMenu() {
+        mDrawerLayout.openDrawer(Gravity.START);
+    }
+
+    ActionBarDrawerToggle toggle;
+
+    public void setUpWithToolbar(Toolbar toolbar) {
+        toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout != null) {
+            if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+                mDrawerLayout.closeDrawer(Gravity.START);
+                return;
+            }
+        }
+        super.onBackPressed();
     }
 }

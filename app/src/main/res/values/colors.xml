@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorIndicator">#4f4dbc</color>
+
+    <color name="class_a_color">#095b36</color>
+
+    <color name="titleTextColor">#a0050202</color>
+
 </resources>

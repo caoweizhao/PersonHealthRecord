@@ -51,7 +51,7 @@ public class HomePageModel extends AHomePageModel {
     }
 
     @Override
-    public void getExperts() {
+    public void getExperts(int type) {
         mHomePageService.getExperts()
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(new Observer<List<ExpertBean>>() {
@@ -62,7 +62,7 @@ public class HomePageModel extends AHomePageModel {
 
                     @Override
                     public void onNext(List<ExpertBean> value) {
-                        mPresenter.onExperssReady(value);
+                        mPresenter.onExpertsReady(value);
                     }
 
                     @Override
