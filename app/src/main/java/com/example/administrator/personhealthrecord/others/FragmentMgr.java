@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.FrameLayout;
 
@@ -24,10 +25,10 @@ public class FragmentMgr {
     public HealthyNewsFragment mHealthyNewsFragement;
     public SocialPageFragment mSocialPageFragment;
 
-    private FragmentActivity context;
+    private AppCompatActivity context;
     private FrameLayout content;
     private FragmentPagerAdapter mFragmentPagerAdapter;
-    public FragmentMgr(FragmentActivity context, FrameLayout frameLayout)
+    public FragmentMgr(AppCompatActivity context, FrameLayout frameLayout)
     {
         this.context=context;
         this.content=frameLayout;

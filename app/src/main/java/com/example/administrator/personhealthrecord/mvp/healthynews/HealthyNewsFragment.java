@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -67,6 +69,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         list=new ArrayList<>();
         list=TestDate.excute();
         manager=new LinearLayoutManager(getContext());
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -122,7 +125,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 
     @Override
     public void hidProgressDialog() {
-
+        adapter.loadMoreFail();
     }
 
     @Override
@@ -137,6 +140,13 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         },2000);
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+    }
+
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);

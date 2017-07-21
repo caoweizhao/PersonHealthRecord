@@ -43,12 +43,12 @@ public abstract class BaseFragment extends Fragment {
     protected void initToolbar(String title) {
         if (mToolbar != null) {
             mToolbar.setTitle(title);
-//            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         }
-//        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//        }
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
     @Override
     public void setMenuVisibility(boolean menuVisible) {

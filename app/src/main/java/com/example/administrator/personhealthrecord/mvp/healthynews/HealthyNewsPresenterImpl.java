@@ -44,6 +44,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: "+e.toString());
+                fragment.hidProgressDialog();
             }
 
             @Override

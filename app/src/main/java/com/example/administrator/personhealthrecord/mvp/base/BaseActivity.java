@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  * Created by andy on 2017/7/18.
  */
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
     public static BaseActivity activity;
     private Unbinder mUnbinder;
