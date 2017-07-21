@@ -29,4 +29,6 @@ public class Contract {
     @IntDef(value = {TYPE_CARDIOLOGY, TYPE_DERMATOLOGY, TYPE_INTERNAL_MEDICINE, TYPE_SURGICAL})
     public @interface ExpertType {
     }
+    //图片的baseURl
+    private static final String TAG="http://192.168.13.210:8080/information/getImage/";
 }

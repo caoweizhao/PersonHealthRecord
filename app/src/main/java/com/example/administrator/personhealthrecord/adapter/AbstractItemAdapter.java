@@ -2,7 +2,9 @@ package com.example.administrator.personhealthrecord.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +32,11 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
         this.mContext=context;
     }
 
+    public AbstractItemAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Fragment context) {
+        super(R.layout.abstract_item, data);
+        this.mContext=context.getContext();
+    }
+
     @Override
     protected void convert(BaseViewHolder helper, T item) {
         helper.setText(R.id.abstract_item__title, item.getTitle())
@@ -53,9 +60,10 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                     }
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .centerCrop()
+                .fitCenter()
                 .into((ImageView)helper.getView(R.id.abstract_item__img));
 
     }
+
 
 }

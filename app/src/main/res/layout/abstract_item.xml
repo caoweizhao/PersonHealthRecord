@@ -11,6 +11,7 @@
     >
 
     <ImageView
+        android:padding="2dp"
         android:id="@+id/abstract_item__img"
         android:layout_width="0dp"
         android:layout_height="100dp"

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.personhealthrecord.mvp.healthynewsdetali.HealthyNewsDetaliActivity">
+    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/healthy_detail_toolbar"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:baselineAligned="false">-->
+
+        <!--<FrameLayout-->
+            <!--android:id="@+id/fragment_container"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical" />-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--app:title="@string/healthy_news_datail"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:minHeight="?attr/actionBarSize"-->
+            <!--android:background="#3b000000"-->
+            <!--app:titleMargin="20dp"-->
+            <!--app:navigationIcon="@drawable/ic_back"-->
+            <!--app:titleTextColor="@android:color/white"-->
+            <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+            <!--android:fitsSystemWindows="true"/>-->
+
+    <!--</FrameLayout>-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        >
+        <android.support.design.widget.CollapsingToolbarLayout
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
+            android:layout_width="match_parent"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorPrimary"
+            >
+            <ImageView
+                app:layout_collapseMode="parallax"
+                android:id="@+id/healthy_news_detali_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_account_info"/>
+            <android.support.v7.widget.Toolbar
+                app:title="@string/healthy_news_datail"
+                android:id="@+id/healthy_news_detail_toolbar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:minHeight="?attr/actionBarSize"
+                android:background="#3b000000"
+                app:titleMargin="20dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_back"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:fitsSystemWindows="true"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+<android.support.v4.widget.NestedScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/healthy_news_detail_text"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

@@ -66,6 +66,7 @@ public class SocialPageFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mViewPager.setAdapter(new SocialPageViewPagerAdapter(getFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

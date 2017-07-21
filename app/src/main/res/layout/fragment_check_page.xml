@@ -1,17 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
 
     <com.youth.banner.Banner
-        android:id="@+id/banner"
+        android:background="#cccc"
+        android:id="@+id/heath_check_banner01"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:layout_marginBottom="5dp"/>
 
-    <TextView
+    <LinearLayout
+        android:background="#ccc"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="CheckPage"/>
+        android:layout_height="80dp">
+        <TextView
+            android:textSize="18sp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="预约体检"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="18sp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="预定订单"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#ccc"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <TextView
+            android:textSize="18sp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="我的报告"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="18sp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="诊疗表"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="18sp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="设备租赁"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <com.youth.banner.Banner
+        android:background="#cccc"
+        android:id="@+id/heath_check_banner02"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+       />
+<android.support.v7.widget.RecyclerView
+    android:nestedScrollingEnabled="false"
+    android:id="@+id/healthy_check_projectlsit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+</android.support.v7.widget.RecyclerView>
 </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
