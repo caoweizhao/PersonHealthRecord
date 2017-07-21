@@ -58,15 +58,6 @@
             android:background="#ffffff"
             android:layout_margin="1dp"
             android:gravity="center"
-            android:text="诊疗表"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:textSize="18sp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:gravity="center"
             android:text="设备租赁"
             android:layout_weight="1"
             android:layout_width="0dp"
