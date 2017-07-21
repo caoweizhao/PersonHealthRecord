@@ -36,7 +36,7 @@ public class FragmentMgr {
         }
         if(pos == 2){
             if(mHealthyNewsFragement == null){
-                mHealthyNewsFragement = new HealthyNewsFragment();
+                mHealthyNewsFragement = HealthyNewsFragment.getInstance();
             }
             return mHealthyNewsFragement;
         }

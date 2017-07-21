@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="150dp"
-              android:gravity="center"
-              android:background="@color/colorPrimary"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="180dp"
+             android:gravity="center"
+             android:orientation="vertical">
 
-    <ImageView
+    <com.example.administrator.personhealthrecord.view.HeaderView
         android:layout_width="match_parent"
+        android:layout_height="180dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher_round"/>
-</LinearLayout>
+        android:layout_gravity="start|bottom"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:src="@mipmap/ic_launcher_round"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/header_view_text_padding"
+            android:text="曹伟钊"
+            android:textColor="@color/headerTextColor"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/header_view_text_padding"
+            android:text="1101168499@qq.com"
+            android:textColor="@color/headerTextColor"/>
+    </LinearLayout>
+</FrameLayout>

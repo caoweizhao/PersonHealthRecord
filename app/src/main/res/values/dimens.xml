@@ -7,4 +7,5 @@
     <dimen name="divider_view_margin">2dp</dimen>
 
     <dimen name="hospital_item_class_padding">3dp</dimen>
+    <dimen name="header_view_text_padding">2dp</dimen>
 </resources>

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.main.MainActivity">
+        <activity android:name=".mvp.main.MainActivity" android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,9 @@
         </activity>
         <activity
             android:theme="@style/HealthyNewsDetialSytle"
-            android:name=".mvp.healthynewsdetali.HealthyNewsDetaliActivity"></activity>
+            android:name=".mvp.healthynewsdetali.HealthyNewsDetaliActivity">
+
+        </activity>
     </application>
 
 </manifest>
