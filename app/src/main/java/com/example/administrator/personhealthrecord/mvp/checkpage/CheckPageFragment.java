@@ -83,4 +83,14 @@ public class CheckPageFragment extends ACheckPageFragment {
     public void updateCheckItems(List<CheckBean> checkBeanList) {
 
     }
+
+    @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
 
 /**
@@ -8,13 +9,15 @@ import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
 
 public abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
 
+
+
     public AHomePageModel(AHomePagePresenter presenter) {
         super(presenter);
     }
 
     public abstract void getImageRes();
 
-    public abstract void getExperts();
+    public abstract void getExperts(@Contract.ExpertType int type);
 
     public abstract void getHospitals();
 

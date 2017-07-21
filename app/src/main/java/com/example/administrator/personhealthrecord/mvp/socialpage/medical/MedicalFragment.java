@@ -46,4 +46,13 @@ public class MedicalFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
 }

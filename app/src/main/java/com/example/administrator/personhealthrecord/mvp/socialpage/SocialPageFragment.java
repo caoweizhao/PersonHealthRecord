@@ -81,5 +81,15 @@ public class SocialPageFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
 }
 

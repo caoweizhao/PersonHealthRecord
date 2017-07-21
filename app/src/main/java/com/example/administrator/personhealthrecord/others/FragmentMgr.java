@@ -34,7 +34,13 @@ public class FragmentMgr {
             }
             return mSocialPageFragment;
         }
-        if (pos == 2) {
+        if(pos == 2){
+            if(mHealthyNewsFragement == null){
+                mHealthyNewsFragement = new HealthyNewsFragment();
+            }
+            return mHealthyNewsFragement;
+        }
+        if (pos == 3) {
             if (mCheckPageFragment == null) {
                 mCheckPageFragment = CheckPageFragment.newInstance();
             }
