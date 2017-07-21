@@ -33,7 +33,7 @@ public class HomePagePresenter extends AHomePagePresenter {
     }
 
     @Override
-    public void onDataReady(List<HospitalBean> hospitalBeanList) {
+    public void onHospitalReady(List<HospitalBean> hospitalBeanList) {
         mView.updateHospitals(hospitalBeanList);
     }
 

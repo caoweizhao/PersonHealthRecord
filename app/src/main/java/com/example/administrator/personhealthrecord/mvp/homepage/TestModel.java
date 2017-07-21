@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
+import com.example.administrator.personhealthrecord.contract.Contract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class TestModel extends AHomePageModel {
     }
 
     @Override
-    public void getExperts() {
+    public void getExperts(@Contract.ExpertType int type) {
         List images = new ArrayList();
         images.add("http://img06.tooopen.com/images/20160921/tooopen_sy_179583447187.jpg");
         images.add("http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg");
@@ -54,6 +55,6 @@ public class TestModel extends AHomePageModel {
             hospitalBean.setClazz("一级甲等");
             hospitalBeens.add(hospitalBean);
         }
-        mPresenter.onDataReady(hospitalBeens);
+        mPresenter.onHospitalReady(hospitalBeens);
     }
 }

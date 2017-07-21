@@ -88,8 +88,12 @@ public class HomePageFragment extends AHomePageFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initBanner();
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         initToolbar("首页");
+        setUpWithActivity(view);
+    }
+
+    private void setUpWithActivity(View view) {
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +132,7 @@ public class HomePageFragment extends AHomePageFragment {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // TODO: 2017-7-21 搜索事件处理
                 Toast.makeText(getContext(), "Submit!", Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -138,7 +143,6 @@ public class HomePageFragment extends AHomePageFragment {
             }
         });
     }
-
 
     @Override
     protected void initEvent() {
@@ -165,13 +169,11 @@ public class HomePageFragment extends AHomePageFragment {
         //设置图片加载器
         mImageBanner.setImageLoader(new GlideImageLoader());
         mExpertsBanner.setImageLoader(new GlideImageLoader());
-        //设置图片集合
         //banner设置方法全部调用完毕时最后调用
         mImageBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mExpertsBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mImageBanner.start();
         mExpertsBanner.start();
-        mPresenter.onRequestData();
     }
 
     @Override

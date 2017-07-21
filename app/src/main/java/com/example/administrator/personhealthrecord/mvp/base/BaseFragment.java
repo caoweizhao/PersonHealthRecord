@@ -51,18 +51,6 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void initToolbarAsHome(String title) {
-        if (mToolbar != null) {
-            mToolbar.setTitle(title);
-            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-        }
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
-    }
-
     @Override
     public void onDestroy() {
         mUnbinder.unbind();

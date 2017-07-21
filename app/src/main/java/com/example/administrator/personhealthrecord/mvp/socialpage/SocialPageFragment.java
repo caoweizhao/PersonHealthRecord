@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.SocialPageViewPagerAdapter;
 import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
+import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 
 import butterknife.BindView;
 
@@ -30,6 +32,8 @@ public class SocialPageFragment extends BaseFragment {
     @BindView(R.id.social_page_viewPager)
     ViewPager mViewPager;
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     public SocialPageFragment() {
         // Required empty public constructor
@@ -80,11 +84,24 @@ public class SocialPageFragment extends BaseFragment {
 
             }
         });
+        initToolbar("社区");
+        setUpWithActivity(view);
     }
 
     @Override
     protected void initEvent() {
 
+    }
+
+    private void setUpWithActivity(View view) {
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openMenu();
+            }
+        });
     }
 
     @Override

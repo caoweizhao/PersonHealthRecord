@@ -114,5 +114,14 @@ public class MainActivity extends AMainActivity {
         toggle.syncState();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout != null) {
+            if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+                mDrawerLayout.closeDrawer(Gravity.START);
+                return;
+            }
+        }
+        super.onBackPressed();
+    }
 }

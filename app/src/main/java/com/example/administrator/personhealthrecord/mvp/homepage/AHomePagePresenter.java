@@ -31,7 +31,7 @@ public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment
      * 医院推荐数据请求完毕
      * @param hospitalBeanList
      */
-    public abstract void onDataReady(List<HospitalBean> hospitalBeanList);
+    public abstract void onHospitalReady(List<HospitalBean> hospitalBeanList);
 
     /**
      * 请求所有数据（图片，医生，医院）
