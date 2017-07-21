@@ -1,5 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
+import com.example.administrator.personhealthrecord.bean.CheckBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,17 @@ public class TestModel extends ACheckPageModel {
 
     @Override
     public void getCheckItems() {
-
+        List<CheckBean> list=new ArrayList<>();
+         int i;
+                 for(i=0;i<5;i++)
+                 {
+                     CheckBean bean=new CheckBean();
+                     bean.setTitle("项目"+i);
+                     bean.setSummary("该体检简单描述"+i);
+                     bean.setImageUrl("http://pic.sc.chinaz.com/files/pic/pic9/201208/xpic6813.jpg");
+                     bean.setReverations(i);
+                     list.add(bean);
+                 }
+                 mPresenter.onDataReady(list);
     }
 }

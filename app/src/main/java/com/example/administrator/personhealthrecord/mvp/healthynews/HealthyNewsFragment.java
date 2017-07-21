@@ -29,6 +29,22 @@ import butterknife.ButterKnife;
  * Created by andy on 2017/7/19.
  */
 public class HealthyNewsFragment extends Fragment implements IHealthyNewsFragment {
+    private static HealthyNewsFragment mHealthyNewsFragment =null;
+    private HealthyNewsFragment(){
+
+    }
+    public static HealthyNewsFragment getInstance() {
+        synchronized(HealthyNewsFragment.class)
+            {
+                if(mHealthyNewsFragment==null)
+                    {
+                        mHealthyNewsFragment=new HealthyNewsFragment();
+                    }
+            }
+        return mHealthyNewsFragment;
+}
+
+
 
     IHealthyNewsPresenter presenter;
 

@@ -36,7 +36,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
                  int i;
                          for(i=0;i<value.size();i++)
                          {
-                             Log.d(TAG, "onNext: "+value.get(i).getContent());
+                             Log.d(TAG, "onNext: "+value.get(i).getImageUrl());
                          }
                          fragment.updateListItem(TestDate.excute());
             }
