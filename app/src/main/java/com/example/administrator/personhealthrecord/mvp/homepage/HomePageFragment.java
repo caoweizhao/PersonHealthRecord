@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -65,6 +66,10 @@ public class HomePageFragment extends AHomePageFragment {
     private boolean isExpand = false;
     private HospitalAdapter mHospitalAdapter;
 
+
+    @BindView(R.id.near_by_hospital)
+    CardView mCardView;
+
     public HomePageFragment() {
         // Required empty public constructor
     }
@@ -98,6 +103,14 @@ public class HomePageFragment extends AHomePageFragment {
             @Override
             public void onClick(View v) {
                 AnimateUtil.createCircularReveal(v);
+            }
+        });
+        mCardView.post(new Runnable() {
+            @Override
+            public void run() {
+                int[] location = new int[2];
+                mCardView.getLocationInWindow(location);
+                Log.d("HomePageFragment", "location:" + location[0] + ":" + location[1]);
             }
         });
 
@@ -184,6 +197,11 @@ public class HomePageFragment extends AHomePageFragment {
         //banner设置方法全部调用完毕时最后调用
         mImageBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mExpertsBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+
+        mImageBanner.setDelayTime(5000);
+        mExpertsBanner.setDelayTime(8000);
+
+
         mImageBanner.start();
         mExpertsBanner.start();
     }

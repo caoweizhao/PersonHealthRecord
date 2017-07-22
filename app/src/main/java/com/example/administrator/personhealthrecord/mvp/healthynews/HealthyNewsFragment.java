@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,16 +12,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.HealthyNewsDetailActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
-import com.example.administrator.personhealthrecord.mvp.healthynewsdetali.HealthyNewsDetaliActivity;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +32,7 @@ import butterknife.ButterKnife;
  */
 public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFragment {
     private static HealthyNewsFragment mHealthyNewsFragment =null;
-    private HealthyNewsFragment(){
+    public HealthyNewsFragment(){
 
     }
     public static HealthyNewsFragment getInstance() {
@@ -98,7 +95,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(getActivity(), HealthyNewsDetaliActivity.class);
+                Intent intent=new Intent(getActivity(), HealthyNewsDetailActivity.class);
                 intent.putExtra("NewsBean",((NewsBean)adapter.getItem(position)));
                 startActivity(intent);
             }

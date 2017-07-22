@@ -51,7 +51,7 @@ public class MainActivity extends AMainActivity {
 
     @Override
     protected void initEvents() {
-        fragmentMgr=new FragmentMgr(this,mFrameLayout);
+        fragmentMgr = new FragmentMgr(this, mFrameLayout);
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -84,7 +84,7 @@ public class MainActivity extends AMainActivity {
                         break;
                 }
                 mDrawerLayout.closeDrawer(Gravity.START);
-               // AnimateUtil.createCircularReveal(getWindow().getDecorView());
+                // AnimateUtil.createCircularReveal(getWindow().getDecorView());
                 return true;
             }
         });
@@ -117,7 +117,7 @@ public class MainActivity extends AMainActivity {
         toolbar.post(new Runnable() {
             @Override
             public void run() {
-                Log.d("MainActivity",":"+toolbar.getMeasuredHeight());
+                Log.d("MainActivity", ":" + toolbar.getMeasuredHeight());
             }
         });
         toggle = new ActionBarDrawerToggle(

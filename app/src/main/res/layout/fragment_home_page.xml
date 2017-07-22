@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -17,132 +18,215 @@
             >
 
             <!--轮播图-->
-            <com.youth.banner.Banner
-                android:id="@+id/home_page_img_banner"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/home_page_img_banner_height"/>
+                android:layout_height="@dimen/home_page_img_banner_height"
+                android:layout_marginBottom="@dimen/card_view_margin_vertical"
+                android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+                android:layout_marginRight="@dimen/card_view_margin_horizontal"
+                android:layout_marginTop="@dimen/card_view_margin_vertical"
+                app:cardCornerRadius="@dimen/card_corner"
+                app:cardElevation="@dimen/card_view_elevation"
+                >
 
+                <com.youth.banner.Banner
+                    android:id="@+id/home_page_img_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/home_page_img_banner_height"/>
+            </android.support.v7.widget.CardView>
             <!--自助挂号-->
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/home_page_normal_padding"
+                android:layout_marginBottom="@dimen/card_view_margin_vertical"
+                android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+                android:layout_marginRight="@dimen/card_view_margin_horizontal"
+                android:layout_marginTop="@dimen/card_view_margin_vertical"
+                app:cardCornerRadius="@dimen/card_corner"
+                app:cardElevation="@dimen/card_view_elevation"
                 >
 
-                <!--自助挂号-->
                 <LinearLayout
-                    android:id="@+id/self_registered"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
+                    android:padding="@dimen/home_page_normal_padding"
                     >
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <!--自助挂号-->
+                    <LinearLayout
+                        android:id="@+id/self_registered"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="自助挂号"/>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_book"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="快速挂号 快速求医"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="自助挂号"/>
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="快速挂号 快速求医"/>
 
-                <!--私人医生-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    >
+                    </LinearLayout>
 
+                    <include
+                        layout="@layout/divider_view"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"/>
                     <!--私人医生-->
-                    <TextView
-                        android:id="@+id/private_doctor"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="私人医生"/>
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        >
 
-                    <!--医疗咨询-->
-                    <TextView
-                        android:id="@+id/medical_consultation"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="医疗咨询"/>
+                        <!--私人医生-->
+                        <TextView
+                            android:id="@+id/private_doctor"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:drawableRight="@drawable/ic_doctor"
+                            android:gravity="center"
+                            android:paddingRight="10dp"
+                            android:text="私人医生"/>
 
+                        <include layout="@layout/divider_view" />
+                        <!--医疗咨询-->
+                        <TextView
+                            android:id="@+id/medical_consultation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:drawableRight="@drawable/ic_medical_consultation"
+                            android:gravity="center"
+                            android:paddingRight="10dp"
+                            android:text="医疗咨询"/>
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-
-            <include layout="@layout/divider_view"/>
-
-            <!--专家类型-->
-            <RelativeLayout
+            </android.support.v7.widget.CardView>
+            <!--专家-->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/home_page_normal_padding"
+                android:layout_marginBottom="@dimen/card_view_margin_vertical"
+                android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+                android:layout_marginRight="@dimen/card_view_margin_horizontal"
+                android:layout_marginTop="@dimen/card_view_margin_vertical"
+                app:cardCornerRadius="@dimen/card_corner"
+                app:cardElevation="@dimen/card_view_elevation"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:drawableLeft="@drawable/ic_expert"
-                    android:drawablePadding="@dimen/drawable_padding"
-                    android:gravity="center_vertical"
-                    android:text="科室专家"
-                    />
+                    android:orientation="vertical">
+                    <!--专家类型-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryLight"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        >
 
-                <!--专家类型-->
-                <Spinner
-                    android:id="@+id/expert_type_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:entries="@array/expert_type"
-                    />
-            </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:drawableLeft="@drawable/ic_expert"
+                            android:drawablePadding="@dimen/drawable_padding"
+                            android:gravity="center_vertical"
+                            android:text="科室专家"
+                            />
 
-            <!--专家轮播-->
-            <com.youth.banner.Banner
-                android:id="@+id/home_page_expert_banner"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/expert_banner_height"/>
+                        <!--专家类型-->
+                        <Spinner
+                            android:id="@+id/expert_type_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:entries="@array/expert_type"
+                            />
+                    </RelativeLayout>
 
-            <include layout="@layout/divider_view"/>
+                    <com.youth.banner.Banner
+                        android:id="@+id/home_page_expert_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/expert_banner_height"/>
 
-            <!--附近医院推荐-->
-            <TextView
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--医院推荐-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/near_by_hospital"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_hospital"
-                android:drawablePadding="@dimen/drawable_padding"
-                android:gravity="center_vertical"
-                android:padding="@dimen/home_page_normal_padding"
-                android:text="附近医院推荐"/>
+                android:layout_marginTop="@dimen/card_view_margin_vertical"
+                app:cardCornerRadius="@dimen/card_corner"
+                app:elevation="@dimen/card_view_elevation"
+                >
 
-            <include layout="@layout/divider_view"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <!--附近医院推荐-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryLight"
+                        android:padding="12dp"
+                        >
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/home_page_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:drawableLeft="@drawable/ic_hospital"
+                            android:drawablePadding="@dimen/drawable_padding"
+                            android:gravity="center_vertical"
+                            android:text="附近医院推荐"/>
+
+                        <TextView
+                            android:id="@+id/map_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:autoLink="all"
+                            android:drawableRight="@drawable/ic_map_icon"
+                            android:gravity="center"
+                            android:text="广州"
+                            />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/home_page_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

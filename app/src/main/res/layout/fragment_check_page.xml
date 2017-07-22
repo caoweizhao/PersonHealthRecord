@@ -1,79 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-    <include layout="@layout/toolbar"/>
-    <com.youth.banner.Banner
-        android:background="#cccc"
-        android:id="@+id/heath_check_banner01"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="5dp"/>
-
-    <LinearLayout
-        android:background="#ccc"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
-        <TextView
-            android:textSize="18sp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:gravity="center"
-            android:text="@string/resover_examintion"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:textSize="18sp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:gravity="center"
-            android:text="@string/resover_order"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:background="#ccc"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
-        <TextView
-            android:textSize="18sp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:gravity="center"
-            android:text="@string/my_report"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:textSize="18sp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:gravity="center"
-            android:text="@string/rent_device"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <com.youth.banner.Banner
-        android:background="#cccc"
-        android:id="@+id/heath_check_banner02"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-       />
-<android.support.v7.widget.RecyclerView
-    android:nestedScrollingEnabled="false"
-    android:id="@+id/healthy_check_projectlsit"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-</android.support.v7.widget.RecyclerView>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/toolbar"/>
+
+    <android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--轮播-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="@dimen/card_view_margin_vertical"
+                android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+                android:layout_marginRight="@dimen/card_view_margin_horizontal"
+                android:layout_marginTop="@dimen/card_view_margin_vertical"
+                app:cardCornerRadius="@dimen/card_corner"
+                app:cardElevation="@dimen/card_view_elevation"
+                >
+
+                <com.youth.banner.Banner
+                    android:id="@+id/heath_check_banner01"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#cccc"/>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:text="@string/resover_examintion"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:text="@string/resover_order"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:text="@string/my_report"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:text="@string/rent_device"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="@dimen/card_view_margin_vertical"
+                android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+                android:layout_marginRight="@dimen/card_view_margin_horizontal"
+                android:layout_marginTop="@dimen/card_view_margin_vertical"
+                app:cardCornerRadius="@dimen/card_corner"
+                app:cardElevation="@dimen/card_view_elevation"
+                >
+
+                <com.youth.banner.Banner
+                    android:id="@+id/heath_check_banner02"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#cccc"
+                    />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/healthy_check_projectlsit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
-</android.support.v4.widget.NestedScrollView>

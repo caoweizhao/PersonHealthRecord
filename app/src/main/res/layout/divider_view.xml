@@ -5,4 +5,6 @@
     android:layout_height="1dp"
     android:layout_marginBottom="@dimen/divider_view_margin"
     android:layout_marginTop="@dimen/divider_view_margin"
+    android:layout_marginLeft="@dimen/divider_view_margin"
+    android:layout_marginRight="@dimen/divider_view_margin"
     android:background="#ccc"/>
