@@ -5,11 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-
-import com.example.administrator.personhealthrecord.mvp.socialpage.disease.DiseaseFragment;
-import com.example.administrator.personhealthrecord.mvp.socialpage.immune.ImmuneFragment;
 import com.example.administrator.personhealthrecord.mvp.socialpage.medical.MedicalFragment;
-import com.example.administrator.personhealthrecord.mvp.socialpage.news.NewsFragment;
 
 /**
  * Created by Administrator on 2017-7-20.
@@ -39,7 +35,7 @@ public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (mFragmentSparseArray.get(position) == null) {
             Fragment fragment;
-            switch (position) {
+            /*switch (position) {
                 case 1:
                     fragment = MedicalFragment.newInstance();
                     break;
@@ -53,7 +49,8 @@ public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
                 default:
                     fragment = NewsFragment.newInstance();
                     break;
-            }
+            }*/
+            fragment = MedicalFragment.newInstance();
             mFragmentSparseArray.put(position,fragment);
             return fragment;
         }

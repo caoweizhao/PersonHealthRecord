@@ -2,7 +2,6 @@ package com.example.administrator.personhealthrecord.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,11 +14,11 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class HealthyNewsDetailActivity extends AppCompatActivity {
+public class HealthyNewsDetailActivity extends BaseActivity {
 
     @BindView(R.id.healthy_news_detail_text)
     public TextView textView;
@@ -27,16 +26,24 @@ public class HealthyNewsDetailActivity extends AppCompatActivity {
     public Toolbar toolbar;
     @BindView(R.id.healthy_news_detali_image)
     public ImageView imageView;
+    @BindView(R.id.health_news_text_title)
+    TextView mTitleTextView;
+    private NewsBean mNewsBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_healthy_news_detali);
-        ButterKnife.bind(this);
-        NewsBean bean = getIntent().getParcelableExtra("NewsBean");
-        textView.setText(bean.getContent() + "\n" + "\n" + bean.getTime());
+
+
+    }
+
+    @Override
+    protected void initData() {
+        mNewsBean = getIntent().getParcelableExtra("NewsBean");
+        textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getTime());
+        mTitleTextView.setText(mNewsBean.getTitle());
         Glide.with(this)
-                .load(bean.getImageUrl())
+                .load(mNewsBean.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -56,11 +63,20 @@ public class HealthyNewsDetailActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    protected void initEvents() {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_healthy_news_detali;
     }
 }

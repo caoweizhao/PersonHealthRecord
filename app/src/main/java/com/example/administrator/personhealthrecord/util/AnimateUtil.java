@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.util;
 
 import android.animation.Animator;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -26,4 +28,41 @@ public class AnimateUtil {
             animator.start();
         }
     }
+
+    public static void scaleShow(View view, ViewPropertyAnimatorListener viewPropertyAnimatorListener) {
+        view.setVisibility(View.VISIBLE);
+        ViewCompat.animate(view)
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .alpha(1.0f)
+                .setDuration(800)
+                .setListener(viewPropertyAnimatorListener)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .start();
+    }
+
+    public static void scaleHide(View view, ViewPropertyAnimatorListener viewPropertyAnimatorListener) {
+        ViewCompat.animate(view)
+                .scaleX(0.0f)
+                .scaleY(0.0f)
+                .alpha(0.0f)
+                .setDuration(400)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setListener(viewPropertyAnimatorListener)
+                .start();
+    }
+
+    public static void scaleHide(View view, float scaleFactor) {
+        view.setScaleX(1 - scaleFactor);
+        view.setScaleY(1 - scaleFactor);
+        view.setAlpha(1 - scaleFactor);
+    }
+
+    public static void scaleShow(View view, float scaleFactor) {
+        view.setScaleX(scaleFactor);
+        view.setScaleY(scaleFactor);
+        view.setAlpha(scaleFactor);
+    }
+
+
 }

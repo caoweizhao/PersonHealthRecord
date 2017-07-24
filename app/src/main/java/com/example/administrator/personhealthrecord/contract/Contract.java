@@ -25,10 +25,21 @@ public class Contract {
      */
     public static final int TYPE_DERMATOLOGY = 3;
 
+    public static final String[] colorsStr = new String[]{
+            "#ff512da7", "#ff00786b", "#ff7a1fa1", "#ff0096a6"
+    };
+    public static final String[] colorsLighterStr = new String[]{
+            "#ff663ab6", "#ff009587", "#ff9b27af", "#ff4ebcc7"
+    };
+
+
+    public static int[] colors = new int[]{0xff512da7, 0xff00786b, 0xff7a1fa1, 0xff0096a6};
+    public static int[] colorsLighter = new int[]{0xff663ab6, 0xff009587, 0xff9b27af, 0xff4ebcc7};
 
     @IntDef(value = {TYPE_CARDIOLOGY, TYPE_DERMATOLOGY, TYPE_INTERNAL_MEDICINE, TYPE_SURGICAL})
     public @interface ExpertType {
     }
+
     //图片的baseURl
-    private static final String TAG="http://192.168.13.210:8080/information/getImage/";
+    private static final String TAG = "http://192.168.13.210:8080/information/getImage/";
 }
