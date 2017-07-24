@@ -1,7 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.healthynewsdetali;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -33,7 +32,7 @@ public class HealthyNewsDetaliActivity extends Activity {
         setContentView(R.layout.activity_healthy_news_detali);
         ButterKnife.bind(this);
         NewsBean bean=getIntent().getParcelableExtra("NewsBean");
-        textView.setText(bean.getContent()+"\n"+"\n"+bean.getTime());
+        textView.setText(bean.getContent()+"\n"+"\n"+bean.getdate());
         Glide.with(this)
                 .load(bean.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {

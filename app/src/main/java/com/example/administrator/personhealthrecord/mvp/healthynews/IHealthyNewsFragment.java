@@ -13,5 +13,9 @@ public interface IHealthyNewsFragment {
 
     void hidProgressDialog();
 
-    void updateListItem(List<NewsBean> list);
+    void updateAfterNews(List<NewsBean> list);
+
+    void updateTodayNews(List<NewsBean> list);
+
+    void updatebeforeNews(List<NewsBean> list);
 }

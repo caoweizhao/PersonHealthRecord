@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 2017-7-20.
  */
 
-public class CheckBean extends AbstractItem{
+public class CheckBean implements AbstractItem{
     @SerializedName("id")
     private int id;
     @SerializedName("title")
@@ -67,7 +67,7 @@ public class CheckBean extends AbstractItem{
     }
 
     @Override
-    public String getTime() {
+    public String getdate() {
         return "预约人数"+reverations;
     }
 }

@@ -2,7 +2,6 @@ package com.example.administrator.personhealthrecord.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.AbstractItem;
+import com.example.administrator.personhealthrecord.contract.Contract;
 
 import java.util.List;
 
@@ -42,12 +42,12 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
         helper.setText(R.id.abstract_item__title, item.getTitle())
                 .setText(R.id.abstract_item__summary, item.getSummary())
                 .setImageResource(R.id.abstract_item__img, R.mipmap.ic_launcher_round)
-                .setText(R.id.abstract_item_date,item.getTime());
+                .setText(R.id.abstract_item_date,item.getdate());
         ((TextView)helper.getView(R.id.abstract_item__title)).setText(item.getTitle());
         ((TextView)helper.getView(R.id.abstract_item__summary)).setText(item.getSummary());
-        ((TextView)helper.getView(R.id.abstract_item_date)).setText(item.getTime());
+        ((TextView)helper.getView(R.id.abstract_item_date)).setText(item.getdate());
         Glide.with(mContext)
-                .load(item.getImageUrl())
+                .load(Contract.ImageUrl+item.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

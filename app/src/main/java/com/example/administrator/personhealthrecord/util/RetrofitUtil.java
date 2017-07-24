@@ -45,6 +45,7 @@ public class RetrofitUtil {
         if (mRetrofit == null) {
             synchronized (RetrofitUtil.class) {
                 if (mRetrofit == null) {
+                    mHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                     mRetrofit = new Retrofit.Builder()
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

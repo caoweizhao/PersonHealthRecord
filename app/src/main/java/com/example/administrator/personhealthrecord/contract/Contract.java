@@ -7,7 +7,7 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
-    public static final String BASE_URL = "http://192.168.13.210:8080/";
+    public static final String BASE_URL = "http://192.168.13.39:8080/";
     /**
      * 心血管内科
      */
@@ -30,5 +30,5 @@ public class Contract {
     public @interface ExpertType {
     }
     //图片的baseURl
-    private static final String TAG="http://192.168.13.210:8080/information/getImage/";
+    public static final String ImageUrl=BASE_URL+"information/getImage/";
 }

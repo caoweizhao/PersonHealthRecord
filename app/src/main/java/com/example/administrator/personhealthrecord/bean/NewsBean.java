@@ -2,16 +2,21 @@ package com.example.administrator.personhealthrecord.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.litepal.crud.DataSupport;
+
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017-7-19.
  */
 
-public class NewsBean extends AbstractItem implements Parcelable{
+public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Comparable<NewsBean>{
     /**
      * id : 1
      * title : 习近平：加快建设开放型经济新体制
@@ -73,11 +78,15 @@ public class NewsBean extends AbstractItem implements Parcelable{
         return category;
     }
 
+    public long getTime() {
+        return time;
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }
      @Override
-    public String getTime() {
+    public String getdate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(time);
     }
@@ -131,5 +140,20 @@ public class NewsBean extends AbstractItem implements Parcelable{
         content=in.readString();
         imageUrl=in.readString();
         time=in.readLong();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return getTime()==((NewsBean)obj).getTime();
+    }
+
+    @Override
+    public int compareTo(@NonNull NewsBean o) {
+        Date date1=new Date(getTime());
+        Date date2=new Date(o.getTime());
+        if(date1.after(date2))
+            return -1;
+        else
+            return 1;
     }
 }

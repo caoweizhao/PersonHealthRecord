@@ -6,7 +6,12 @@ import java.util.List;
 
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 /**
@@ -14,6 +19,14 @@ import retrofit2.http.GET;
  */
 
 public interface HealthyNewsApi {
-    @GET("information/information_list")
-    Observable<List<NewsBean>> getNews();
+    @GET("information/information_list_today")
+    Observable<List<NewsBean>> getNewsToday();
+
+
+    @GET("information/information_list_today")
+    Observable<List<NewsBean>> getNewsAfter(@Query("date") long time);
+
+
+    @GET("information/information_list_before/{date}")
+    Observable<List<NewsBean>> getNewsBefore(@Path("date") long time);
 }
