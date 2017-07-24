@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:weightSum="1"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="查看体检报告"
+            android:textColor="#fff"
+            android:textSize="19sp"/>
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.10"
+            android:src="@drawable/righttop"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <!--查看体检报告-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="姓名："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/record_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        tools:text="体检人"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="年龄："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/record_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        tools:text="22岁"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="户籍："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/census_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        tools:text="广东汕头"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="身高："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/record_height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        tools:text="182厘米"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="体重："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/record_weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        tools:text="65公斤"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="血常规："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <ImageView
+                        android:id="@+id/blood_routine"
+                        android:layout_width="210dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="19sp"
+                        tools:background="@drawable/set_pic"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="视力："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="左"
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/left_vision"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        tools:text="4.7"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="116dp"
+                        android:layout_marginTop="10dp"
+                        android:text="右"
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/right_vision"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        tools:text="4.7"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="310dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="辨色力："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/color_discrimination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="听力："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/hearing_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="血压："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/blood_pressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="心肺功能："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/cardiopulmonary_function"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="脉搏次数："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/pulse_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="躯干颈部运动障碍："
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/trunkneck_trouble"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/record_resource"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="15dp"
+                        android:maxLines="1"
+                        android:paddingRight="10dp"
+                        android:text="-本数据由xxx提供"
+                        android:textColor="#000"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="345dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#b6b6b6"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
