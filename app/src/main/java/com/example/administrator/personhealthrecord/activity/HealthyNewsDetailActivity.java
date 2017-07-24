@@ -1,7 +1,10 @@
-package com.example.administrator.personhealthrecord.mvp.healthynewsdetali;
+package com.example.administrator.personhealthrecord.activity;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,21 +21,22 @@ import com.example.administrator.personhealthrecord.bean.NewsBean;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HealthyNewsDetaliActivity extends Activity {
+public class HealthyNewsDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.healthy_news_detail_text)
-    TextView textView;
+    public TextView textView;
     @BindView(R.id.healthy_news_detail_toolbar)
-    Toolbar toolbar;
+    public Toolbar toolbar;
     @BindView(R.id.healthy_news_detali_image)
-    ImageView imageView;
+    public ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_healthy_news_detali);
         ButterKnife.bind(this);
         NewsBean bean=getIntent().getParcelableExtra("NewsBean");
-        textView.setText(bean.getContent()+"\n"+"\n"+bean.getdate());
+        textView.setText(bean.getContent()+"\n"+"\n"+bean.getTime());
         Glide.with(this)
                 .load(bean.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {
@@ -49,6 +53,11 @@ public class HealthyNewsDetaliActivity extends Activity {
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .fitCenter()
                 .into(imageView);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

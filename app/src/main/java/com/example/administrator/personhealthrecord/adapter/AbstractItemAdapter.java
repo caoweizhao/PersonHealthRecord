@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
@@ -16,7 +17,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.AbstractItem;
-import com.example.administrator.personhealthrecord.contract.Contract;
 
 import java.util.List;
 
@@ -27,14 +27,15 @@ import java.util.List;
 public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     private Context mContext;
+
     public AbstractItemAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Context context) {
         super(R.layout.abstract_item, data);
-        this.mContext=context;
+        this.mContext = context;
     }
 
     public AbstractItemAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Fragment context) {
         super(R.layout.abstract_item, data);
-        this.mContext=context.getContext();
+        this.mContext = context.getContext();
     }
 
     @Override
@@ -50,18 +51,23 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                 .load(Contract.ImageUrl+item.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onException(Exception e, String model,
+                                               Target<GlideDrawable> target,
+                                               boolean isFirstResource) {
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(GlideDrawable resource, String model,
+                                                   Target<GlideDrawable> target,
+                                                   boolean isFromMemoryCache,
+                                                   boolean isFirstResource) {
                         return false;
                     }
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .fitCenter()
-                .into((ImageView)helper.getView(R.id.abstract_item__img));
+                .centerCrop()
+                .into((ImageView) helper.getView(R.id.abstract_item__img));
 
     }
 

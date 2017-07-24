@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -22,12 +23,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
+import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -61,6 +64,11 @@ public class HomePageFragment extends AHomePageFragment {
     private SearchView mSearchView;
 
     private boolean isExpand = false;
+    private HospitalAdapter mHospitalAdapter;
+
+
+    @BindView(R.id.near_by_hospital)
+    CardView mCardView;
 
     public HomePageFragment() {
         // Required empty public constructor
@@ -90,6 +98,22 @@ public class HomePageFragment extends AHomePageFragment {
         initBanner();
         initToolbar("首页");
         setUpWithActivity(view);
+
+        mPrivateDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimateUtil.createCircularReveal(v);
+            }
+        });
+        mCardView.post(new Runnable() {
+            @Override
+            public void run() {
+                int[] location = new int[2];
+                mCardView.getLocationInWindow(location);
+                Log.d("HomePageFragment", "location:" + location[0] + ":" + location[1]);
+            }
+        });
+
     }
 
     private void setUpWithActivity(View view) {
@@ -173,6 +197,11 @@ public class HomePageFragment extends AHomePageFragment {
         //banner设置方法全部调用完毕时最后调用
         mImageBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mExpertsBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+
+        mImageBanner.setDelayTime(5000);
+        mExpertsBanner.setDelayTime(8000);
+
+
         mImageBanner.start();
         mExpertsBanner.start();
     }
@@ -204,8 +233,14 @@ public class HomePageFragment extends AHomePageFragment {
     @Override
     public void updateHospitals(List<HospitalBean> hospitalBeanList) {
         Log.d("HomePageFragment", "hos:" + hospitalBeanList);
-        HospitalAdapter adapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
-        mHomePageRecyclerView.setAdapter(adapter);
+        mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
+        mHomePageRecyclerView.setAdapter(mHospitalAdapter);
+        mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                AnimateUtil.createCircularReveal(view);
+            }
+        });
         mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 

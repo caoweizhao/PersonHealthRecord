@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -38,6 +39,7 @@ public class MainActivity extends AMainActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDrawerLayout.setScrimColor(0x00ffffff);
     }
 
     @Override
@@ -45,14 +47,21 @@ public class MainActivity extends AMainActivity {
         return R.layout.main;
     }
 
+    boolean isFirstIn = true;
+
     @Override
     protected void initEvents() {
-        fragmentMgr=new FragmentMgr(this,mFrameLayout);
+        fragmentMgr = new FragmentMgr(this, mFrameLayout);
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 mPresenter.onTabSelected(tabId);
+               /* if (isFirstIn) {
+                    isFirstIn = false;
+                }else{
+                    AnimateUtil.createCircularReveal(mFrameLayout);
+                }*/
             }
         });
 
@@ -75,6 +84,7 @@ public class MainActivity extends AMainActivity {
                         break;
                 }
                 mDrawerLayout.closeDrawer(Gravity.START);
+                // AnimateUtil.createCircularReveal(getWindow().getDecorView());
                 return true;
             }
         });
@@ -85,13 +95,6 @@ public class MainActivity extends AMainActivity {
         return new MainPresenter();
     }
 
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void dismissLoading() {
-    }
 
     @Override
     public void setFragment(int position) {
@@ -110,7 +113,13 @@ public class MainActivity extends AMainActivity {
 
     ActionBarDrawerToggle toggle;
 
-    public void setUpWithToolbar(Toolbar toolbar) {
+    public void setUpWithToolbar(final Toolbar toolbar) {
+        toolbar.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("MainActivity", ":" + toolbar.getMeasuredHeight());
+            }
+        });
         toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
@@ -126,5 +135,13 @@ public class MainActivity extends AMainActivity {
             }
         }
         super.onBackPressed();
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void dismissLoading() {
     }
 }

@@ -24,6 +24,7 @@ public class HospitalAdapter extends BaseQuickAdapter<HospitalBean, BaseViewHold
     protected void convert(BaseViewHolder helper, HospitalBean item) {
         helper.setText(R.id.hospital_item_clazz, item.getClazz())
                 .setText(R.id.hospital_item__name, item.getName())
-                .setText(R.id.hospital_item_address, item.getAddress());
+                .setText(R.id.hospital_item_address, item.getAddress())
+                .addOnClickListener(R.id.hospital_item_layout);
     }
 }

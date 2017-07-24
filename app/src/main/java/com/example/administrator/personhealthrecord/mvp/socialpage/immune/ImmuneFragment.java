@@ -3,6 +3,7 @@ package com.example.administrator.personhealthrecord.mvp.socialpage.immune;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,12 @@ public class ImmuneFragment extends BaseFragment {
 
     public ImmuneFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("ImmuneFragment","onResume");
     }
 
     /**

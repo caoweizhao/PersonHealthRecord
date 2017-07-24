@@ -5,6 +5,7 @@ import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.adapter.rxjava2.Result;
 import retrofit2.http.GET;
 
 /**
@@ -14,7 +15,7 @@ import retrofit2.http.GET;
 public interface HomePageService {
 
     @GET("")
-    Observable<List<String>> getImagesUrl();
+    Observable<Result<List<String>>> getImagesUrl();
 
     @GET("")
     Observable<List<ExpertBean>> getExperts();

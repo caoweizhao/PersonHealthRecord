@@ -18,8 +18,6 @@ import com.example.administrator.personhealthrecord.mvp.socialpage.news.NewsFrag
 public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
 
     private SparseArray<Fragment> mFragmentSparseArray = new SparseArray<>(4);
-
-
     public SparseArray<String> mTitles = new SparseArray<>();
     {
         mTitles.put(0,"新闻管理");
@@ -33,24 +31,19 @@ public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-
     public CharSequence getPageTitle(int position) {
         return mTitles.get(position);
     }
 
     @Override
-
     public Fragment getItem(int position) {
         if (mFragmentSparseArray.get(position) == null) {
             Fragment fragment;
             switch (position) {
-
-
                 case 1:
                     fragment = MedicalFragment.newInstance();
                     break;
                 case 2:
-
                     fragment = DiseaseFragment.newInstance();
                     break;
                 case 3:
@@ -64,8 +57,6 @@ public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
             mFragmentSparseArray.put(position,fragment);
             return fragment;
         }
-
-
         return mFragmentSparseArray.get(position);
     }
 

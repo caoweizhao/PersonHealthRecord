@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.SocialPageViewPagerAdapter;
 import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
+import com.youth.banner.transformer.DepthPageTransformer;
 
 import butterknife.BindView;
 
@@ -70,8 +72,18 @@ public class SocialPageFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mViewPager.setAdapter(new SocialPageViewPagerAdapter(getFragmentManager()));
+        FragmentManager fm = getChildFragmentManager();
+        mViewPager.setAdapter(new SocialPageViewPagerAdapter(fm));
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setPageTransformer(true,new DepthPageTransformer());
         mTabLayout.setupWithViewPager(mViewPager);
+
+        initToolbar("社区");
+        setUpWithActivity(view);
+    }
+
+    @Override
+    protected void initEvent() {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -88,20 +100,13 @@ public class SocialPageFragment extends BaseFragment {
 
             }
         });
-        initToolbar("社区");
-        setUpWithActivity(view);
-    }
-
-    @Override
-    protected void initEvent() {
-
     }
 
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
+            @Override
             public void onClick(View v) {
                 ((MainActivity) getActivity()).openMenu();
             }

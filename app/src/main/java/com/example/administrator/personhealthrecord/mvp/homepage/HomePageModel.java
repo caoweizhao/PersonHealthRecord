@@ -9,6 +9,7 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.Result;
 
 /**
  * Created by Administrator on 2017-7-19.
@@ -27,15 +28,14 @@ public class HomePageModel extends AHomePageModel {
     public void getImageRes() {
         mHomePageService.getImagesUrl()
                 .observeOn(Schedulers.newThread())
-                .subscribe(new Observer<List<String>>() {
+                .subscribe(new Observer<Result<List<String>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<String> value) {
-                        mPresenter.onImagesReady(value);
+                    public void onNext(Result<List<String>> value) {
                     }
 
                     @Override

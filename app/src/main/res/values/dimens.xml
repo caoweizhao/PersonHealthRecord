@@ -3,8 +3,13 @@
     <dimen name="expert_banner_height">150dp</dimen>
     <dimen name="home_page_img_banner_height">200dp</dimen>
     <dimen name="drawable_padding">10dp</dimen>
-    <dimen name="home_page_normal_padding">10dp</dimen>
+    <dimen name="home_page_normal_padding">8dp</dimen>
     <dimen name="divider_view_margin">2dp</dimen>
 
     <dimen name="hospital_item_class_padding">3dp</dimen>
+    <dimen name="header_view_text_padding">2dp</dimen>
+    <dimen name="card_view_margin_horizontal">8dp</dimen>
+    <dimen name="card_view_margin_vertical">8dp</dimen>
+    <dimen name="card_view_elevation">2dp</dimen>
+    <dimen name="card_corner">4dp</dimen>
 </resources>

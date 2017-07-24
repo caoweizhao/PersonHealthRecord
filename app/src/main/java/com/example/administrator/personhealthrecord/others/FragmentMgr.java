@@ -1,9 +1,6 @@
 package com.example.administrator.personhealthrecord.others;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,7 +16,7 @@ import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageFra
  */
 
 public class FragmentMgr {
-    private static final String TAG="FragmentMgr";
+    private static final String TAG = "FragmentMgr";
     public CheckPageFragment mCheckPageFragment;
     public HomePageFragment mHomePageFragment;
     public HealthyNewsFragment mHealthyNewsFragement;
@@ -28,12 +25,11 @@ public class FragmentMgr {
     private AppCompatActivity context;
     private FrameLayout content;
     private FragmentPagerAdapter mFragmentPagerAdapter;
-    public FragmentMgr(AppCompatActivity context, FrameLayout frameLayout)
-    {
-        this.context=context;
-        this.content=frameLayout;
-        mFragmentPagerAdapter = new FragmentPagerAdapter(context.getSupportFragmentManager())
-        {
+
+    public FragmentMgr(AppCompatActivity context, FrameLayout frameLayout) {
+        this.context = context;
+        this.content = frameLayout;
+        mFragmentPagerAdapter = new FragmentPagerAdapter(context.getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 switch (position) {
@@ -49,6 +45,7 @@ public class FragmentMgr {
                         return HomePageFragment.newInstance();
                 }
             }
+
             @Override
             public int getCount() {
                 return 4;
@@ -59,26 +56,25 @@ public class FragmentMgr {
 
     public Fragment getFragment(int pos) {
         if (pos == 0) {
-            ExcuteAdapter(0);
+            ExecuteAdapter(0);
         }
-        if(pos == 1){
-            ExcuteAdapter(1);
+        if (pos == 1) {
+            ExecuteAdapter(1);
         }
-        if(pos == 2){
-            ExcuteAdapter(2);
+        if (pos == 2) {
+            ExecuteAdapter(2);
         }
         if (pos == 3) {
-            ExcuteAdapter(3);
+            ExecuteAdapter(3);
         }
         return null;
     }
 
-    public void ExcuteAdapter(int position)
-    {
+    public void ExecuteAdapter(int position) {
         Fragment fragment = (Fragment) mFragmentPagerAdapter.instantiateItem(content, position);
         mFragmentPagerAdapter.setPrimaryItem(content, 0, fragment);
         mFragmentPagerAdapter.finishUpdate(content);
-        Log.d(TAG, "ExcuteAdapter: "+mFragmentPagerAdapter);
+        Log.d(TAG, "ExecuteAdapter: " + mFragmentPagerAdapter);
     }
 }
 
