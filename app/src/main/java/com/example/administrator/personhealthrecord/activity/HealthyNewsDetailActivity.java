@@ -17,6 +17,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+import com.example.administrator.personhealthrecord.contract.Contract;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,9 +39,10 @@ public class HealthyNewsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_healthy_news_detali);
         ButterKnife.bind(this);
         NewsBean bean=getIntent().getParcelableExtra("NewsBean");
-        textView.setText(bean.getContent()+"\n"+"\n"+bean.getTime());
+        Date date=new Date(bean.getTime());
+        textView.setText(bean.getContent()+"\n"+"\n"+bean.getdate());
         Glide.with(this)
-                .load(bean.getImageUrl())
+                .load(Contract.ImageUrl+bean.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

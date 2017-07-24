@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.AbstractItem;
+import com.example.administrator.personhealthrecord.contract.Contract;
 
 import java.util.List;
 

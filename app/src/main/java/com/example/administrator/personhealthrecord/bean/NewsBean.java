@@ -3,6 +3,7 @@ package com.example.administrator.personhealthrecord.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,6 +18,7 @@ import java.util.Date;
  */
 
 public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Comparable<NewsBean>{
+    private static final String TAG="NewsBean";
     /**
      * id : 1
      * title : 习近平：加快建设开放型经济新体制
@@ -144,6 +146,7 @@ public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Com
 
     @Override
     public boolean equals(Object obj) {
+        Log.d(TAG, "equals: "+((NewsBean)obj).getTime()+"  "+getTime()+"  "+(getTime()==((NewsBean)obj).getTime()));
         return getTime()==((NewsBean)obj).getTime();
     }
 

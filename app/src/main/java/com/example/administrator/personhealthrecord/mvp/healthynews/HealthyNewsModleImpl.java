@@ -14,6 +14,7 @@ import org.reactivestreams.Subscriber;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -95,6 +96,7 @@ public class HealthyNewsModleImpl implements IHealthyNewsModle{
         List<NewsBean> list=DataSupport.findAll(NewsBean.class);
         for (NewsBean bean: list)
             Log.d(TAG, "getDBlist: "+bean.getTitle());
+        Collections.sort(list);
         return list;
     }
 }

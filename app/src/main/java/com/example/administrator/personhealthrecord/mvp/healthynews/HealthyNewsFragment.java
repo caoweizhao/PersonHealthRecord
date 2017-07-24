@@ -22,7 +22,6 @@ import com.example.administrator.personhealthrecord.activity.HealthyNewsDetailAc
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
-import com.example.administrator.personhealthrecord.mvp.healthynewsdetali.HealthyNewsDetaliActivity;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
 
@@ -103,7 +102,17 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 Log.d(TAG, "onUpFetch: ");
                 // adapter.setUpFetching(true);
                 if(!isfirsttime)
+                {
                     adapter.setEnableLoadMore(false);
+                    List<NewsBean> list=adapter.getData();//现将list进行排序
+                    Collections.sort(list);
+                    if(list.size()>0)
+                    {
+                        NewsBean bean= list.get(0);
+                        presenter.getNewsAfter(bean.getdate());
+                    }
+
+                }
                 else
                 {
                     presenter.getTodayNews();//假如是第一次的时候进行gettodaynews
@@ -201,12 +210,17 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter.addData(list1);
+                for(NewsBean bean:list1)
+                {
+                    if(!(adapter.getData().contains(bean)))
+                        adapter.addData(bean);
+                }
+                Collections.sort(adapter.getData());
                 adapter.loadMoreComplete();
                 adapter.setEnableLoadMore(true);
                 adapter.setUpFetchEnable(true);
             }
-        },1000);
+        },500);
     }
 
     //一开始更新最新的消息
@@ -216,28 +230,41 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter.addData(0,list1);
+                for(NewsBean bean:list1)
+                {
+                    if(!(adapter.getData().contains(bean)))
+                        adapter.addData(0,bean);
+                }
+                Collections.sort(adapter.getData());
                 adapter.loadMoreComplete();
                 adapter.setEnableLoadMore(true);
                 adapter.setUpFetchEnable(true);
             }
-        },1000);
+        },500);
     }
 
     @Override
-    public void updatebeforeNews(final List<NewsBean> list) {
+    public void updatebeforeNews( List<NewsBean> list) {
         final List<NewsBean> list1=list;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "run: "+"loadmoreBefor"+list.size());
+                Log.d(TAG, "run: "+"loadmoreBefor"+list1.size());
                 if(!(list1.size()==0))
-                    adapter.addData(list1);
+                {
+                    for(NewsBean bean:list1)
+                    {
+                        if(!(adapter.getData().contains(bean)))
+                            adapter.addData(bean);
+                    }
+                    Collections.sort(adapter.getData());
+
+                }
                 else
                     adapter.setEnableLoadMore(false);
                 adapter.loadMoreComplete();
             }
-        },1000);
+        },500);
     }
 
 

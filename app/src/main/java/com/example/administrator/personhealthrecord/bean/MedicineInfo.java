@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 2017-7-22.
  */
 
-public class MedicineInfo extends AbstractItem {
+public class MedicineInfo implements AbstractItem {
 
     /**
      * code : H10970410
@@ -187,7 +187,7 @@ public class MedicineInfo extends AbstractItem {
     }
 
     @Override
-    public String getTime() {
+    public String getdate() {
         return "";
     }
 
