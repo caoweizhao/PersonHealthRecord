@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.FrameLayout;
 
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.checkpage.CheckPageFragment;
 import com.example.administrator.personhealthrecord.mvp.healthynews.HealthyNewsFragment;
 import com.example.administrator.personhealthrecord.mvp.homepage.HomePageFragment;
+import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageFragment;
 
 /**
@@ -74,7 +76,11 @@ public class FragmentMgr {
         Fragment fragment = (Fragment) mFragmentPagerAdapter.instantiateItem(content, position);
         mFragmentPagerAdapter.setPrimaryItem(content, 0, fragment);
         mFragmentPagerAdapter.finishUpdate(content);
-        Log.d(TAG, "ExecuteAdapter: " + mFragmentPagerAdapter);
+        if (position == 1) {
+            int pos = ((SocialPageFragment) fragment).getCurrentPosition();
+            Log.d("FragmentMgr","ExecuteAdapter:"+pos);
+            ((MainActivity) context).setStatusBarTint(Contract.colors[pos]);
+        }
     }
 }
 

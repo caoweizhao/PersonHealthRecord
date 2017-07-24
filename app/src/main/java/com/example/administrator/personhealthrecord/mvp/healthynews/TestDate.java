@@ -3,7 +3,6 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class TestDate {
             bean.setTime(1111);
             bean.setTitle("新闻"+i);
             bean.setSummary("新闻详情"+i);
-            bean.setImageUrl("http://www.toutiaoba.com/template/comiis_mi/img/comiis_mini_logo.png");
+            bean.setImageUrl("http://picapi.ooopic.com/11/54/90/22b1OOOPIC5e.jpg");
             bean.setContent(strings.get(i%2));
             list.add(bean);
         }

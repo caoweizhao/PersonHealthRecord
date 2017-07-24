@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -34,12 +35,15 @@ public class MainActivity extends AMainActivity {
     NavigationView mMainNavigationView;
     @BindView(R.id.main_drawerLayout)
     DrawerLayout mDrawerLayout;
-
+    SystemBarTintManager sm;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDrawerLayout.setScrimColor(0x00ffffff);
+        sm = new SystemBarTintManager(this);
+        sm.setStatusBarTintEnabled(true);
+        setStatusBarTint(0xff05d09b);
     }
 
     @Override
@@ -56,6 +60,7 @@ public class MainActivity extends AMainActivity {
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
+                setStatusBarTint(0xff05d09b);
                 mPresenter.onTabSelected(tabId);
                /* if (isFirstIn) {
                     isFirstIn = false;
@@ -143,5 +148,12 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void dismissLoading() {
+    }
+
+    public void setStatusBarTint(int color) {
+        if (sm != null) {
+            sm.setStatusBarTintColor(color);
+            sm.setStatusBarAlpha(255 * 0.6f);
+        }
     }
 }

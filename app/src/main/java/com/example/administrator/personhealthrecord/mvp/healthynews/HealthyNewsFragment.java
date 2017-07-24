@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,7 +10,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+import android.util.Pair;
+>>>>>>> master
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,23 +43,27 @@ import butterknife.ButterKnife;
  * Created by andy on 2017/7/19.
  */
 public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFragment {
+<<<<<<< HEAD
     private boolean isfirsttime=true;
     private static final String TAG="HealthyNewsFragment";
     private static HealthyNewsFragment mHealthyNewsFragment =null;
     private HealthyNewsFragment(){
+=======
+    private static HealthyNewsFragment mHealthyNewsFragment = null;
+
+    public HealthyNewsFragment() {
+>>>>>>> master
 
     }
-    public static HealthyNewsFragment getInstance() {
-        synchronized(HealthyNewsFragment.class)
-            {
-                if(mHealthyNewsFragment==null)
-                    {
-                        mHealthyNewsFragment=new HealthyNewsFragment();
-                    }
-            }
-        return mHealthyNewsFragment;
-}
 
+    public static HealthyNewsFragment getInstance() {
+        synchronized (HealthyNewsFragment.class) {
+            if (mHealthyNewsFragment == null) {
+                mHealthyNewsFragment = new HealthyNewsFragment();
+            }
+        }
+        return mHealthyNewsFragment;
+    }
 
 
     IHealthyNewsPresenter presenter;
@@ -62,19 +72,32 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+<<<<<<< HEAD
     @BindView(R.id.health_news_ProgressBar)
     SwipeRefreshLayout layout;
     private AbstractItemAdapter adapter;
+=======
+    private AbstractItemAdapter<NewsBean> adapter;
+>>>>>>> master
     private List<NewsBean> list;
-    private Handler handler=new Handler();
+    private Handler handler = new Handler();
     private RecyclerView.LayoutManager manager;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
         presenter=new HealthyNewsPresenterImpl(this);
 //        list=new ArrayList<>();
 //        list=TestDate.excute();
         manager=new LinearLayoutManager(getContext());
+=======
+        presenter = new HealthyNewsPresenterImpl(this);
+        presenter.getNewsList("");
+        list = new ArrayList<>();
+        list = TestDate.excute();
+        manager = new LinearLayoutManager(getContext());
+>>>>>>> master
         setHasOptionsMenu(true);
     }
 
@@ -82,7 +105,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.healthy_news_layout, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
 
     }
@@ -91,7 +114,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter=new AbstractItemAdapter(R.layout.abstract_item,list,this);
+        adapter = new AbstractItemAdapter(R.layout.abstract_item, list, this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         presenter.getDBlist();
@@ -173,9 +196,18 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(getActivity(), HealthyNewsDetailActivity.class);
-                intent.putExtra("NewsBean",((NewsBean)adapter.getItem(position)));
-                startActivity(intent);
+
+                Intent intent = new Intent(getActivity(), HealthyNewsDetailActivity.class);
+                intent.putExtra("NewsBean", ((NewsBean) adapter.getItem(position)));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    /*startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(),
+                            Pair.create(view.findViewById(R.id.abstract_item__img), "image"),
+                            Pair.create(view.findViewById(R.id.abstract_item__title), "title"))
+                            .toBundle());
+                } else {
+                    startActivity(intent);
+                }
             }
         });
         adapter.setPreLoadNumber(0);
@@ -205,8 +237,13 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     }
 
     @Override
+<<<<<<< HEAD
     public void updateAfterNews(List<NewsBean> list) {
         final List<NewsBean> list1=list;
+=======
+    public void updateListItem(List<NewsBean> list) {
+        final List<NewsBean> list1 = list;
+>>>>>>> master
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -220,8 +257,12 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 adapter.setEnableLoadMore(true);
                 adapter.setUpFetchEnable(true);
             }
+<<<<<<< HEAD
         },500);
     }
+=======
+        }, 2000);
+>>>>>>> master
 
     //一开始更新最新的消息
     @Override
