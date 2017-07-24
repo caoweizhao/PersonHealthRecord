@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="matrix"
-                android:alpha="0.4"
+                android:alpha="0.2"
                 app:layout_collapseMode="parallax"
                 />
 
@@ -50,6 +50,7 @@
                 android:layout_gravity="bottom|center_horizontal"
                 app:layout_collapseMode="pin"
                 app:tabGravity="fill"
+                app:tabIndicatorHeight="4dp"
                 app:tabIndicatorColor="@color/colorIndicator"
                 app:tabMode="scrollable"
                 />

@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DiseaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiseaseFragment extends BaseFragment {
+public class DiseaseFragment extends Fragment {
 
 
     public DiseaseFragment() {
@@ -45,16 +44,6 @@ public class DiseaseFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_disease_page, container, false);
         return view;
-    }
-
-    @Override
-    protected void initEvent() {
-
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     @Override

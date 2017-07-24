@@ -11,12 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
@@ -51,7 +53,6 @@ public class MainActivity extends AMainActivity {
         return R.layout.main;
     }
 
-    boolean isFirstIn = true;
 
     @Override
     protected void initEvents() {
@@ -60,13 +61,11 @@ public class MainActivity extends AMainActivity {
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                setStatusBarTint(0xff05d09b);
+                int pos = mBottomBar.findPositionForTabWithId(tabId);
+                if (pos != 1) {
+                    setStatusBarTint(0xff05d09b);
+                }
                 mPresenter.onTabSelected(tabId);
-               /* if (isFirstIn) {
-                    isFirstIn = false;
-                }else{
-                    AnimateUtil.createCircularReveal(mFrameLayout);
-                }*/
             }
         });
 
@@ -93,6 +92,31 @@ public class MainActivity extends AMainActivity {
                 return true;
             }
         });
+
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                Log.d("MainActivity", "slideOffset" + slideOffset);
+                if (slideOffset < 0.5) {
+                    sm.setStatusBarTintEnabled(true);
+                } else {
+                    sm.setStatusBarTintEnabled(false);
+                }
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
     @Override
@@ -103,17 +127,13 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void setFragment(int position) {
-        // TODO: 2017-7-20
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))
-//                .commit();
         fragmentMgr.getFragment(position);
     }
 
     @Override
     public void openMenu() {
         mDrawerLayout.openDrawer(Gravity.START);
+        sm.setStatusBarTintEnabled(false);
     }
 
     ActionBarDrawerToggle toggle;
@@ -155,5 +175,18 @@ public class MainActivity extends AMainActivity {
             sm.setStatusBarTintColor(color);
             sm.setStatusBarAlpha(255 * 0.6f);
         }
+    }
+
+    BottomBarTab tab;
+
+    public void setBottomBarTint(int color) {
+        if (tab == null) {
+            tab = mBottomBar.getTabWithId(R.id.tab_community);
+        }
+        tab.setBarColorWhenSelected(color);
+    }
+
+    public void refreshBottom() {
+        mBottomBar.selectTabAtPosition(1);
     }
 }

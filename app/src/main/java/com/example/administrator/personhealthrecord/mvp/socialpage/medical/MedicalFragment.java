@@ -17,6 +17,8 @@ import com.example.administrator.personhealthrecord.bean.MedicineInfo;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +29,7 @@ public class MedicalFragment extends AMedicalFragment {
 
     @BindView(R.id.medical_recyclerView)
     RecyclerView mRecyclerView;
-
+    Unbinder mUnbinder;
     public MedicalFragment() {
         // Required empty public constructor
     }
@@ -53,17 +55,9 @@ public class MedicalFragment extends AMedicalFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_medical_page, container, false);
-        return view;
-    }
-
-    @Override
-    protected void initEvent() {
-
-    }
-
-    @Override
-    protected void initData() {
+        mUnbinder = ButterKnife.bind(this,view);
         mPresenter.onRequestData();
+        return view;
     }
 
     @Override
@@ -85,6 +79,14 @@ public class MedicalFragment extends AMedicalFragment {
     public void onResume() {
         super.onResume();
         Log.d("MedicalFragment","onResume");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mUnbinder != null){
+            mUnbinder.unbind();
+        }
     }
 
     @Override

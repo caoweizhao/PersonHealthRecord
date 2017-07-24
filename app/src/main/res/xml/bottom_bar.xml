@@ -7,6 +7,7 @@
     <tab
         icon="@drawable/ic_community"
         id="@+id/tab_community"
+        barColorWhenSelected="#ff512da7"
         title="@string/community"/>
     <tab
         icon="@drawable/ic_health"

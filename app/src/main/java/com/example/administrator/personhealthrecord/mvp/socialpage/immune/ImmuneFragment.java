@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ImmuneFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ImmuneFragment extends BaseFragment {
+public class ImmuneFragment extends Fragment {
 
 
     public ImmuneFragment() {
@@ -53,13 +52,4 @@ public class ImmuneFragment extends BaseFragment {
         return view;
     }
 
-    @Override
-    protected void initEvent() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
 }

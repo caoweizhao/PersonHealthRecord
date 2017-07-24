@@ -28,8 +28,8 @@
     <color name="secondary_text_color">#747475</color>
     <color name="divider_color">#bbbcbc</color>
 
-    <color name="news_page">#ff0096a6</color>
-    <color name="medical_page">#b1ddd9</color>
+    <color name="news_page">#607c8a</color>
+    <color name="medical_page">#455a64</color>
     <color name="disease_page">#4ebcc7</color>
     <color name="immune_page">#ff0096a6</color>
 
