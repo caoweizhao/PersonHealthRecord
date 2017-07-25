@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews.api;
 
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import retrofit2.http.Query;
 
 public interface HealthyNewsApi {
     @GET("information/information_list_today")
-    Observable<List<NewsBean>> getNewsToday();
+    Observable<ResultUtilOfNewsBean> getNewsToday();
 
 
     @GET("information/information_list_today")

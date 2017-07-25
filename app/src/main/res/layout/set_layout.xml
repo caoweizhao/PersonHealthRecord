@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:weightSum="1">
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:text="套餐详情"
+        android:textColor="#fff"
+        android:textSize="19sp" />
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/righttop"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.10" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!--体检套餐详情-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/set_pic"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            tools:background="@drawable/set_pic"/>
+
+        <TextView
+            android:id="@+id/set_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            tools:text="项目2......"
+            android:textSize="22sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/set_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            tools:text="¥10000元"
+            android:textSize="20sp"
+            android:textColor="#de0e00"/>
+
+        <TextView
+            android:id="@+id/appointment_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            tools:text="已预约人数"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/healthtest_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            tools:text="该体检描述2:"
+            android:textSize="20sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="套餐详情:"
+            android:textSize="20sp"
+            android:textColor="#000">
+        </TextView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/set_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/doctor_details"
+                android:textSize="18sp"
+                android:textColor="#000" />
+        </ScrollView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/setorder_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="立刻预约"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:background="@color/colorPrimary"/>
+
+</LinearLayout>

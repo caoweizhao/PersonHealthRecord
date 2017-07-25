@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.administrator.personhealthrecord.bean.HealthInfo;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
 import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
 import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
@@ -53,7 +54,7 @@ public class HealthyNewsModleImpl implements IHealthyNewsModle{
     }
 
     @Override
-    public void getTodayNews(Observer<List<NewsBean>> observer) {
+    public void getTodayNews(Observer<ResultUtilOfNewsBean> observer) {
         retrofit= RetrofitUtil.getRetrofit();
         HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
         api.getNewsToday()

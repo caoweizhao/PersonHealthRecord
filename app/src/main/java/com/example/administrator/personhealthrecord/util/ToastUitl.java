@@ -11,6 +11,6 @@ import com.example.administrator.personhealthrecord.application.MyApplication;
 public class ToastUitl {
     public static void Toast(String msg)
     {
-        Toast.makeText(MyApplication.getContext(),msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(MyApplication.getContext(),msg,Toast.LENGTH_SHORT).show();
     }
 }

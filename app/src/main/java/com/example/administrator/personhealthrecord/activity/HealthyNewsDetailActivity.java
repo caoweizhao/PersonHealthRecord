@@ -1,10 +1,10 @@
 package com.example.administrator.personhealthrecord.activity;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,15 +16,16 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
-<<<<<<< HEAD
-import com.example.administrator.personhealthrecord.contract.Contract;
+
+
 
 import java.util.Date;
-=======
+
 import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
->>>>>>> master
+
 
 import butterknife.BindView;
+
 
 public class HealthyNewsDetailActivity extends BaseActivity {
 
@@ -41,27 +42,19 @@ public class HealthyNewsDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        setContentView(R.layout.activity_healthy_news_detali);
-        ButterKnife.bind(this);
-        NewsBean bean=getIntent().getParcelableExtra("NewsBean");
-        Date date=new Date(bean.getTime());
-        textView.setText(bean.getContent()+"\n"+"\n"+bean.getdate());
-        Glide.with(this)
-                .load(Contract.ImageUrl+bean.getImageUrl())
-=======
-
-
     }
 
     @Override
     protected void initData() {
-        mNewsBean = getIntent().getParcelableExtra("NewsBean");
-        textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getTime());
+
+        mNewsBean=getIntent().getParcelableExtra("NewsBean");
+        Date date=new Date(mNewsBean.getTime());
+        Log.d(TAG, "initData: "+mNewsBean.getTitle());
+        textView.setText(mNewsBean.getContent()+"\n"+"\n"+mNewsBean.getdate());
         mTitleTextView.setText(mNewsBean.getTitle());
         Glide.with(this)
                 .load(mNewsBean.getImageUrl())
->>>>>>> master
+
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

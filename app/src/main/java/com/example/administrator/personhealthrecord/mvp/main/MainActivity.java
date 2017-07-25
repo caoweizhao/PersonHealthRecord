@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.mvp.log.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
@@ -78,6 +80,8 @@ public class MainActivity extends AMainActivity {
                     case R.id.menu_my_book:
                         break;
                     case R.id.menu_account_info:
+                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.menu_my_medical_record_folder:
                         break;

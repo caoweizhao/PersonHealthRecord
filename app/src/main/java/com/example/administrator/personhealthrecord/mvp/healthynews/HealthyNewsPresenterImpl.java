@@ -4,6 +4,7 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
 import android.util.Log;
 
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
                     Log.d(TAG, "onNext: "+value.get(i).getImageUrl());
                 }
                 fragment.updateAfterNews(value);
+                healthyNewsModle.savaToDatabase(value);
             }
 
             @Override
@@ -59,21 +61,25 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
 
     @Override//九、返回今天的资讯数据
     public void getTodayNews() {
-        Observer<List<NewsBean>> observer=new Observer<List<NewsBean>>() {
+        Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<NewsBean> value) {
-                 int i;
-                         for(i=0;i<value.size();i++)
-                         {
-                             Log.d(TAG, "onNext: "+value.get(i).getImageUrl());
-                         }
-                         fragment.updateTodayNews(value);
-                         healthyNewsModle.savaToDatabase(value);
+            public void onNext(ResultUtilOfNewsBean value) {
+                if(value.getStatus().equals("success"))
+                {
+                    List<NewsBean> list=value.getCollection();
+                    for(int i=0;i<list.size();i++)
+                    {
+                        Log.d(TAG, "onNext: "+list.get(i).getImageUrl());
+                    }
+                    fragment.updateTodayNews(list);
+                    healthyNewsModle.savaToDatabase(list);
+                }
+
             }
 
             @Override

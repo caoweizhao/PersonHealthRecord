@@ -41,9 +41,8 @@ public class Contract {
     }
 
     //图片的baseURl
-<<<<<<< HEAD
+
     public static final String ImageUrl=BASE_URL+"information/getImage/";
-=======
-    private static final String TAG = "http://192.168.13.210:8080/information/getImage/";
->>>>>>> master
+    public static String cookie="";
+
 }

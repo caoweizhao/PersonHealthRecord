@@ -10,11 +10,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
+
 import android.util.Log;
-=======
+
 import android.util.Pair;
->>>>>>> master
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,16 +43,11 @@ import butterknife.ButterKnife;
  * Created by andy on 2017/7/19.
  */
 public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFragment {
-<<<<<<< HEAD
+
     private boolean isfirsttime=true;
     private static final String TAG="HealthyNewsFragment";
     private static HealthyNewsFragment mHealthyNewsFragment =null;
     private HealthyNewsFragment(){
-=======
-    private static HealthyNewsFragment mHealthyNewsFragment = null;
-
-    public HealthyNewsFragment() {
->>>>>>> master
 
     }
 
@@ -72,13 +67,12 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-<<<<<<< HEAD
+
     @BindView(R.id.health_news_ProgressBar)
     SwipeRefreshLayout layout;
-    private AbstractItemAdapter adapter;
-=======
+
     private AbstractItemAdapter<NewsBean> adapter;
->>>>>>> master
+
     private List<NewsBean> list;
     private Handler handler = new Handler();
     private RecyclerView.LayoutManager manager;
@@ -86,18 +80,12 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
+
         presenter=new HealthyNewsPresenterImpl(this);
 //        list=new ArrayList<>();
 //        list=TestDate.excute();
         manager=new LinearLayoutManager(getContext());
-=======
-        presenter = new HealthyNewsPresenterImpl(this);
-        presenter.getNewsList("");
-        list = new ArrayList<>();
-        list = TestDate.excute();
-        manager = new LinearLayoutManager(getContext());
->>>>>>> master
+
         setHasOptionsMenu(true);
     }
 
@@ -198,6 +186,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 Intent intent = new Intent(getActivity(), HealthyNewsDetailActivity.class);
+                Log.d(TAG, "onItemClick: "+((NewsBean) adapter.getItem(position)).getTitle());
                 intent.putExtra("NewsBean", ((NewsBean) adapter.getItem(position)));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     /*startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
@@ -237,13 +226,9 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     }
 
     @Override
-<<<<<<< HEAD
     public void updateAfterNews(List<NewsBean> list) {
         final List<NewsBean> list1=list;
-=======
-    public void updateListItem(List<NewsBean> list) {
-        final List<NewsBean> list1 = list;
->>>>>>> master
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -257,12 +242,9 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 adapter.setEnableLoadMore(true);
                 adapter.setUpFetchEnable(true);
             }
-<<<<<<< HEAD
         },500);
     }
-=======
-        }, 2000);
->>>>>>> master
+
 
     //一开始更新最新的消息
     @Override
