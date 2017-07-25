@@ -5,17 +5,19 @@
         id="@+id/tab_home_page"
         title="@string/home_page"/>
     <tab
+        barColorWhenSelected="#ff5d4037"
         icon="@drawable/ic_community"
         id="@+id/tab_community"
-        barColorWhenSelected="#ff512da7"
         title="@string/community"/>
     <tab
         icon="@drawable/ic_health"
         id="@+id/tab_health"
+        barColorWhenSelected="#ff37474f"
         title="@string/health"/>
     <tab
         icon="@drawable/ic_physical_examination"
         id="@+id/tab_physical_examination"
+        barColorWhenSelected="#ff1565bf"
         title="@string/physical_examination"/>
 
 </tabs>

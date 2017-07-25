@@ -77,7 +77,6 @@ public class FragmentMgr {
         mFragmentPagerAdapter.finishUpdate(content);
         if (position == 1) {
             int pos = ((SocialPageFragment) fragment).getCurrentPosition();
-            ((MainActivity) context).setStatusBarTint(Contract.colors[pos]);
             ((MainActivity) context).setBottomBarTint(Contract.colors[pos]);
             //((MainActivity) context).refreshBottom();
         }

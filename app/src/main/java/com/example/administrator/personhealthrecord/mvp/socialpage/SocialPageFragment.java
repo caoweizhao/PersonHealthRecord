@@ -225,7 +225,6 @@ public class SocialPageFragment extends BaseFragment {
                         mCollapsingToolbarLayout.setBackgroundColor(color);
                         mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
                         mCollapsingToolbarLayout.setContentScrimColor(color);
-                        ((MainActivity) getActivity()).setStatusBarTint(color);
                         ((MainActivity) getActivity()).setBottomBarTint(color);
                         ((MainActivity) getActivity()).refreshBottom();
                     }
@@ -269,7 +268,6 @@ public class SocialPageFragment extends BaseFragment {
                         mCollapsingToolbarLayout.setBackgroundColor(color);
                         mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
                         mCollapsingToolbarLayout.setContentScrimColor(color);
-                        ((MainActivity) getActivity()).setStatusBarTint(color);
                         ((MainActivity) getActivity()).setBottomBarTint(color);
                         ((MainActivity) getActivity()).refreshBottom();
                     }

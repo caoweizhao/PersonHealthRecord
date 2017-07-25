@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -42,7 +43,7 @@ public class MainActivity extends AMainActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDrawerLayout.setScrimColor(0x00ffffff);
+        //mDrawerLayout.setScrimColor(0x00ffffff);
         sm = new SystemBarTintManager(this);
         sm.setStatusBarTintEnabled(true);
         setStatusBarTint(0xff05d09b);
@@ -62,9 +63,21 @@ public class MainActivity extends AMainActivity {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 int pos = mBottomBar.findPositionForTabWithId(tabId);
-                if (pos != 1) {
-                    setStatusBarTint(0xff05d09b);
+                int color = getResources().getColor(R.color.colorPrimary);
+                switch (pos) {
+                    case 0:
+                        color = getResources().getColor(R.color.colorPrimary);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        color = Color.parseColor("#ff37474f");
+                        break;
+                    case 3:
+                        color = Color.parseColor("#ff1565bf");
+                        break;
                 }
+                setStatusBarTint(color);
                 mPresenter.onTabSelected(tabId);
             }
         });
@@ -138,13 +151,10 @@ public class MainActivity extends AMainActivity {
 
     ActionBarDrawerToggle toggle;
 
-    public void setUpWithToolbar(final Toolbar toolbar) {
-        toolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("MainActivity", ":" + toolbar.getMeasuredHeight());
-            }
-        });
+    Toolbar mToolbar;
+
+    public void setUpWithToolbar(Toolbar toolbar) {
+        mToolbar = toolbar;
         toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
@@ -175,6 +185,9 @@ public class MainActivity extends AMainActivity {
             sm.setStatusBarTintColor(color);
             sm.setStatusBarAlpha(255 * 0.6f);
         }
+        if(mToolbar != null){
+            //mToolbar.setBackgroundColor(color);
+        }
     }
 
     BottomBarTab tab;
@@ -183,7 +196,9 @@ public class MainActivity extends AMainActivity {
         if (tab == null) {
             tab = mBottomBar.getTabWithId(R.id.tab_community);
         }
+
         tab.setBarColorWhenSelected(color);
+        setStatusBarTint(color);
     }
 
     public void refreshBottom() {
