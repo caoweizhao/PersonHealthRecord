@@ -1,14 +1,17 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.mvp.homepage.api.HomePageService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.Result;
 
 /**
@@ -78,7 +81,11 @@ public class HomePageModel extends AHomePageModel {
     }
 
     @Override
-    public void getHospitals() {
-
+    public void getHospitals(Observer<ResultUtilOfHospitalList> observer) {
+        mHomePageService.getHostipals()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 }

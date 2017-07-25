@@ -27,6 +27,7 @@ import java.util.List;
 
 public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapter<T, BaseViewHolder> {
 
+    private String mImageURL;
     private Context mContext;
 
     public AbstractItemAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Context context) {
@@ -41,15 +42,20 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
 
     @Override
     protected void convert(BaseViewHolder helper, T item) {
-        helper.setText(R.id.abstract_item__title, item.getTitle())
-                .setText(R.id.abstract_item__summary, item.getSummary())
-                .setImageResource(R.id.abstract_item__img, R.mipmap.ic_launcher_round)
-                .setText(R.id.abstract_item_date,item.getdate());
+        if(item.getImageUrl().contains("http"))
+           mImageURL=item.getImageUrl();
+        else
+            mImageURL=Contract.ImageUrl+item.getImageUrl();
+
+//        helper.setText(R.id.abstract_item__title, item.getTitle())
+//                .setText(R.id.abstract_item__summary, item.getSummary())
+//                .setImageResource(R.id.abstract_item__img, R.mipmap.ic_launcher_round)
+//                .setText(R.id.abstract_item_date,item.getdate());
         ((TextView)helper.getView(R.id.abstract_item__title)).setText(item.getTitle());
         ((TextView)helper.getView(R.id.abstract_item__summary)).setText(item.getSummary());
         ((TextView)helper.getView(R.id.abstract_item_date)).setText(item.getdate());
         Glide.with(mContext)
-                .load(Contract.ImageUrl+item.getImageUrl())
+                .load(mImageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model,

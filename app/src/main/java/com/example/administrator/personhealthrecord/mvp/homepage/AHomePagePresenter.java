@@ -46,4 +46,6 @@ public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment
      * @param id
      */
     public abstract void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id);
+
+    public abstract void getHospitalLis();
 }

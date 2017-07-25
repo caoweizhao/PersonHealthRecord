@@ -44,5 +44,6 @@ public class Contract {
 
     public static final String ImageUrl=BASE_URL+"information/getImage/";
     public static String cookie="";
+    public static final String HospitalBase=BASE_URL+"hospital/getImage/";
 
 }
