@@ -12,7 +12,7 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017-7-25.
  */
 
-public class SocialPagerBaseFragment extends Fragment {
+public abstract class SocialPagerBaseFragment extends Fragment {
 
     Unbinder mUnbinder;
 
@@ -29,4 +29,13 @@ public class SocialPagerBaseFragment extends Fragment {
             mUnbinder.unbind();
         }
     }
+
+    protected abstract void fetchData();
+
+    protected abstract void fetchDataDone();
+
+    protected abstract void loadMoreData();
+
+    protected abstract void loadMoreDataDone();
+
 }

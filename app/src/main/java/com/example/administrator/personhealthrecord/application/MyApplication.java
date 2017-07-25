@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
 
+import org.litepal.LitePalApplication;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -15,7 +17,7 @@ import java.util.ListIterator;
  * Created by andy on 2017/7/18.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends LitePalApplication {
     public final static String TAG = "BaseApplication";
     public final static boolean DEBUG = true;
     private static MyApplication myApplication;

@@ -57,4 +57,9 @@
     <string name="resover_order">预定订单</string>
     <string name="my_report">我的报告</string>
     <string name="rent_device">设备租赁</string>
+    <string name="regin_new_account">注册新账号</string>
+    <string name="use_with_wechat">使用微信登录</string>
+    <string name="forgein_password">忘记密码？</string>
+    <string name="username_cannot_be_empty">用户名不可以为空</string>
+    <string name="password_cannot_empty">密码不可以为空</string>
 </resources>

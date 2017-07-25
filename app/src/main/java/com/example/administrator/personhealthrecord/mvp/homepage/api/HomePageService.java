@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.homepage.api;
 
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 
 import java.util.List;
 
@@ -20,6 +21,6 @@ public interface HomePageService {
     @GET("")
     Observable<List<ExpertBean>> getExperts();
 
-    @GET("")
-    Observable<List<ExpertBean>> getHostipals();
+    @GET("hospital/hospital_list")
+    Observable<ResultUtilOfHospitalList> getHostipals();
 }

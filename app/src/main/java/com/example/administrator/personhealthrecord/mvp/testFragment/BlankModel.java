@@ -8,7 +8,6 @@ import com.example.administrator.personhealthrecord.mvp.testFragment.apidemo.New
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.net.HttpCookie;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -82,7 +81,7 @@ public class BlankModel extends BaseModel<BlankPresenter> {
                         Log.d("BlankModel", "\n");
                         Log.d("BlankModel", "title:" + value.getTitle());
                         Log.d("BlankModel", "content:" + value.getContent());
-                        Log.d("BlankModel", "time:" + value.getTime());
+                        Log.d("BlankModel", "time:" + value.getdate());
                         Log.d("BlankModel", "url:" + value.getImageUrl());
                         Log.d("BlankModel", "summary:" + value.getSummary());
                     }

@@ -1,8 +1,10 @@
 package com.example.administrator.personhealthrecord.activity;
 
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,9 +16,16 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
+
+
+
+import java.util.Date;
+
 import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
 
+
 import butterknife.BindView;
+
 
 public class HealthyNewsDetailActivity extends BaseActivity {
 
@@ -33,17 +42,19 @@ public class HealthyNewsDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
     protected void initData() {
-        mNewsBean = getIntent().getParcelableExtra("NewsBean");
-        textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getTime());
+
+        mNewsBean=getIntent().getParcelableExtra("NewsBean");
+        Date date=new Date(mNewsBean.getTime());
+        Log.d(TAG, "initData: "+mNewsBean.getTitle());
+        textView.setText(mNewsBean.getContent()+"\n"+"\n"+mNewsBean.getdate());
         mTitleTextView.setText(mNewsBean.getTitle());
         Glide.with(this)
                 .load(mNewsBean.getImageUrl())
+
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -62,6 +73,7 @@ public class HealthyNewsDetailActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+
         }
     }
 

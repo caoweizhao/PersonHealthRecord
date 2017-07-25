@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="PHR" />
+    <version value="1" />
+    <list>
+        <mapping class="com.example.administrator.personhealthrecord.bean.NewsBean" />
+    </list>
+</litepal>

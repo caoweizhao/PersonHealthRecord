@@ -4,7 +4,7 @@ package com.example.administrator.personhealthrecord.bean;
  * Created by Administrator on 2017-7-19.
  */
 
-public class HealthInfo extends AbstractItem{
+public class HealthInfo implements AbstractItem{
     private String title;
     private String summary;
     private String content;
@@ -27,7 +27,7 @@ public class HealthInfo extends AbstractItem{
     }
 
     @Override
-    public String getTime() {
+    public String getdate() {
         return null;
     }
 

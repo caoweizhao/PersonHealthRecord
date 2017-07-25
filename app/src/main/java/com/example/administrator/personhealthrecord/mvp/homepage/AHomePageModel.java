@@ -1,7 +1,11 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
+
+import io.reactivex.Observer;
+
 
 /**
  * Created by Administrator on 2017-7-19.
@@ -19,6 +23,6 @@ public abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
 
     public abstract void getExperts(@Contract.ExpertType int type);
 
-    public abstract void getHospitals();
+    public abstract void getHospitals(Observer<ResultUtilOfHospitalList> observer);
 
 }
