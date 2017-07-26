@@ -1,4 +1,4 @@
-package com.example.administrator.personhealthrecord.mvp.healthynews.api;
+package com.example.administrator.personhealthrecord.mvp.socialpage.news;
 
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
@@ -21,9 +21,9 @@ public interface NewsService {
 
 
     @GET("information/information_list_today")
-    Observable<List<NewsBean>> getNewsAfter(@Query("date") long time);
+    Observable<List<NewsBean>> getLatestNews(@Query("date") long time);
 
 
     @GET("information/information_list_before/{date}")
-    Observable<List<NewsBean>> getNewsBefore(@Path("date") long time);
+    Observable<List<NewsBean>> getOlderNews(@Path("date") long time);
 }

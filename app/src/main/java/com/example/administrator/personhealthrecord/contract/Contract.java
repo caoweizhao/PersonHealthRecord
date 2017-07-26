@@ -44,9 +44,10 @@ public class Contract {
     }
 
     //图片的baseURl
-
-    public static final String ImageUrl=BASE_URL+"information/getImage/";
-    public static String cookie="";
-    public static final String HospitalBase=BASE_URL+"hospital/getImage/";
+    public static final String ImageUrl = BASE_URL + "information/getImage/";
+    public static String cookie = "";
+    public static final String HospitalBase = BASE_URL + "hospital/getImage/";
+    public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
+    public static final String MedicalBase = BASE_URL + "medicine/getImage/";
 
 }

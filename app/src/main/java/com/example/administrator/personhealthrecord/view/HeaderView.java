@@ -28,7 +28,6 @@ public class HeaderView extends View {
     private DisplayMetrics mDisplayMetrics;
     private int mCustomHeight;
 
-
     public HeaderView(Context context) {
         super(context);
         init();
@@ -81,7 +80,7 @@ public class HeaderView extends View {
             //绘制1/4圆
             //int radius = mWidth - (mHeight - mCustomHeight);
             float radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, mDisplayMetrics);
-            mPaint.setColor(getResources().getColor(R.color.google_play_blue));
+            mPaint.setColor(getResources().getColor(R.color.google_play_yellow));
             canvas.drawArc(mWidth - radius, mHeight - radius, mWidth + radius, mHeight + radius, -180, 90, true, mPaint);
         }
         //绘制绿色三角形

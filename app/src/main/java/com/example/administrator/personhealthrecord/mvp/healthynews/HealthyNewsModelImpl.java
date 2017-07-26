@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
-import com.example.administrator.personhealthrecord.mvp.healthynews.api.NewsService;
+import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import org.litepal.crud.DataSupport;
@@ -27,12 +27,12 @@ import retrofit2.Retrofit;
  */
 
 public class HealthyNewsModelImpl implements IHealthyNewsModle{
-    private static final String TAG="HealthyNewsModleImpl";
+    private static final String TAG="HealthyNewsModelImpl";
     private Retrofit retrofit;
     @Override
     public void getNewsAfter(Observer<List<NewsBean>> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
-        NewsService api=retrofit.create(NewsService.class);
+        HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
         SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1=format.parse(date);
@@ -50,7 +50,7 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
     @Override
     public void getTodayNews(Observer<ResultUtilOfNewsBean> observer) {
         retrofit= RetrofitUtil.getRetrofit();
-        NewsService api=retrofit.create(NewsService.class);
+        HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
         api.getNewsToday()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -61,7 +61,7 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
     @Override
     public void getNewsBefore(Observer<List<NewsBean>> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
-        NewsService api=retrofit.create(NewsService.class);
+        HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1=format.parse(date);

@@ -16,13 +16,10 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
-
-
-
-import java.util.Date;
-
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
 
+import java.util.Date;
 
 import butterknife.BindView;
 
@@ -47,14 +44,14 @@ public class HealthyNewsDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        mNewsBean=getIntent().getParcelableExtra("NewsBean");
-        Date date=new Date(mNewsBean.getTime());
-        Log.d(TAG, "initData: "+mNewsBean.getTitle());
-        textView.setText(mNewsBean.getContent()+"\n"+"\n"+mNewsBean.getdate());
+        mNewsBean = getIntent().getParcelableExtra("NewsBean");
+        Date date = new Date(mNewsBean.getTime());
+        textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getdate());
         mTitleTextView.setText(mNewsBean.getTitle());
+        String mImageUrl = Contract.ImageUrl + mNewsBean.getImageUrl();
+        Log.d("aaa", "initData" + mImageUrl);
         Glide.with(this)
-                .load(mNewsBean.getImageUrl())
-
+                .load(mImageUrl)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

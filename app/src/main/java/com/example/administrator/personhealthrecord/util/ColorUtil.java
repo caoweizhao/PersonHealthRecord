@@ -8,6 +8,13 @@ import android.graphics.Color;
 
 public class ColorUtil {
 
+    /**
+     * 获取当前颜色值
+     * @param fraction
+     * @param startColor
+     * @param endColor
+     * @return
+     */
     public static int getCurrentColor(float fraction, int startColor, int endColor) {
         int redCurrent;
         int blueCurrent;

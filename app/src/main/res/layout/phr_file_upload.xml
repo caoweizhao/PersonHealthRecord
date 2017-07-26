@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--文件上传-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        >
+
+     <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="PHR文件上传"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <!--选择文件-->
+        <Button
+        android:id="@+id/upload_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:text="选择文件"
+        android:background="@drawable/frame"/>
+        
+        <!--提示文本-->
+        <TextView
+            android:id="@+id/choose_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginLeft="8dp"
+            android:text="未选择任何文件"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <!--警告文本-->
+    <TextView
+        android:id="@+id/warn_tip"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:text="  请上传一个.txt文件！"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:drawableLeft="@drawable/warn2"/>
+
+</LinearLayout>

@@ -14,7 +14,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.Result;
 
 /**
@@ -85,7 +84,7 @@ public class HomePageModel extends AHomePageModel {
 
     @Override
     public void getHospitals(Observer<ResultUtilOfHospitalList> observer) {
-        mHomePageService.getHostipals()
+        mHomePageService.getHospitals()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 2017-7-25.
  */
 
-public class DiseaseBean {
+public class DiseaseBean implements AbstractItem {
 
     /**
      * id : 1
@@ -95,6 +95,11 @@ public class DiseaseBean {
         this.name = name;
     }
 
+    @Override
+    public String getTitle() {
+        return getSummary();
+    }
+
     public String getSummary() {
         return summary;
     }
@@ -169,6 +174,11 @@ public class DiseaseBean {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    @Override
+    public String getdate() {
+        return "";
     }
 
     public void setImageUrl(String imageUrl) {

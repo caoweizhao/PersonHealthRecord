@@ -1,11 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews;
 
-import com.example.administrator.personhealthrecord.bean.HealthInfo;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
-
-
-import org.reactivestreams.Subscriber;
 
 import java.util.List;
 

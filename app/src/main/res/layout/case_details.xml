@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--病例详情-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="XXX的病例"
+            android:textSize="@dimen/text_size"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--姓名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/patient_name"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/name_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:textSize="@dimen/text_size"
+                    tools:text="刘剑璇" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--年龄-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/patient_age"
+                    android:textSize="@dimen/text_size"
+                    />
+                <TextView
+                    android:id="@+id/age_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    tools:text="22"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_right"
+                    android:text="岁"
+                    android:textSize="@dimen/text_size"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--户籍-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/household"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/patient_household"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/household_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    tools:text="广东汕头"
+                    android:textSize="@dimen/text_size"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--就诊医院-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/hospital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/treatment_hospital"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/hospital_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+
+                    tools:text="中山三院"
+                    android:textSize="@dimen/text_size"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--就诊时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/treatment_time"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/time_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="2017年1月1日"
+                    android:textSize="@dimen/text_size"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--身体状况-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/body_condition"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/condition_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    tools:text="轻度感冒"
+                    android:textSize="@dimen/text_size"
+                    />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--药物处方-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:padding="@dimen/text_padding"
+                >
+                <TextView
+                    android:id="@+id/prescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prescription"
+                    android:textSize="@dimen/text_size"/>
+
+                <TextView
+                    android:id="@+id/prescription_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:paddingTop="3dp"
+                    tools:text="XXX药 一天三次 XXX"
+                    android:textSize="@dimen/text_size"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--治疗日程-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/schedule"
+                    android:textSize="@dimen/text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/schedule_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    tools:text="15天后复诊"
+                    android:textSize="@dimen/text_size"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <!--待办事件-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="@dimen/text_padding"
+                >
+                <TextView
+                    android:id="@+id/remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remark"
+                    android:textSize="@dimen/text_size"/>
+
+                <TextView
+                    android:id="@+id/remark_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:paddingTop="3dp"
+                    android:textSize="@dimen/text_size"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/view_margin"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@android:color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

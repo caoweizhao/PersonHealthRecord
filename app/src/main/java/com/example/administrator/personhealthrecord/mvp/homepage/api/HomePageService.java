@@ -22,5 +22,5 @@ public interface HomePageService {
     Observable<List<ExpertBean>> getExperts();
 
     @GET("hospital/hospital_list")
-    Observable<ResultUtilOfHospitalList> getHostipals();
+    Observable<ResultUtilOfHospitalList> getHospitals();
 }

@@ -66,7 +66,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void setMenuVisibility(boolean menuVisible) {
-        Log.d("BaseFragment","visible:"+menuVisible);
         super.setMenuVisibility(menuVisible);
         if (this.getView() != null)
             this.getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);

@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.mvp.socialpage.immune;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,14 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageBaseFragment;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ImmuneFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ImmuneFragment extends Fragment {
-
+public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
 
     public ImmuneFragment() {
         // Required empty public constructor
@@ -25,7 +28,7 @@ public class ImmuneFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("ImmuneFragment","onResume");
+        Log.d("ImmuneFragment", "onResume");
     }
 
     /**
@@ -48,8 +51,38 @@ public class ImmuneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_immune_page, container, false);
-        return view;
+        return inflater.inflate(R.layout.social_child_fragment, container, false);
     }
 
+    @Override
+    protected int getLayoutRes() {
+        return 0;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    protected void fetchData() {
+        mSwipeRefreshLayout.setRefreshing(true);
+
+    }
+
+    @Override
+    protected void fetchDataDone(List datas) {
+
+    }
+
+    @Override
+    protected void loadMoreData() {
+
+    }
+
+    @Override
+    protected void loadMoreDataDone(List datas) {
+
+    }
 }

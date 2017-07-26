@@ -1,4 +1,4 @@
-package com.example.administrator.personhealthrecord.mvp.socialpage.medical.api;
+package com.example.administrator.personhealthrecord.mvp.socialpage.medicine;
 
 import com.example.administrator.personhealthrecord.bean.MedicineBean;
 
@@ -11,8 +11,8 @@ import retrofit2.http.GET;
  * Created by Administrator on 2017-7-19.
  */
 
-public interface MedicalService {
+public interface MedicineService {
 
-    @GET("")
+    @GET("medicine/medicine_list")
     Observable<List<MedicineBean>> getMedicineInfos();
 }
