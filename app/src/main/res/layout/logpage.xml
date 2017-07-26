@@ -26,6 +26,7 @@
             android:src="@drawable/ic_id"/>
 
         <EditText
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -48,6 +49,7 @@
             android:src="@drawable/ic_pw"/>
 
         <EditText
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,6 +59,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/login_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
@@ -64,16 +67,17 @@
         android:layout_marginTop="13dp"
         android:background="@drawable/rectangle"
         android:gravity="center"
-        android:text="S I G N   I N"
+        android:text="@string/sign_in"
         android:textColor="#525e71"
         android:textSize="20dp"/>
 
     <TextView
+        android:id="@+id/login_forget_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="忘记密码？"
+        android:text="@string/forgein_password"
         android:textColor="#000000"
         android:textSize="16dp"/>
 
@@ -112,7 +116,8 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button4"
+
+        android:id="@+id/login_regist_by_wechat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="65dp"
@@ -123,17 +128,18 @@
         android:drawablePadding="5dp"
         android:gravity="center"
         android:paddingLeft="20dp"
-        android:text="使用微信登录"
+        android:text="@string/use_with_wechat"
         android:textSize="16dp"/>
 
     <Button
+        android:id="@+id/regist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="65dp"
         android:layout_marginRight="65dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/rectangle"
-        android:text="注册新账号"
+        android:text="@string/regin_new_account"
         android:textSize="16dp"/>
 
 </LinearLayout>

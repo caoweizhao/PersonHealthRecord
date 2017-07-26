@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#05d09b</color>
-    <color name="colorPrimaryDark">#009e6d</color>
-    <color name="colorPrimaryLight">#61ffcc</color>
+    <!--<color name="colorPrimary">#05d09b</color>
+    <color name="colorPrimaryDark">#009e6d</color>-->
+    <color name="colorPrimary">#1565bf</color>
+    <color name="colorPrimaryDark">#0d47a0</color>
+    <color name="colorPrimaryLight">#2195f2</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorIndicator">#e7e7ec</color>
@@ -31,7 +33,7 @@
     <color name="news_page">#37474f</color>
     <color name="medical_page">#607c8a</color>
 
-    <color name="test">#4cae50</color>
+    <color name="test">#2e7c32</color>
     <color name="disease_page">#1565bf</color>
     <color name="immune_page">#2195f2</color>
 

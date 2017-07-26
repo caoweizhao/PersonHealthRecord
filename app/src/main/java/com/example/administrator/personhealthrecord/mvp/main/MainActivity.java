@@ -1,7 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
-import android.graphics.Color;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -17,9 +17,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.TestActivity;
 import com.example.administrator.personhealthrecord.mvp.log.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -40,15 +40,11 @@ public class MainActivity extends AMainActivity {
     NavigationView mMainNavigationView;
     @BindView(R.id.main_drawerLayout)
     DrawerLayout mDrawerLayout;
-    SystemBarTintManager sm;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //mDrawerLayout.setScrimColor(0x00ffffff);
-        sm = new SystemBarTintManager(this);
-        sm.setStatusBarTintEnabled(true);
-        setStatusBarTint(0xff05d09b);
     }
 
     @Override
@@ -73,10 +69,10 @@ public class MainActivity extends AMainActivity {
                     case 1:
                         break;
                     case 2:
-                        color = Color.parseColor("#ff37474f");
+                        color = Color.parseColor(getString(R.string.health_color));
                         break;
                     case 3:
-                        color = Color.parseColor("#ff1565bf");
+                        color = Color.parseColor(getString(R.string.check_page_color));
                         break;
                 }
                 setStatusBarTint(color);
@@ -90,9 +86,11 @@ public class MainActivity extends AMainActivity {
                 // TODO: 2017-7-20
                 switch (item.getItemId()) {
                     case R.id.menu_my_book:
+                        Intent intent1 = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.menu_account_info:
-                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.menu_my_medical_record_folder:
@@ -188,9 +186,6 @@ public class MainActivity extends AMainActivity {
         if (sm != null) {
             sm.setStatusBarTintColor(color);
             sm.setStatusBarAlpha(255 * 0.6f);
-        }
-        if(mToolbar != null){
-            //mToolbar.setBackgroundColor(color);
         }
     }
 

@@ -1,51 +1,84 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.disease;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
-import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPagerBaseFragment;
+import com.example.administrator.personhealthrecord.bean.DiseaseBean;
+import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageBaseFragment;
 
-import butterknife.BindView;
+import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DiseaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiseaseFragment extends SocialPagerBaseFragment {
-
-    @BindView(R.id.disease_page_recyclerView)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.disease_page_swipeRefreshLayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
-
-    AbstractItemAdapter mAdapter;
+public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
 
     public static DiseaseFragment newInstance() {
         return new DiseaseFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_disease_page, container, false);
+    protected int getLayoutRes() {
+        return R.layout.social_child_fragment;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void fetchData() {
+        mService.fetchDiseaseList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(new Observer<List<DiseaseBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        mAdapter = new AbstractItemAdapter(R.layout.abstract_item, null, this);
-        mRecyclerView.setAdapter(mAdapter);
+                    }
+
+                    @Override
+                    public void onNext(List<DiseaseBean> value) {
+                        for (DiseaseBean diseaseBean : value) {
+                            Log.d("DiseaseFragment", "imageUrl:" + diseaseBean.getImageUrl());
+                        }
+                        fetchDataDone(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("DiseaseFragment", "onError:" + e.getMessage());
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("DiseaseFragment", "complete");
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+    }
+
+    @Override
+    protected void fetchDataDone(List datas) {
+        mAdapter.getData().clear();
+        mAdapter.addData(datas);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void loadMoreData() {
+    }
+
+    @Override
+    protected void loadMoreDataDone(List datas) {
+        int count = mAdapter.getItemCount();
+        mAdapter.addData(datas);
+        mAdapter.notifyItemRangeInserted(count, datas.size());
     }
 }

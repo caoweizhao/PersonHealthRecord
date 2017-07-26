@@ -34,6 +34,7 @@ import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.util.ColorUtil;
+import com.youth.banner.transformer.ZoomOutSlideTransformer;
 
 import butterknife.BindView;
 
@@ -61,7 +62,7 @@ public class SocialPageFragment extends BaseFragment {
     @BindView(R.id.social_page_fab)
     FloatingActionButton mFloatingActionButton;
     @BindView(R.id.social_page_collapsingToolbarLayout)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    public CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private int[] imgs = new int[]{R.drawable.ic_news_icon, R.drawable.ic_medicine_icon,
             R.drawable.ic_disease_icon, R.drawable.ic_immune_icon};
@@ -184,7 +185,7 @@ public class SocialPageFragment extends BaseFragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 final int pos = tab.getPosition();
-                mViewPager.setCurrentItem(pos);
+                mViewPager.setCurrentItem(pos,false);
                 ((MainActivity) getActivity()).setStatusBarTint(colors[pos]);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mCollapsingToolbarLayout.setBackgroundColor(parseColor(colorsStr[pos]));
@@ -294,7 +295,7 @@ public class SocialPageFragment extends BaseFragment {
             public void onPageScrollStateChanged(int state) {
             }
         });
-        mViewPager.setPageTransformer(true, null);
+        mViewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
     private void setUpWithActivity(View view) {

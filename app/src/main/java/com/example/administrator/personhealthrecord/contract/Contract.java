@@ -7,7 +7,9 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
-    public static final String BASE_URL = "http://192.168.13.39:8080/";
+    //public static final String BASE_URL = "http://192.168.13.39:8080/";
+    public static final String BASE_URL = "http://192.168.191.1:8080/";
+
     /**
      * 心血管内科
      */
@@ -41,9 +43,10 @@ public class Contract {
     }
 
     //图片的baseURl
-
-    public static final String ImageUrl=BASE_URL+"information/getImage/";
-    public static String cookie="";
-    public static final String HospitalBase=BASE_URL+"hospital/getImage/";
+    public static final String ImageUrl = BASE_URL + "information/getImage/";
+    public static String cookie = "";
+    public static final String HospitalBase = BASE_URL + "hospital/getImage/";
+    public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
+    public static final String MedicalBase = BASE_URL + "medicine/getImage/";
 
 }

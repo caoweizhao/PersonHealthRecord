@@ -147,7 +147,7 @@ public class CheckPageFragment extends ACheckPageFragment {
 
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        mToolbar.setBackgroundColor(Color.parseColor("#ff1565bf"));
+        mToolbar.setBackgroundColor(Color.parseColor(getString(R.string.check_page_color)));
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

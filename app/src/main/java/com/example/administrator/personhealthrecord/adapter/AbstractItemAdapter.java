@@ -2,9 +2,9 @@ package com.example.administrator.personhealthrecord.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +17,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.AbstractItem;
+import com.example.administrator.personhealthrecord.bean.DiseaseBean;
+import com.example.administrator.personhealthrecord.bean.MedicineBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 
 import java.util.List;
@@ -42,18 +44,33 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
 
     @Override
     protected void convert(BaseViewHolder helper, T item) {
-        if(item.getImageUrl().contains("http"))
-           mImageURL=item.getImageUrl();
-        else
-            mImageURL=Contract.ImageUrl+item.getImageUrl();
+        if (item instanceof DiseaseBean) {
+            if (item.getImageUrl().contains("http"))
+                mImageURL = item.getImageUrl();
+            else
+                mImageURL = Contract.DiseaseBase + item.getImageUrl();
+        } else if (item instanceof MedicineBean) {
+            if (item.getImageUrl().contains("http"))
+                mImageURL = item.getImageUrl();
+            else
+                mImageURL = Contract.MedicalBase + item.getImageUrl();
+            Log.d("AbstractItemAdapter", "url" + mImageURL);
+        } else {
+            if (item.getImageUrl().contains("http"))
+                mImageURL = item.getImageUrl();
+            else
+                mImageURL = Contract.ImageUrl + item.getImageUrl();
+
+        }
+
 
 //        helper.setText(R.id.abstract_item__title, item.getTitle())
 //                .setText(R.id.abstract_item__summary, item.getSummary())
 //                .setImageResource(R.id.abstract_item__img, R.mipmap.ic_launcher_round)
 //                .setText(R.id.abstract_item_date,item.getdate());
-        ((TextView)helper.getView(R.id.abstract_item__title)).setText(item.getTitle());
-        ((TextView)helper.getView(R.id.abstract_item__summary)).setText(item.getSummary());
-        ((TextView)helper.getView(R.id.abstract_item_date)).setText(item.getdate());
+        ((TextView) helper.getView(R.id.abstract_item__title)).setText(item.getTitle());
+        ((TextView) helper.getView(R.id.abstract_item__summary)).setText(item.getSummary());
+        ((TextView) helper.getView(R.id.abstract_item_date)).setText(item.getdate());
         Glide.with(mContext)
                 .load(mImageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {

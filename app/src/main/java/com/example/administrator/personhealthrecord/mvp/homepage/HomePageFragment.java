@@ -232,7 +232,6 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        Log.d("HomePageFragment", "hos:" + hospitalBeanList);
         mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
         mHomePageRecyclerView.setAdapter(mHospitalAdapter);
         mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

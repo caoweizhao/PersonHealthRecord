@@ -22,7 +22,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
     public HealthyNewsPresenterImpl(IHealthyNewsFragment fragments)
     {
         this.fragment=fragments;
-        healthyNewsModle=new HealthyNewsModleImpl();
+        healthyNewsModle=new HealthyNewsModelImpl();
     }
 
     @Override//八、返回比时间参数之前的5条数据

@@ -26,8 +26,8 @@ import retrofit2.Retrofit;
  * Created by andy on 2017/7/19.
  */
 
-public class HealthyNewsModleImpl implements IHealthyNewsModle{
-    private static final String TAG="HealthyNewsModleImpl";
+public class HealthyNewsModelImpl implements IHealthyNewsModle{
+    private static final String TAG="HealthyNewsModelImpl";
     private Retrofit retrofit;
     @Override
     public void getNewsAfter(Observer<List<NewsBean>> observer, String date) {

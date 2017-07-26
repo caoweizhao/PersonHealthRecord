@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--填写PHR记录-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--标题栏-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="填写PHR"
+            android:textSize="@dimen/text_size"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--姓名-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/patient_name"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="@dimen/margin_right"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        android:hint="输入姓名"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--年龄-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/patient_age"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_age"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:padding="@dimen/edit_padding"
+                        android:background="@drawable/input_frame"
+                        android:numeric="integer"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size"
+                        android:hint="年龄" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="250dp"
+                        android:text="岁"
+                        android:textSize="@dimen/text_size"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--户籍-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/household"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/patient_household"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_household"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="@dimen/margin_right"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        android:hint="如:广东汕头"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--身体状况-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/condition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/body_condition"
+                        android:textSize="@dimen/text_size"/>
+
+                    <Spinner
+                        android:id="@+id/choose_condition_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:entries="@array/choose_condition">
+                    </Spinner>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--身高-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/patient_height"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_height"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:numeric="decimal|integer"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        tools:text="188"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_right"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/text_size"
+                        android:text="厘米"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--体重-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/patient_weight"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_weight"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:numeric="decimal|integer"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        tools:text="68"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_right"
+                        android:textSize="@dimen/text_size"
+                        android:text="公斤"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--血型-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/blood_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/blood_type"
+                        android:textSize="@dimen/text_size"/>
+
+                    <Spinner
+                        android:id="@+id/blood_type_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:entries="@array/choose_blood_type">
+                    </Spinner>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--心率-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/heart_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/heart_rate"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_heart_rate"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:numeric="decimal|integer"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        tools:text="65"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_right"
+                        android:textSize="@dimen/text_size"
+                        android:text="bpm"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--血压-收缩压-->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/blood_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/blood_pressure"
+                    android:textSize="@dimen/text_size"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size"
+                    android:text="@string/systolic"/>
+
+                <EditText
+                    android:id="@+id/edit_systolic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:padding="@dimen/edit_padding"
+                    android:singleLine="true"
+                    android:numeric="decimal|integer"
+                    android:background="@drawable/input_frame"
+                    android:textSize="@dimen/text_size"
+                    tools:text="68"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="150dp"
+                    android:textSize="@dimen/text_size"
+                    android:text="Kpa"/>
+            </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--血压-舒张压-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/text_padding"
+                        android:paddingBottom="@dimen/text_padding"
+                        android:layout_marginLeft="84dp"
+                        android:textSize="@dimen/text_size"
+                        android:text="@string/diastolic"/>
+
+                    <EditText
+                        android:id="@+id/edit_diastolic"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:numeric="decimal|integer"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        tools:text="68"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="150dp"
+                        android:textSize="@dimen/text_size"
+                        android:text="Kpa"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="65dp"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--吸烟量-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/smoking_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/smoking_amount"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_smoking_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:padding="@dimen/edit_padding"
+                        android:singleLine="true"
+                        android:hint="单行输入"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--饮酒类型-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/drinking_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/drinking_type"
+                        android:textSize="@dimen/text_size"/>
+
+                    <Spinner
+                        android:id="@+id/drinking_type_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:entries="@array/choose_drinking_type">
+
+                    </Spinner>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--饮酒量-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/alcohol_comsuption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/alcohol_comsuption"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_alcohol_comsuption"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="@dimen/edit_padding"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:singleLine="true"
+                        android:hint="单行输入"
+                        android:background="@drawable/input_frame"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--饮酒频率-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/drinking_"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/drinking_frequency"
+                        android:textSize="@dimen/text_size"/>
+
+                    <Spinner
+                        android:id="@+id/drinking_frequency_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:entries="@array/choose_drinking_frequency">
+                    </Spinner>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--体育锻炼情况-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp">
+
+                    <TextView
+                        android:id="@+id/exercise_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/exercise_status"
+                        android:textSize="@dimen/text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_exercise_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/input_frame"
+                        android:gravity="top"
+                        android:hint="多行输入"
+                        android:padding="@dimen/edit_padding"
+                        android:textSize="@dimen/text_size" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--药物过敏史-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/allergy_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/allergy_history"
+                        android:textSize="@dimen/text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_allergy_history"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size"
+                        tools:text="暂无"
+
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--病史-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/sick_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/text_padding"
+                        android:text="@string/sick_history"
+                        android:textSize="@dimen/text_size"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_sick_history1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:textSize="@dimen/text_size"
+                        android:text="2017年01月01日 XXXXXX"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:layout_marginLeft="60dp"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/black"/>
+
+                <!--病史2-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <EditText
+                        android:id="@+id/edit_sick_history2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="70dp"
+                        android:background="@null"
+                        android:textSize="@dimen/text_size"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/view_margin"
+                        android:layout_marginLeft="60dp"
+                        android:layout_height="1px"
+                        android:layout_gravity="bottom"
+                        android:background="@android:color/black"/>
+                    <EditText
+                        android:id="@+id/edit_sick_history3"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="70dp"
+                        android:background="@null"
+                        android:textSize="@dimen/text_size"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/view_margin"
+                        android:layout_marginLeft="60dp"
+                        android:layout_height="1px"
+                        android:layout_gravity="bottom"
+                        android:background="@android:color/black"/>
+                    <EditText
+                        android:id="@+id/edit_sick_history4"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="70dp"
+                        android:background="@null"
+                        android:textSize="@dimen/text_size"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/view_margin"
+                        android:layout_marginLeft="60dp"
+                        android:layout_height="1px"
+                        android:layout_gravity="bottom"
+                        android:background="@android:color/black"/>
+
+                </LinearLayout>
+
+
+                <!--确认提交-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <Button
+                        android:id="@+id/commit_ok"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/commit_ok"
+                        android:layout_gravity="bottom"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

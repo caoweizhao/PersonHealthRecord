@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.application.MyApplication;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -22,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static BaseActivity activity;
     private Unbinder mUnbinder;
     public FragmentMgr fragmentMgr;
+    protected SystemBarTintManager sm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         ((MyApplication) MyApplication.getContext()).addActivity(this);
         setContentView(getLayoutRes());
         init();
+        sm = new SystemBarTintManager(this);
+        sm.setStatusBarTintEnabled(true);
+        sm.setStatusBarTintColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
     @Override
