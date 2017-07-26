@@ -15,8 +15,10 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.mvp.log.LoginActivity;
+import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
+import com.example.administrator.personhealthrecord.util.ToastUitl;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -80,8 +82,15 @@ public class MainActivity extends AMainActivity {
                     case R.id.menu_my_book:
                         break;
                     case R.id.menu_account_info:
-                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        if(Contract.IsLogin.equals(Contract.Login))
+                        {
+                            ToastUitl.Toast("已经登录");
+                        }
+                        else
+                        {
+                            Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.menu_my_medical_record_folder:
                         break;

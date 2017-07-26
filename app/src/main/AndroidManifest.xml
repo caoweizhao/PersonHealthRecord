@@ -4,6 +4,26 @@
     package="com.example.administrator.personhealthrecord">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name=".application.MyApplication"
@@ -13,7 +33,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="89005e7823bb733f0274ad9262517bce"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="89005e7823bb733f0274ad9262517bce" />
+
         <activity
             android:name=".mvp.main.MainActivity"
             android:windowSoftInputMode="adjustPan">
@@ -26,28 +49,12 @@
         <activity
             android:name=".activity.HealthyNewsDetailActivity"
             android:theme="@style/HealthyNewsDetailStyle" />
-        <activity android:name=".mvp.log.LoginActivity" />
-        <activity android:name=".activity.MapAcitvity"></activity>
-        <service android:name="com.amap.api.location.APSService"/>
+        <activity android:name=".mvp.registandlogin.LoginActivity" />
+        <activity android:name=".activity.MapAcitvity" />
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity android:name=".mvp.registandlogin.RegistActivity"></activity>
     </application>
-    <!--允许程序打开网络套接字-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--允许程序设置内置sd卡的写权限-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--允许程序获取网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--允许程序访问WiFi网络信息-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--允许程序读写手机状态和身份-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
 </manifest>

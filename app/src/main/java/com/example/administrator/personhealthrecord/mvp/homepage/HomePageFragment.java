@@ -240,8 +240,8 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        Log.d("HomePageFragment", "hos:" + hospitalBeanList);
+    public void InitHospitals(List<HospitalBean> hospitalBeanList) {
+        Log.d("HomePageFragment", "hos:" + hospitalBeanList.size());
         mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
         mHomePageRecyclerView.setAdapter(mHospitalAdapter);
         mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -251,6 +251,16 @@ public class HomePageFragment extends AHomePageFragment {
             }
         });
         mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void updateHospitals(List<HospitalBean> hospitalBeanList) {
+        List<HospitalBean> nowList=mHospitalAdapter.getData();
+        for(HospitalBean bean:hospitalBeanList)
+        {
+            if(!nowList.contains(bean))
+                mHospitalAdapter.addData(bean);
+        }
     }
 
     @Override

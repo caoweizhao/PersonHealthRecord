@@ -4,5 +4,6 @@
     <version value="1" />
     <list>
         <mapping class="com.example.administrator.personhealthrecord.bean.NewsBean" />
+        <mapping class="com.example.administrator.personhealthrecord.bean.HospitalBean"/>
     </list>
 </litepal>

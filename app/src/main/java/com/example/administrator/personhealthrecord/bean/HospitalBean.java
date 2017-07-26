@@ -1,10 +1,12 @@
 package com.example.administrator.personhealthrecord.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by Administrator on 2017-7-20.
  */
 
-public class HospitalBean {
+public class HospitalBean extends DataSupport{
     private String name;
     private String englishName;
     private String category;
@@ -112,5 +114,10 @@ public class HospitalBean {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return getName().equals(((HospitalBean)obj).getName());
     }
 }

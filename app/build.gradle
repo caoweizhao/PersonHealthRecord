@@ -38,6 +38,8 @@ dependencies {
     // 针对rxjava2.x（adapter-rxjava2的版本要 >= 2.2.0）
     //Gilde
     //轮播最新版本
+    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
+    compile files('libs/AMap_Location_V3.4.1_20170629.jar')
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
@@ -56,6 +58,4 @@ dependencies {
     compile 'org.litepal.android:core:1.5.1'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
-    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
-    compile files('libs/AMap_Location_V3.4.1_20170629.jar')
 }

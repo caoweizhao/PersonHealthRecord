@@ -1,10 +1,11 @@
-package com.example.administrator.personhealthrecord.mvp.log;
+package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
@@ -27,9 +28,31 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     Button registByWechat;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: requestcode"+requestCode+"   resultcode"+resultCode);
+        switch(requestCode)
+            {
+                case 1:
+                    if(resultCode==0)
+                    {
+                        String myusername=data.getStringExtra("username");
+                        String mypasswrod=data.getStringExtra("password");
+                        usrname.setText(myusername);
+                        password.setText(mypasswrod);
+                    }
+                    break;
+                default:
+
+                    break;
+            }
+    }
+
+    @Override
     protected void initEvents() {
         super.initEvents();
         login.setOnClickListener(this);
+        regist.setOnClickListener(this);
     }
 
     @Override
@@ -42,8 +65,8 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     }
 
     @Override
-    public ILoginPresenter createPresenter() {
-        mPresenter=new LoginPresenterImpl(this);
+    public IRegistAndLoginPresenter createPresenter() {
+        mPresenter=new RegistAndLoginPresenterImpl(this);
         return mPresenter;
     }
 
@@ -64,6 +87,9 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
                             case R.id.login_login:
                                 dologin();
                                 break;
+                            case R.id.regist:
+                                regist();
+                                break;
                             default:
                                 break;
                         }
@@ -82,5 +108,17 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
         }
         Log.d(TAG, "dologin: username"+usrname.getText().toString()+"   password"+password.getText().toString());
 
+    }
+
+    @Override
+    public void regist() {
+        Log.d(TAG, "regist: ");
+        Intent intent=new Intent(LoginActivity.this,RegistActivity.class);
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    public void finishAcitvity() {
+        finish();
     }
 }
