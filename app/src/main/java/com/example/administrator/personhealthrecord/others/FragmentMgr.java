@@ -3,7 +3,6 @@ package com.example.administrator.personhealthrecord.others;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.contract.Contract;
@@ -38,7 +37,7 @@ public class FragmentMgr {
                     case 0:
                         return HomePageFragment.newInstance();
                     case 1:
-                        return SocialPageFragment.newInstance();
+                        return mSocialPageFragment = SocialPageFragment.newInstance();
                     case 2:
                         return HealthyNewsFragment.getInstance();
                     case 3:
@@ -78,8 +77,8 @@ public class FragmentMgr {
         mFragmentPagerAdapter.finishUpdate(content);
         if (position == 1) {
             int pos = ((SocialPageFragment) fragment).getCurrentPosition();
-            Log.d("FragmentMgr","ExecuteAdapter:"+pos);
-            ((MainActivity) context).setStatusBarTint(Contract.colors[pos]);
+            ((MainActivity) context).setBottomBarTint(Contract.colors[pos]);
+            //((MainActivity) context).refreshBottom();
         }
     }
 }

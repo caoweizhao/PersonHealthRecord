@@ -1,7 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.medical;
 
 import com.example.administrator.personhealthrecord.bean.MedicineInfo;
-import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
 
 import java.util.List;
 

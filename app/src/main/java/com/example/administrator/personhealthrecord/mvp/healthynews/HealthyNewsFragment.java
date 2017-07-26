@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -299,6 +300,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mToolbar.setBackgroundColor(Color.parseColor("#ff37474f"));
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

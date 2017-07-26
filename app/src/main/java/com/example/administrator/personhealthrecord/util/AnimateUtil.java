@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 /**
  * Created by Administrator on 2017-7-21.
@@ -37,7 +38,7 @@ public class AnimateUtil {
                 .alpha(1.0f)
                 .setDuration(800)
                 .setListener(viewPropertyAnimatorListener)
-                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setInterpolator(new LinearInterpolator())
                 .start();
     }
 
@@ -53,9 +54,11 @@ public class AnimateUtil {
     }
 
     public static void scaleHide(View view, float scaleFactor) {
-        view.setScaleX(1 - scaleFactor);
-        view.setScaleY(1 - scaleFactor);
-        view.setAlpha(1 - scaleFactor);
+        //scaleFactor 0->1
+        //scale 1->0.5
+        view.setScaleX(1 - 0.5f * scaleFactor);
+        view.setScaleY(1 - 0.5f * scaleFactor);
+        //view.setAlpha(1 - scaleFactor);
     }
 
     public static void scaleShow(View view, float scaleFactor) {

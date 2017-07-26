@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
+import android.graphics.Color;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
@@ -21,6 +23,7 @@ import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
@@ -44,7 +47,7 @@ public class MainActivity extends AMainActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDrawerLayout.setScrimColor(0x00ffffff);
+        //mDrawerLayout.setScrimColor(0x00ffffff);
         sm = new SystemBarTintManager(this);
         sm.setStatusBarTintEnabled(true);
         setStatusBarTint(0xff05d09b);
@@ -55,7 +58,6 @@ public class MainActivity extends AMainActivity {
         return R.layout.main;
     }
 
-    boolean isFirstIn = true;
 
     @Override
     protected void initEvents() {
@@ -64,13 +66,23 @@ public class MainActivity extends AMainActivity {
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                setStatusBarTint(0xff05d09b);
+                int pos = mBottomBar.findPositionForTabWithId(tabId);
+                int color = getResources().getColor(R.color.colorPrimary);
+                switch (pos) {
+                    case 0:
+                        color = getResources().getColor(R.color.colorPrimary);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        color = Color.parseColor("#ff37474f");
+                        break;
+                    case 3:
+                        color = Color.parseColor("#ff1565bf");
+                        break;
+                }
+                setStatusBarTint(color);
                 mPresenter.onTabSelected(tabId);
-               /* if (isFirstIn) {
-                    isFirstIn = false;
-                }else{
-                    AnimateUtil.createCircularReveal(mFrameLayout);
-                }*/
             }
         });
 
@@ -106,6 +118,31 @@ public class MainActivity extends AMainActivity {
                 return true;
             }
         });
+
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                Log.d("MainActivity", "slideOffset" + slideOffset);
+                if (slideOffset < 0.5) {
+                    sm.setStatusBarTintEnabled(true);
+                } else {
+                    sm.setStatusBarTintEnabled(false);
+                }
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
     @Override
@@ -116,28 +153,21 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void setFragment(int position) {
-        // TODO: 2017-7-20
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.main_container, FragmentMgr.getInstance().getFragment(position))
-//                .commit();
         fragmentMgr.getFragment(position);
     }
 
     @Override
     public void openMenu() {
         mDrawerLayout.openDrawer(Gravity.START);
+        sm.setStatusBarTintEnabled(false);
     }
 
     ActionBarDrawerToggle toggle;
 
-    public void setUpWithToolbar(final Toolbar toolbar) {
-        toolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("MainActivity", ":" + toolbar.getMeasuredHeight());
-            }
-        });
+    Toolbar mToolbar;
+
+    public void setUpWithToolbar(Toolbar toolbar) {
+        mToolbar = toolbar;
         toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
@@ -168,5 +198,23 @@ public class MainActivity extends AMainActivity {
             sm.setStatusBarTintColor(color);
             sm.setStatusBarAlpha(255 * 0.6f);
         }
+        if(mToolbar != null){
+            //mToolbar.setBackgroundColor(color);
+        }
+    }
+
+    BottomBarTab tab;
+
+    public void setBottomBarTint(int color) {
+        if (tab == null) {
+            tab = mBottomBar.getTabWithId(R.id.tab_community);
+        }
+
+        tab.setBarColorWhenSelected(color);
+        setStatusBarTint(color);
+    }
+
+    public void refreshBottom() {
+        mBottomBar.selectTabAtPosition(1);
     }
 }

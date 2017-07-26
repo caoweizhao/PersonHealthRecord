@@ -16,7 +16,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +33,7 @@ import com.example.administrator.personhealthrecord.adapter.SocialPageViewPagerA
 import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
+import com.example.administrator.personhealthrecord.util.ColorUtil;
 
 import butterknife.BindView;
 
@@ -41,6 +41,7 @@ import static android.graphics.Color.parseColor;
 import static com.example.administrator.personhealthrecord.contract.Contract.colors;
 import static com.example.administrator.personhealthrecord.contract.Contract.colorsLighter;
 import static com.example.administrator.personhealthrecord.contract.Contract.colorsStr;
+import static com.example.administrator.personhealthrecord.util.ColorUtil.getCurrentColor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,13 +50,10 @@ import static com.example.administrator.personhealthrecord.contract.Contract.col
  */
 public class SocialPageFragment extends BaseFragment {
 
-
     @BindView(R.id.social_page_tabLayout)
     TabLayout mTabLayout;
-
     @BindView(R.id.social_page_viewPager)
     ViewPager mViewPager;
-
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.social_page_img_bg)
@@ -65,11 +63,9 @@ public class SocialPageFragment extends BaseFragment {
     @BindView(R.id.social_page_collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
 
-
     private int[] imgs = new int[]{R.drawable.ic_news_icon, R.drawable.ic_medicine_icon,
             R.drawable.ic_disease_icon, R.drawable.ic_immune_icon};
     private Matrix mImageMatrix;
-    private float[] matrixValues = new float[9];
 
     public SocialPageFragment() {
         // Required empty public constructor
@@ -108,6 +104,7 @@ public class SocialPageFragment extends BaseFragment {
         Glide.with(this)
                 .load(R.drawable.community2)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
                 .listener(new RequestListener<Integer, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, Integer model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -127,38 +124,23 @@ public class SocialPageFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mViewPager);
         //initToolbar("社区");
         setUpWithActivity(view);
-        mImageMatrix = new Matrix();
-        animator = ValueAnimator.ofFloat(1, 1.5f)
-                .setDuration(6000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentScale = getScale();
-                float value = (float) animation.getAnimatedValue();
-               /* mImageMatrix.postScale(value * currentScale, value * currentScale,
-                        mImageView.getWidth() / 2, mImageView.getHeight() / 2);
-                mImageView.setImageMatrix(mImageMatrix);*/
-            }
-        });
-        animator.setRepeatCount(Integer.MAX_VALUE);
-        animator.start();
     }
 
     private void initImageView(GlideDrawable d) {
-        if (d == null)
+        /*if (d == null)
             return;
-        int width = mImageView.getWidth();
-        int height = mImageView.getHeight();
+        final int width = mImageView.getWidth();
+        final int height = mImageView.getHeight();
         // 拿到图片的宽和高
-        int dw = d.getIntrinsicWidth();
-        int dh = d.getIntrinsicHeight();
+        final int dw = d.getIntrinsicWidth();
+        final int dh = d.getIntrinsicHeight();
         float scale = 1.0f;
         // 如果图片的宽或者高大于屏幕，则缩放至屏幕的宽或者高
         if (dw > width && dh <= height) {
-            scale = height * 1.0f / dh;
+            scale = width * 1.0f / dw;
         }
         if (dh > height && dw <= width) {
-            scale = width * 1.0f / dw;
+            scale = height * 1.0f / dh;
         }
         // 如果宽和高都大于屏幕，则让其按按比例适应屏幕大小
         if (dw > width && dh > height) {
@@ -167,38 +149,33 @@ public class SocialPageFragment extends BaseFragment {
         if (dw < width && dh < height) {
             scale = Math.max(width * 1.0f / dw, height * 1.0f / dh);
         }
-
-        Log.d("InitImageView", "scale:" + scale + "dw:" + dw + "dh:" + dh + "width:" + width + "height:" + height);
         // 图片移动至屏幕中心
         if (mImageMatrix == null) {
             mImageMatrix = new Matrix();
         }
-        mImageMatrix.postTranslate((width - dw) / 2, (height - dh) / 2);
+        final int dx = (width - dw) / 2;
+        final int dy = (height - dh) / 2;
+        mImageMatrix.setTranslate(dx, dy);
         mImageMatrix
                 .postScale(scale, scale, mImageView.getWidth() / 2, mImageView.getHeight() / 2);
         mImageView.setImageMatrix(mImageMatrix);
-
-        final float s = getScale();
-        Log.d("", "scale:" + s);
-        animator = ValueAnimator.ofFloat(1, 1.1f, 0.9091f, 1)
-                .setDuration(6000);
+*/
+        mImageMatrix = new Matrix();
+        animator = ValueAnimator.ofFloat(1, 1.5f)
+                .setDuration(15000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float s = (float) animation.getAnimatedValue();
-                Log.d("SocialPageFragment", "s" + s);
-                mImageMatrix.postScale(s, s, mImageView.getWidth() / 2, mImageView.getHeight() / 2);
+                mImageMatrix.setScale(s, s,
+                        mImageView.getWidth() * 1.0f / 2, mImageView.getHeight() * 1.0f / 2);
                 mImageView.setImageMatrix(mImageMatrix);
             }
         });
         animator.setRepeatCount(Integer.MAX_VALUE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
         animator.start();
-    }
-
-    public final float getScale() {
-        mImageMatrix.getValues(matrixValues);
-        return matrixValues[Matrix.MSCALE_X];
     }
 
     @Override
@@ -207,14 +184,13 @@ public class SocialPageFragment extends BaseFragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 final int pos = tab.getPosition();
-
+                mViewPager.setCurrentItem(pos);
                 ((MainActivity) getActivity()).setStatusBarTint(colors[pos]);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mCollapsingToolbarLayout.setBackgroundColor(parseColor(colorsStr[pos]));
                     mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
                     mCollapsingToolbarLayout.setContentScrimColor(parseColor(colorsStr[pos]));
                 }
-                mViewPager.setCurrentItem(pos);
                 mFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(colorsLighter[pos]));
                 mFloatingActionButton.setImageResource(imgs[pos]);
 
@@ -231,13 +207,10 @@ public class SocialPageFragment extends BaseFragment {
 
             }
         });
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                Log.d("SocialPageFragment", "position:" + position + "cp:" + getCurrentPosition()
-                        + "offset:" + positionOffset);
-                int color = 0;
+                int color;
                 /**
                  * 0->1
                  */
@@ -246,13 +219,14 @@ public class SocialPageFragment extends BaseFragment {
                         (position == 1 && curPos == 1) ||
                         (position == 2 && curPos == 2)) {
                     AnimateUtil.scaleHide(mFloatingActionButton, positionOffset);
-                    color = getCurrentColor(positionOffset, Color.parseColor(colorsStr[curPos]),
+                    color = ColorUtil.getCurrentColor(positionOffset, Color.parseColor(colorsStr[curPos]),
                             Color.parseColor(colorsStr[3]));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         mCollapsingToolbarLayout.setBackgroundColor(color);
                         mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
                         mCollapsingToolbarLayout.setContentScrimColor(color);
-                        ((MainActivity) getActivity()).setStatusBarTint(color);
+                        ((MainActivity) getActivity()).setBottomBarTint(color);
+                        ((MainActivity) getActivity()).refreshBottom();
                     }
                 }
                 /**
@@ -294,11 +268,10 @@ public class SocialPageFragment extends BaseFragment {
                         mCollapsingToolbarLayout.setBackgroundColor(color);
                         mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
                         mCollapsingToolbarLayout.setContentScrimColor(color);
-                        ((MainActivity) getActivity()).setStatusBarTint(color);
+                        ((MainActivity) getActivity()).setBottomBarTint(color);
+                        ((MainActivity) getActivity()).refreshBottom();
                     }
                 }
-
-
                 /**
                  * 2->1
                  *//*
@@ -311,26 +284,17 @@ public class SocialPageFragment extends BaseFragment {
                 else if (position == 0 && getCurrentPosition() == 1) {
                     AnimateUtil.scaleHide(mFloatingActionButton, 1 - positionOffset);
                 }*/
-
             }
 
             @Override
             public void onPageSelected(int position) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    mCollapsingToolbarLayout.setBackgroundColor(colors[position]);
-                    mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
-                    mCollapsingToolbarLayout.setContentScrimColor(colors[position]);
-                    ((MainActivity) getActivity()).setStatusBarTint(colors[position]);
-
-
-                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
+        mViewPager.setPageTransformer(true, null);
     }
 
     private void setUpWithActivity(View view) {
@@ -356,37 +320,12 @@ public class SocialPageFragment extends BaseFragment {
     }
 
     public int getCurrentPosition() {
-        return mTabLayout.getSelectedTabPosition();
+        if (mTabLayout != null) {
+            return mTabLayout.getSelectedTabPosition() >= 0 ? mTabLayout.getSelectedTabPosition() : 0;
+        }
+        return 0;
     }
 
-    private int getCurrentColor(float fraction, int startColor, int endColor) {
-        int redCurrent;
-        int blueCurrent;
-        int greenCurrent;
-        int alphaCurrent;
-
-        int redStart = Color.red(startColor);
-        int blueStart = Color.blue(startColor);
-        int greenStart = Color.green(startColor);
-        int alphaStart = Color.alpha(startColor);
-
-        int redEnd = Color.red(endColor);
-        int blueEnd = Color.blue(endColor);
-        int greenEnd = Color.green(endColor);
-        int alphaEnd = Color.alpha(endColor);
-
-        int redDifference = redEnd - redStart;
-        int blueDifference = blueEnd - blueStart;
-        int greenDifference = greenEnd - greenStart;
-        int alphaDifference = alphaEnd - alphaStart;
-
-        redCurrent = (int) (redStart + fraction * redDifference);
-        blueCurrent = (int) (blueStart + fraction * blueDifference);
-        greenCurrent = (int) (greenStart + fraction * greenDifference);
-        alphaCurrent = (int) (alphaStart + fraction * alphaDifference);
-
-        return Color.argb(alphaCurrent, redCurrent, greenCurrent, blueCurrent);
-    }
 
     @Override
     public void onDestroy() {

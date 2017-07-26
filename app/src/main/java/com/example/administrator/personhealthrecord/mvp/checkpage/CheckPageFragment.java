@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
  */
 public class CheckPageFragment extends ACheckPageFragment {
 
-    private static final String TAG="CheckPageFragment";
+    private static final String TAG = "CheckPageFragment";
     private AbstractItemAdapter<CheckBean> adapter;
     private List<CheckBean> checkBeanList;
 
@@ -47,7 +48,8 @@ public class CheckPageFragment extends ACheckPageFragment {
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-            public CheckPageFragment() {
+
+    public CheckPageFragment() {
         // Required empty public constructor
     }
 
@@ -73,9 +75,9 @@ public class CheckPageFragment extends ACheckPageFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        checkBeanList=new ArrayList<>();
+        checkBeanList = new ArrayList<>();
         View view = inflater.inflate(R.layout.fragment_check_page, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         //设置图片加载器
         banner01.setImageLoader(new GlideImageLoader());
         //设置图片集合
@@ -88,7 +90,7 @@ public class CheckPageFragment extends ACheckPageFragment {
         banner02.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         banner02.start();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter=new AbstractItemAdapter<CheckBean>(R.layout.abstract_item,checkBeanList,this.getContext());
+        adapter = new AbstractItemAdapter<CheckBean>(R.layout.abstract_item, checkBeanList, this.getContext());
         recyclerView.setAdapter(adapter);
         mPresenter.onRequestData();
         return view;
@@ -138,13 +140,14 @@ public class CheckPageFragment extends ACheckPageFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.d(TAG, "onCreateOptionsMenu: "+"Check");
+        Log.d(TAG, "onCreateOptionsMenu: " + "Check");
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
     }
 
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mToolbar.setBackgroundColor(Color.parseColor("#ff1565bf"));
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

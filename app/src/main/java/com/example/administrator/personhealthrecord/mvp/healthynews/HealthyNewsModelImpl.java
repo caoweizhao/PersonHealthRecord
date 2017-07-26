@@ -2,16 +2,12 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
 
 import android.util.Log;
 
-import com.example.administrator.personhealthrecord.bean.HealthInfo;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
-import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
-import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
 import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import org.litepal.crud.DataSupport;
-import org.reactivestreams.Subscriber;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,10 +15,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 

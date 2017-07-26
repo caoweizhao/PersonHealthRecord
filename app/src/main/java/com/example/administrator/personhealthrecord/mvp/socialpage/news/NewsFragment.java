@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewsFragment extends BaseFragment {
+public class NewsFragment extends Fragment {
 
 
     public NewsFragment() {
@@ -49,17 +48,6 @@ public class NewsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_news_page, container, false);
-        return view;
-    }
-
-    @Override
-    protected void initEvent() {
-
-    }
-
-    @Override
-    protected void initData() {
-
+        return inflater.inflate(R.layout.fragment_news_page, container, false);
     }
 }
