@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 2017-7-22.
  */
 
-public class MedicineInfo implements AbstractItem {
+public class MedicineBean implements AbstractItem {
 
     /**
      * code : H10970410

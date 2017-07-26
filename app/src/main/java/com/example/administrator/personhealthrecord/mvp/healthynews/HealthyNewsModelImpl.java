@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
-import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
+import com.example.administrator.personhealthrecord.mvp.healthynews.api.NewsService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import org.litepal.crud.DataSupport;
@@ -26,13 +26,13 @@ import retrofit2.Retrofit;
  * Created by andy on 2017/7/19.
  */
 
-public class HealthyNewsModleImpl implements IHealthyNewsModle{
+public class HealthyNewsModelImpl implements IHealthyNewsModle{
     private static final String TAG="HealthyNewsModleImpl";
     private Retrofit retrofit;
     @Override
     public void getNewsAfter(Observer<List<NewsBean>> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
-        HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
+        NewsService api=retrofit.create(NewsService.class);
         SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1=format.parse(date);
@@ -50,7 +50,7 @@ public class HealthyNewsModleImpl implements IHealthyNewsModle{
     @Override
     public void getTodayNews(Observer<ResultUtilOfNewsBean> observer) {
         retrofit= RetrofitUtil.getRetrofit();
-        HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
+        NewsService api=retrofit.create(NewsService.class);
         api.getNewsToday()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -61,7 +61,7 @@ public class HealthyNewsModleImpl implements IHealthyNewsModle{
     @Override
     public void getNewsBefore(Observer<List<NewsBean>> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
-        HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
+        NewsService api=retrofit.create(NewsService.class);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1=format.parse(date);

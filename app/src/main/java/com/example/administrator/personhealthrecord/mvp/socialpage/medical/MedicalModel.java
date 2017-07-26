@@ -1,6 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.medical;
 
-import com.example.administrator.personhealthrecord.bean.MedicineInfo;
+import com.example.administrator.personhealthrecord.bean.MedicineBean;
 import com.example.administrator.personhealthrecord.mvp.socialpage.medical.api.MedicalService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
@@ -29,14 +29,14 @@ public class MedicalModel extends AMedicalModel {
         mMedicalService.getMedicineInfos()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<MedicineInfo>>() {
+                .subscribe(new Observer<List<MedicineBean>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<MedicineInfo> value) {
+                    public void onNext(List<MedicineBean> value) {
                         mPresenter.onMedicineInfosReady(value);
                     }
 

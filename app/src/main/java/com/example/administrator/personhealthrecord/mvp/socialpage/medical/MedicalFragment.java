@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
-import com.example.administrator.personhealthrecord.bean.MedicineInfo;
+import com.example.administrator.personhealthrecord.bean.MedicineBean;
 
 import java.util.List;
 
@@ -90,8 +90,8 @@ public class MedicalFragment extends AMedicalFragment {
     }
 
     @Override
-    public void updateMedicines(List<MedicineInfo> medicineInfoList) {
-        AbstractItemAdapter<MedicineInfo> adapter = new AbstractItemAdapter<MedicineInfo>(R.layout.fragment_medical_page, medicineInfoList, this);
+    public void updateMedicines(List<MedicineBean> medicineInfoList) {
+        AbstractItemAdapter<MedicineBean> adapter = new AbstractItemAdapter<MedicineBean>(R.layout.fragment_medical_page, medicineInfoList, this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

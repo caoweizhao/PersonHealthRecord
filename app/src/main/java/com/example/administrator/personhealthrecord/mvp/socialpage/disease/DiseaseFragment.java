@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
-import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPagerBaseFragment;
+import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageBaseFragment;
 
 import butterknife.BindView;
 
@@ -21,7 +21,7 @@ import butterknife.BindView;
  * Use the {@link DiseaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiseaseFragment extends SocialPagerBaseFragment {
+public class DiseaseFragment extends SocialPageBaseFragment {
 
     @BindView(R.id.disease_page_recyclerView)
     RecyclerView mRecyclerView;

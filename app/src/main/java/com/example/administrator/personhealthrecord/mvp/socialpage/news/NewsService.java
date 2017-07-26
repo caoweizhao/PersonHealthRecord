@@ -15,7 +15,7 @@ import retrofit2.http.Query;
  * Created by andy on 2017/7/19.
  */
 
-public interface HealthyNewsApi {
+public interface NewsService {
     @GET("information/information_list_today")
     Observable<ResultUtilOfNewsBean> getNewsToday();
 

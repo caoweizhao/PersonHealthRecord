@@ -1,6 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.medical.api;
 
-import com.example.administrator.personhealthrecord.bean.MedicineInfo;
+import com.example.administrator.personhealthrecord.bean.MedicineBean;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ import retrofit2.http.GET;
 public interface MedicalService {
 
     @GET("")
-    Observable<List<MedicineInfo>> getMedicineInfos();
+    Observable<List<MedicineBean>> getMedicineInfos();
 }
