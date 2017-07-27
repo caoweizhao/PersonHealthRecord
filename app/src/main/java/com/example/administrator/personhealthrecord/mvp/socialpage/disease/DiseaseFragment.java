@@ -22,6 +22,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
 
+    private Disposable mDisposable;
+
     public static DiseaseFragment newInstance() {
         return new DiseaseFragment();
     }
@@ -39,7 +41,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
                 .subscribe(new Observer<List<DiseaseBean>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        mDisposable = d;
                     }
 
                     @Override
@@ -80,5 +82,13 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
         int count = mAdapter.getItemCount();
         mAdapter.addData(datas);
         mAdapter.notifyItemRangeInserted(count, datas.size());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mDisposable != null){
+            mDisposable.dispose();
+        }
     }
 }

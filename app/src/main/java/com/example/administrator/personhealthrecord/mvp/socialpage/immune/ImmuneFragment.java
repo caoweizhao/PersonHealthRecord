@@ -14,12 +14,16 @@ import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageBas
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ImmuneFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
+
+    private Disposable mDisposable;
 
     public ImmuneFragment() {
         // Required empty public constructor
@@ -68,7 +72,6 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
     @Override
     protected void fetchData() {
         mSwipeRefreshLayout.setRefreshing(true);
-
     }
 
     @Override
@@ -84,5 +87,13 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
     @Override
     protected void loadMoreDataDone(List datas) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mDisposable != null){
+            mDisposable.dispose();
+        }
     }
 }

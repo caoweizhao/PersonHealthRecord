@@ -16,6 +16,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NewsFragment extends SocialPageBaseFragment<NewsService> {
 
+    Disposable mDisposable;
+
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -49,6 +51,7 @@ public class NewsFragment extends SocialPageBaseFragment<NewsService> {
                 }).subscribe(new Observer<List<NewsBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
+                mDisposable = d;
             }
 
             @Override
@@ -93,5 +96,13 @@ public class NewsFragment extends SocialPageBaseFragment<NewsService> {
     @Override
     protected void loadMoreDataDone(List datas) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
     }
 }

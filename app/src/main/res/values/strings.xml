@@ -62,7 +62,7 @@
     <string name="forgein_password">忘记密码？</string>
     <string name="username_cannot_be_empty">用户名不可以为空</string>
     <string name="password_cannot_empty">密码不可以为空</string>
-    <string name="sign_in">S I G N I N</string>
+    <string name="sign_in">S I G N   I N</string>
     <string name="health_color">#ff2e7c32</string>
     <string name="check_page_color">#ff37474f</string>
     <string name="error_happen_msg">获取失败，请稍后重试！</string>

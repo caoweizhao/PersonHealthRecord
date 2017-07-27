@@ -3,7 +3,6 @@ package com.example.administrator.personhealthrecord.view;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 /**
@@ -32,7 +31,6 @@ public class MyViewPager extends ViewPager {
             case MotionEvent.ACTION_MOVE:
                 float deltaX = Math.abs(x - mLastX);
                 float deltaY = Math.abs(y - mLastY);
-                Log.d("MyViewPager", "deltaX" + deltaX + "deltaY" + deltaY);
                 if (deltaX > deltaY) {
                     intercepted = true;
                 } else {
@@ -45,7 +43,6 @@ public class MyViewPager extends ViewPager {
             default:
                 break;
         }
-        Log.d("MyViewPager", "onInterceptTouchEvent" + intercepted);
         return intercepted;
     }
 }

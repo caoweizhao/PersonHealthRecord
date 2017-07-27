@@ -114,7 +114,7 @@ public class SocialPageFragment extends BaseFragment {
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, Integer model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        initImageView(resource);
+                        startImageAnim();
                         return false;
                     }
                 })
@@ -127,40 +127,7 @@ public class SocialPageFragment extends BaseFragment {
         setUpWithActivity(view);
     }
 
-    private void initImageView(GlideDrawable d) {
-        /*if (d == null)
-            return;
-        final int width = mImageView.getWidth();
-        final int height = mImageView.getHeight();
-        // 拿到图片的宽和高
-        final int dw = d.getIntrinsicWidth();
-        final int dh = d.getIntrinsicHeight();
-        float scale = 1.0f;
-        // 如果图片的宽或者高大于屏幕，则缩放至屏幕的宽或者高
-        if (dw > width && dh <= height) {
-            scale = width * 1.0f / dw;
-        }
-        if (dh > height && dw <= width) {
-            scale = height * 1.0f / dh;
-        }
-        // 如果宽和高都大于屏幕，则让其按按比例适应屏幕大小
-        if (dw > width && dh > height) {
-            scale = Math.min(dw * 1.0f / width, dh * 1.0f / height);
-        }
-        if (dw < width && dh < height) {
-            scale = Math.max(width * 1.0f / dw, height * 1.0f / dh);
-        }
-        // 图片移动至屏幕中心
-        if (mImageMatrix == null) {
-            mImageMatrix = new Matrix();
-        }
-        final int dx = (width - dw) / 2;
-        final int dy = (height - dh) / 2;
-        mImageMatrix.setTranslate(dx, dy);
-        mImageMatrix
-                .postScale(scale, scale, mImageView.getWidth() / 2, mImageView.getHeight() / 2);
-        mImageView.setImageMatrix(mImageMatrix);
-*/
+    private void initImageView() {
         mImageMatrix = new Matrix();
         animator = ValueAnimator.ofFloat(1, 1.5f)
                 .setDuration(15000);
@@ -179,13 +146,39 @@ public class SocialPageFragment extends BaseFragment {
         animator.start();
     }
 
+    public void startImageAnim() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (animator != null && animator.isPaused()) {
+                animator.resume();
+            }else{
+                initImageView();
+            }
+        }else{
+            if (animator != null && !animator.isRunning()) {
+                animator.start();
+            }else{
+                initImageView();
+            }
+        }
+    }
+
+    public void stopImageAnim() {
+        if (animator != null && animator.isRunning()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                animator.pause();
+            }else{
+                animator.cancel();
+            }
+        }
+    }
+
     @Override
     protected void initEvent() {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 final int pos = tab.getPosition();
-                mViewPager.setCurrentItem(pos,false);
+                mViewPager.setCurrentItem(pos, false);
                 ((MainActivity) getActivity()).setStatusBarTint(colors[pos]);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mCollapsingToolbarLayout.setBackgroundColor(parseColor(colorsStr[pos]));

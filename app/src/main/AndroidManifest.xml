@@ -26,7 +26,11 @@
             android:name=".activity.HealthyNewsDetailActivity"
             android:theme="@style/HealthyNewsDetailStyle"/>
         <activity android:name=".mvp.log.LoginActivity"/>
-        <activity android:name=".activity.TestActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".activity.TestActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.AddCaseActivity">
+        </activity>
     </application>
 
 </manifest>

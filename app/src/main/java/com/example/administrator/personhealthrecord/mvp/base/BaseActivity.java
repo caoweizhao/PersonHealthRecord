@@ -11,8 +11,9 @@ import com.example.administrator.personhealthrecord.application.MyApplication;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static butterknife.ButterKnife.bind;
 
 
 /**
@@ -25,6 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder mUnbinder;
     public FragmentMgr fragmentMgr;
     protected SystemBarTintManager sm;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +42,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
-        mUnbinder = ButterKnife.bind(this);
+        mUnbinder = bind(this);
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        mUnbinder = ButterKnife.bind(this);
+        mUnbinder = bind(this);
     }
 
     protected abstract int getLayoutRes();

@@ -46,7 +46,6 @@ public class FragmentMgr {
                         return HomePageFragment.newInstance();
                 }
             }
-
             @Override
             public int getCount() {
                 return 4;
@@ -78,7 +77,12 @@ public class FragmentMgr {
         if (position == 1) {
             int pos = ((SocialPageFragment) fragment).getCurrentPosition();
             ((MainActivity) context).setBottomBarTint(Contract.colors[pos]);
+            ((SocialPageFragment) fragment).startImageAnim();
             //((MainActivity) context).refreshBottom();
+        } else {
+            if (mSocialPageFragment != null) {
+                mSocialPageFragment.stopImageAnim();
+            }
         }
     }
 }

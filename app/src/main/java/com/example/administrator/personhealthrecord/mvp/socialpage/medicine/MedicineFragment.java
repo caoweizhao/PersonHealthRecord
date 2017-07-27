@@ -14,6 +14,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MedicineFragment extends SocialPageBaseFragment<MedicineService> {
 
+    Disposable mDisposable;
+
     public MedicineFragment() {
         // Required empty public constructor
     }
@@ -39,7 +41,7 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineService> {
                 .subscribe(new Observer<List<MedicineBean>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        mDisposable = d;
                     }
 
                     @Override
@@ -82,5 +84,13 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineService> {
     @Override
     protected void loadMoreDataDone(List datas) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
     }
 }
