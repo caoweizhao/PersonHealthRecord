@@ -1,6 +1,7 @@
-package com.example.administrator.personhealthrecord.mvp.log.api;
+package com.example.administrator.personhealthrecord.mvp.registandlogin.api;
 
 import com.example.administrator.personhealthrecord.bean.Loginbean;
+import com.example.administrator.personhealthrecord.bean.RegistBean;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
@@ -16,4 +17,8 @@ public interface LoginApi {
     @FormUrlEncoded
     @POST("user/login")
     Observable<Response<Loginbean>> login(@Field("username")String username, @Field("password")String password);
+
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<RegistBean> regist(@Field("username")String username, @Field("password")String password);
 }

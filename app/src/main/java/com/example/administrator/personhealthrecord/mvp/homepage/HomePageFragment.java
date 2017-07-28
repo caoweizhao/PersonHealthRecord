@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.MapAcitvity;
 import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
@@ -34,7 +35,6 @@ import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.List;
 
@@ -68,12 +68,11 @@ public class HomePageFragment extends AHomePageFragment {
     private boolean isExpand = false;
     private HospitalAdapter mHospitalAdapter;
 
-    private SparseArray<String> imagesUrl = new SparseArray<>();
-    private SparseArray<String> expertsUrl = new SparseArray<>();
 
     @BindView(R.id.near_by_hospital)
     CardView mCardView;
-
+    @BindView(R.id.map_text_view)
+    TextView mpaTextView;
     public HomePageFragment() {
         // Required empty public constructor
     }
@@ -102,6 +101,21 @@ public class HomePageFragment extends AHomePageFragment {
         initBanner();
         initToolbar("首页");
         setUpWithActivity(view);
+
+        mPrivateDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimateUtil.createCircularReveal(v);
+            }
+        });
+        mCardView.post(new Runnable() {
+            @Override
+            public void run() {
+                int[] location = new int[2];
+                mCardView.getLocationInWindow(location);
+                Log.d("HomePageFragment", "location:" + location[0] + ":" + location[1]);
+            }
+        });
 
     }
 
@@ -160,6 +174,13 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     protected void initEvent() {
+        mpaTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), MapAcitvity.class);
+                startActivity(intent);
+            }
+        });
         mExpertTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -172,36 +193,12 @@ public class HomePageFragment extends AHomePageFragment {
 
             }
         });
-
-        mPrivateDoctor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimateUtil.createCircularReveal(v);
-            }
-        });
-
-        mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                AnimateUtil.createCircularReveal(view);
-            }
-        });
-
-        mImageBanner.setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-            }
-        });
     }
 
     @Override
     protected void initData() {
-        mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, null);
-        mHospitalAdapter.bindToRecyclerView(mHomePageRecyclerView);
-        mHospitalAdapter.setEmptyView(R.layout.empty_view);
         mPresenter.onRequestData();
     }
-
     private void initBanner() {
         //设置图片加载器
         mImageBanner.setImageLoader(new GlideImageLoader());
@@ -212,6 +209,7 @@ public class HomePageFragment extends AHomePageFragment {
 
         mImageBanner.setDelayTime(5000);
         mExpertsBanner.setDelayTime(8000);
+
 
         mImageBanner.start();
         mExpertsBanner.start();
@@ -242,7 +240,8 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void updateHospitals(List<HospitalBean> hospitalBeanList) {
+    public void InitHospitals(List<HospitalBean> hospitalBeanList) {
+        Log.d("HomePageFragment", "hos:" + hospitalBeanList.size());
         mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
         mHomePageRecyclerView.setAdapter(mHospitalAdapter);
         mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -255,9 +254,17 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mImageBanner.stopAutoPlay();
-        mExpertsBanner.stopAutoPlay();
+    public void updateHospitals(List<HospitalBean> hospitalBeanList) {
+        List<HospitalBean> nowList=mHospitalAdapter.getData();
+        for(HospitalBean bean:hospitalBeanList)
+        {
+            if(!nowList.contains(bean))
+                mHospitalAdapter.addData(bean);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

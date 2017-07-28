@@ -1,9 +1,12 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
+import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.homepage.api.HomePageService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,21 @@ public class TestModel extends AHomePageModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+    }
+
+    @Override
+    public void saveToDB(List<HospitalBean> list) {
+        List<HospitalBean> DBlist= DataSupport.findAll(HospitalBean.class);
+        for(HospitalBean bean:list)
+        {
+            if(!DBlist.contains(bean))
+                bean.save();
+        }
+    }
+
+    @Override
+    public List<HospitalBean> getBDlist() {
+        return DataSupport.findAll(HospitalBean.class);
     }
 
 

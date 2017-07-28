@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class HomePagePresenter extends AHomePagePresenter {
-    private static final String TAG = "HomePagePresenter";
+    private static final String TAG="HomePagePresenter";
 
     @Override
     public AHomePageModel createModel() {
@@ -41,7 +41,7 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void onHospitalReady(List<HospitalBean> hospitalBeanList) {
-        mView.updateHospitals(hospitalBeanList);
+        mView.InitHospitals(hospitalBeanList);
     }
 
     @Override
@@ -54,16 +54,16 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int type = Contract.TYPE_ORTHOPEDICS;
+        int type = Contract.TYPE_CARDIOLOGY;
         switch (position) {
             case 0:
-                type = Contract.TYPE_ORTHOPEDICS;
+                type = Contract.TYPE_CARDIOLOGY;
                 break;
             case 1:
-                type = Contract.TYPE_PEDIATRIC_SURGERY;
+                type = Contract.TYPE_INTERNAL_MEDICINE;
                 break;
             case 2:
-                type = Contract.TYPE_ENT;
+                type = Contract.TYPE_SURGICAL;
                 break;
             case 3:
                 type = Contract.TYPE_DERMATOLOGY;
@@ -76,7 +76,8 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void getHospitalLis() {
-        Observer<ResultUtilOfHospitalList> observer = new Observer<ResultUtilOfHospitalList>() {
+        onHospitalReady( mModel.getBDlist());//先从数据库取出列表然后在进行网络请求
+        Observer<ResultUtilOfHospitalList> observer=new Observer<ResultUtilOfHospitalList>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -84,14 +85,18 @@ public class HomePagePresenter extends AHomePagePresenter {
 
             @Override
             public void onNext(ResultUtilOfHospitalList value) {
-                if (value.getStatus().equals("success")) {
-                    List<HospitalBean> list = value.getCollection();
+                if(value.getStatus().equals("success"))
+                {
+                    List<HospitalBean> list=value.getCollection();
                     int i;
-                    for (i = 0; i < list.size(); i++) {
-                        Log.d(TAG, "onNext: " + list.get(i).getName());
+                    for(i=0;i<list.size();i++)
+                    {
+                        Log.d(TAG, "onNext: "+list.get(i).getName());
                     }
-                    onHospitalReady(value.getCollection());
-                } else {
+                    mView.updateHospitals(value.getCollection());
+                    mModel.saveToDB(value.getCollection());
+                }else
+                {
                     ToastUitl.Toast(value.getMessage());
                 }
 

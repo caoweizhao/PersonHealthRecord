@@ -7,9 +7,10 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
-    //public static final String BASE_URL = "http://192.168.13.39:8080/";
-    public static final String BASE_URL = "http://192.168.191.1:8080/";
-
+    public static final String Login="Login";
+    public static final String Unlogin="Unlogin";
+    public static String IsLogin=Unlogin;
+    public static final String BASE_URL = "http://192.168.13.39:8080/";
     /**
      * 骨科
      */
@@ -51,5 +52,6 @@ public class Contract {
     public static final String HospitalBase = BASE_URL + "hospital/getImage/";
     public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
     public static final String MedicalBase = BASE_URL + "medicine/getImage/";
+    public static final String PackageImageBase="http://192.168.13.39:8080/medical_package/getImage/";
 
 }

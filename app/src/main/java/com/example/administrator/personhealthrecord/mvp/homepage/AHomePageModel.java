@@ -1,8 +1,11 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
+import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 
@@ -25,4 +28,7 @@ public abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
 
     public abstract void getHospitals(Observer<ResultUtilOfHospitalList> observer);
 
+    public abstract void saveToDB(List<HospitalBean> list);
+
+    public abstract List<HospitalBean> getBDlist();
 }
