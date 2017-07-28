@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.mvp.homepage;
 
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.homepage.api.HomePageService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
@@ -54,7 +55,7 @@ public class HomePageModel extends AHomePageModel {
 
     @Override
     public void getExperts(int type) {
-        mHomePageService.getExperts()
+        mHomePageService.getExperts(Contract.ExpertType[type])
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(new Observer<List<ExpertBean>>() {
                     @Override
