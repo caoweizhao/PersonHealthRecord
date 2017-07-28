@@ -48,7 +48,7 @@ public class HomePagePresenter extends AHomePagePresenter {
     public void onRequestData() {
         mView.showLoading();
         mModel.getImageRes();
-        mModel.getExperts(Contract.TYPE_CARDIOLOGY);
+        mModel.getExperts(Contract.TYPE_ORTHOPEDICS);
         getHospitalLis();
     }
 
