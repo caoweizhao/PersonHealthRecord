@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class HomePagePresenter extends AHomePagePresenter {
-    private static final String TAG="HomePagePresenter";
+    private static final String TAG = "HomePagePresenter";
 
     @Override
     public AHomePageModel createModel() {
@@ -54,16 +54,16 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int type = Contract.TYPE_CARDIOLOGY;
+        int type = Contract.TYPE_ORTHOPEDICS;
         switch (position) {
             case 0:
-                type = Contract.TYPE_CARDIOLOGY;
+                type = Contract.TYPE_ORTHOPEDICS;
                 break;
             case 1:
-                type = Contract.TYPE_INTERNAL_MEDICINE;
+                type = Contract.TYPE_PEDIATRIC_SURGERY;
                 break;
             case 2:
-                type = Contract.TYPE_SURGICAL;
+                type = Contract.TYPE_ENT;
                 break;
             case 3:
                 type = Contract.TYPE_DERMATOLOGY;
@@ -76,7 +76,7 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void getHospitalLis() {
-        Observer<ResultUtilOfHospitalList> observer=new Observer<ResultUtilOfHospitalList>() {
+        Observer<ResultUtilOfHospitalList> observer = new Observer<ResultUtilOfHospitalList>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -84,17 +84,14 @@ public class HomePagePresenter extends AHomePagePresenter {
 
             @Override
             public void onNext(ResultUtilOfHospitalList value) {
-                if(value.getStatus().equals("success"))
-                {
-                    List<HospitalBean> list=value.getCollection();
+                if (value.getStatus().equals("success")) {
+                    List<HospitalBean> list = value.getCollection();
                     int i;
-                    for(i=0;i<list.size();i++)
-                    {
-                        Log.d(TAG, "onNext: "+list.get(i).getName());
+                    for (i = 0; i < list.size(); i++) {
+                        Log.d(TAG, "onNext: " + list.get(i).getName());
                     }
                     onHospitalReady(value.getCollection());
-                }else
-                {
+                } else {
                     ToastUitl.Toast(value.getMessage());
                 }
 

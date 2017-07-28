@@ -41,12 +41,11 @@ public abstract class BaseFragment extends Fragment {
         mUnbinder = ButterKnife.bind(this, view);
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         init();
-        Log.d("BaseFragment", this.getClass().getSimpleName()+"onViewCreated");
     }
 
     private void init() {
-        initEvent();
         initData();
+        initEvent();
     }
 
     protected abstract void initEvent();

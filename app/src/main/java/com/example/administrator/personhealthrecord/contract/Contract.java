@@ -11,21 +11,23 @@ public class Contract {
     public static final String BASE_URL = "http://192.168.191.1:8080/";
 
     /**
-     * 心血管内科
+     * 骨科
      */
-    public static final int TYPE_CARDIOLOGY = 0;
+    public static final int TYPE_ORTHOPEDICS = 0;
     /**
-     * 内科
+     * 小儿外科
      */
-    public static final int TYPE_INTERNAL_MEDICINE = 1;
+    public static final int TYPE_PEDIATRIC_SURGERY = 1;
     /**
-     * 外科
+     * 耳鼻喉科
      */
-    public static final int TYPE_SURGICAL = 2;
+    public static final int TYPE_ENT = 2;
     /**
      * 皮肤科
      */
     public static final int TYPE_DERMATOLOGY = 3;
+
+    public static String[] ExpertType = new String[]{"D1", "D7", "D22", "D18"};
 
     public static final String[] colorsStr = new String[]{
             "#ff5d4037", "#ff00786b", "#ff455a64", "#ff0096a6"
@@ -38,7 +40,8 @@ public class Contract {
     public static int[] colors = new int[]{0xff5d4037, 0xff00786b, 0xff455a64, 0xff0096a6};
     public static int[] colorsLighter = new int[]{0xff785548, 0xff009587, 0xff607c8a, 0xff4ebcc7};
 
-    @IntDef(value = {TYPE_CARDIOLOGY, TYPE_DERMATOLOGY, TYPE_INTERNAL_MEDICINE, TYPE_SURGICAL})
+
+    @IntDef(value = {TYPE_ORTHOPEDICS, TYPE_DERMATOLOGY, TYPE_PEDIATRIC_SURGERY, TYPE_ENT})
     public @interface ExpertType {
     }
 

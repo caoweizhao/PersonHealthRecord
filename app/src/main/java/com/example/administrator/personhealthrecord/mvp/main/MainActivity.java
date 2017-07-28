@@ -171,6 +171,7 @@ public class MainActivity extends AMainActivity {
         if (mDrawerLayout != null) {
             if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
                 mDrawerLayout.closeDrawer(Gravity.START);
+                return;
             }
         }
         if ((System.currentTimeMillis() - mLastClickTime) <= 1500) {
