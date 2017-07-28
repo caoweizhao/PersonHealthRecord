@@ -59,4 +59,5 @@ public class HospitalAdapter extends BaseQuickAdapter<HospitalBean, BaseViewHold
                 .centerCrop()
                 .into((ImageView) helper.getView(R.id.hospital_item__img));
     }
+
 }

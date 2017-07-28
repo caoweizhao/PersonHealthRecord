@@ -7,6 +7,7 @@ import org.litepal.crud.DataSupport;
  */
 
 public class HospitalBean extends DataSupport{
+    private int id;
     private String name;
     private String englishName;
     private String category;
@@ -119,5 +120,13 @@ public class HospitalBean extends DataSupport{
     @Override
     public boolean equals(Object obj) {
         return getName().equals(((HospitalBean)obj).getName());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

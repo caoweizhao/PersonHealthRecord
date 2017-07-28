@@ -17,8 +17,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.activity.TestActivity;
-import com.example.administrator.personhealthrecord.mvp.log.LoginActivity;
+import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
@@ -86,8 +85,8 @@ public class MainActivity extends AMainActivity {
                 // TODO: 2017-7-20
                 switch (item.getItemId()) {
                     case R.id.menu_my_book:
-                        Intent intent1 = new Intent(MainActivity.this, TestActivity.class);
-                        startActivity(intent1);
+//                        Intent intent1 = new Intent(MainActivity.this, TestActivity.class);
+//                        startActivity(intent1);
                         break;
                     case R.id.menu_account_info:
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

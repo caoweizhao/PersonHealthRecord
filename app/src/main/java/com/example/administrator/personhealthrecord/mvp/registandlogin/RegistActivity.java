@@ -87,7 +87,7 @@ public class RegistActivity extends ILoginVIew implements View.OnClickListener{
         Intent intent=new Intent();
         intent.putExtra("username",username.getText().toString());
         intent.putExtra("password",password.getText().toString());
-        setResult(0,intent);
+        setResult(6,intent);
         finish();
     }
 }

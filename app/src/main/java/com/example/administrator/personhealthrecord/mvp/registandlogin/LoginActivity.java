@@ -31,10 +31,11 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: requestcode"+requestCode+"   resultcode"+resultCode);
+        ToastUitl.Toast(resultCode+"");
         switch(requestCode)
             {
                 case 1:
-                    if(resultCode==0)
+                    if(resultCode==6)
                     {
                         String myusername=data.getStringExtra("username");
                         String mypasswrod=data.getStringExtra("password");

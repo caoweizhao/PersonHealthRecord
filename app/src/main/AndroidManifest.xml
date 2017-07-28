@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.administrator.personhealthrecord">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.administrator.personhealthrecord">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序打开网络套接字 -->
@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".application.MyApplication"
@@ -42,23 +42,22 @@
             android:name=".mvp.main.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.HealthyNewsDetailActivity"
-            android:theme="@style/HealthyNewsDetailStyle"/>
-        <activity android:name=".mvp.log.LoginActivity"/>
-        <activity android:name=".activity.TestActivity" android:windowSoftInputMode="stateHidden"/>
             android:theme="@style/HealthyNewsDetailStyle" />
         <activity android:name=".mvp.registandlogin.LoginActivity" />
         <activity android:name=".activity.MapAcitvity" />
 
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".mvp.registandlogin.RegistActivity"></activity>
+        <activity android:name=".mvp.registandlogin.RegistActivity" />
+        <activity android:name=".mvp.reserve.ReserveActivity"></activity>
+        <activity android:name=".activity.HospitalPackageDetailActivity"/>
     </application>
 
 </manifest>
