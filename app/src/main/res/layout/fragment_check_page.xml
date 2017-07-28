@@ -43,53 +43,124 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/reserve_button"
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    card_view:cardCornerRadius="8dp"
+                    card_view:cardElevation="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+                <TextView
+                    android:padding="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_health_check_reserve_physical"
+                    android:id="@+id/reserve_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="1dp"
-                    android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center"
                     android:text="@string/resover_examintion"
                     android:textSize="18sp"/>
-
-                <TextView
+                </android.support.v7.widget.CardView>
+                <!--<View-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:layout_width="1dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@android:color/black"/>-->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    card_view:cardCornerRadius="8dp"
+                    card_view:cardElevation="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+                <TextView
+                    android:padding="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_healthy_check_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="1dp"
-                    android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center"
                     android:text="@string/resover_order"
                     android:textSize="18sp"/>
+                </android.support.v7.widget.CardView>
             </LinearLayout>
-
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp">-->
+                <!--<View-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@android:color/black"/>-->
+                <!--<View-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@android:color/black"/>-->
+            <!--</LinearLayout>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:orientation="horizontal">
-
-                <TextView
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    card_view:cardCornerRadius="8dp"
+                    card_view:cardElevation="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+                <TextView
+                    android:padding="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_healthy_check_myreport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_margin="1dp"
-                    android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center"
                     android:text="@string/my_report"
                     android:textSize="18sp"/>
-
-                <TextView
+                </android.support.v7.widget.CardView>
+                <!--<View-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:layout_width="1dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@android:color/black"/>-->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    card_view:cardCornerRadius="8dp"
+                    card_view:cardElevation="8dp"
                     android:layout_width="0dp"
+                    android:background="@drawable/"
                     android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:gravity="center"
-                    android:text="@string/rent_device"
-                    android:textSize="18sp"/>
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:padding="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/ic_healthy_check_equiptment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        android:gravity="center"
+                        android:text="@string/rent_device"
+                        android:textSize="18sp"/>
+                </android.support.v7.widget.CardView>
+
             </LinearLayout>
 
             <android.support.v7.widget.CardView
