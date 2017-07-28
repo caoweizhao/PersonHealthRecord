@@ -197,6 +197,7 @@ public class HomePageFragment extends AHomePageFragment {
     @Override
     protected void initData() {
         mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, null);
+        mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mHospitalAdapter.bindToRecyclerView(mHomePageRecyclerView);
         mHospitalAdapter.setEmptyView(R.layout.empty_view);
         mPresenter.onRequestData();
@@ -243,21 +244,19 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
-        mHomePageRecyclerView.setAdapter(mHospitalAdapter);
-        mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                AnimateUtil.createCircularReveal(view);
-            }
-        });
-        mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mHospitalAdapter.getData().clear();
+        mHospitalAdapter.addData(hospitalBeanList);
+        mHospitalAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mImageBanner.stopAutoPlay();
-        mExpertsBanner.stopAutoPlay();
+        if (mImageBanner != null) {
+            mImageBanner.stopAutoPlay();
+        }
+        if (mExpertsBanner != null) {
+            mExpertsBanner.stopAutoPlay();
+        }
     }
 }
