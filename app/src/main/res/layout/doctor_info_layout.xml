@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="查看医生信息"
+            android:textColor="#fff"
+            android:textSize="19sp" />
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/righttop"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.10" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <!--医生信息-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/textview_border">
+
+        <ImageView
+            android:id="@+id/doctor_pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            tools:src="@drawable/person"
+            android:adjustViewBounds="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:padding="7dp"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-4dp">
+
+                    <TextView
+                        android:id="@+id/doctor_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="30dp"
+                        android:maxLines="1"
+                        tools:text="XXX"
+                        android:textSize="25sp"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:id="@+id/doctor_position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:padding="2dp"
+                        android:maxLines="1"
+                        tools:text="主任医师"
+                        android:textSize="16sp"
+                        android:textColor="#000"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/doctor_workplace"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
+                tools:text="中山大学附属第三医院天河医院-特诊医疗门诊[天河]"
+                android:textSize="14sp"
+                android:textColor="#2a4199" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--医生详细介绍-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp" >
+
+            <TextView
+                android:id="@+id/doctor_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                tools:text="@string/doctor_details"
+                android:textColor="#000"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

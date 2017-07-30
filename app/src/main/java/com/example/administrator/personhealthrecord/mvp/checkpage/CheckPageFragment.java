@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,11 +15,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
+import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -34,7 +38,7 @@ import butterknife.ButterKnife;
  * Use the {@link CheckPageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CheckPageFragment extends ACheckPageFragment {
+public class CheckPageFragment extends ACheckPageFragment implements View.OnClickListener{
 
     private static final String TAG = "CheckPageFragment";
     private AbstractItemAdapter<CheckBean> adapter;
@@ -48,7 +52,8 @@ public class CheckPageFragment extends ACheckPageFragment {
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
+    @BindView(R.id.reserve_button)
+    TextView reserve;
     public CheckPageFragment() {
         // Required empty public constructor
     }
@@ -130,7 +135,7 @@ public class CheckPageFragment extends ACheckPageFragment {
 
     @Override
     protected void initEvent() {
-
+        reserve.setOnClickListener(this);
     }
 
     @Override
@@ -155,5 +160,18 @@ public class CheckPageFragment extends ACheckPageFragment {
                 ((MainActivity) getActivity()).openMenu();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+                switch (v.getId())
+                        {
+                            case R.id.reserve_button:
+                                Intent intent=new Intent(getActivity(), ReserveActivity.class);
+                                startActivity(intent);
+                                break;
+                            default:
+                                break;
+                        }
     }
 }

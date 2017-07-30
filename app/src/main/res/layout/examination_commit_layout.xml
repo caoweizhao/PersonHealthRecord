@@ -12,6 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@mipmap/back"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:weightSum="1">
 
@@ -30,6 +31,7 @@
             android:id="@+id/right_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@mipmap/righttop"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
             android:layout_weight="0.10" />
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            tools:src="@drawable/set_pic"
             android:padding="3.5dp"/>
         
         <LinearLayout
@@ -140,6 +143,7 @@
                             android:id="@+id/date_order"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/date_pic"
                             android:drawablePadding="5dp"
                             android:padding="10dp"
                             android:textSize="16sp"
@@ -169,7 +173,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.2"
                             android:layout_gravity="center"
-                            android:src="@drawable/getdate_pic"
+                            android:src="@mipmap/getdate_pic"
                             android:adjustViewBounds="true"/>
                     </LinearLayout>
 
@@ -185,7 +189,7 @@
                         android:id="@+id/time_order"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/date_pic"
+                        android:drawableLeft="@mipmap/date_pic"
                         android:maxLines="1"
                         android:drawablePadding="9dp"
                         android:padding="10dp"
@@ -218,7 +222,7 @@
                             android:layout_weight="0.2"
                             android:layout_gravity="center"
                             android:layout_marginLeft="2dp"
-                            android:src="@drawable/gettime_pic"
+                            android:src="@mipmap/gettime_pic"
                             android:adjustViewBounds="true"/>
                     </LinearLayout>
 
@@ -236,7 +240,7 @@
                         android:id="@+id/tester_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/phone_pic"
+                        android:drawableLeft="@mipmap/phone_pic"
                         android:drawablePadding="10dp"
                         android:padding="10dp"
                         android:textSize="16sp"
@@ -262,7 +266,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
-                        android:src="@drawable/add_pic"
+                        android:src="@mipmap/add_pic"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"/>
 
@@ -281,7 +285,7 @@
                         android:layout_height="wrap_content"
                         android:maxLines="1"
                         android:drawablePadding="9dp"
-                        android:drawableLeft="@drawable/phone_pic"
+                        android:drawableLeft="@mipmap/phone_pic"
                         android:padding="10dp"
                         android:text="诊疗卡号："
                         android:textAlignment="center"

@@ -1,5 +1,6 @@
-package com.example.administrator.personhealthrecord.mvp.log;
+package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
+import android.content.Intent;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -16,6 +17,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.LinearLayout;
 
 import com.example.administrator.personhealthrecord.R;
@@ -48,9 +50,32 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     LinearLayout mContainer;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: requestcode"+requestCode+"   resultcode"+resultCode);
+        ToastUitl.Toast(resultCode+"");
+        switch(requestCode)
+            {
+                case 1:
+                    if(resultCode==6)
+                    {
+                        String myusername=data.getStringExtra("username");
+                        String mypasswrod=data.getStringExtra("password");
+                        usrname.setText(myusername);
+                        password.setText(mypasswrod);
+                    }
+                    break;
+                default:
+
+                    break;
+            }
+    }
+
+    @Override
     protected void initEvents() {
         super.initEvents();
         login.setOnClickListener(this);
+        regist.setOnClickListener(this);
     }
 
     @Override
@@ -119,8 +144,8 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     }
 
     @Override
-    public ILoginPresenter createPresenter() {
-        mPresenter = new LoginPresenterImpl(this);
+    public IRegistAndLoginPresenter createPresenter() {
+        mPresenter=new RegistAndLoginPresenterImpl(this);
         return mPresenter;
     }
 
@@ -136,13 +161,17 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.login_login:
-                dologin();
-                break;
-            default:
-                break;
-        }
+                switch (v.getId())
+                        {
+                            case R.id.login_login:
+                                dologin();
+                                break;
+                            case R.id.regist:
+                                regist();
+                                break;
+                            default:
+                                break;
+                        }
     }
 
     @Override
@@ -155,6 +184,20 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
             mPresenter.dologin(usrname.getText().toString(), password.getText().toString());
             Log.d(TAG, "dologin: username" + usrname + "   password" + "");
         }
+        Log.d(TAG, "dologin: username"+usrname.getText().toString()+"   password"+password.getText().toString());
+
+    }
+
+    @Override
+    public void regist() {
+        Log.d(TAG, "regist: ");
+        Intent intent=new Intent(LoginActivity.this,RegistActivity.class);
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    public void finishAcitvity() {
+        finish();
         Log.d(TAG, "dologin: username" + usrname.getText().toString() + "   password" + password.getText().toString());
     }
 }

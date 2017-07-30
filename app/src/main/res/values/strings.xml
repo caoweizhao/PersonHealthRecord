@@ -112,4 +112,6 @@
     <string name="allergy_history">药物过敏史：</string>
     <string name="sick_history">病史：</string>
     <string name="commit_ok">确认提交</string>
+    <string name="yuan">￥</string>
+    <string name="had_reserve">已经预约</string>
 </resources>
