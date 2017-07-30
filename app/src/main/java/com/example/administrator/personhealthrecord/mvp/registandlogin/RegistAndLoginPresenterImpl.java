@@ -29,7 +29,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
         return mModel;
     }
     @Override
-    void dologin(String username, String password) {
+    void dologin(final String username, final String password) {
         Log.d(TAG, "dologin: ");
         Observer<Response<Loginbean>> observer=new Observer<Response<Loginbean>>() {
             @Override
@@ -54,6 +54,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
                     Contract.cookie=cookie;
                     Contract.IsLogin=Contract.Login;
                     Log.d(TAG, "onNext: "+cookie.toString());
+                    ((LoginActivity)mView).SetAcount(username,password);
                     mView.finishAcitvity();
                 }
 

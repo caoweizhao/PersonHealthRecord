@@ -7,6 +7,7 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
+    public static String cookie = "";
     public static final String Login="Login";
     public static final String Unlogin="Unlogin";
     public static String IsLogin=Unlogin;
@@ -48,7 +49,6 @@ public class Contract {
 
     //图片的baseURl
     public static final String ImageUrl = BASE_URL + "information/getImage/";
-    public static String cookie = "";
     public static final String HospitalBase = BASE_URL + "hospital/getImage/";
     public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
     public static final String MedicalBase = BASE_URL + "medicine/getImage/";

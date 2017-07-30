@@ -20,9 +20,9 @@ public interface HealthyNewsApi {
     Observable<ResultUtilOfNewsBean> getNewsToday();
 
     @GET("information/information_list_today")
-    Observable<List<NewsBean>> getNewsAfter(@Query("date") long time);
+    Observable<ResultUtilOfNewsBean> getNewsAfter(@Query("date") long time);
 
 
     @GET("information/information_list_before/{date}")
-    Observable<List<NewsBean>> getNewsBefore(@Path("date") long time);
+    Observable<ResultUtilOfNewsBean> getNewsBefore(@Path("date") long time);
 }

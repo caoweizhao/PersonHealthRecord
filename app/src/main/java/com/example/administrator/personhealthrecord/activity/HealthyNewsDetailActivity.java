@@ -25,7 +25,7 @@ import butterknife.BindView;
 
 
 public class HealthyNewsDetailActivity extends BaseActivity {
-
+    private String mImageUrl;
     @BindView(R.id.healthy_news_detail_text)
     public TextView textView;
     @BindView(R.id.healthy_news_detail_toolbar)
@@ -48,7 +48,10 @@ public class HealthyNewsDetailActivity extends BaseActivity {
         Date date = new Date(mNewsBean.getTime());
         textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getdate());
         mTitleTextView.setText(mNewsBean.getTitle());
-        String mImageUrl = Contract.ImageUrl + mNewsBean.getImageUrl();
+        if(mNewsBean.getImageUrl().contains("http"))
+            mImageUrl=mNewsBean.getImageUrl();
+        else
+        mImageUrl=Contract.ImageUrl + mNewsBean.getImageUrl();
         Log.d("aaa", "initData" + mImageUrl);
         Glide.with(this)
                 .load(mImageUrl)

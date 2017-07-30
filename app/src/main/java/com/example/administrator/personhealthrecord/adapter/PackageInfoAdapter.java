@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +35,7 @@ public class PackageInfoAdapter extends BaseQuickAdapter<PackageBean,BaseViewHol
                 .setText(R.id.health_check_item_money,mContext.getString(R.string.yuan)+item.getPackagePrice())
                 .setText(R.id.health_check_item_reserve,mContext.getString(R.string.had_reserve)+item.getAllocatedQuantity())
                 .addOnClickListener(R.id.health_check_item_package_itemId);
-
+        ((CardView)helper.getView(R.id.health_check_item_package_itemId)).setClickable(true);
         Glide.with(mContext).load(Contract.PackageImageBase+item.getImageUrl())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override

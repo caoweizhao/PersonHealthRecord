@@ -1,14 +1,30 @@
 package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.sharepreference.Acount;
+import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.view.WaveImageView;
 
 
 import butterknife.BindView;
@@ -27,27 +43,13 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     @BindView(R.id.login_regist_by_wechat)
     Button registByWechat;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: requestcode"+requestCode+"   resultcode"+resultCode);
-        ToastUitl.Toast(resultCode+"");
-        switch(requestCode)
-            {
-                case 1:
-                    if(resultCode==6)
-                    {
-                        String myusername=data.getStringExtra("username");
-                        String mypasswrod=data.getStringExtra("password");
-                        usrname.setText(myusername);
-                        password.setText(mypasswrod);
-                    }
-                    break;
-                default:
-
-                    break;
-            }
-    }
+    private Acount acount;
+    private float width;
+    private float height;
+    private DisplayMetrics mMetrics;
+    private FloatingActionButton mFab;
+    @BindView(R.id.login_container)
+    LinearLayout mContainer;
 
     @Override
     protected void initEvents() {
@@ -58,12 +60,72 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
 
     @Override
     protected void initData() {
+        acount=new Acount(this);
+        usrname.setText(acount.getUser());
+        password.setText(acount.getPassword());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sm.setStatusBarTintEnabled(false);
+        WaveImageView myImageView = (WaveImageView) findViewById(R.id.login_image_view);
+        /*Glide.with(this)
+                .load(R.drawable.login_bg)
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(myImageView);*/
+        myImageView.startAnimate();
+
+        mMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+        width = mMetrics.widthPixels;
+        height = mMetrics.heightPixels;
+        startAnimate();
+    }
+
+    private void startAnimate() {
+        mFab = (FloatingActionButton) findViewById(R.id.login_logo);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mFab, "translationY", 0,
+                height * 8 / 10, height * 4 / 10, height * 6 / 10, height / 2);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setDuration(3000);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mFab, "translationY", height / 2,
+                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, mMetrics));
+                objectAnimator.setDuration(1500);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Animator animator = ViewAnimationUtils.createCircularReveal(mContainer, 0, 0, 0,
+                            (float) Math.hypot(mContainer.getWidth(), mContainer.getHeight()));
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            super.onAnimationStart(animation);
+                            mContainer.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    animator.setDuration(1500);
+                    AnimatorSet set = new AnimatorSet();
+                    set.playTogether(objectAnimator, animator);
+                    set.start();
+                } else {
+                    objectAnimator.start();
+                    AnimateUtil.scaleShow(mContainer, null);
+                }
+            }
+        });
+        animator.start();
     }
 
     @Override
     protected int getLayoutRes() {
         return R.layout.logpage;
     }
+
 
     @Override
     public IRegistAndLoginPresenter createPresenter() {
@@ -80,6 +142,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     public void dismissLoading() {
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -121,5 +184,10 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     @Override
     public void finishAcitvity() {
         finish();
+    }
+
+    public void SetAcount(String username,String password)
+    {
+        acount.setAccount(username,password);
     }
 }

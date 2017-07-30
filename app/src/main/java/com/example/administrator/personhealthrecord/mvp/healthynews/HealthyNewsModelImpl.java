@@ -30,7 +30,7 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
     private static final String TAG="HealthyNewsModelImpl";
     private Retrofit retrofit;
     @Override
-    public void getNewsAfter(Observer<List<NewsBean>> observer, String date) {
+    public void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
         HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
         SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
@@ -59,7 +59,7 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
     }
 
     @Override
-    public void getNewsBefore(Observer<List<NewsBean>> observer, String date) {
+    public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer, String date) {
         retrofit= RetrofitUtil.getRetrofit();
         HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");

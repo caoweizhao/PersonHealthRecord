@@ -2,8 +2,11 @@ package com.example.administrator.personhealthrecord.mvp.reserve;
 
 import android.util.Log;
 
+import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.PackageBean;
+import com.example.administrator.personhealthrecord.bean.ReserveBean;
+import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfPackageBean;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
@@ -31,7 +34,6 @@ public class ReservePresenterImpl extends IResrevePresenter{
             @Override
             public void onNext(ResultUtilOfHospitalList value) {
                 List<HospitalBean> list=new ArrayList<>();
-                Log.d(TAG, "onNext: "+value.getCollection().size());
                 if(value.getStatus().equals("success"))
                 {
                     OnhospitalReady(value.getCollection());
@@ -97,6 +99,47 @@ public class ReservePresenterImpl extends IResrevePresenter{
     @Override
     public void OnPackageReadey(List<PackageBean> list) {
         mView.updatePackgets(list);
+    }
+
+    @Override
+    public void ReserveNow(long StartTime, long EndTime, String name, String phoneNumber,int id) {
+        Observer<ResultUitlOfReserve> observer=new Observer<ResultUitlOfReserve>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(ResultUitlOfReserve value) {
+                List<PackageBean> list=new ArrayList<>();
+                Log.d(TAG, "onNext: "+value.getObject().getMedicalStatus());
+                if(value.getStatus().equals("success"))
+                {
+                    ToastUitl.Toast(value.getMessage());
+                    ((ReserveNowActivity)mView).ReserveSuccess();
+                }else
+                {
+                    ToastUitl.Toast(value.getMessage());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: "+e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete: ");
+            }
+        };
+        ReserveBean bean=new ReserveBean();
+        bean.setStartTime(StartTime);
+        bean.setEndTime(EndTime);
+        bean.setName(name);
+        bean.setPhoneNumber(phoneNumber);
+        bean.setId(id);
+        mModel.ReserveNow(observer,bean);
     }
 
     @Override

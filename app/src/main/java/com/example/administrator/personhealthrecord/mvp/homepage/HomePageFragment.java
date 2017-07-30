@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.MapAcitvity;
 import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
@@ -73,7 +75,8 @@ public class HomePageFragment extends AHomePageFragment {
 
     @BindView(R.id.near_by_hospital)
     CardView mCardView;
-
+    @BindView(R.id.map_text_view)
+    TextView mpaTextView;
     public HomePageFragment() {
         // Required empty public constructor
     }
@@ -160,6 +163,13 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     protected void initEvent() {
+        mpaTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), MapAcitvity.class);
+                startActivity(intent);
+            }
+        });
         mExpertTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -243,10 +253,27 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
+    public void InitHospitals(List<HospitalBean> hospitalBeanList) {
+        Log.d("HomePageFragment", "hos:" + hospitalBeanList.size());
+        mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, hospitalBeanList);
+        mHomePageRecyclerView.setAdapter(mHospitalAdapter);
+        mHospitalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                AnimateUtil.createCircularReveal(view);
+            }
+        });
+        mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
     public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        mHospitalAdapter.getData().clear();
-        mHospitalAdapter.addData(hospitalBeanList);
-        mHospitalAdapter.notifyDataSetChanged();
+        List<HospitalBean> nowList=mHospitalAdapter.getData();
+        for(HospitalBean bean:hospitalBeanList)
+        {
+            if(!nowList.contains(bean))
+                mHospitalAdapter.addData(bean);
+        }
     }
 
     @Override

@@ -114,4 +114,5 @@
     <string name="commit_ok">确认提交</string>
     <string name="yuan">￥</string>
     <string name="had_reserve">已经预约</string>
+    <string name="healthy_package_detail">套餐详情</string>
 </resources>

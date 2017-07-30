@@ -1,9 +1,13 @@
 package com.example.administrator.personhealthrecord.mvp.reserve;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,6 +17,7 @@ import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.adapter.PackageInfoAdapter;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.PackageBean;
+import com.example.administrator.personhealthrecord.util.AnimateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +36,8 @@ public class ReserveActivity extends IReserveView {
     RecyclerView hospitalsRecycleview;
     @BindView(R.id.health_check_package_list)
     RecyclerView packageZRecycleview;
+    @BindView(R.id.health_check_itme_list_toolbar)
+    Toolbar toolbar;
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_reserve;
@@ -55,6 +62,7 @@ public class ReserveActivity extends IReserveView {
         packageZRecycleview.setLayoutManager(new LinearLayoutManager(this));
         packageZRecycleview.setAdapter(packageAdapter);
 
+
     }
 
     @Override
@@ -63,6 +71,7 @@ public class ReserveActivity extends IReserveView {
        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
            @Override
            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+               AnimateUtil.createCircularReveal(view);
               HospitalBean bean=(HospitalBean) adapter.getData().get(position);
                Log.d(TAG, "onItemChildClick: "+position);
                getPackage(bean.getId());
@@ -71,12 +80,22 @@ public class ReserveActivity extends IReserveView {
         packageAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                AnimateUtil.createCircularReveal(view);
                 Log.d(TAG, "onItemChildClick: aaaaaaaaaaa");
                 Intent intent=new Intent(ReserveActivity.this, HospitalPackageDetailActivity.class);
                 intent.putExtra("packagebean",(PackageBean)adapter.getData().get(position));
-                startActivity(intent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ReserveActivity.this,
+                            Pair.create(view.findViewById(R.id.health_check_item__img), "image"),
+                            Pair.create(view.findViewById(R.id.health_check_item__title), "title"))
+                            .toBundle());
+                }else
+                {
+                    startActivity(intent);
+                }
             }
         });
+
     }
 
     @Override

@@ -27,21 +27,21 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
 
     @Override//八、返回比时间参数之前的5条数据
     public void getNewsAfter(String string) {
-        Observer<List<NewsBean>> observer=new Observer<List<NewsBean>>() {
+        Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<NewsBean> value) {
+            public void onNext(ResultUtilOfNewsBean value) {
                 int i;
-                for(i=0;i<value.size();i++)
+                for(i=0;i<value.getCollection().size();i++)
                 {
-                    Log.d(TAG, "onNext: "+value.get(i).getImageUrl());
+                    Log.d(TAG, "onNext: "+value.getCollection().get(i).getImageUrl());
                 }
-                fragment.updateAfterNews(value);
-                healthyNewsModle.savaToDatabase(value);
+                fragment.updateAfterNews(value.getCollection());
+                healthyNewsModle.savaToDatabase(value.getCollection());
             }
 
             @Override
@@ -99,21 +99,21 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
 
     @Override//返回比时间参数之前的5条数据
     public void getNewsBefore(String date) {
-        Observer<List<NewsBean>> observer=new Observer<List<NewsBean>>() {
+        Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<NewsBean> value) {
+            public void onNext(ResultUtilOfNewsBean value) {
                 int i;
-                for(i=0;i<value.size();i++)
+                for(i=0;i<value.getCollection().size();i++)
                 {
-                    Log.d(TAG, "onNext: "+value.get(i).getTitle());
+                    Log.d(TAG, "onNext: "+value.getCollection().get(i).getTitle());
                 }
-                fragment.updatebeforeNews(value);
-                healthyNewsModle.savaToDatabase(value);
+                fragment.updatebeforeNews(value.getCollection());
+                healthyNewsModle.savaToDatabase(value.getCollection());
             }
 
             @Override

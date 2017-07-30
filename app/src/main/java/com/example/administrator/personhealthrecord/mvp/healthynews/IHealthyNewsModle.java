@@ -13,9 +13,9 @@ import io.reactivex.Observer;
  */
 
 public interface IHealthyNewsModle {
-    public void getNewsAfter(Observer<List<NewsBean>> observer, String string);
+    public void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, String string);
     public void getTodayNews(Observer<ResultUtilOfNewsBean> observer);
-    public void getNewsBefore(Observer<List<NewsBean>> observer,String date);
+    public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer,String date);
     public void savaToDatabase(List<NewsBean> list);
     public List<NewsBean> getDBlist();
 }

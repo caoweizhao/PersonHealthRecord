@@ -9,7 +9,7 @@
     tools:context="com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity">
     <include layout="@layout/toolbar"/>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/health_check_itme_list"
+        android:id="@+id/health_check_itme_list_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <android.support.v7.widget.RecyclerView

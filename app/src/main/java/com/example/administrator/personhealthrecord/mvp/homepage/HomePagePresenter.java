@@ -54,16 +54,16 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int type = Contract.TYPE_CARDIOLOGY;
+        int type = Contract.TYPE_ORTHOPEDICS;
         switch (position) {
             case 0:
-                type = Contract.TYPE_CARDIOLOGY;
+                type = Contract.TYPE_ORTHOPEDICS;
                 break;
             case 1:
-                type = Contract.TYPE_INTERNAL_MEDICINE;
+                type = Contract.TYPE_PEDIATRIC_SURGERY;
                 break;
             case 2:
-                type = Contract.TYPE_SURGICAL;
+                type = Contract.TYPE_ENT;
                 break;
             case 3:
                 type = Contract.TYPE_DERMATOLOGY;

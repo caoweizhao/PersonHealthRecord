@@ -40,6 +40,7 @@
             android:value="89005e7823bb733f0274ad9262517bce" />
 
         <activity
+            android:launchMode="singleTask"
             android:name=".mvp.main.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -49,16 +50,34 @@
             </intent-filter>
         </activity>
         <activity
+            android:launchMode="singleTask"
             android:name=".activity.HealthyNewsDetailActivity"
             android:theme="@style/HealthyNewsDetailStyle" />
-        <activity android:name=".mvp.registandlogin.LoginActivity" />
-        <activity android:name=".activity.MapAcitvity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".mvp.registandlogin.LoginActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.MapAcitvity" />
 
-        <service android:name="com.amap.api.location.APSService" />
+        <service
+            android:launchMode="singleTask"
+            android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".mvp.registandlogin.RegistActivity" />
-        <activity android:name=".mvp.reserve.ReserveActivity"></activity>
-        <activity android:name=".activity.HospitalPackageDetailActivity"/>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".mvp.registandlogin.RegistActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".mvp.reserve.ReserveActivity"></activity>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.HospitalPackageDetailActivity"/>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.ReserveNowActivity"
+            android:windowSoftInputMode="adjustResize"
+            ></activity>
     </application>
 
 </manifest>

@@ -15,4 +15,5 @@ public abstract class IResrevePresenter extends BasePresenter<IReserveView,IRese
     public abstract void OnhospitalReady(List<HospitalBean> collection);
     public abstract void getPackage(int id);
     public abstract void OnPackageReadey(List<PackageBean> collection);
+    public abstract void ReserveNow(long StartTime,long EndTime,String name,String phoneNumber,int id);
 }
