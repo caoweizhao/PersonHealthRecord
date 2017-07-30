@@ -25,7 +25,7 @@
             app:statusBarScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|snap|enterAlwaysCollapsed"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="@string/healthy_news_datail"
+            app:title="@string/healthy_news_detail"
             app:expandedTitleGravity="left|center_vertical"
             >
 

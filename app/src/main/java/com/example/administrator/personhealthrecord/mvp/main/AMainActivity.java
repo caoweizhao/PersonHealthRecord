@@ -1,6 +1,5 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
-
 import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
 
 /**

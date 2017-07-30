@@ -30,7 +30,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.SocialPageViewPagerAdapter;
-import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
+import com.example.administrator.personhealthrecord.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.util.ColorUtil;
@@ -150,13 +150,13 @@ public class SocialPageFragment extends BaseFragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (animator != null && animator.isPaused()) {
                 animator.resume();
-            }else{
+            } else {
                 initImageView();
             }
-        }else{
+        } else {
             if (animator != null && !animator.isRunning()) {
                 animator.start();
-            }else{
+            } else {
                 initImageView();
             }
         }
@@ -166,10 +166,33 @@ public class SocialPageFragment extends BaseFragment {
         if (animator != null && animator.isRunning()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 animator.pause();
-            }else{
+            } else {
                 animator.cancel();
             }
         }
+    }
+
+
+    private void setUpWithActivity(View view) {
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openMenu();
+            }
+        });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override
@@ -293,35 +316,12 @@ public class SocialPageFragment extends BaseFragment {
         mViewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
-    private void setUpWithActivity(View view) {
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).openMenu();
-            }
-        });
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
     public int getCurrentPosition() {
         if (mTabLayout != null) {
             return mTabLayout.getSelectedTabPosition() >= 0 ? mTabLayout.getSelectedTabPosition() : 0;
         }
         return 0;
     }
-
 
     @Override
     public void onDestroy() {
