@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
  * Created by Administrator on 2017-7-17.
  */
 
-public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity implements IView<P> {
+public abstract class MvpActivity<P extends BasePresenter> extends com.example.administrator.personhealthrecord.mvp.base.BaseActivity implements IView<P> {
 
     public P mPresenter;
 

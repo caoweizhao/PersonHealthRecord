@@ -77,7 +77,6 @@ public class HomePagePresenter extends AHomePagePresenter {
     @Override
     public void getHospitalLis() {
         onHospitalReady( mModel.getBDlist());//先从数据库取出列表然后在进行网络请求
-        Observer<ResultUtilOfHospitalList> observer=new Observer<ResultUtilOfHospitalList>() {
         Observer<ResultUtilOfHospitalList> observer = new Observer<ResultUtilOfHospitalList>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -94,10 +93,7 @@ public class HomePagePresenter extends AHomePagePresenter {
                     }
                     mView.updateHospitals(value.getCollection());
                     mModel.saveToDB(value.getCollection());
-                }else
-                {
-                    onHospitalReady(value.getCollection());
-                } else {
+                }else {
                     ToastUitl.Toast(value.getMessage());
                 }
 
@@ -117,5 +113,5 @@ public class HomePagePresenter extends AHomePagePresenter {
         mModel.getHospitals(observer);
     }
 
-
 }
+

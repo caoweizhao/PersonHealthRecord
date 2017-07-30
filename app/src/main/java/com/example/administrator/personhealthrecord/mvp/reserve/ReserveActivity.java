@@ -36,8 +36,6 @@ public class ReserveActivity extends IReserveView {
     RecyclerView hospitalsRecycleview;
     @BindView(R.id.health_check_package_list)
     RecyclerView packageZRecycleview;
-    @BindView(R.id.health_check_itme_list_toolbar)
-    Toolbar toolbar;
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_reserve;

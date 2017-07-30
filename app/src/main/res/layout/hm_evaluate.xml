@@ -145,7 +145,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:background="@null"
-                        android:entries="@array/bloodtype"/>
+                        android:entries="@array/blood_type"/>
 
                     <ImageView
                         android:layout_width="10dp"
@@ -328,7 +328,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:background="@null"
-                        android:entries="@array/alcoholtype"/>
+                        android:entries="@array/alcohol_type"/>
 
                     <ImageView
                         android:layout_width="10dp"
@@ -404,7 +404,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:background="@null"
-                        android:entries="@array/freqtype"/>
+                        android:entries="@array/freq_type"/>
 
                     <ImageView
                         android:layout_width="10dp"

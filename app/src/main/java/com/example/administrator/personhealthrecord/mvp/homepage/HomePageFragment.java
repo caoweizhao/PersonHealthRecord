@@ -111,13 +111,14 @@ public class HomePageFragment extends AHomePageFragment {
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((MainActivity) getActivity()).setUpWithToolbar(mToolbar);
+
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isExpand) {
                     getActivity().onBackPressed();
                 } else {
-                    ((MainActivity) getActivity()).openMenu();
+                    ((MainActivity)getActivity()).openMenu();
                 }
             }
         });
@@ -265,23 +266,15 @@ public class HomePageFragment extends AHomePageFragment {
         mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    @Override
     public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        List<HospitalBean> nowList=mHospitalAdapter.getData();
-        for(HospitalBean bean:hospitalBeanList)
-        {
-            if(!nowList.contains(bean))
-                mHospitalAdapter.addData(bean);
-        }
+        mHospitalAdapter.getData().clear();
+        mHospitalAdapter.addData(hospitalBeanList);
+        mHospitalAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        mHospitalAdapter.getData().clear();
-        mHospitalAdapter.addData(hospitalBeanList);
-        mHospitalAdapter.notifyDataSetChanged();
     }
 
     @Override
