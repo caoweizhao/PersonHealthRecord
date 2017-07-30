@@ -17,18 +17,21 @@ public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment
 
     /**
      * 图片轮播数据请求完毕
+     *
      * @param urls
      */
     public abstract void onImagesReady(List<String> urls);
 
     /**
      * 专家轮播数据请求完毕
+     *
      * @param expertBeanList
      */
     public abstract void onExpertsReady(List<ExpertBean> expertBeanList);
 
     /**
      * 医院推荐数据请求完毕
+     *
      * @param hospitalBeanList
      */
     public abstract void onHospitalReady(List<HospitalBean> hospitalBeanList);
@@ -40,6 +43,7 @@ public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment
 
     /**
      * 医生分类选择，进行相应数据请求
+     *
      * @param parent
      * @param view
      * @param position
@@ -48,4 +52,6 @@ public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment
     public abstract void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id);
 
     public abstract void getHospitalLis();
+
+    public abstract void onErrorHappened(String error);
 }

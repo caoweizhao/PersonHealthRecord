@@ -39,7 +39,7 @@ public class MainActivity extends AMainActivity {
     @BindView(R.id.main_navigationView)
     NavigationView mMainNavigationView;
     @BindView(R.id.main_drawerLayout)
-    DrawerLayout mDrawerLayout;
+    public DrawerLayout mDrawerLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

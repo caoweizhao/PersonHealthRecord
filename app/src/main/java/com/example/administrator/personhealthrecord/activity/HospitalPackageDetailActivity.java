@@ -2,7 +2,6 @@ package com.example.administrator.personhealthrecord.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,7 +43,7 @@ public class HospitalPackageDetailActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.set_layout);
+        setContentView(R.layout.set_detail_layout);
         ButterKnife.bind(this);
         Intent intent=getIntent();
         bean=intent.getParcelableExtra("packagebean");

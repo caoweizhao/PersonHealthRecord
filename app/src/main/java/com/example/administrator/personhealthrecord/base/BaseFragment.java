@@ -1,4 +1,4 @@
-package com.example.administrator.personhealthrecord.mvp.base;
+package com.example.administrator.personhealthrecord.base;
 
 import android.content.Context;
 import android.os.Bundle;

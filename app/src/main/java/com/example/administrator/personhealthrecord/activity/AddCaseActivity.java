@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
+import com.example.administrator.personhealthrecord.base.BaseActivity;
 
 import butterknife.BindView;
 

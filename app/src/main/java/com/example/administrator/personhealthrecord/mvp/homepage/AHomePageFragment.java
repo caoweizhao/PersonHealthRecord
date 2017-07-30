@@ -14,7 +14,7 @@ public abstract class AHomePageFragment extends MvpFragment<AHomePagePresenter> 
 
     public abstract void updateImages(List<String> urls);
     public abstract void updateExperts(List<ExpertBean> expertBeenF);
-    public abstract void InitHospitals(List<HospitalBean> hospitalBeanList);
+    public abstract void initHospitals(List<HospitalBean> hospitalBeanList);
     public abstract void updateHospitals(List<HospitalBean> hospitalBeanList);
 
 }

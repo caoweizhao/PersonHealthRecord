@@ -1,8 +1,9 @@
-package com.example.administrator.personhealthrecord.mvp.base;
+package com.example.administrator.personhealthrecord.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -114,4 +115,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         ((MyApplication) MyApplication.getContext()).removeActivity(this);
     }
 
+    Snackbar mSnackbar;
+
+    protected void showMessage(View view, String msg) {
+        if (mSnackbar == null) {
+            mSnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+        } else {
+            mSnackbar.setText(msg);
+        }
+        mSnackbar.setAction("我知道了", null);
+        mSnackbar.show();
+    }
 }

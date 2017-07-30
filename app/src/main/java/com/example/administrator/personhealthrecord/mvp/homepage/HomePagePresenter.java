@@ -25,7 +25,7 @@ public class HomePagePresenter extends AHomePagePresenter {
     @Override
     public AHomePageModel createModel() {
         // TODO: 2017-7-19
-        //return new CheckPageModel(this);
+        //return new HomePageModel(this);
         return new TestModel(this);
     }
 
@@ -41,7 +41,7 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void onHospitalReady(List<HospitalBean> hospitalBeanList) {
-        mView.InitHospitals(hospitalBeanList);
+        mView.initHospitals(hospitalBeanList);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void getHospitalLis() {
-        onHospitalReady( mModel.getBDlist());//先从数据库取出列表然后在进行网络请求
+        onHospitalReady(mModel.getBDlist());//先从数据库取出列表然后在进行网络请求
         Observer<ResultUtilOfHospitalList> observer = new Observer<ResultUtilOfHospitalList>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -93,11 +93,9 @@ public class HomePagePresenter extends AHomePagePresenter {
                     }
                     mView.updateHospitals(value.getCollection());
                     mModel.saveToDB(value.getCollection());
-                }else {
+                } else {
                     ToastUitl.Toast(value.getMessage());
                 }
-
-
             }
 
             @Override
@@ -113,5 +111,10 @@ public class HomePagePresenter extends AHomePagePresenter {
         mModel.getHospitals(observer);
     }
 
-}
+    @Override
+    public void onErrorHappened(String error) {
+        mView.showMessage(error);
+    }
 
+
+}

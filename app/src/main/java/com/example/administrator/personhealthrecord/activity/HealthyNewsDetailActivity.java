@@ -17,7 +17,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
+import com.example.administrator.personhealthrecord.base.BaseActivity;
 
 import java.util.Date;
 
