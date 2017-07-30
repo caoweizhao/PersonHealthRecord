@@ -24,7 +24,7 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.HealthyNewsDetailActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
-import com.example.administrator.personhealthrecord.mvp.base.BaseFragment;
+import com.example.administrator.personhealthrecord.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 
 import java.util.Collections;

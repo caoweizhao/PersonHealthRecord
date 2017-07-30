@@ -12,7 +12,7 @@ import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.bean.HospitalBean;
+import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 
 import java.util.List;
@@ -21,22 +21,24 @@ import java.util.List;
  * Created by Administrator on 2017-7-20.
  */
 
-public class HospitalAdapter extends BaseQuickAdapter<HospitalBean, BaseViewHolder> {
+public class ExpertAdapter extends BaseQuickAdapter<ExpertBean, BaseViewHolder> {
     private String mImageURL;
-    public HospitalAdapter(@LayoutRes int layoutResId, @Nullable List<HospitalBean> data) {
+
+    public ExpertAdapter(@LayoutRes int layoutResId, @Nullable List<ExpertBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, HospitalBean item) {
-        if(item.getImageUrl().contains("http"))
-            mImageURL=item.getImageUrl();
-        else
-            mImageURL= Contract.HospitalBase+item.getImageUrl();
-        helper.setText(R.id.hospital_item_clazz, item.getLevel())
-                .setText(R.id.hospital_item__name, item.getName())
-                .setText(R.id.hospital_item_address, item.getAddress())
-                .addOnClickListener(R.id.hospital_item_layout);
+    protected void convert(BaseViewHolder helper, ExpertBean item) {
+        if (item.getImageUrl().contains("http"))
+            mImageURL = item.getImageUrl();
+        else {
+            mImageURL = Contract.DoctorBase + item.getImageUrl();
+        }
+        helper.setText(R.id.expert_item_address, item.getAddress())
+                .setText(R.id.expert_item__name, item.getName())
+                .setText(R.id.expert_item_title, item.getDoctorTitle())
+                .addOnClickListener(R.id.expert_item_layout);
         Glide.with(mContext)
                 .load(mImageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {
@@ -57,7 +59,7 @@ public class HospitalAdapter extends BaseQuickAdapter<HospitalBean, BaseViewHold
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .centerCrop()
-                .into((ImageView) helper.getView(R.id.hospital_item__img));
+                .into((ImageView) helper.getView(R.id.expert_item__img));
     }
 
 }

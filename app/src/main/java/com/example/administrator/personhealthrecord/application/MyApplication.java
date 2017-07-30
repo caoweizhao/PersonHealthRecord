@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
 
-import com.example.administrator.personhealthrecord.mvp.base.BaseActivity;
+import com.example.administrator.personhealthrecord.base.BaseActivity;
 
 import org.litepal.LitePalApplication;
 
