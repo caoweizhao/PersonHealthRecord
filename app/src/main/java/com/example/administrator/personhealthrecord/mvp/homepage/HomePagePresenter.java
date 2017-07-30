@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class HomePagePresenter extends AHomePagePresenter {
-    private static final String TAG="HomePagePresenter";
+    private static final String TAG = "HomePagePresenter";
 
     @Override
     public AHomePageModel createModel() {
@@ -78,6 +78,7 @@ public class HomePagePresenter extends AHomePagePresenter {
     public void getHospitalLis() {
         onHospitalReady( mModel.getBDlist());//先从数据库取出列表然后在进行网络请求
         Observer<ResultUtilOfHospitalList> observer=new Observer<ResultUtilOfHospitalList>() {
+        Observer<ResultUtilOfHospitalList> observer = new Observer<ResultUtilOfHospitalList>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -85,18 +86,18 @@ public class HomePagePresenter extends AHomePagePresenter {
 
             @Override
             public void onNext(ResultUtilOfHospitalList value) {
-                if(value.getStatus().equals("success"))
-                {
-                    List<HospitalBean> list=value.getCollection();
+                if (value.getStatus().equals("success")) {
+                    List<HospitalBean> list = value.getCollection();
                     int i;
-                    for(i=0;i<list.size();i++)
-                    {
-                        Log.d(TAG, "onNext: "+list.get(i).getName());
+                    for (i = 0; i < list.size(); i++) {
+                        Log.d(TAG, "onNext: " + list.get(i).getName());
                     }
                     mView.updateHospitals(value.getCollection());
                     mModel.saveToDB(value.getCollection());
                 }else
                 {
+                    onHospitalReady(value.getCollection());
+                } else {
                     ToastUitl.Toast(value.getMessage());
                 }
 

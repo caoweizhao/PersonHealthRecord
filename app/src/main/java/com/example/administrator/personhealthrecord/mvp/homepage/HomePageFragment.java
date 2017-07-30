@@ -212,7 +212,6 @@ public class HomePageFragment extends AHomePageFragment {
         mHospitalAdapter.setEmptyView(R.layout.empty_view);
         mPresenter.onRequestData();
     }
-
     private void initBanner() {
         //设置图片加载器
         mImageBanner.setImageLoader(new GlideImageLoader());
@@ -274,6 +273,15 @@ public class HomePageFragment extends AHomePageFragment {
             if(!nowList.contains(bean))
                 mHospitalAdapter.addData(bean);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    public void updateHospitals(List<HospitalBean> hospitalBeanList) {
+        mHospitalAdapter.getData().clear();
+        mHospitalAdapter.addData(hospitalBeanList);
+        mHospitalAdapter.notifyDataSetChanged();
     }
 
     @Override

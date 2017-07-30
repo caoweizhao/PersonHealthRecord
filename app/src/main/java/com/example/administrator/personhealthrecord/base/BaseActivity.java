@@ -3,7 +3,9 @@ package com.example.administrator.personhealthrecord.mvp.base;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.administrator.personhealthrecord.R;
@@ -37,6 +39,25 @@ public abstract class BaseActivity extends AppCompatActivity {
         sm = new SystemBarTintManager(this);
         sm.setStatusBarTintEnabled(true);
         sm.setStatusBarTintColor(getResources().getColor(R.color.colorPrimaryDark));
+    }
+
+    protected void initToolbar(String title, boolean showHomeUp, View.OnClickListener listener) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            try {
+                toolbar.setTitle(title);
+                setSupportActionBar(toolbar);
+                if (listener != null) {
+                    toolbar.setNavigationOnClickListener(listener);
+                }
+                ActionBar actionBar = getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(showHomeUp);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

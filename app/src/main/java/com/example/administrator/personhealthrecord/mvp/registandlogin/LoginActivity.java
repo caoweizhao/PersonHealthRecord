@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
+import android.content.Intent;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -17,6 +18,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -126,7 +128,6 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
         return R.layout.logpage;
     }
 
-
     @Override
     public IRegistAndLoginPresenter createPresenter() {
         mPresenter=new RegistAndLoginPresenterImpl(this);
@@ -142,7 +143,6 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     public void dismissLoading() {
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -184,6 +184,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     @Override
     public void finishAcitvity() {
         finish();
+        Log.d(TAG, "dologin: username" + usrname.getText().toString() + "   password" + password.getText().toString());
     }
 
     public void SetAcount(String username,String password)

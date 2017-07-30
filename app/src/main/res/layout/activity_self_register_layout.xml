@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/toolbar"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/home_page_normal_padding"
+            android:paddingRight="@dimen/home_page_normal_padding">
+            <!--医生信息-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+
+                <!--avatar-->
+                <ImageView
+                    android:id="@+id/doctor_pic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/person"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.5"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <!--名字-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="5dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/self_register_doctor_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:text="XXX"
+                            android:textColor="#000"
+                            android:textSize="25sp"/>
+
+                        <TextView
+                            android:id="@+id/self_register_doctor_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:padding="2dp"
+                            android:text="主任医师"
+                            android:textColor="#000"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+
+                    <!--隶属医院-->
+                    <TextView
+                        android:id="@+id/self_register_doctor_workplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="中山大学附属第三医院天河医院-特诊医疗门诊[天河]"
+                        android:textColor="#2a4199"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--医生详细介绍-->
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scrollbars="none"
+                android:padding="3dp"
+                android:background="@drawable/textview_border"
+                >
+
+                <TextView
+                    android:id="@+id/self_register_doctor_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/text_padding"
+                    android:text="@string/doctor_details"
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+            </android.support.v4.widget.NestedScrollView>
+
+
+            <!--体检预约申请-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--体检日期选择-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/self_register_date_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="选择体检日期："
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/self_register_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/textview_border"
+                        android:padding="5dp"
+                        android:text="2017-07-25"
+                        android:textAlignment="center"
+                        android:textSize="18sp"/>
+
+                    <ImageView
+                        android:id="@+id/self_register_input_date_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_home_page"
+                        />
+
+                </LinearLayout>
+
+                <include layout="@layout/divider_view"/>
+
+                <!--体检时间选择-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/self_register_time_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:padding="@dimen/text_padding"
+                        android:text="体检时间："
+                        android:textColor="#000"
+                        android:textSize="16sp"/>
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/book_time"
+                        />
+                </LinearLayout>
+
+                <include layout="@layout/divider_view"/>
+
+                <!--手机号-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/self_register_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="手机号："
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/self_register_input_phone_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/textview_border"
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:textColor="#000"
+                        android:textSize="20sp"/>
+
+                    <Button
+                        android:id="@+id/self_registered_get_vertify_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_bg"
+                        android:text="获取验证码"
+                        android:layout_marginLeft="5dp"
+                        />
+
+                </LinearLayout>
+
+                <include layout="@layout/divider_view"/>
+
+                <!--验证码-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/self_register_vertify_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="验证码："
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/self_register_input_vertify_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border"
+                        android:minWidth="120dp"
+                        android:padding="5dp"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/self_register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="立刻预约"
+        />
+</LinearLayout>
