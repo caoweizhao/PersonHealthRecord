@@ -26,7 +26,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
     }
 
     @Override//八、返回比时间参数之前的5条数据
-    public void getNewsAfter(String string) {
+    public void getNewsAfter(long date) {
         Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -56,7 +56,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
             }
         };
 
-        healthyNewsModle.getNewsAfter(observer,string);
+        healthyNewsModle.getNewsAfter(observer,date);
     }
 
     @Override//九、返回今天的资讯数据
@@ -98,7 +98,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
     }
 
     @Override//返回比时间参数之前的5条数据
-    public void getNewsBefore(String date) {
+    public void getNewsBefore(long date) {
         Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
             @Override
             public void onSubscribe(Disposable d) {

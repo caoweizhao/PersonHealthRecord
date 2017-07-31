@@ -39,11 +39,11 @@ public class HealthyNewsDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sm.setStatusBarTintEnabled(false);
     }
 
     @Override
     protected void initData() {
-
         mNewsBean = getIntent().getParcelableExtra("NewsBean");
         Date date = new Date(mNewsBean.getTime());
         textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getdate());
@@ -51,7 +51,7 @@ public class HealthyNewsDetailActivity extends BaseActivity {
         if(mNewsBean.getImageUrl().contains("http"))
             mImageUrl=mNewsBean.getImageUrl();
         else
-        mImageUrl=Contract.ImageUrl + mNewsBean.getImageUrl();
+        mImageUrl=Contract.HealthyNewsImageUrl + mNewsBean.getImageUrl();
         Log.d("aaa", "initData" + mImageUrl);
         Glide.with(this)
                 .load(mImageUrl)

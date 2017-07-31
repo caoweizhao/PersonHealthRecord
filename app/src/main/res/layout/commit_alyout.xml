@@ -1,6 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/health_check_item_linerlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <include layout="@layout/toolbar"></include>
+
+    <!--体检预约详情-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/healthtest_pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:padding="3.5dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/healthtest_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:textColor="#000"
+                android:textSize="16sp"
+                tools:text="项目2" />
+
+            <TextView
+                android:id="@+id/healthtest_details"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="2"
+                android:textColor="#000"
+                android:textSize="14sp"
+                tools:text="该体检简单描述2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/healthtest_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:textColor="#de0e00"
+                    android:textSize="15sp"
+                    tools:text="¥10000元" />
+
+                <TextView
+                    android:id="@+id/healthtest_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:maxLines="1"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    tools:text="x1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--体检预约申请-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.8"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <!--体检日期选择-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:padding="10dp"
+                        android:drawablePadding="9dp"
+                        android:drawableLeft="@drawable/ic_health_check_package_select_date2"
+                        android:layout_weight="1.1"
+                        android:id="@+id/date_order"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:text="体检日期:"
+                        />
+                    <LinearLayout
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_margin="6dp"
+                            android:padding="2dp"
+                            android:id="@+id/healthtest_date"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/textview_border"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            tools:text="2017-07-25" />
+
+                        <ImageView
+                            android:padding="2dp"
+                            android:id="@+id/input_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_health_check_package_select_date"
+                            android:adjustViewBounds="true"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--体检时间选择-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/time_order"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.1"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/date_pic"
+                        android:maxLines="1"
+                        android:drawablePadding="9dp"
+                        android:padding="10dp"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:text="体检时间:" />
+                    <LinearLayout
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+
+                        <Spinner
+                            android:layout_gravity="center"
+                            android:id="@+id/health_check_select_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="6dp"
+                            android:background="@drawable/textview_border"
+                            android:entries="@array/healthy_check_time" />
+                        <!--<TextView-->
+                        <!--android:id="@+id/healthtest_time"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_margin="6dp"-->
+                        <!--android:layout_marginLeft="28dp"-->
+                        <!--android:layout_weight="0.8"-->
+                        <!--android:background="@drawable/textview_border"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="2dp"-->
+                        <!--android:textAlignment="center"-->
+                        <!--android:textColor="#000"-->
+                        <!--android:textSize="18sp"-->
+                        <!--tools:text="07:07" />-->
+
+                        <!--<ImageView-->
+                        <!--android:padding="2dp"-->
+                        <!--android:id="@+id/input_time"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="0.15"-->
+                        <!--android:adjustViewBounds="true"-->
+                        <!--android:src="@drawable/ic_health_check_package_select_time" />-->
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--体检人姓名-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/tester_name"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.1"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/phone_pic"
+                        android:drawablePadding="10dp"
+                        android:padding="10dp"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:text="体检姓名:" />
+
+                    <EditText
+                        android:id="@+id/input_name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="6dp"
+                        android:layout_marginLeft="43dp"
+                        android:layout_weight="1.89"
+                        android:background="@drawable/textview_border"
+                        android:gravity="center"
+                        android:hint="请输入就诊人姓名"
+                        android:maxLines="1"
+                        android:padding="2dp"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+                <!--诊疗卡号填写-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/ic_card"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.1"
+                        android:drawableLeft="@drawable/phone_pic"
+                        android:drawablePadding="6dp"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="电话号码:"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/input_Phone"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="6dp"
+                        android:layout_marginLeft="28dp"
+                        android:layout_weight="1.87"
+                        android:background="@drawable/textview_border"
+                        android:gravity="center"
+                        android:hint="请输入就诊人电话号码"
+                        android:inputType="number"
+                        android:padding="2dp"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/order_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定预约"
+        android:textColor="#fff"
+        android:textSize="19sp"
+        android:background="@color/colorPrimary"/>
 </LinearLayout>

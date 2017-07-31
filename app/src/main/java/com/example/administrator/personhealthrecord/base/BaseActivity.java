@@ -50,6 +50,17 @@ public abstract class BaseActivity extends AppCompatActivity {
                 setSupportActionBar(toolbar);
                 if (listener != null) {
                     toolbar.setNavigationOnClickListener(listener);
+                }else
+                {
+                    if(showHomeUp)
+                    {
+                        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                onBackPressed();
+                            }
+                        });
+                    }
                 }
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {

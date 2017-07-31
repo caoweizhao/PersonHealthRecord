@@ -23,6 +23,7 @@ import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
+import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -54,6 +55,8 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     Toolbar mToolbar;
     @BindView(R.id.reserve_button)
     TextView reserve;
+    @BindView(R.id.health_check_reserve_order_button)
+    TextView reserveOrder;
     public CheckPageFragment() {
         // Required empty public constructor
     }
@@ -136,6 +139,7 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     @Override
     protected void initEvent() {
         reserve.setOnClickListener(this);
+        reserveOrder.setOnClickListener(this);
     }
 
     @Override
@@ -170,6 +174,9 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                                 Intent intent=new Intent(getActivity(), ReserveActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.health_check_reserve_order_button:
+                                Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
+                                startActivity(intent2);
                             default:
                                 break;
                         }

@@ -19,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.PackageBean;
@@ -84,7 +88,26 @@ private PackageBean bean;
         count.setText("X1");
         price.setText("￥"+bean.getPackagePrice());
         Glide.with(this).load(Contract.PackageImageBase+bean.getImageUrl())
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model,
+                                               Target<GlideDrawable> target,
+                                               boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model,
+                                                   Target<GlideDrawable> target,
+                                                   boolean isFromMemoryCache,
+                                                   boolean isFirstResource) {
+                        return false;
+                    }
+                })
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .centerCrop()
                 .into(imageView);
+        initToolbar("提交预约",true,null);
     }
 
     @Override
@@ -142,7 +165,7 @@ private PackageBean bean;
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.commit_layout;
+        return R.layout.commit_alyout;
     }
 
     @Override

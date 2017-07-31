@@ -30,21 +30,14 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
     private static final String TAG="HealthyNewsModelImpl";
     private Retrofit retrofit;
     @Override
-    public void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, String date) {
+    public void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, long date) {
         retrofit= RetrofitUtil.getRetrofit();
         HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
-        SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1=format.parse(date);
-
-        api.getNewsAfter(date1.getTime())
+        api.getNewsAfter(date)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -59,21 +52,17 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
     }
 
     @Override
-    public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer, String date) {
+    public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer, long date) {
         retrofit= RetrofitUtil.getRetrofit();
         HealthyNewsApi api=retrofit.create(HealthyNewsApi.class);
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1=format.parse(date);
 
-            api.getNewsBefore(date1.getTime())
+
+            api.getNewsBefore(date)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override

@@ -50,6 +50,7 @@ public class ReserveActivity extends IReserveView {
     protected void initData() {
         super.initData();
         status=IsOnHospital;
+        initToolbar("体检机构",true,null);
         hospitals=new ArrayList<>();
         adapter=new HospitalAdapter(R.layout.hospital_item,hospitals);
         hospitalsRecycleview.setLayoutManager(new LinearLayoutManager(this));
@@ -59,7 +60,6 @@ public class ReserveActivity extends IReserveView {
         packageAdapter=new PackageInfoAdapter(R.layout.health_check_package_item,pacakges);
         packageZRecycleview.setLayoutManager(new LinearLayoutManager(this));
         packageZRecycleview.setAdapter(packageAdapter);
-
 
     }
 
@@ -124,6 +124,7 @@ public class ReserveActivity extends IReserveView {
     @Override
     public void updatePackgets(List<PackageBean> list) {
         status=IsOnPackage;
+        initToolbar("体检套餐",true,null);
         hospitalsRecycleview.setVisibility(View.GONE);
         packageZRecycleview.setVisibility(View.VISIBLE);
         Log.d(TAG, "updatePackgets: "+pacakges.size());
@@ -144,6 +145,7 @@ public class ReserveActivity extends IReserveView {
             hospitalsRecycleview.setVisibility(View.VISIBLE);
             packageZRecycleview.setVisibility(View.GONE);
             status=IsOnHospital;
+            initToolbar("体检机构",true,null);
         }else
         {
             super.onBackPressed();

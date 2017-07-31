@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.PackageBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by andy on 2017/7/27.
  */
 
-public class HospitalPackageDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class HospitalPackageDetailActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG="HospitalPackageDetaily";
     @BindView(R.id.set_pic)
     ImageView imageView;
@@ -41,10 +42,13 @@ public class HospitalPackageDetailActivity extends AppCompatActivity implements 
     Button reserve;
     private PackageBean bean;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.set_detail_layout);
-        ButterKnife.bind(this);
+    protected int getLayoutRes() {
+        return R.layout.set_detail_layout;
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
         Intent intent=getIntent();
         bean=intent.getParcelableExtra("packagebean");
         Log.d(TAG, "onCreate: "+bean.getName());
@@ -56,6 +60,12 @@ public class HospitalPackageDetailActivity extends AppCompatActivity implements 
         detail.setText(bean.getPackageDetail());
         description.setText(bean.getSummary());
         count.setText(bean.getAllocatedQuantity()+"");
+        initToolbar("套餐详情",true,null);
+    }
+
+    @Override
+    protected void initEvents() {
+        super.initEvents();
         reserve.setOnClickListener(this);
     }
 

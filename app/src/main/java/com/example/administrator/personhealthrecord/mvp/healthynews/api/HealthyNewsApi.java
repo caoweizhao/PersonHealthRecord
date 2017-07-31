@@ -16,13 +16,13 @@ import retrofit2.http.Query;
  */
 
 public interface HealthyNewsApi {
-    @GET("information/information_list_today")
+    @GET("health_info/health_info_list_today")
     Observable<ResultUtilOfNewsBean> getNewsToday();
 
-    @GET("information/information_list_today")
-    Observable<ResultUtilOfNewsBean> getNewsAfter(@Query("date") long time);
+    @GET("health_info/health_info_list_after/{time}")
+    Observable<ResultUtilOfNewsBean> getNewsAfter(@Path("time") long time);
 
 
-    @GET("information/information_list_before/{date}")
-    Observable<ResultUtilOfNewsBean> getNewsBefore(@Path("date") long time);
+    @GET("health_info/health_info_list_before/{time}")
+    Observable<ResultUtilOfNewsBean> getNewsBefore(@Path("time") long time);
 }

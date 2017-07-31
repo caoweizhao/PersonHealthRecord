@@ -112,14 +112,13 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                     Collections.sort(list);
                     if (list.size() > 0) {
                         NewsBean bean = list.get(0);
-                        presenter.getNewsAfter(bean.getdate());
+                        Log.d(TAG, "onRefresh: "+bean.getTitle()+bean.getTime());
+                        presenter.getNewsAfter(bean.getTime());
                     }
-
                 } else {
                     presenter.getTodayNews();//假如是第一次的时候进行gettodaynews
                     Log.d(TAG, "onRefresh: " + "getnewsToday");
                 }
-
                 Log.d(TAG, "onUpFetch: " + adapter.isUpFetching());
 
                 handler.postDelayed(new Runnable() {
@@ -165,7 +164,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 Collections.sort(list);
                 NewsBean bean = list.get(list.size() - 1);
                 Log.d(TAG, "onLoadMoreRequested: " + adapter.getData().size() + "    " + adapter.getItemCount() + bean.getTime());
-                presenter.getNewsBefore(bean.getdate());
+                presenter.getNewsBefore(bean.getTime());
             }
         });
 
@@ -225,9 +224,8 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                         adapter.addData(bean);
                 }
                 Collections.sort(adapter.getData());
+                adapter.notifyDataSetChanged();
                 adapter.loadMoreComplete();
-                adapter.setEnableLoadMore(true);
-                adapter.setUpFetchEnable(true);
             }
         }, 500);
     }
@@ -245,6 +243,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                         adapter.addData(0, bean);
                 }
                 Collections.sort(adapter.getData());
+                adapter.notifyDataSetChanged();
                 adapter.loadMoreComplete();
                 adapter.setEnableLoadMore(true);
                 adapter.setUpFetchEnable(true);
@@ -268,6 +267,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 
                 } else
                     adapter.setEnableLoadMore(false);
+                adapter.notifyDataSetChanged();
                 adapter.loadMoreComplete();
             }
         }, 500);

@@ -23,8 +23,9 @@ import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.base.BaseActivity;
 
-public class MapAcitvity extends AppCompatActivity implements LocationSource,AMapLocationListener {
+public class MapAcitvity extends BaseActivity implements LocationSource,AMapLocationListener {
 
     private MapView mapView;
     private AMap map;
@@ -41,7 +42,6 @@ public class MapAcitvity extends AppCompatActivity implements LocationSource,AMa
 
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_acitvity);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -83,10 +83,15 @@ public class MapAcitvity extends AppCompatActivity implements LocationSource,AMa
 
         //初始化定位服务
         initLocationService();
-
-
+        initToolbar("地图",true,null);
 
     }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_map_acitvity;
+    }
+
 
     //初始化定位服务
     private void initLocationService() {
