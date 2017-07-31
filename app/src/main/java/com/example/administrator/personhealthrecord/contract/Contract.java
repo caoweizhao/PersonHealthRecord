@@ -7,12 +7,6 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
-<<<<<<<<< Temporary merge branch 1
-    public static String cookie = "";
-    public static final String Login="Login";
-    public static final String Unlogin="Unlogin";
-    public static String IsLogin=Unlogin;
-=========
     public static final String Login = "Login";
     public static final String Unlogin = "Unlogin";
     public static String IsLogin = Unlogin;

@@ -23,6 +23,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.HealthyNewsDetailActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
+import com.example.administrator.personhealthrecord.adapter.HealthyNewsAdapter;
+import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.base.BaseFragment;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
@@ -65,7 +67,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     @BindView(R.id.health_news_ProgressBar)
     SwipeRefreshLayout layout;
 
-    private AbstractItemAdapter<NewsBean> adapter;
+    private HealthyNewsAdapter<NewsBean> adapter;
 
     private List<NewsBean> list;
     private Handler handler = new Handler();
@@ -96,7 +98,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new AbstractItemAdapter(R.layout.abstract_item, list, this);
+        adapter = new HealthyNewsAdapter<NewsBean>(R.layout.abstract_item, list, this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         presenter.getDBlist();

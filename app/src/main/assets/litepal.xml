@@ -6,5 +6,6 @@
         <mapping class="com.example.administrator.personhealthrecord.bean.NewsBean"/>
         <mapping class="com.example.administrator.personhealthrecord.bean.HospitalBean"/>
         <mapping class="com.example.administrator.personhealthrecord.bean.MedicineBean"/>
+        <mapping class="com.example.administrator.personhealthrecord.bean.HealthyNewBean"/>
     </list>
 </litepal>

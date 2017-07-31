@@ -25,52 +25,30 @@ import com.example.administrator.personhealthrecord.contract.Contract;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017-7-19.
+ * Created by andy on 2017/7/31.
  */
 
-public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapter<T, BaseViewHolder> {
-
+public class HealthyNewsAdapter <T extends AbstractItem> extends BaseQuickAdapter<T, BaseViewHolder> {
     private String mImageURL;
     private Context mContext;
 
-    public AbstractItemAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Context context) {
+    public HealthyNewsAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Context context) {
         super(R.layout.abstract_item, data);
         this.mContext = context;
     }
 
-    public AbstractItemAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Fragment context) {
+    public HealthyNewsAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Fragment context) {
         super(R.layout.abstract_item, data);
         this.mContext = context.getContext();
     }
 
     @Override
     protected void convert(BaseViewHolder helper, T item) {
-        if (item instanceof DiseaseBean) {
-            if (item.getImageUrl().contains("http"))
-                mImageURL = item.getImageUrl();
-            else
-                mImageURL = Contract.DiseaseBase + item.getImageUrl();
-        }else if(item instanceof NewsBean)
-        {
-            if (item.getImageUrl().contains("http"))
-                mImageURL = item.getImageUrl();
-            else
-                mImageURL = Contract.ImageUrl + item.getImageUrl();
-            Log.d("AbstractItemAdapter", "url" + mImageURL);
-        } else if (item instanceof MedicineBean) {
-            if (item.getImageUrl().contains("http"))
-                mImageURL = item.getImageUrl();
-            else
-                mImageURL = Contract.MedicalBase + item.getImageUrl();
-            Log.d("AbstractItemAdapter", "url" + mImageURL);
-        } else {
-            if (item.getImageUrl().contains("http"))
-                mImageURL = item.getImageUrl();
-            else
-                mImageURL = Contract.ImageUrl + item.getImageUrl();
 
-        }
-
+            if (item.getImageUrl().contains("http"))
+                mImageURL = item.getImageUrl();
+            else
+                mImageURL = Contract.HealthyNewsImageUrl + item.getImageUrl();
 
 //        helper.setText(R.id.abstract_item__title, item.getTitle())
 //                .setText(R.id.abstract_item__summary, item.getSummary())
@@ -102,6 +80,4 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                 .into((ImageView) helper.getView(R.id.abstract_item__img));
 
     }
-
-
 }

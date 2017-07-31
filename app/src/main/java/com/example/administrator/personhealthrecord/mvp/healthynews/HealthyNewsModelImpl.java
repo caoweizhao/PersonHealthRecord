@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
 
 import android.util.Log;
 
+import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
@@ -11,6 +12,7 @@ import org.litepal.crud.DataSupport;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -67,8 +69,9 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
 
     @Override
     public void savaToDatabase(List<NewsBean> list) {
-        List<NewsBean> dblist= DataSupport.findAll(NewsBean.class);
-        for(NewsBean bean:list)
+        List<HealthyNewBean> dblist= DataSupport.findAll(HealthyNewBean.class);
+        List<HealthyNewBean> Mylist=ConverToH(list);
+        for(HealthyNewBean bean:Mylist)
         {
             if(!dblist.contains(bean))
                 bean.save();
@@ -77,10 +80,33 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle{
 
     @Override
     public List<NewsBean> getDBlist() {
-        List<NewsBean> list=DataSupport.findAll(NewsBean.class);
-        for (NewsBean bean: list)
+        List<HealthyNewBean> list=DataSupport.findAll(HealthyNewBean.class);
+        for (HealthyNewBean bean: list)
             Log.d(TAG, "getDBlist: "+bean.getTitle());
         Collections.sort(list);
-        return list;
+
+        return ConverToN(list);
+    }
+
+    public List<HealthyNewBean> ConverToH(List<NewsBean> list)
+    {
+        List<HealthyNewBean> Hlist=new ArrayList<>();
+        for(NewsBean bean:list)
+        {
+            HealthyNewBean Hbean=new HealthyNewBean(bean.getId(),bean.getTitle(),bean.getSummary(),bean.getContent(),bean.getCategory(),bean.getTime(),bean.getImageUrl());
+            Hlist.add(Hbean);
+        }
+        return Hlist;
+    }
+
+    public List<NewsBean> ConverToN(List<HealthyNewBean> list)
+    {
+        List<NewsBean> Hlist=new ArrayList<>();
+        for(HealthyNewBean bean:list)
+        {
+            NewsBean Hbean=new NewsBean(bean.getId(),bean.getTitle(),bean.getSummary(),bean.getContent(),bean.getCategory(),bean.getTime(),bean.getImageUrl());
+            Hlist.add(Hbean);
+        }
+        return Hlist;
     }
 }

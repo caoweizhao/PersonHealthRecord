@@ -12,10 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2017-7-19.
+ * Created by andy on 2017/7/31.
  */
 
-public class NewsBean extends DataSupport implements Parcelable, AbstractItem {
+public class HealthyNewBean extends DataSupport implements Comparable,Parcelable,AbstractItem{
     private static final String TAG = "NewsBean";
     /**
      * id : 1
@@ -92,9 +92,6 @@ public class NewsBean extends DataSupport implements Parcelable, AbstractItem {
         return sdf.format(time);
     }
 
-    public NewsBean() {
-
-    }
 
     public void setTime(long time) {
         this.time = time;
@@ -122,19 +119,21 @@ public class NewsBean extends DataSupport implements Parcelable, AbstractItem {
         dest.writeLong(time);
     }
 
-    public static final Parcelable.Creator<NewsBean> CREATOR = new Creator<NewsBean>() {
+    public static final Parcelable.Creator<HealthyNewBean> CREATOR = new Parcelable.Creator<HealthyNewBean>() {
         @Override
-        public NewsBean createFromParcel(Parcel source) {
-            return new NewsBean(source);
+        public HealthyNewBean createFromParcel(Parcel source) {
+            return new HealthyNewBean(source);
         }
 
         @Override
-        public NewsBean[] newArray(int size) {
-            return new NewsBean[size];
+        public HealthyNewBean[] newArray(int size) {
+            return new HealthyNewBean[size];
         }
     };
 
-    private NewsBean(Parcel in) {
+    public HealthyNewBean()
+    {}
+    private HealthyNewBean(Parcel in) {
         title = in.readString();
         content = in.readString();
         imageUrl = in.readString();
@@ -143,22 +142,22 @@ public class NewsBean extends DataSupport implements Parcelable, AbstractItem {
 
     @Override
     public boolean equals(Object obj) {
-        return getTime() == ((NewsBean) obj).getTime()
-                && getTitle().equals(((NewsBean) obj).getTitle())
-                && getContent().equals(((NewsBean) obj).getContent());
+        return getTime() == ((HealthyNewBean) obj).getTime()
+                && getTitle().equals(((HealthyNewBean) obj).getTitle())
+                && getContent().equals(((HealthyNewBean) obj).getContent());
     }
 
     @Override
     public int compareTo(@NonNull Object o) {
         Date date1 = new Date(getTime());
-        Date date2 = new Date(((NewsBean) o).getTime());
+        Date date2 = new Date(((HealthyNewBean) o).getTime());
         if (date1.after(date2))
             return -1;
         else
             return 1;
     }
 
-    public NewsBean(int id, String title, String summary, String content, String category, long time, String imageUrl) {
+    public HealthyNewBean(int id, String title, String summary, String content, String category, long time, String imageUrl) {
         this.id = id;
         this.title = title;
         this.summary = summary;

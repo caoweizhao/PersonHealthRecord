@@ -78,9 +78,11 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".mvp.reserveorder.ReserveOrderActivity"></activity>
-            android:windowSoftInputMode="adjustResize"
-            ></activity>
         <activity android:name=".activity.NewsDetailActivity"/>
+        <activity android:name=".activity.DoctorDetailActivity"></activity>
+        <activity android:name=".activity.HospitalListActivity"></activity>
+        <activity android:name=".activity.SelfRegisterActivity"></activity>
+        <activity android:name=".activity.ExpertListActivity"></activity>
     </application>
 
 </manifest>
