@@ -78,6 +78,7 @@
             android:name=".activity.ReserveNowActivity"
             android:windowSoftInputMode="adjustResize"
             ></activity>
+        <activity android:name=".activity.NewsDetailActivity"/>
     </application>
 
 </manifest>

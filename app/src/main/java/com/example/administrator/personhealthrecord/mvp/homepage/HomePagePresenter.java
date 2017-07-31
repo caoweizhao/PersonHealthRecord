@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
@@ -25,12 +26,12 @@ public class HomePagePresenter extends AHomePagePresenter {
     @Override
     public AHomePageModel createModel() {
         // TODO: 2017-7-19
-        //return new HomePageModel(this);
-        return new TestModel(this);
+        return new HomePageModel(this);
+       /* return new TestModel(this);*/
     }
 
     @Override
-    public void onImagesReady(List<String> urls) {
+    public void onImagesReady(List<AdvertisementBean> urls) {
         mView.updateImages(urls);
     }
 
