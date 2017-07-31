@@ -136,9 +136,10 @@ public class SocialPageFragment extends BaseFragment {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float s = (float) animation.getAnimatedValue();
-                mImageMatrix.setScale(s, s,
-                        mImageView.getWidth() * 1.0f / 2, mImageView.getHeight() * 1.0f / 2);
-                mImageView.setImageMatrix(mImageMatrix);
+                if (mImageView != null) {
+                    mImageMatrix.setScale(s, s, mImageView.getWidth() * 1.0f / 2, mImageView.getHeight() * 1.0f / 2);
+                    mImageView.setImageMatrix(mImageMatrix);
+                }
             }
         });
         animator.setRepeatCount(Integer.MAX_VALUE);

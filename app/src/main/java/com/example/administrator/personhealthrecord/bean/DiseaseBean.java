@@ -1,5 +1,8 @@
 package com.example.administrator.personhealthrecord.bean;
 
+import android.os.Parcel;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -184,4 +187,60 @@ public class DiseaseBean implements AbstractItem {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return 0;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.summary);
+        dest.writeString(this.pathogeny);
+        dest.writeString(this.category);
+        dest.writeString(this.clinicalManifestation);
+        dest.writeString(this.checkUp);
+        dest.writeString(this.diagnosis);
+        dest.writeString(this.differential);
+        dest.writeString(this.treatment);
+        dest.writeString(this.prevention);
+        dest.writeString(this.imageUrl);
+    }
+
+    public DiseaseBean() {
+    }
+
+    protected DiseaseBean(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.summary = in.readString();
+        this.pathogeny = in.readString();
+        this.category = in.readString();
+        this.clinicalManifestation = in.readString();
+        this.checkUp = in.readString();
+        this.diagnosis = in.readString();
+        this.differential = in.readString();
+        this.treatment = in.readString();
+        this.prevention = in.readString();
+        this.imageUrl = in.readString();
+    }
+
+    public static final Creator<DiseaseBean> CREATOR = new Creator<DiseaseBean>() {
+        @Override
+        public DiseaseBean createFromParcel(Parcel source) {
+            return new DiseaseBean(source);
+        }
+
+        @Override
+        public DiseaseBean[] newArray(int size) {
+            return new DiseaseBean[size];
+        }
+    };
 }

@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
+import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
@@ -25,7 +26,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import retrofit2.adapter.rxjava2.Result;
 
 /**
  * Created by Administrator on 2017-7-19.
@@ -45,27 +45,41 @@ public class HomePageModel extends AHomePageModel {
         mHomePageService.getImagesUrl()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Result<List<String>>>() {
+                .map(new Function<ResponseBody, List<AdvertisementBean>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
+                    public List<AdvertisementBean> apply(ResponseBody body) throws Exception {
+                        List<AdvertisementBean> advertisementBeanList = new ArrayList<AdvertisementBean>();
+                        JSONObject jsonObject = new JSONObject(body.string());
+                        if (jsonObject.get("status").equals("success")) {
+                            Gson gson = new Gson();
+                            advertisementBeanList = gson.fromJson(jsonObject.get("collection").toString(),
+                                    new TypeToken<List<AdvertisementBean>>() {
+                                    }.getType());
+                            return advertisementBeanList;
+                        }
+                        return Collections.emptyList();
                     }
+                }).subscribe(new Observer<List<AdvertisementBean>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-                    @Override
-                    public void onNext(Result<List<String>> value) {
-                        mPresenter.onImagesReady(value.response().body());
-                    }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
+            @Override
+            public void onNext(List<AdvertisementBean> value) {
+                mPresenter.onImagesReady(value);
+            }
 
-                    }
+            @Override
+            public void onError(Throwable e) {
+                mPresenter.onErrorHappened(e.getMessage());
+            }
 
-                    @Override
-                    public void onComplete() {
+            @Override
+            public void onComplete() {
 
-                    }
-                });
+            }
+        });
     }
 
     @Override
@@ -74,7 +88,7 @@ public class HomePageModel extends AHomePageModel {
         mHomePageService.getExperts(Contract.ExpertType[type])
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Function<ResponseBody, ObservableSource<ExpertBean>>() {
+                .concatMap(new Function<ResponseBody, ObservableSource<ExpertBean>>() {
                     @Override
                     public ObservableSource<ExpertBean> apply(ResponseBody body) throws Exception {
                         try {

@@ -13,11 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
+import com.example.administrator.personhealthrecord.bean.AbstractItem;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,7 +33,7 @@ import retrofit2.Retrofit;
  * Created by Administrator on 2017-7-25.
  */
 
-public abstract class SocialPageBaseFragment<T> extends Fragment {
+public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends Fragment {
 
     @BindView(R.id.social_child_fragment_swipeRefreshLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
@@ -37,9 +41,10 @@ public abstract class SocialPageBaseFragment<T> extends Fragment {
     public RecyclerView mRecyclerView;
 
     private Unbinder mUnbinder;
-    protected AbstractItemAdapter mAdapter;
+    protected AbstractItemAdapter<B> mAdapter;
     protected Retrofit mRetrofit;
     protected T mService;
+    protected List<B> mDataList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -59,26 +64,37 @@ public abstract class SocialPageBaseFragment<T> extends Fragment {
         initView();
         initEvent();
         mService = createService();
-        fetchData();
+        initData();
     }
+
+    protected abstract void initData();
 
     protected void initEvent() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mAdapter.setEnableLoadMore(false);
-                fetchData();
+                refreshData();
             }
         });
+
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                loadMoreData();
+            }
+        }, mRecyclerView);
     }
 
+
+    protected abstract void refreshData();
 
     private void initView() {
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.google_play_yellow),
                 getResources().getColor(R.color.google_play_blue),
                 getResources().getColor(R.color.google_play_red),
                 getResources().getColor(R.color.google_play_green));
-        mAdapter = new AbstractItemAdapter(R.layout.social_child_fragment, null, this);
+        mAdapter = new AbstractItemAdapter(R.layout.social_child_fragment, mDataList, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter.bindToRecyclerView(mRecyclerView);
         mAdapter.setEmptyView(R.layout.empty_view);
@@ -95,17 +111,23 @@ public abstract class SocialPageBaseFragment<T> extends Fragment {
         }
     }
 
-    /**
-     * 获取数据
-     */
-    protected abstract void fetchData();
 
-    /**
-     * 获取数据完毕
-     *
-     * @param datas 获取的数据
-     */
-    protected abstract void fetchDataDone(List datas);
+    protected void initDataDone(List<B> datas) {
+        Log.d("SocialPageBaseFragment","initDataDone"+getClass().getName());
+        Collections.sort(datas);
+        Collections.reverse(datas);
+        for (B data : datas) {
+            if (!mDataList.contains(data)) {
+                mAdapter.addData(0, data);
+            }
+        }
+        mRecyclerView.scrollToPosition(0);
+    }
+
+    protected void refreshDataDone(List<B> dataList) {
+        mAdapter.addData(0, dataList);
+        mRecyclerView.scrollToPosition(0);
+    }
 
     /**
      * 加载更多数据
@@ -117,7 +139,10 @@ public abstract class SocialPageBaseFragment<T> extends Fragment {
      *
      * @param datas 加载的更多数据
      */
-    protected abstract void loadMoreDataDone(List datas);
+    protected void loadMoreDataDone(List<B> datas) {
+        int mDataCount = mDataList.size();
+        mAdapter.addData(mDataCount, datas);
+    }
 
     /**
      * 创建对应Fragment的请求接口
@@ -125,7 +150,7 @@ public abstract class SocialPageBaseFragment<T> extends Fragment {
     protected T createService() {
         Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass())
-                .getActualTypeArguments()[0];
+                .getActualTypeArguments()[1];
        /* Type t = SocialPageBaseFragment.class.getGenericSuperclass();
         Type[] params = ((ParameterizedType) t).getActualTypeArguments();
         Class<T> cls = (Class<T>) params[0];*/

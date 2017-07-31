@@ -1,5 +1,8 @@
 package com.example.administrator.personhealthrecord.bean;
 
+import android.os.Parcel;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -70,4 +73,50 @@ public class CheckBean implements AbstractItem{
     public String getdate() {
         return "预约人数"+reverations;
     }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return 0;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.summary);
+        dest.writeString(this.content);
+        dest.writeString(this.category);
+        dest.writeInt(this.reverations);
+        dest.writeString(this.imageUrl);
+    }
+
+    public CheckBean() {
+    }
+
+    protected CheckBean(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.summary = in.readString();
+        this.content = in.readString();
+        this.category = in.readString();
+        this.reverations = in.readInt();
+        this.imageUrl = in.readString();
+    }
+
+    public static final Creator<CheckBean> CREATOR = new Creator<CheckBean>() {
+        @Override
+        public CheckBean createFromParcel(Parcel source) {
+            return new CheckBean(source);
+        }
+
+        @Override
+        public CheckBean[] newArray(int size) {
+            return new CheckBean[size];
+        }
+    };
 }

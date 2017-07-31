@@ -64,10 +64,13 @@
             android:name=".activity.TestActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.AddCaseActivity"/>
-        <activity android:name=".activity.SelfRegisterActivity" android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.SelfRegisterActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity android:name=".activity.HospitalListActivity"/>
         <activity android:name=".activity.ExpertListActivity"/>
         <activity android:name=".activity.DoctorDetailActivity"/>
+        <activity android:name=".activity.NewsDetailActivity"/>
     </application>
 
 </manifest>

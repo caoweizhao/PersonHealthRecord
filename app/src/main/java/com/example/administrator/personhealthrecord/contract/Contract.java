@@ -17,6 +17,7 @@ public class Contract {
     public static final String ADDRESS_KEY = "ADDRESS_KEY";
     public static final String HOSPITAL_KEY = "HOSPITAL_KEY";
     public static final String EXPERT_KEY = "EXPERT_KEY";
+    public static final String ADURL_KEY = "AD_KEY";
 
 
     public static final String BASE_URL = "http://192.168.13.39:8080/";
@@ -67,6 +68,7 @@ public class Contract {
     public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
     public static final String MedicalBase = BASE_URL + "medicine/getImage/";
     public static final String DoctorBase = BASE_URL + "doctor/getImage/";
+    public static final String AdvertisementBase = BASE_URL + "advertisement/getImage/";
 
     public static final String PackageImageBase = "http://192.168.13.39:8080/medical_package/getImage/";
 

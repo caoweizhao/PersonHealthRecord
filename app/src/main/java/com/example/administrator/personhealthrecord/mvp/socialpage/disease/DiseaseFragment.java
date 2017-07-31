@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
  * Use the {@link DiseaseFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
+public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, DiseaseService> {
 
     private Disposable mDisposable;
 
@@ -34,7 +34,12 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
     }
 
     @Override
-    protected void fetchData() {
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void refreshData() {
         mService.fetchDiseaseList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
@@ -49,7 +54,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
                         for (DiseaseBean diseaseBean : value) {
                             Log.d("DiseaseFragment", "imageUrl:" + diseaseBean.getImageUrl());
                         }
-                        fetchDataDone(value);
+                        initDataDone(value);
                     }
 
                     @Override
@@ -67,28 +72,16 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseService> {
     }
 
     @Override
-    protected void fetchDataDone(List datas) {
-        mAdapter.getData().clear();
-        mAdapter.addData(datas);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     protected void loadMoreData() {
-    }
-
-    @Override
-    protected void loadMoreDataDone(List datas) {
-        int count = mAdapter.getItemCount();
-        mAdapter.addData(datas);
-        mAdapter.notifyItemRangeInserted(count, datas.size());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mDisposable != null){
+        if (mDisposable != null) {
             mDisposable.dispose();
         }
     }
+
+
 }

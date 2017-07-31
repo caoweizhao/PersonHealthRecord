@@ -3,7 +3,6 @@ package com.example.administrator.personhealthrecord.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -16,8 +15,8 @@ import java.util.Date;
  * Created by Administrator on 2017-7-19.
  */
 
-public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Comparable<NewsBean>{
-    private static final String TAG="NewsBean";
+public class NewsBean extends DataSupport implements Parcelable, AbstractItem {
+    private static final String TAG = "NewsBean";
     /**
      * id : 1
      * title : 习近平：加快建设开放型经济新体制
@@ -86,16 +85,17 @@ public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Com
     public void setCategory(String category) {
         this.category = category;
     }
-     @Override
+
+    @Override
     public String getdate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(time);
     }
 
-    public NewsBean()
-    {
+    public NewsBean() {
 
     }
+
     public void setTime(long time) {
         this.time = time;
     }
@@ -103,7 +103,6 @@ public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Com
     public String getImageUrl() {
         return imageUrl;
     }
-
 
 
     public void setImageUrl(String imageUrl) {
@@ -123,7 +122,7 @@ public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Com
         dest.writeLong(time);
     }
 
-    public static final Parcelable.Creator<NewsBean> CREATOR= new Creator<NewsBean>() {
+    public static final Parcelable.Creator<NewsBean> CREATOR = new Creator<NewsBean>() {
         @Override
         public NewsBean createFromParcel(Parcel source) {
             return new NewsBean(source);
@@ -135,25 +134,25 @@ public class NewsBean extends DataSupport implements Parcelable,AbstractItem,Com
         }
     };
 
-    private NewsBean(Parcel in)
-    {
-        title=in.readString();
-        content=in.readString();
-        imageUrl=in.readString();
-        time=in.readLong();
+    private NewsBean(Parcel in) {
+        title = in.readString();
+        content = in.readString();
+        imageUrl = in.readString();
+        time = in.readLong();
     }
 
     @Override
     public boolean equals(Object obj) {
-        Log.d(TAG, "equals: "+((NewsBean)obj).getTime()+"  "+getTime()+"  "+(getTime()==((NewsBean)obj).getTime()));
-        return getTime()==((NewsBean)obj).getTime();
+        return getTime() == ((NewsBean) obj).getTime()
+                && getTitle().equals(((NewsBean) obj).getTitle())
+                && getContent().equals(((NewsBean) obj).getContent());
     }
 
     @Override
-    public int compareTo(@NonNull NewsBean o) {
-        Date date1=new Date(getTime());
-        Date date2=new Date(o.getTime());
-        if(date1.after(date2))
+    public int compareTo(@NonNull Object o) {
+        Date date1 = new Date(getTime());
+        Date date2 = new Date(((NewsBean) o).getTime());
+        if (date1.after(date2))
             return -1;
         else
             return 1;
