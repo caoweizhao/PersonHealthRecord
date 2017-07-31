@@ -1,12 +1,17 @@
 package com.example.administrator.personhealthrecord.bean;
 
+import android.os.Parcel;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import org.litepal.crud.DataSupport;
 
 /**
  * Created by Administrator on 2017-7-22.
  */
 
-public class MedicineBean implements AbstractItem {
+public class MedicineBean extends DataSupport implements AbstractItem {
 
     /**
      * code : H10970410
@@ -194,4 +199,66 @@ public class MedicineBean implements AbstractItem {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return getName().equals(((MedicineBean) obj).getName())
+                && getCode().equals(((MedicineBean) obj).getCode());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.code);
+        dest.writeString(this.name);
+        dest.writeString(this.function);
+        dest.writeString(this.useTaboo);
+        dest.writeString(this.category);
+        dest.writeString(this.component);
+        dest.writeString(this.method);
+        dest.writeString(this.character);
+        dest.writeString(this.attention);
+        dest.writeString(this.expiryDate);
+        dest.writeString(this.standard);
+        dest.writeString(this.imageUrl);
+    }
+
+    public MedicineBean() {
+    }
+
+    protected MedicineBean(Parcel in) {
+        this.code = in.readString();
+        this.name = in.readString();
+        this.function = in.readString();
+        this.useTaboo = in.readString();
+        this.category = in.readString();
+        this.component = in.readString();
+        this.method = in.readString();
+        this.character = in.readString();
+        this.attention = in.readString();
+        this.expiryDate = in.readString();
+        this.standard = in.readString();
+        this.imageUrl = in.readString();
+    }
+
+    public static final Creator<MedicineBean> CREATOR = new Creator<MedicineBean>() {
+        @Override
+        public MedicineBean createFromParcel(Parcel source) {
+            return new MedicineBean(source);
+        }
+
+        @Override
+        public MedicineBean[] newArray(int size) {
+            return new MedicineBean[size];
+        }
+    };
 }

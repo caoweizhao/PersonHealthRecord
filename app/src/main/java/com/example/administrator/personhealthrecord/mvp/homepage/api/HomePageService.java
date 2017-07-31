@@ -2,11 +2,8 @@ package com.example.administrator.personhealthrecord.mvp.homepage.api;
 
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
-import retrofit2.adapter.rxjava2.Result;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -16,8 +13,8 @@ import retrofit2.http.Path;
 
 public interface HomePageService {
 
-    @GET("")
-    Observable<Result<List<String>>> getImagesUrl();
+    @GET("advertisement/ad_list")
+    Observable<ResponseBody> getImagesUrl();
 
     @GET("doctor/find_doctor_by_dc/{departmentCode}")
     Observable<ResponseBody> getExperts(@Path("departmentCode") String departmentCode);

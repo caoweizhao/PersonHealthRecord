@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.bean.ImmuneBean;
 import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageBaseFragment;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import io.reactivex.disposables.Disposable;
  * Use the {@link ImmuneFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
+public class ImmuneFragment extends SocialPageBaseFragment<ImmuneBean, ImmuneService> {
 
     private Disposable mDisposable;
 
@@ -47,22 +46,9 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.social_child_fragment, container, false);
-    }
-
-    @Override
     protected int getLayoutRes() {
-        return 0;
+        return R.layout.social_child_fragment;
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -70,13 +56,8 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
     }
 
     @Override
-    protected void fetchData() {
+    protected void refreshData() {
         mSwipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    protected void fetchDataDone(List datas) {
-
     }
 
     @Override
@@ -85,15 +66,25 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneService> {
     }
 
     @Override
-    protected void loadMoreDataDone(List datas) {
+    protected void loadMoreDataDone(List<ImmuneBean> datas) {
 
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mDisposable != null){
+        if (mDisposable != null) {
             mDisposable.dispose();
         }
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initDataDone(List<ImmuneBean> datas) {
+
     }
 }

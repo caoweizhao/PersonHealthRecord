@@ -3,6 +3,7 @@ package com.example.administrator.personhealthrecord.mvp.homepage;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +33,7 @@ import com.example.administrator.personhealthrecord.activity.DoctorDetailActivit
 import com.example.administrator.personhealthrecord.activity.HospitalListActivity;
 import com.example.administrator.personhealthrecord.activity.MapAcitvity;
 import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
+import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
@@ -74,9 +77,10 @@ public class HomePageFragment extends AHomePageFragment {
     private boolean isExpand = false;
     private HospitalAdapter mHospitalAdapter;
 
-    private List<String> imagesUrl = new ArrayList<>();
-
+    private List<String> mExpertsImageUrl = new ArrayList<>();
+    private List<String> mAdvertisementImageUrl = new ArrayList<>();
     private List<ExpertBean> mExpertsBean = new ArrayList<>();
+    private List<AdvertisementBean> mAdvertisementBeenList = new ArrayList<>();
 
     @BindView(R.id.near_by_hospital)
     CardView mCardView;
@@ -217,6 +221,15 @@ public class HomePageFragment extends AHomePageFragment {
         mImageBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
+
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri url = Uri.parse(mAdvertisementBeenList.get(position).getAdvertiseUrl());
+                intent.setData(url);
+                intent.addCategory(Intent. CATEGORY_DEFAULT);
+
+                Intent newIntent = Intent.createChooser(intent,"选择浏览器");
+                startActivity(newIntent);
             }
         });
         mExpertsBanner.setOnBannerListener(new OnBannerListener() {
@@ -227,9 +240,9 @@ public class HomePageFragment extends AHomePageFragment {
                 bundle.putParcelable(Contract.EXPERT_KEY, mExpertsBean.get(position));
                 intent.putExtra("bundle", bundle);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(getActivity(),
-                            mExpertsBanner,"image").toBundle());
-                }else{
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(),
+                            mExpertsBanner, "image").toBundle());
+                } else {
                     startActivity(intent);
                 }
             }
@@ -293,18 +306,25 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void updateImages(List<String> urls) {
-        mImageBanner.update(urls);
+    public void updateImages(List<AdvertisementBean> advertisementBeanList) {
+        mAdvertisementBeenList = advertisementBeanList;
+        Log.d("HomePageFragment", "updateImages" + mAdvertisementBeenList.get(0).getImageUrl());
+        mAdvertisementImageUrl.clear();
+        for (int i = 0, n = mAdvertisementBeenList.size(); i < n; i++) {
+            mAdvertisementImageUrl.add(Contract.AdvertisementBase +
+                    mAdvertisementBeenList.get(i).getImageUrl());
+        }
+        mImageBanner.update(mAdvertisementImageUrl);
     }
 
     @Override
     public void updateExperts(List<ExpertBean> expertBeenF) {
         mExpertsBean = expertBeenF;
-        imagesUrl.clear();
+        mExpertsImageUrl.clear();
         for (int i = 0, n = expertBeenF.size(); i < n; i++) {
-            imagesUrl.add(Contract.DoctorBase + expertBeenF.get(i).getImageUrl());
+            mExpertsImageUrl.add(Contract.DoctorBase + expertBeenF.get(i).getImageUrl());
         }
-        mExpertsBanner.update(imagesUrl);
+        mExpertsBanner.update(mExpertsImageUrl);
     }
 
     @Override

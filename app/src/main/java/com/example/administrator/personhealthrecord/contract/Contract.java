@@ -7,6 +7,12 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
+<<<<<<<<< Temporary merge branch 1
+    public static String cookie = "";
+    public static final String Login="Login";
+    public static final String Unlogin="Unlogin";
+    public static String IsLogin=Unlogin;
+=========
     public static final String Login = "Login";
     public static final String Unlogin = "Unlogin";
     public static String IsLogin = Unlogin;
@@ -17,8 +23,10 @@ public class Contract {
     public static final String ADDRESS_KEY = "ADDRESS_KEY";
     public static final String HOSPITAL_KEY = "HOSPITAL_KEY";
     public static final String EXPERT_KEY = "EXPERT_KEY";
+    public static final String ADURL_KEY = "AD_KEY";
 
 
+    public static String cookie = "";
     public static final String BASE_URL = "http://192.168.13.39:8080/";
 
     //专家推荐类型
@@ -61,13 +69,13 @@ public class Contract {
     public @interface ExpertType {
     }
 
-    public static String cookie = "";
     //图片的baseURl
     public static final String ImageUrl = BASE_URL + "information/getImage/";
     public static final String HospitalBase = BASE_URL + "hospital/getImage/";
     public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
     public static final String MedicalBase = BASE_URL + "medicine/getImage/";
     public static final String DoctorBase = BASE_URL + "doctor/getImage/";
+    public static final String AdvertisementBase = BASE_URL + "advertisement/getImage/";
 
     public static final String PackageImageBase = "http://192.168.13.39:8080/medical_package/getImage/";
     public static final String HealthyNewsImageUrl=BASE_URL+"health_info/getImage/";

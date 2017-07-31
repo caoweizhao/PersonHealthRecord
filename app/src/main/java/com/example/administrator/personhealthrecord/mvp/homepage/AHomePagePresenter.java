@@ -3,6 +3,7 @@ package com.example.administrator.personhealthrecord.mvp.homepage;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
@@ -18,9 +19,9 @@ public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment
     /**
      * 图片轮播数据请求完毕
      *
-     * @param urls
+     * @param advertisementBeanList
      */
-    public abstract void onImagesReady(List<String> urls);
+    public abstract void onImagesReady(List<AdvertisementBean> advertisementBeanList);
 
     /**
      * 专家轮播数据请求完毕
