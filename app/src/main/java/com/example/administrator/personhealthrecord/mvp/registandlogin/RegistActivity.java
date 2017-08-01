@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
@@ -12,7 +13,8 @@ import butterknife.BindView;
 
 public class RegistActivity extends ILoginVIew implements View.OnClickListener{
 
-
+    @BindView(R.id.regist_layout_parent)
+    LinearLayout parenlLayout;
     @BindView(R.id.regist_username)
     EditText username;
     @BindView(R.id.regist_password)
@@ -89,5 +91,10 @@ public class RegistActivity extends ILoginVIew implements View.OnClickListener{
         intent.putExtra("password",password.getText().toString());
         setResult(6,intent);
         finish();
+    }
+
+    @Override
+    public void ShowSanck(String string) {
+        showMessage(parenlLayout,string);
     }
 }

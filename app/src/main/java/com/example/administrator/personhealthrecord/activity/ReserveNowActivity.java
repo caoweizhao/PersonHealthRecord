@@ -61,8 +61,6 @@ public class ReserveNowActivity extends IReserveView implements View.OnClickList
     TextView count;
     @BindView(R.id.healthtest_date)
     TextView date;
-    @BindView(R.id.input_date)
-    ImageView getDate;
     @BindView(R.id.input_Phone)
     EditText editphoneNumber;
     @BindView(R.id.input_name)
@@ -88,24 +86,6 @@ private PackageBean bean;
         count.setText("X1");
         price.setText("￥"+bean.getPackagePrice());
         Glide.with(this).load(Contract.PackageImageBase+bean.getImageUrl())
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model,
-                                               Target<GlideDrawable> target,
-                                               boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model,
-                                                   Target<GlideDrawable> target,
-                                                   boolean isFromMemoryCache,
-                                                   boolean isFirstResource) {
-                        return false;
-                    }
-                })
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .centerCrop()
                 .into(imageView);
         initToolbar("提交预约",true,null);
     }
@@ -113,7 +93,7 @@ private PackageBean bean;
     @Override
     protected void initEvents() {
         super.initEvents();
-        getDate.setOnClickListener(this);
+        date.setOnClickListener(this);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -172,7 +152,7 @@ private PackageBean bean;
     public void onClick(View v) {
                 switch (v.getId())
                         {
-                            case R.id.input_date:
+                            case R.id.healthtest_date:
                                 startPickdate();
                                 break;
                             case R.id.order_button:
@@ -277,7 +257,7 @@ private PackageBean bean;
     }
     public void ReserveSuccess()
     {
-        pDialog.getProgressHelper().setProgress(100);
+        pDialog.dismiss();
     }
     public void loding()
     {

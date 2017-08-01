@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+<include layout="@layout/toolbar"></include>
+    <LinearLayout
+        android:background="@drawable/chat_machin_backgroud"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+        <ListView
+            android:id="@+id/chat_list_Listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#0000"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:paddingLeft="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/chat_input_text"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_border"
+            android:hint="输入你想说的话"
+            android:maxLines="2" />
+
+        <ImageView
+            android:paddingLeft="6dp"
+            android:background="@drawable/cycle_imageview"
+            android:id="@+id/chat_send"
+            android:src="@drawable/ic_caht_send"
+            android:layout_height="36dp"
+            android:layout_width="36dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

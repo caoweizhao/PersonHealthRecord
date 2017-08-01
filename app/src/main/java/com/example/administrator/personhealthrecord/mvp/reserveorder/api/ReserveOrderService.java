@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.reserveorder.api;
 
 import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfHealthyOrderBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfPackageBean;
 
 import io.reactivex.Observable;
@@ -14,5 +15,5 @@ import retrofit2.http.Path;
 
 public interface ReserveOrderService {
     @GET("medical_order/medical_order_list")
-    Observable<ResultUitlOfReserve> getReserveOrderList(@Header("Cookie")String cookie);
+    Observable<ResultUtilOfHealthyOrderBean> getHealthyCheckOrderList(@Header("Cookie")String cookie);
 }

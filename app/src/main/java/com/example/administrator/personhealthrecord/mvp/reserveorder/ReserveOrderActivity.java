@@ -29,6 +29,7 @@ public class ReserveOrderActivity extends IReserveOrderView {
         super.initData();
         fmanager=getSupportFragmentManager();
         viewPager.setAdapter(new ReserveOrderFragmentPageAdapter(fmanager));
+        viewPager.setOffscreenPageLimit(2);
         mTabLayout.setupWithViewPager(viewPager);
         initToolbar("我的预约",true,null);
     }

@@ -19,9 +19,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
+import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
 import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
@@ -33,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -175,10 +179,36 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                                 startActivity(intent);
                                 break;
                             case R.id.health_check_reserve_order_button:
-                                Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
-                                startActivity(intent2);
+                                if(Contract.IsLogin.equals(Contract.Login))
+                                {
+                                    Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
+                                    startActivity(intent2);
+                                }else
+                                {
+                                    gotToLogin();
+                                }
+
                             default:
                                 break;
                         }
+    }
+
+    public void gotToLogin()
+    {
+        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("您还没有登录！")
+                .setContentText("是否去登录界面？")
+                .setCancelText("不了~")
+                .setConfirmText("去登陆->")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                        Intent intent=new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .show();
     }
 }

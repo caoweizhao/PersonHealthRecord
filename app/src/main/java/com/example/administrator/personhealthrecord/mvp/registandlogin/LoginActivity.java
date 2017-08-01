@@ -18,6 +18,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ import butterknife.BindView;
 
 public class LoginActivity extends ILoginVIew implements View.OnClickListener{
 
+    @BindView(R.id.login_activity_parentlayout)
+    FrameLayout frameLayout;
     @BindView(R.id.login_username)
     EditText usrname;
     @BindView(R.id.login_password)
@@ -185,6 +188,11 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener{
     public void finishAcitvity() {
         finish();
         Log.d(TAG, "dologin: username" + usrname.getText().toString() + "   password" + password.getText().toString());
+    }
+
+    @Override
+    public void ShowSanck(String string) {
+        showMessage(frameLayout,string);
     }
 
     public void SetAcount(String username,String password)

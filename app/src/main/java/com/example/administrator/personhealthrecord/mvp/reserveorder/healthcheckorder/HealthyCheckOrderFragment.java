@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
 import com.example.administrator.personhealthrecord.mvp.reserveorder.IResreveOrderPresenter;
+import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderPresenterImpl;
 
 import butterknife.BindView;
 
@@ -30,7 +31,7 @@ public class HealthyCheckOrderFragment extends MvpFragment<IResreveOrderPresente
 
     @Override
     public IResreveOrderPresenter createPresenter() {
-        return null;
+        return new ReserveOrderPresenterImpl();
     }
 
     @Override
@@ -50,6 +51,6 @@ public class HealthyCheckOrderFragment extends MvpFragment<IResreveOrderPresente
 
     @Override
     protected void initData() {
-
+        mPresenter.getHealthCheckeList();
     }
 }

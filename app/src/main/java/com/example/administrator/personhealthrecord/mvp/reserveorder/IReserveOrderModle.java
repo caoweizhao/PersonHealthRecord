@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.mvp.reserveorder;
 
 import com.example.administrator.personhealthrecord.bean.ReserveBean;
 import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfHealthyOrderBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfPackageBean;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
 
@@ -17,5 +18,5 @@ public abstract class IReserveOrderModle extends BaseModel<IResreveOrderPresente
         super(presenter);
     }
 
-    public abstract void getHealthyCheckList(Observer<ResultUitlOfReserve> observer);
+    public abstract void getHealthyCheckList(Observer<ResultUtilOfHealthyOrderBean> observer);
 }
