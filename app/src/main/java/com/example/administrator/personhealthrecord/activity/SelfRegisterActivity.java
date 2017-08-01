@@ -21,7 +21,6 @@ import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
-import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.util.RegexUtils;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
@@ -63,8 +62,8 @@ public class SelfRegisterActivity extends BaseActivity {
     TextView mSelfRegisterDoctorDetails;    //医生详情
     @BindView(R.id.self_register_date)
     TextView mSelfRegisterDate;     //显示体检日期
-    @BindView(R.id.self_register_input_date_picker)
-    ImageView mSelfRegisterInputDatePicker; //弹出选择体检日期按钮
+    /*@BindView(R.id.self_register_input_date_picker)
+    ImageView mSelfRegisterInputDatePicker; //弹出选择体检日期按钮*/
     @BindView(R.id.self_register_input_phone_number)
     EditText mSelfRegisterInputPhoneNumber; //输入手机号码
     @BindView(R.id.self_registered_get_vertify_code)
@@ -95,10 +94,6 @@ public class SelfRegisterActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        final View view = findViewById(R.id.self_registered_container);
-        view.setScaleY(0);
-        view.setScaleX(0);
-        AnimateUtil.scaleShow(findViewById(R.id.self_registered_container), null);
 
         initToolbar("自助挂号", true, new View.OnClickListener() {
             @Override
@@ -106,7 +101,6 @@ public class SelfRegisterActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-
         mService = RetrofitUtil.getRetrofit().create(SelfRegisterService.class);
 
         Intent intent = getIntent();
@@ -168,7 +162,7 @@ public class SelfRegisterActivity extends BaseActivity {
         /**
          * 选择挂号日期
          */
-        mSelfRegisterInputDatePicker.setOnClickListener(new View.OnClickListener() {
+        mSelfRegisterDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();

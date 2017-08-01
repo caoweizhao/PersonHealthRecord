@@ -52,32 +52,6 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
         mSwipeRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
 
-        Observable<List<NewsBean>> netWorkObservable = mService.getNewsToday()
-                .subscribeOn(Schedulers.newThread())
-                .map(new Function<ResultUtilOfNewsBean, List<NewsBean>>() {
-                    @Override
-                    public List<NewsBean> apply(ResultUtilOfNewsBean bean) throws Exception {
-                        if (bean.getStatus().equals("success")) {
-                            bean.getCollection();
-                            /**
-                             * 保存数据库
-                             */
-                            List<NewsBean> newsBeanList = findAll(NewsBean.class);
-                            List<NewsBean> networkList = bean.getCollection();
-                            List<NewsBean> resultList = new ArrayList<NewsBean>();
-                            for (NewsBean newsBean : networkList) {
-                                if (!newsBeanList.contains(newsBean)) {
-                                    resultList.add(newsBean);
-                                    Log.d("NewsFragment", "save");
-                                }
-                            }
-                            DataSupport.saveAll(resultList);
-                            Log.d("NewsFragment", "dbSize:" + DataSupport.findAll(NewsBean.class).size());
-                            return resultList;
-                        }
-                        return Collections.emptyList();
-                    }
-                });
         Observable<List<NewsBean>> localObservable = create(new ObservableOnSubscribe<List<NewsBean>>() {
             @Override
             public void subscribe(ObservableEmitter<List<NewsBean>> e) throws Exception {
@@ -91,6 +65,32 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
             }
         }).subscribeOn(Schedulers.newThread());
 
+        Observable<List<NewsBean>> netWorkObservable = mService.getNewsToday()
+                .subscribeOn(Schedulers.newThread())
+                .map(new Function<ResultUtilOfNewsBean, List<NewsBean>>() {
+                    @Override
+                    public List<NewsBean> apply(ResultUtilOfNewsBean bean) throws Exception {
+                        if (bean.getStatus().equals("success")) {
+                            bean.getCollection();
+                            /**
+                             * 保存数据库
+                             */
+                            List<NewsBean> localList = findAll(NewsBean.class);
+                            List<NewsBean> networkList = bean.getCollection();
+                            List<NewsBean> resultList = new ArrayList<NewsBean>();
+                            for (NewsBean newsBean : networkList) {
+                                if (!localList.contains(newsBean)) {
+                                    resultList.add(newsBean);
+                                    Log.d("NewsFragment", "save");
+                                }
+                            }
+                            DataSupport.saveAll(resultList);
+                            Log.d("NewsFragment", "dbSize:" + DataSupport.findAll(NewsBean.class).size());
+                            return resultList;
+                        }
+                        return Collections.emptyList();
+                    }
+                });
 
         Observable.concat(localObservable, netWorkObservable)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -140,47 +140,52 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
      */
     @Override
     protected void refreshData() {
-        mService.getLatestNews(mDataList.get(0).getTime())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(new Observer<ResultUtilOfNewsBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mDisposables.add(d);
-                    }
-
-                    @Override
-                    public void onNext(ResultUtilOfNewsBean value) {
-                        if (value.getStatus().equals("success")) {
-                            List<NewsBean> networkList = value.getCollection();
-                            List<NewsBean> localList = DataSupport.findAll(NewsBean.class);
-                            List<NewsBean> resultList = new ArrayList<>();
-
-                            for (NewsBean newsBean : networkList) {
-                                if (!localList.contains(newsBean)) {
-                                    resultList.add(newsBean);
-                                }
-                            }
-                            DataSupport.saveAll(resultList);
-                            refreshDataDone(resultList);
-                        } else {
-                            mSwipeRefreshLayout.setRefreshing(false);
+        if (mDataList.size() > 0) {
+            mService.getLatestNews(mDataList.get(0).getTime())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe(new Observer<ResultUtilOfNewsBean>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            mDisposables.add(d);
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        showMessage(e.getMessage());
-                        mAdapter.setEnableLoadMore(true);
-                    }
+                        @Override
+                        public void onNext(ResultUtilOfNewsBean value) {
+                            if (value.getStatus().equals("success")) {
+                                List<NewsBean> networkList = value.getCollection();
+                                List<NewsBean> localList = DataSupport.findAll(NewsBean.class);
+                                List<NewsBean> resultList = new ArrayList<>();
 
-                    @Override
-                    public void onComplete() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        mAdapter.setEnableLoadMore(true);
-                    }
-                });
+                                for (NewsBean newsBean : networkList) {
+                                    if (!localList.contains(newsBean)) {
+                                        resultList.add(newsBean);
+                                    }
+                                }
+                                DataSupport.saveAll(resultList);
+                                refreshDataDone(resultList);
+                            } else {
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                            showMessage(e.getMessage());
+                            mAdapter.setEnableLoadMore(true);
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                            mAdapter.setEnableLoadMore(true);
+                        }
+                    });
+        } else {
+            initData();
+        }
+
     }
 
     /**

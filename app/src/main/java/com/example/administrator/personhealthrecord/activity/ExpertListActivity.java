@@ -1,10 +1,13 @@
 package com.example.administrator.personhealthrecord.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,7 +16,6 @@ import com.example.administrator.personhealthrecord.adapter.ExpertAdapter;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -63,10 +65,6 @@ public class ExpertListActivity extends BaseActivity {
         mAdapter.bindToRecyclerView(mRecyclerView);
         mAdapter.setEmptyView(R.layout.empty_view);
 
-        mRecyclerView.setScaleX(0);
-        mRecyclerView.setScaleY(0);
-        AnimateUtil.scaleShow(mRecyclerView, null);
-
         initToolbar("医生列表", true, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,9 +95,17 @@ public class ExpertListActivity extends BaseActivity {
                 ExpertBean expertBean = (ExpertBean) adapter.getItem(position);
                 Intent intent = new Intent(ExpertListActivity.this, SelfRegisterActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(Contract.EXPERT_KEY,expertBean);
-                intent.putExtra("bundle",bundle);
-                startActivity(intent);
+                bundle.putParcelable(Contract.EXPERT_KEY, expertBean);
+                intent.putExtra("bundle", bundle);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ExpertListActivity.this,
+                            Pair.create(view.findViewById(R.id.expert_item_img), "doctor_pic"),
+                            Pair.create(view.findViewById(R.id.expert_item__name), "doctor_name"),
+                            Pair.create(view.findViewById(R.id.expert_item_address), "doctor_workplace"),
+                            Pair.create(view.findViewById(R.id.expert_item_title), "doctor_position")).toBundle());
+                } else {
+                    startActivity(intent);
+                }
             }
         });
     }

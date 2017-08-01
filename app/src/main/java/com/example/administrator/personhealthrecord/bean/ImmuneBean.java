@@ -3,11 +3,13 @@ package com.example.administrator.personhealthrecord.bean;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by Administrator on 2017-7-31.
  */
 
-public class ImmuneBean implements AbstractItem {
+public class ImmuneBean extends DataSupport implements AbstractItem {
 
     @Override
     public String getTitle() {
@@ -32,6 +34,12 @@ public class ImmuneBean implements AbstractItem {
     @Override
     public int compareTo(@NonNull Object o) {
         return 0;
+    }
+
+    // TODO: 2017-8-1
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
     @Override

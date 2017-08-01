@@ -1,12 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.disease;
 
-import com.example.administrator.personhealthrecord.bean.DiseaseBean;
-
-import java.util.List;
-
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 /**
  * Created by Administrator on 2017-7-25.
@@ -15,8 +11,6 @@ import retrofit2.http.Query;
 public interface DiseaseService {
 
     @GET("slow_disease/disease_list")
-    Observable<List<DiseaseBean>> fetchDiseaseList();
+    Observable<ResponseBody> initDiseaseInfo();
 
-    @GET("")
-    Observable<List<DiseaseBean>> loadMoreDisease(@Query("date")String date);
 }

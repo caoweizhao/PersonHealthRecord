@@ -36,6 +36,7 @@
                 <ImageView
                     android:id="@+id/doctor_pic"
                     android:layout_width="0dp"
+                    android:transitionName="doctor_pic"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
@@ -64,6 +65,7 @@
                             android:maxLines="1"
                             android:padding="5dp"
                             android:text="XXX"
+                            android:transitionName="doctor_name"
                             android:textColor="#000"
                             android:textSize="25sp"/>
 
@@ -74,6 +76,7 @@
                             android:maxLines="1"
                             android:padding="2dp"
                             android:text="主任医师"
+                            android:transitionName="doctor_position"
                             android:textColor="#000"
                             android:textSize="16sp"/>
                     </LinearLayout>
@@ -83,6 +86,7 @@
                         android:id="@+id/self_register_doctor_workplace"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:transitionName="doctor_eo"
                         android:text="中山大学附属第三医院天河医院-特诊医疗门诊[天河]"
                         android:textColor="#2a4199"
                         android:textSize="12sp"/>
@@ -144,14 +148,11 @@
                         android:padding="5dp"
                         android:text="2017-07-25"
                         android:textAlignment="center"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_health_check_package_select_date"
                         android:textSize="18sp"/>
 
-                    <ImageView
-                        android:id="@+id/self_register_input_date_picker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_home_page"
-                        />
+
 
                 </LinearLayout>
 

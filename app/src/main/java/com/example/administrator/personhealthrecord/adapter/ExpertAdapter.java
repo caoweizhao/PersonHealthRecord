@@ -59,7 +59,7 @@ public class ExpertAdapter extends BaseQuickAdapter<ExpertBean, BaseViewHolder> 
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .centerCrop()
-                .into((ImageView) helper.getView(R.id.expert_item__img));
+                .into((ImageView) helper.getView(R.id.expert_item_img));
     }
 
 }
