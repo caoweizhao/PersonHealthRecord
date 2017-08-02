@@ -32,6 +32,7 @@ import okhttp3.ResponseBody;
 public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, MedicineService> {
 
     private List<Disposable> mDisposables = new ArrayList<>();
+    private int offset = 0;
 
     public MedicineFragment() {
         // Required empty public constructor
@@ -112,11 +113,24 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
      */
     @Override
     protected void loadMoreData() {
-    }
-
-    @Override
-    protected void loadMoreDataDone(List<MedicineBean> datas) {
-
+        List<MedicineBean> localList = DataSupport
+                .limit(20)
+                .offset(offset)
+                .find(MedicineBean.class);
+        if(localList.size()==0){
+            mAdapter.loadMoreEnd(true);
+            showMessage("没有更多数据啦！");
+            return ;
+        }
+        List<MedicineBean> resultList = new ArrayList<>();
+        List<MedicineBean> curList = mAdapter.getData();
+        for (MedicineBean medicineBean : localList) {
+            if (!curList.contains(medicineBean)) {
+                resultList.add(medicineBean);
+            }
+        }
+        offset += localList.size();
+        loadMoreDataDone(resultList);
     }
 
     @Override
@@ -160,10 +174,13 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
         Observable<List<MedicineBean>> localObservable = Observable.create(new ObservableOnSubscribe<List<MedicineBean>>() {
             @Override
             public void subscribe(ObservableEmitter<List<MedicineBean>> e) throws Exception {
-                List<MedicineBean> localMedicineList = DataSupport.limit(20).find(MedicineBean.class);
+                List<MedicineBean> localMedicineList = DataSupport.limit(20)
+                        .offset(offset)
+                        .find(MedicineBean.class);
                 if (localMedicineList.size() == 0) {
                     e.onComplete();
                 } else {
+                    offset += localMedicineList.size();
                     e.onNext(localMedicineList);
                 }
             }

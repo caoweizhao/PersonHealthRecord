@@ -5,11 +5,12 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by Administrator on 2017-7-25.
  */
-
-public class DiseaseBean implements AbstractItem {
+public class DiseaseBean extends DataSupport implements AbstractItem {
 
     /**
      * id : 1
@@ -191,6 +192,11 @@ public class DiseaseBean implements AbstractItem {
     @Override
     public int compareTo(@NonNull Object o) {
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getId() == ((DiseaseBean) obj).getId();
     }
 
     @Override

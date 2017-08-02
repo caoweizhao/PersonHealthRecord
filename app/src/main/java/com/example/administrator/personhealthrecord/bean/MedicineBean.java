@@ -202,13 +202,12 @@ public class MedicineBean extends DataSupport implements AbstractItem {
 
     @Override
     public int compareTo(@NonNull Object o) {
-        return 0;
+        return getCode().compareTo(((MedicineBean) o).getCode());
     }
 
     @Override
     public boolean equals(Object obj) {
-        return getName().equals(((MedicineBean) obj).getName())
-                && getCode().equals(((MedicineBean) obj).getCode());
+        return getCode().equals(((MedicineBean) obj).getCode());
     }
 
     @Override
