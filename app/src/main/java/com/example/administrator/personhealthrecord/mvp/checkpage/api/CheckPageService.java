@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage.api;
 
+import com.example.administrator.personhealthrecord.bean.AbstractResulUitl;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.bean.ImageBean;
 
 import java.util.List;
 
@@ -13,8 +15,8 @@ import retrofit2.http.GET;
 
 public interface CheckPageService {
 
-    @GET("")
-    Observable<List<String>> getImagesUrl();
+    @GET("advertisement/medical_ad_list")
+    Observable<AbstractResulUitl<ImageBean>> getImagesUrl();
 
     @GET("")
     Observable<List<CheckBean>> getCheckItems();

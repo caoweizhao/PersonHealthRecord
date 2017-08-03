@@ -37,6 +37,7 @@ import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.mvp.chat.ChatActivity;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
@@ -261,6 +262,14 @@ public class HomePageFragment extends AHomePageFragment {
                 } else {
                     startActivity(intent);
                 }
+            }
+        });
+
+        mMedicalConsultation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), ChatActivity.class);
+                startActivity(intent);
             }
         });
 

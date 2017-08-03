@@ -6,10 +6,13 @@ import android.util.Log;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * Created by andy on 2017/7/19.
@@ -134,5 +137,37 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
     @Override
     public void getDBlist() {
         fragment.updateTodayNews(healthyNewsModle.getDBlist());
+    }
+
+    @Override
+    public void test() {
+        Observer<ResponseBody> observer=new Observer<ResponseBody>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(ResponseBody value) {
+                try {
+                    Log.d(TAG, "onNext: "+value.string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: "+e.toString());
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete: ");
+            }
+        };
+
+        healthyNewsModle.test(observer);
     }
 }

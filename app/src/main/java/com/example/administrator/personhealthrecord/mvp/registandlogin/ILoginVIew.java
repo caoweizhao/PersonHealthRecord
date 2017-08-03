@@ -12,4 +12,5 @@ public abstract class ILoginVIew extends MvpActivity<IRegistAndLoginPresenter>{
 
     public void finishAcitvity() {
     }
+    public abstract void ShowSanck(String string);
 }

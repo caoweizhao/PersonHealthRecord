@@ -1,8 +1,11 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,20 +22,27 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.DoctorDetailActivity;
+import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.bean.ImageBean;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
+import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
 import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +54,7 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     private static final String TAG = "CheckPageFragment";
     private AbstractItemAdapter<CheckBean> adapter;
     private List<CheckBean> checkBeanList;
-
+    private List<ImageBean> imageBeanList;
     @BindView(R.id.heath_check_banner01)
     Banner banner01;
     @BindView(R.id.heath_check_banner02)
@@ -126,9 +136,12 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     }
 
     @Override
-    public void updateImages(List<String> urls) {
+    public void updateImages(List<ImageBean> imageBeens) {
+        imageBeanList=imageBeens;
+        List<String> urls=new ArrayList<>();
+        for(ImageBean bean: imageBeens)
+            urls.add(Contract.CheckPageAdvertismentImageUrl+bean.getImageUrl());
         banner01.update(urls);
-        banner02.update(urls);
     }
 
     @Override
@@ -140,11 +153,23 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     protected void initEvent() {
         reserve.setOnClickListener(this);
         reserveOrder.setOnClickListener(this);
+        banner01.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri url = Uri.parse(imageBeanList.get(position).getAdvertiseUrl());
+                intent.setData(url);
+                intent.addCategory(Intent. CATEGORY_DEFAULT);
+                Intent newIntent = Intent.createChooser(intent,"选择浏览器");
+                startActivity(newIntent);
+            }
+        });
     }
 
     @Override
     protected void initData() {
-
+        imageBeanList=new ArrayList<>();
     }
 
     @Override
@@ -175,10 +200,43 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                                 startActivity(intent);
                                 break;
                             case R.id.health_check_reserve_order_button:
-                                Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
-                                startActivity(intent2);
+                                if(Contract.IsLogin.equals(Contract.Login))
+                                {
+                                    Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
+                                    startActivity(intent2);
+                                }else
+                                {
+                                    gotToLogin();
+                                }
+
                             default:
                                 break;
                         }
+    }
+
+    public void gotToLogin()
+    {
+        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("您还没有登录！")
+                .setContentText("是否去登录界面？")
+                .setCancelText("不了~")
+                .setConfirmText("去登陆->")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                        Intent intent=new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(banner01!=null)
+            banner01.stopAutoPlay();
     }
 }

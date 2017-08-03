@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
+import android.content.Intent;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -27,6 +28,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,6 +50,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
+    @BindView(R.id.login_activity_parentlayout)
+    FrameLayout frameLayout;
     @BindView(R.id.login_username)
     EditText usrname;
     @BindView(R.id.login_password)
@@ -223,7 +228,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     public IRegistAndLoginPresenter createPresenter() {
-        mPresenter = new RegistAndLoginPresenterImpl(this);
+        mPresenter=new RegistAndLoginPresenterImpl(this);
         return mPresenter;
     }
 
@@ -277,8 +282,14 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         Log.d(TAG, "dologin: username" + usrname.getText().toString() + "   password" + password.getText().toString());
     }
 
-    public void SetAcount(String username, String password) {
-        acount.setAccount(username, password);
+    @Override
+    public void ShowSanck(String string) {
+        showMessage(frameLayout,string);
+    }
+
+    public void SetAcount(String username,String password)
+    {
+        acount.setAccount(username,password);
     }
 
     @Override

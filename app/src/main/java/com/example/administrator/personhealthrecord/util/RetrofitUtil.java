@@ -37,7 +37,7 @@ public class RetrofitUtil {
 
     private static OkHttpClient mOkHttpClient = new OkHttpClient.Builder()
             .connectTimeout(8, TimeUnit.SECONDS)
-            .addInterceptor(mHttpLoggingInterceptor)
+            .addInterceptor(new OkHttpLoggingInterceptor())
             .cache(new Cache(cacheFile, fileSize))
             .build();
 
@@ -52,6 +52,7 @@ public class RetrofitUtil {
                             .client(mOkHttpClient)
                             .baseUrl(Contract.BASE_URL)
                             .build();
+
                 }
             }
         }

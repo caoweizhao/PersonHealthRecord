@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.administrator.personhealthrecord.bean.Loginbean;
 import com.example.administrator.personhealthrecord.bean.RegistBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.util.SnackBarUitl;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
 
 import io.reactivex.Observer;
@@ -63,6 +64,8 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: "+e.toString());
+                mView.ShowSanck(e.toString());
+
             }
 
             @Override
@@ -101,6 +104,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: "+e.toString());
+                mView.ShowSanck(e.toString());
             }
 
             @Override

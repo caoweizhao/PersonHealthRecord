@@ -1,9 +1,13 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
+import com.example.administrator.personhealthrecord.bean.AbstractResulUitl;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.bean.ImageBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observer;
 
 /**
  * Created by Administrator on 2017-7-19.
@@ -15,7 +19,7 @@ public class TestModel extends ACheckPageModel {
     }
 
     @Override
-    public void getImageRes() {
+    public void getImageRes(Observer<AbstractResulUitl<ImageBean>> observer) {
         List images = new ArrayList();
         images.add("http://img06.tooopen.com/images/20160921/tooopen_sy_179583447187.jpg");
         images.add("http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg");

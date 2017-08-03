@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
 import com.example.administrator.personhealthrecord.mvp.reserveorder.TestFragment;
+import com.example.administrator.personhealthrecord.mvp.reserveorder.appointmenorder.AppointmentOrderFragment;
+import com.example.administrator.personhealthrecord.mvp.reserveorder.healthcheckorder.HealthyCheckOrderFragment;
 
 
 /**
@@ -26,9 +28,9 @@ public class ReserveOrderFragmentPageAdapter extends FragmentPagerAdapter{
         switch(position)
             {
                 case 0:
-                    return new TestFragment();
+                    return new AppointmentOrderFragment();
                 case 1:
-                    return new TestFragment();
+                    return new HealthyCheckOrderFragment();
                 case 2:
                     return new TestFragment();
                 default:

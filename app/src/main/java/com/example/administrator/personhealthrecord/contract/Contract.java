@@ -74,4 +74,9 @@ public class Contract {
 
     public static final String PackageImageBase = "http://192.168.13.39:8080/medical_package/getImage/";
     public static final String HealthyNewsImageUrl = BASE_URL + "health_info/getImage/";
+
+
+    public static final String ReserVeOrderHealthyCheckImageUrl=BASE_URL+"rro/getImage/";
+
+    public static final String CheckPageAdvertismentImageUrl=BASE_URL+"/advertisement/getImage/";
 }
