@@ -21,7 +21,7 @@ import butterknife.BindView;
 
 public class DoctorDetailActivity extends BaseActivity {
 
-    @BindView(R.id.doctor_pic)
+    @BindView(R.id.expert_item_img)
     ImageView mDoctorPic;
     @BindView(R.id.doctor_name)
     TextView mDoctorName;

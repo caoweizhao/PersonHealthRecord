@@ -189,7 +189,7 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
     }
 
     /**
-     * 获取更多数据
+     * 获取更多数据(数据库有则从数据库读，没有则从网络读)
      */
     @Override
     protected void loadMoreData() {
@@ -224,8 +224,11 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
                     @Override
                     public List<NewsBean> apply(ResultUtilOfNewsBean bean) throws Exception {
                         if (bean.getStatus().equals("success")) {
-                            DataSupport.saveAll(bean.getCollection());
-                            return bean.getCollection();
+                            List<NewsBean> list = bean.getCollection();
+                            Log.d("NewsFragment","list:"+list);
+                            Collections.sort(list);
+                            DataSupport.saveAll(list);
+                            return list;
                         } else {
                             return Collections.emptyList();
                         }

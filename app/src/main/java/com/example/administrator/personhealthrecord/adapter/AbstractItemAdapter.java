@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.bean.AbstractItem;
 import com.example.administrator.personhealthrecord.bean.DiseaseBean;
+import com.example.administrator.personhealthrecord.bean.ImmuneBean;
 import com.example.administrator.personhealthrecord.bean.MedicineBean;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
@@ -50,8 +51,7 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                 mImageURL = item.getImageUrl();
             else
                 mImageURL = Contract.DiseaseBase + item.getImageUrl();
-        }else if(item instanceof NewsBean)
-        {
+        } else if (item instanceof NewsBean) {
             if (item.getImageUrl().contains("http"))
                 mImageURL = item.getImageUrl();
             else
@@ -63,12 +63,18 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
             else
                 mImageURL = Contract.MedicalBase + item.getImageUrl();
             Log.d("AbstractItemAdapter", "url" + mImageURL);
-        } else {
-            if (item.getImageUrl().contains("http"))
+        } else if (item instanceof ImmuneBean) {
+            if (item.getImageUrl().contains("http")) {
                 mImageURL = item.getImageUrl();
-            else
+            } else {
+                mImageURL = Contract.ImmuneBase + item.getImageUrl();
+            }
+        } else {
+            if (item.getImageUrl().contains("http")) {
+                mImageURL = item.getImageUrl();
+            } else {
                 mImageURL = Contract.ImageUrl + item.getImageUrl();
-
+            }
         }
 
 

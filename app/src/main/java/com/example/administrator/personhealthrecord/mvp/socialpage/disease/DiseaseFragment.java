@@ -130,6 +130,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
         }
         offset += localList.size();
         loadMoreDataDone(resultList);
+        mAdapter.loadMoreComplete();
     }
 
     @Override
@@ -144,6 +145,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
 
     @Override
     protected void initData() {
+        mAdapter.setEnableLoadMore(false);
         Observable<List<DiseaseBean>> networkObservable = mService.initDiseaseInfo()
                 .subscribeOn(Schedulers.newThread())
                 .map(new Function<ResponseBody, List<DiseaseBean>>() {
@@ -202,12 +204,14 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
                     public void onError(Throwable e) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         showMessage(e.getMessage());
+                        mAdapter.setEnableLoadMore(true);
                     }
 
                     @Override
                     public void onComplete() {
                         mSwipeRefreshLayout.setRefreshing(false);
                         showMessage(getString(R.string.success_msg));
+                        mAdapter.setEnableLoadMore(true);
                     }
                 });
     }

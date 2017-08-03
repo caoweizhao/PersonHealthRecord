@@ -99,10 +99,7 @@ public class ExpertListActivity extends BaseActivity {
                 intent.putExtra("bundle", bundle);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ExpertListActivity.this,
-                            Pair.create(view.findViewById(R.id.expert_item_img), "doctor_pic"),
-                            Pair.create(view.findViewById(R.id.expert_item__name), "doctor_name"),
-                            Pair.create(view.findViewById(R.id.expert_item_address), "doctor_workplace"),
-                            Pair.create(view.findViewById(R.id.expert_item_title), "doctor_position")).toBundle());
+                            Pair.create(view.findViewById(R.id.expert_item_img), "doctor_pic")).toBundle());
                 } else {
                     startActivity(intent);
                 }

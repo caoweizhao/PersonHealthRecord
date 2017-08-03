@@ -30,6 +30,22 @@ public class AnimateUtil {
         }
     }
 
+    public static void createCircularRevealFromTopLeftToRightBottom(View view) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            //创建CircularReveal效果示例
+            int width, height;
+            width = view.getWidth();
+            height = view.getHeight();
+            //参数为动画的中心点X,动画的中心点Y，动画开始的半径，动画结束的半径
+            Animator animator = null;
+            animator = ViewAnimationUtils.createCircularReveal(view, 0, 0, 0,
+                    (float) Math.hypot(view.getWidth(), view.getHeight()));
+            animator.setDuration(1200);
+            animator.setInterpolator(new AccelerateDecelerateInterpolator());
+            animator.start();
+        }
+    }
+
     public static void scaleShow(View view, ViewPropertyAnimatorListener viewPropertyAnimatorListener) {
         view.setVisibility(View.VISIBLE);
         ViewCompat.animate(view)

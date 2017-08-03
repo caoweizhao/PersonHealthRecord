@@ -117,10 +117,10 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
                 .limit(20)
                 .offset(offset)
                 .find(MedicineBean.class);
-        if(localList.size()==0){
+        if (localList.size() == 0) {
             mAdapter.loadMoreEnd(true);
             showMessage("没有更多数据啦！");
-            return ;
+            return;
         }
         List<MedicineBean> resultList = new ArrayList<>();
         List<MedicineBean> curList = mAdapter.getData();
@@ -131,6 +131,7 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
         }
         offset += localList.size();
         loadMoreDataDone(resultList);
+        mAdapter.loadMoreComplete();
     }
 
     @Override
@@ -145,6 +146,7 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
 
     @Override
     protected void initData() {
+        mAdapter.setEnableLoadMore(false);
         Observable<List<MedicineBean>> networkObservable = mService.getMedicineInfos()
                 .subscribeOn(Schedulers.newThread())
                 .map(new Function<ResponseBody, List<MedicineBean>>() {
@@ -203,12 +205,14 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
                     public void onError(Throwable e) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         showMessage(e.getMessage());
+                        mAdapter.setEnableLoadMore(true);
                     }
 
                     @Override
                     public void onComplete() {
                         mSwipeRefreshLayout.setRefreshing(false);
                         showMessage(getString(R.string.success_msg));
+                        mAdapter.setEnableLoadMore(true);
                     }
                 });
     }

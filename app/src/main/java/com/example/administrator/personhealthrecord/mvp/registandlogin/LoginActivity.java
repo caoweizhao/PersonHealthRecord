@@ -12,11 +12,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
@@ -35,11 +33,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.application.MyApplication;
 import com.example.administrator.personhealthrecord.sharepreference.Acount;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.view.WaveImageView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class LoginActivity extends ILoginVIew implements View.OnClickListener {
@@ -75,49 +80,53 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         super.initEvents();
         login.setOnClickListener(this);
         regist.setOnClickListener(this);
-        usrname.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+        Observable<CharSequence> userNameObservable = RxTextView.textChanges(usrname).share();
+        userNameObservable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence sequence) throws Exception {
+                        if (TextUtils.isEmpty(sequence)) {
+                            password.setText("");
+                        }
+                    }
+                });
+        Observable<CharSequence> passwordObservable = RxTextView.textChanges(password);
 
+        Observable.combineLatest(userNameObservable, passwordObservable, new BiFunction<CharSequence, CharSequence, Boolean>() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (userNameLayout.isErrorEnabled()) {
-                    userNameLayout.setErrorEnabled(false);
+            public Boolean apply(CharSequence usrName, CharSequence psw) throws Exception {
+                if (!TextUtils.isEmpty(usrName) || TextUtils.isEmpty(password.getText())) {
+                    if (userNameLayout.isErrorEnabled()) {
+                        userNameLayout.setErrorEnabled(false);
+                    }
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (TextUtils.isEmpty(s)) {
-                    password.setText("");
+                if (!TextUtils.isEmpty(password.getText()) && TextUtils.isEmpty(usrname.getText())) {
+                    userNameLayout.setError(getString(R.string.username_cannot_be_empty));
                 }
-            }
-        });
-        password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                return !TextUtils.isEmpty(usrName) && !TextUtils.isEmpty(psw);
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (passwordLayout.isErrorEnabled()) {
-                    passwordLayout.setErrorEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        login.setEnabled(aBoolean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d("LoginActivity", "accept" + throwable.getMessage());
+                    }
+                });
     }
 
     @Override
     protected void initData() {
-        acount = new Acount(this);
+        acount = new Acount(MyApplication.getContext());
         usrname.setText(acount.getUser());
         password.setText(acount.getPassword());
 
@@ -149,7 +158,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         sm.setStatusBarTintEnabled(false);
         WaveImageView myImageView = (WaveImageView) findViewById(R.id.login_image_view);
         /*Glide.with(this)
-                .load(R.drawable.login_bg)
+                .load(R.drawable.login_bg_enable)
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(myImageView);*/
@@ -237,15 +246,10 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     void dologin() {
-        if (TextUtils.isEmpty(usrname.getText())) {
-            //usrname.setError(getString(R.string.username_cannot_be_empty));
-            userNameLayout.setError(getString(R.string.username_cannot_be_empty));
-        } else if (TextUtils.isEmpty(password.getText()))
-            passwordLayout.setError(getString(R.string.password_cannot_empty));
-        else {
-            mPresenter.dologin(usrname.getText().toString(), password.getText().toString());
-            Log.d(TAG, "dologin: username" + usrname + "   password" + "");
-        }
+
+        mPresenter.dologin(usrname.getText().toString(), password.getText().toString());
+        Log.d(TAG, "dologin: username" + usrname + "   password" + "");
+
         Log.d(TAG, "dologin: username" + usrname.getText().toString() + "   password" + password.getText().toString());
 
     }

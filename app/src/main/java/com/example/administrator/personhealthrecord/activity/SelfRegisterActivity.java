@@ -2,10 +2,13 @@ package com.example.administrator.personhealthrecord.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -50,13 +53,13 @@ import retrofit2.http.POST;
 
 public class SelfRegisterActivity extends BaseActivity {
 
-    @BindView(R.id.doctor_pic)
+    @BindView(R.id.expert_item_img)
     ImageView mDoctorPic;   //医生图片
-    @BindView(R.id.self_register_doctor_name)
+    @BindView(R.id.expert_item_name)
     TextView mSelfRegisterDoctorName;   //医生名称
-    @BindView(R.id.self_register_doctor_position)
+    @BindView(R.id.expert_item_title)
     TextView mSelfRegisterDoctorPosition;   //医生职位
-    @BindView(R.id.self_register_doctor_workplace)
+    @BindView(R.id.expert_item_address)
     TextView mSelfRegisterDoctorWorkplace;  //医生工作地址
     @BindView(R.id.self_register_doctor_details)
     TextView mSelfRegisterDoctorDetails;    //医生详情
@@ -94,6 +97,9 @@ public class SelfRegisterActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setSharedElementsUseOverlay(true);
+        }
 
         initToolbar("自助挂号", true, new View.OnClickListener() {
             @Override
@@ -299,6 +305,8 @@ public class SelfRegisterActivity extends BaseActivity {
                 }
             }
         });
+
+        fix(mSelfRegisteredContainer, mSelfRegisteredGetVertifyCode);
     }
 
     private boolean validateVertifyCode() {
@@ -363,4 +371,24 @@ public class SelfRegisterActivity extends BaseActivity {
                 @Field("endTime") Timestamp endTime,
                 @Field("phoneNumber") String phoneNumber);
     }
+
+    public static void fix(final NestedScrollView root, final View lastView) {
+        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect rect = new Rect();
+                root.getWindowVisibleDisplayFrame(rect);
+                int mainInvisibleHeight = root.getRootView().getHeight() - rect.bottom;
+                if (mainInvisibleHeight > 200) {
+                    int[] location = new int[2];
+                    lastView.getLocationInWindow(location);
+                    int deltaY = location[1] + lastView.getHeight() - rect.bottom;
+                    root.smoothScrollBy(0, deltaY);
+                } else {
+                    root.smoothScrollTo(0, 0);
+                }
+            }
+        });
+    }
 }
+

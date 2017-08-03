@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,6 @@ import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.activity.TestActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
-import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -109,7 +109,6 @@ public class MainActivity extends AMainActivity {
                         break;
                 }
                 mDrawerLayout.closeDrawer(Gravity.START);
-                AnimateUtil.createCircularReveal(getWindow().getDecorView());
                 return true;
             }
         });
@@ -143,6 +142,7 @@ public class MainActivity extends AMainActivity {
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
+                Log.d("MainActivity", "slideOffset" + slideOffset);
                 if (slideOffset < 0.5) {
                     sm.setStatusBarTintEnabled(true);
                 } else {
@@ -196,7 +196,7 @@ public class MainActivity extends AMainActivity {
     public void setStatusBarTint(int color) {
         if (sm != null) {
             sm.setStatusBarTintColor(color);
-            sm.setStatusBarAlpha(255 * 0.6f);
+            sm.setStatusBarAlpha(255 * 0.9f);
         }
     }
 
