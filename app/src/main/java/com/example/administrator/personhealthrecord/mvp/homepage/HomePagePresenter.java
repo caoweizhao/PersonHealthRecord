@@ -101,7 +101,6 @@ public class HomePagePresenter extends AHomePagePresenter {
 
             @Override
             public void onError(Throwable e) {
-
             }
 
             @Override

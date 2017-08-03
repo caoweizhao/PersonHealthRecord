@@ -82,13 +82,16 @@
         <activity android:name=".activity.NewsDetailActivity"/>
         <activity android:name=".activity.DoctorDetailActivity"/>
         <activity android:name=".activity.HospitalListActivity"/>
-        <activity android:name=".activity.SelfRegisterActivity"/>
+        <activity
+            android:name=".activity.SelfRegisterActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity android:name=".activity.ExpertListActivity"/>
         <activity android:name=".activity.SelfPHRActivity"/>
         <activity
             android:name=".activity.EditPHRActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity android:name=".activity.TestActivity"/>
+        <activity android:name=".activity.ImmuneDetailActivity"/>
     </application>
 
 </manifest>

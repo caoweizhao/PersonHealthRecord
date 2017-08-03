@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 
 public interface ImmuneService {
 
-    @GET("immune/immune_list")
+    @GET("plan_immunity/plan_list")
     Observable<ResponseBody> getImmunesInfo();
 }

@@ -86,7 +86,6 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
         }, mRecyclerView);
     }
 
-
     protected abstract void refreshData();
 
     private void initView() {
@@ -113,12 +112,12 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
 
 
     protected void initDataDone(List<B> datas) {
-        Log.d("SocialPageBaseFragment","initDataDone"+getClass().getName());
         Collections.sort(datas);
         Collections.reverse(datas);
         for (B data : datas) {
             if (!mDataList.contains(data)) {
                 mAdapter.addData(0, data);
+                mAdapter.notifyItemInserted(0);
             }
         }
         mRecyclerView.scrollToPosition(0);
@@ -126,6 +125,7 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
 
     protected void refreshDataDone(List<B> dataList) {
         mAdapter.addData(0, dataList);
+        mAdapter.notifyItemRangeInserted(0, dataList.size());
         mRecyclerView.scrollToPosition(0);
     }
 
@@ -140,8 +140,9 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
      * @param datas 加载的更多数据
      */
     protected void loadMoreDataDone(List<B> datas) {
-        int mDataCount = mDataList.size();
-        mAdapter.addData(mDataCount, datas);
+        int mDataCount = mAdapter.getItemCount();
+        mAdapter.addData(mDataCount-1, datas);
+        mAdapter.notifyDataSetChanged();
     }
 
     /**

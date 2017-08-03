@@ -22,4 +22,5 @@
     <dimen name="smargin_right">100dp</dimen>
     <dimen name="add_case_padding">20dp</dimen>
 
+    <dimen name="medicine_text_size">16sp</dimen>
 </resources>

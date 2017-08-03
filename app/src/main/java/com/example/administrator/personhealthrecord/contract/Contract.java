@@ -68,9 +68,10 @@ public class Contract {
     public static final String HospitalBase = BASE_URL + "hospital/getImage/";
     public static final String DiseaseBase = BASE_URL + "slow_disease/getImage/";
     public static final String MedicalBase = BASE_URL + "medicine/getImage/";
+    public static final String ImmuneBase = BASE_URL + "plan_immunity/getImage/";
     public static final String DoctorBase = BASE_URL + "doctor/getImage/";
     public static final String AdvertisementBase = BASE_URL + "advertisement/getImage/";
 
     public static final String PackageImageBase = "http://192.168.13.39:8080/medical_package/getImage/";
-    public static final String HealthyNewsImageUrl=BASE_URL+"health_info/getImage/";
+    public static final String HealthyNewsImageUrl = BASE_URL + "health_info/getImage/";
 }

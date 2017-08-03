@@ -36,7 +36,7 @@ public class ExpertAdapter extends BaseQuickAdapter<ExpertBean, BaseViewHolder> 
             mImageURL = Contract.DoctorBase + item.getImageUrl();
         }
         helper.setText(R.id.expert_item_address, item.getAddress())
-                .setText(R.id.expert_item__name, item.getName())
+                .setText(R.id.expert_item_name, item.getName())
                 .setText(R.id.expert_item_title, item.getDoctorTitle())
                 .addOnClickListener(R.id.expert_item_layout);
         Glide.with(mContext)

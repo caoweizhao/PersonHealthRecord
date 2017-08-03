@@ -23,9 +23,10 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
@@ -37,6 +38,8 @@ import retrofit2.http.Header;
  */
 
 public class SelfPHRActivity extends BaseActivity {
+
+    Disposable mDisposable;
 
     @BindView(R.id.edit_phr)
     ImageView mImageView;
@@ -76,6 +79,9 @@ public class SelfPHRActivity extends BaseActivity {
     @BindView(R.id.phr_body_mass_index_unit)
     TextView mPhrBodyMassIndexUnit;
 
+    @BindView(R.id.container_)
+    View view;
+
     PHRBean mPhrBean;
     UserInfoBean mUserInfoBean;
 
@@ -104,6 +110,12 @@ public class SelfPHRActivity extends BaseActivity {
 
     private void getSelfPHR() {
         if (Contract.IsLogin.equals(Contract.Login)) {
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    AnimateUtil.createCircularRevealFromTopLeftToRightBottom(view);
+                }
+            });
             Observable<PHRBean> observable1 = mService.getSelfPHR(Contract.cookie)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -138,16 +150,31 @@ public class SelfPHRActivity extends BaseActivity {
 
                     });
 
-            Observable.zip(observable1, observable2, new BiFunction<PHRBean, UserInfoBean, PHRclass>() {
+            Observable.zip(observable1, observable2, new BiFunction<PHRBean, UserInfoBean, PHRClass>() {
                 @Override
-                public PHRclass apply(PHRBean bean, UserInfoBean bean2) throws Exception {
-                    return new PHRclass(bean,bean2);
+                public PHRClass apply(PHRBean bean, UserInfoBean bean2) throws Exception {
+                    return new PHRClass(bean, bean2);
                 }
             }).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<PHRclass>() {
+                    .subscribe(new Observer<PHRClass>() {
                         @Override
-                        public void accept(PHRclass rclass) throws Exception {
-                            initValues(rclass.mPHRBean,rclass.mUserInfoBean);
+                        public void onSubscribe(Disposable d) {
+                            mDisposable = d;
+                        }
+
+                        @Override
+                        public void onNext(PHRClass value) {
+                            initValues(value.mPHRBean, value.mUserInfoBean);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            showMessage(mPhrAllergyHistory, e.getMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+
                         }
                     });
 
@@ -220,10 +247,12 @@ public class SelfPHRActivity extends BaseActivity {
         @GET("phr/search")
         Observable<ResponseBody> getSelfPHR(@Header("Cookie") String cookie);
     }
-    class PHRclass{
+
+    class PHRClass {
         PHRBean mPHRBean;
         UserInfoBean mUserInfoBean;
-        public PHRclass(PHRBean phrBean,UserInfoBean userInfoBean){
+
+        public PHRClass(PHRBean phrBean, UserInfoBean userInfoBean) {
             this.mPHRBean = phrBean;
             this.mUserInfoBean = userInfoBean;
         }

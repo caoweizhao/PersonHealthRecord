@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【药名】"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:id="@+id/medicine_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/medicine_text_size"
+        tools:text="氯雷他定片"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【编号】"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/medicine_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/medicine_text_size"
+        tools:text="H10970410"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【分类目录】"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:id="@+id/medicine_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/medicine_text_size"
+        tools:text="本品为耳鼻喉科及皮肤科用药类非处方药药品"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【特性】"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/medicine_character"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/medicine_text_size"
+        tools:text="本品为白色片"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【组成成分】"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/medicine_component"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/medicine_text_size"
+        tools:text="本品每粒含氯雷他定"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【功效】"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/medicine_function"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/medicine_text_size"
+        tools:text="用于缓解过敏性鼻炎有关的症状，如喷嚏、流涕、鼻痒、鼻塞以及眼部痒及烧灼感。口服药物后，鼻和眼部症状及体征得以迅速缓解。亦适用于缓解慢性荨麻疹、瘙痒性皮肤病及其他过敏性皮肤病的症状及体征"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【服用方法】"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【注意事项】"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【规格】"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【有效期】"
+        android:textSize="@dimen/text_size"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_padding"
+        android:text="【使用禁忌】"
+        android:textSize="@dimen/text_size"
+        />
+
+
+</LinearLayout>

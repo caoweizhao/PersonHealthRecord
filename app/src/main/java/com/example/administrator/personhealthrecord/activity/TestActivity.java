@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
+import com.example.administrator.personhealthrecord.util.AnimateUtil;
 
 import butterknife.BindView;
 
@@ -20,6 +21,8 @@ public class TestActivity extends BaseActivity {
 
     @BindView(R.id.imageView)
     ImageView mImageView;
+    @BindView(R.id.container_)
+    View view;
 
     @Override
     protected int getLayoutRes() {
@@ -28,6 +31,13 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                AnimateUtil.createCircularRevealFromTopLeftToRightBottom(view);
+            }
+        });
+
         Glide.with(this)
                 .load(R.drawable.news_bg)
                 .centerCrop()
