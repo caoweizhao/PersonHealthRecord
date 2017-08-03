@@ -1,7 +1,6 @@
 package com.example.administrator.personhealthrecord.activity;
 
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -11,15 +10,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewStub;
-import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ImmuneBean;
@@ -120,27 +118,32 @@ public class ImmuneDetailActivity extends BaseActivity implements View.OnClickLi
                 mToolbar.setTitle(mImmuneBean.getName());
                 mSummaryView.setText(mImmuneBean.getSummary());
                 mSummaryDrawable.setLevel(10000);
+
                 String mImageURL;
                 if (mImmuneBean.getImageUrl().contains("http")) {
                     mImageURL = mImmuneBean.getImageUrl();
                 } else {
                     mImageURL = Contract.ImmuneBase + mImmuneBean.getImageUrl();
                 }
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    postponeEnterTransition();
                     Glide.with(this)
                             .load(mImageURL)
                             .asBitmap()
                             .centerCrop()
+                            .placeholder(R.mipmap.ic_launcher_round)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(new SimpleTarget<Bitmap>() {
+                            .listener(new RequestListener<String, Bitmap>() {
                                 @Override
-                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                    mImageView.setImageBitmap(resource);
-                                    scheduleStartPostponedTransition(mImageView);
+                                public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
+                                    return false;
                                 }
-                            });
+
+                                @Override
+                                public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    return false;
+                                }
+                            })
+                            .into(mImageView);
                 }
             }
         }
@@ -333,24 +336,6 @@ public class ImmuneDetailActivity extends BaseActivity implements View.OnClickLi
         mAttentionDrawable.setLevel(0);
     }
 
-
-    /**
-     * 延迟共享元素动画
-     *
-     * @param sharedElement
-     */
-    private void scheduleStartPostponedTransition(final View sharedElement) {
-        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public boolean onPreDraw() {
-                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-                        startPostponedEnterTransition();
-                        return true;
-                    }
-                });
-    }
 
     private void reset() {
         if (mSummaryStart != 0) {

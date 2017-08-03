@@ -239,6 +239,14 @@ public class SelfPHRActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+    }
+
     interface SelfPHRService {
 
         @GET("user_info/search")

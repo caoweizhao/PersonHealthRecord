@@ -490,7 +490,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/edit_phr_btn_bg"
                         android:text="@string/commit_ok"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"/>

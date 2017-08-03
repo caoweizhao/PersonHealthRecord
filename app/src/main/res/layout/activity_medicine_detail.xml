@@ -1,143 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <TextView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【药名】"
-        android:textSize="@dimen/text_size"
-        />
+        android:layout_height="250dp"
+        android:background="@color/medical_page"
+        android:fitsSystemWindows="true"
+        >
 
-    <TextView
-        android:id="@+id/medicine_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:textSize="@dimen/medicine_text_size"
-        tools:text="氯雷他定片"
-        />
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:minHeight="?android:attr/actionBarSize"
+            app:contentScrim="@color/medical_page"
+            app:layout_scrollFlags="scroll|snap|enterAlwaysCollapsed|exitUntilCollapsed"
+            app:statusBarScrim="@color/medical_page"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="药品详情"
+            >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【编号】"
-        android:textSize="@dimen/text_size"
-        />
-    <TextView
-        android:id="@+id/medicine_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:textSize="@dimen/medicine_text_size"
-        tools:text="H10970410"
-        />
+            <ImageView
+                android:id="@+id/medicine_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitXY"
+                android:transitionName="image"
+                app:layout_collapseMode="parallax"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【分类目录】"
-        android:textSize="@dimen/text_size"
-        />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#00aaaaaa"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                />
 
-    <TextView
-        android:id="@+id/medicine_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:textSize="@dimen/medicine_text_size"
-        tools:text="本品为耳鼻喉科及皮肤科用药类非处方药药品"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【特性】"
-        android:textSize="@dimen/text_size"
-        />
-    <TextView
-        android:id="@+id/medicine_character"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:textSize="@dimen/medicine_text_size"
-        tools:text="本品为白色片"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【组成成分】"
-        android:textSize="@dimen/text_size"
-        />
-    <TextView
-        android:id="@+id/medicine_component"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:textSize="@dimen/medicine_text_size"
-        tools:text="本品每粒含氯雷他定"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【功效】"
-        android:textSize="@dimen/text_size"
-        />
-    <TextView
-        android:id="@+id/medicine_function"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:textSize="@dimen/medicine_text_size"
-        tools:text="用于缓解过敏性鼻炎有关的症状，如喷嚏、流涕、鼻痒、鼻塞以及眼部痒及烧灼感。口服药物后，鼻和眼部症状及体征得以迅速缓解。亦适用于缓解慢性荨麻疹、瘙痒性皮肤病及其他过敏性皮肤病的症状及体征"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【服用方法】"
-        android:textSize="@dimen/text_size"
-        />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-    <TextView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【注意事项】"
-        android:textSize="@dimen/text_size"
-        />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【规格】"
-        android:textSize="@dimen/text_size"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【有效期】"
-        android:textSize="@dimen/text_size"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【药名】"
+                android:textSize="@dimen/text_size"
+                />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_padding"
-        android:text="【使用禁忌】"
-        android:textSize="@dimen/text_size"
-        />
+            <TextView
+                android:id="@+id/medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="氯雷他定片"
+                android:textSize="@dimen/medicine_text_size"
+                />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【编号】"
+                android:textSize="@dimen/text_size"
+                />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/medicine_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="H10970410"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【分类目录】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="本品为耳鼻喉科及皮肤科用药类非处方药药品"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【特性】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_character"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="本品为白色片"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【组成成分】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_component"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="本品每粒含氯雷他定"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【功效】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_function"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="用于缓解过敏性鼻炎有关的症状，如喷嚏、流涕、鼻痒、鼻塞以及眼部痒及烧灼感。口服药物后，鼻和眼部症状及体征得以迅速缓解。亦适用于缓解慢性荨麻疹、瘙痒性皮肤病及其他过敏性皮肤病的症状及体征"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【服用方法】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+
+                android:text="成人及12岁以上儿童：一日1次，一次1片（10毫克）。2～12岁儿童：体重＞30公斤：一日1次，一次1片（10毫克）。体重≤30公斤：一日1次，一次半片（5毫克）。"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【注意事项】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_attention"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+
+                android:text="1.严重肝功能不全的患者请在医生指导下使用。 2.妊娠期及哺乳期妇女慎用。 3.在作皮试前的约48小时左右应中止使用本品，因抗组胺药能阻止或降低皮试的阳性反应发生。 4.对本品过敏者禁用，过敏体质者慎用。 5.本品性状发生改变时禁止使用。 6.请将本品放在儿童不能接触的地方。 7.儿童必须在成人监护下使用。 8.如正在使用其他药品，使用本品前请咨询医师或药师。"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【规格】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_standard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+
+                android:text="10mg*6片/盒"
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【有效期】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_expiry_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="48个月"
+
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:text="【使用禁忌】"
+                android:textSize="@dimen/text_size"
+                />
+
+            <TextView
+                android:id="@+id/medicine_use_taboo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medicine_text_bg"
+                android:padding="@dimen/text_padding"
+                android:text="对本品过敏者禁用"
+
+                android:textSize="@dimen/medicine_text_size"
+                />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
