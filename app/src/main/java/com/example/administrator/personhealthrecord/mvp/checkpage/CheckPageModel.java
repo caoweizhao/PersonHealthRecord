@@ -1,12 +1,15 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
+import com.example.administrator.personhealthrecord.bean.AbstractResulUitl;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.bean.ImageBean;
 import com.example.administrator.personhealthrecord.mvp.checkpage.api.CheckPageService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -24,30 +27,13 @@ public class CheckPageModel extends ACheckPageModel {
     }
 
     @Override
-    public void getImageRes() {
+    public void getImageRes(Observer<AbstractResulUitl<ImageBean>> observer) {
         mCheckPageService.getImagesUrl()
-                .observeOn(Schedulers.newThread())
-                .subscribe(new Observer<List<String>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
 
-                    }
-
-                    @Override
-                    public void onNext(List<String> value) {
-                        mPresenter.onImagesReady(value);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
 

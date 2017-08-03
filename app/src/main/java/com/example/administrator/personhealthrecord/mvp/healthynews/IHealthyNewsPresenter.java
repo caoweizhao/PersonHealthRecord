@@ -9,4 +9,5 @@ public interface IHealthyNewsPresenter {
     public void getTodayNews();
     public void getNewsBefore(long date);
     public void getDBlist();
+    public void test();
 }

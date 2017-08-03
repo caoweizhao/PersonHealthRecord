@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -38,6 +38,7 @@
 
 
                 <TextView
+                    android:textColor="@android:color/black"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/health_check_reserve_order_title"
                     android:layout_width="wrap_content"
@@ -52,6 +53,7 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:textColor="@android:color/black"
                         android:id="@+id/health_check_reserve_order_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -60,6 +62,7 @@
                         tools:text="体检时间:2017年7月30号" />
 
                     <TextView
+                        android:textColor="@android:color/black"
                         android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:id="@+id/health_check_reserve_order_hospital"
@@ -75,8 +78,9 @@
                     android:background="@drawable/cycle_imageview"
                     android:id="@+id/health_check_reserve_order_cancle"
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="33dp"
                     android:layout_gravity="end"
+                    android:text="@string/cancle_reserve"
                     tools:text="取消预约" />
             </LinearLayout>
         </LinearLayout>

@@ -3,13 +3,12 @@ package com.example.administrator.personhealthrecord.bean;
 import java.util.List;
 
 /**
- * Created by andy on 2017/8/1.
+ * Created by andy on 2017/8/2.
  */
 
-public class ResultUtilOfHealthyOrderBean<T extends AbstractReserveBean> {
+public class AbstractResulUitl<T>{
     public long timestamp;
     public String status;
-
     public String message;
     public List<T> collection;
 

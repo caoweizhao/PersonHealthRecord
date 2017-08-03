@@ -34,13 +34,24 @@ import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReservePresenterImpl;
 import com.example.administrator.personhealthrecord.util.SnackBarUitl;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by andy on 2017/7/28.
@@ -88,6 +99,7 @@ private PackageBean bean;
         Glide.with(this).load(Contract.PackageImageBase+bean.getImageUrl())
                 .into(imageView);
         initToolbar("提交预约",true,null);
+        reserveNow.setEnabled(false);
     }
 
     @Override
@@ -105,7 +117,46 @@ private PackageBean bean;
 
             }
         });
-        reserveNow.setOnClickListener(this);
+        RxView.clicks(reserveNow)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        if(Contract.IsLogin.equals(Contract.Login))//判断是否有登录
+                        {
+                            ReserveNow();
+                        }else
+                        {
+                            gotToLogin();
+                        }
+                    }
+                });
+        Observable<CharSequence> nameObservable= RxTextView.textChanges(editname);
+        final Observable<CharSequence> phoneObservble=RxTextView.textChanges(editphoneNumber);
+
+        Observable.combineLatest(nameObservable, phoneObservble, new BiFunction<CharSequence, CharSequence, Boolean>() {
+
+            @Override
+            public Boolean apply(CharSequence charSequence, CharSequence charSequence2) throws Exception {
+                return (editname.getText().toString().length()>0)&&(editphoneNumber.getText().toString().length()==11);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(new Consumer<Boolean>() {
+                               @Override
+                               public void accept(Boolean aBoolean) throws Exception {
+                                   reserveNow.setEnabled(aBoolean);
+                               }
+                           }
+                        , new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                Log.d(TAG, "accept: ");
+                            }
+                        });
+
+
     }
 
     @Override
@@ -155,22 +206,22 @@ private PackageBean bean;
                             case R.id.healthtest_date:
                                 startPickdate();
                                 break;
-                            case R.id.order_button:
-                                try {
-                                    if(!setTime())
-                                        return;
-
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                if(Contract.IsLogin.equals(Contract.Login))//判断是否有登录
-                                {
-                                    ReserveNow();
-                                }else
-                                {
-                                    gotToLogin();
-                                }
-                                break;
+//                            case R.id.order_button:
+//                                try {
+//                                    if(!setTime())
+//                                        return;
+//
+//                                } catch (ParseException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                if(Contract.IsLogin.equals(Contract.Login))//判断是否有登录
+//                                {
+//                                    ReserveNow();
+//                                }else
+//                                {
+//                                    gotToLogin();
+//                                }
+//                                break;
                             default:
                                 break;
                         }

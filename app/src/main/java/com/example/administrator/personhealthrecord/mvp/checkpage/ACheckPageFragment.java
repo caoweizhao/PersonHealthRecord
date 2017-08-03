@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 import com.example.administrator.personhealthrecord.bean.CheckBean;
+import com.example.administrator.personhealthrecord.bean.ImageBean;
 import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public abstract class ACheckPageFragment extends MvpFragment<ACheckPagePresenter> {
 
-    public abstract void updateImages(List<String> urls);
+    public abstract void updateImages(List<ImageBean> urls);
 
     public abstract void updateCheckItems(List<CheckBean> checkBeanList);
 }

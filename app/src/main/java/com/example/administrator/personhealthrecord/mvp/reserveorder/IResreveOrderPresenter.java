@@ -13,4 +13,5 @@ import java.util.List;
 
 public abstract class IResreveOrderPresenter extends BasePresenter<IReserveOrderView,IReserveOrderModle>{
     public abstract void getHealthCheckeList();
+    public abstract void getAppoitmentList();
 }

@@ -11,6 +11,7 @@ public class ReserveBean {
     private String name;
     private String phoneNumber;
     private String medicalStatus;
+    //private PackageBean packageinfo;
 
     public long getStartTime() {
         return startTime;

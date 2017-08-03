@@ -1,5 +1,7 @@
 package com.example.administrator.personhealthrecord.mvp.reserveorder;
 
+import com.example.administrator.personhealthrecord.bean.AppointmentBean;
+import com.example.administrator.personhealthrecord.bean.ReserOrderBean;
 import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHealthyOrderBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
@@ -21,10 +23,21 @@ public class ReserveOrderModleImpl extends IReserveOrderModle{
     }
 
     @Override
-    public void getHealthyCheckList(Observer<ResultUtilOfHealthyOrderBean> observer) {
+    public void getHealthyCheckList(Observer<ResultUtilOfHealthyOrderBean<ReserOrderBean>> observer) {
         Retrofit client= RetrofitUtil.getRetrofit();
         ReserveOrderService service=client.create(ReserveOrderService.class);
         service.getHealthyCheckOrderList(Contract.cookie)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    @Override
+    public void getAppoitmentList(Observer<ResultUtilOfHealthyOrderBean<AppointmentBean>> observer) {
+        Retrofit client= RetrofitUtil.getRetrofit();
+        ReserveOrderService service=client.create(ReserveOrderService.class);
+        service.getAppoitment(Contract.cookie)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

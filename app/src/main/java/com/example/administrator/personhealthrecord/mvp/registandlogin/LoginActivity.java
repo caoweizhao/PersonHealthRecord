@@ -271,7 +271,5 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     public void SetAcount(String username,String password)
     {
         acount.setAccount(username,password);
-    public void SetAcount(String username, String password) {
-        acount.setAccount(username, password);
     }
 }

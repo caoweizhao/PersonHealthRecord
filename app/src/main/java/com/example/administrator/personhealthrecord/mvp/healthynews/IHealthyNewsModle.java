@@ -5,7 +5,10 @@ import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 
 /**
@@ -18,4 +21,5 @@ public interface IHealthyNewsModle {
     public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer,long date);
     public void savaToDatabase(List<NewsBean> list);
     public List<NewsBean> getDBlist();
+    public void test(Observer<ResponseBody> observer);
 }

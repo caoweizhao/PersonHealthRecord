@@ -6,13 +6,15 @@ import android.support.v4.view.ViewPager;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.ReserveOrderFragmentPageAdapter;
+import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
+import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class ReserveOrderActivity extends IReserveOrderView {
+public class ReserveOrderActivity extends BaseActivity {
 
     @BindView(R.id.reserve_order_tabLayout)
     TabLayout mTabLayout;
@@ -34,28 +36,4 @@ public class ReserveOrderActivity extends IReserveOrderView {
         initToolbar("我的预约",true,null);
     }
 
-    @Override
-    public IResreveOrderPresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void dismissLoading() {
-
-    }
-
-    @Override
-    public void getHealthCheckeList() {
-
-    }
-
-    @Override
-    public void updataHealthCheckeList(List<ResultUitlOfReserve> list) {
-
-    }
 }

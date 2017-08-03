@@ -5,12 +5,12 @@ package com.example.administrator.personhealthrecord.bean;
  */
 
 public abstract class AbstractReserveBean {
-    public abstract String getTitle();
+    public abstract String getImageId();
 
-    public abstract String getSummary();
+    public abstract long getStartTime();
 
-    public abstract String getImageUrl();
+    public abstract String getHosPitalNameTotal();
 
-    public abstract String getdate();
+    public abstract String getName();
 
 }

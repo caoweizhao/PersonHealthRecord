@@ -131,4 +131,5 @@
     <string name="yuan">￥</string>
     <string name="had_reserve">已经预约</string>
     <string name="healthy_package_detail">套餐详情</string>
+    <string name="cancle_reserve">取消预约</string>
 </resources>
