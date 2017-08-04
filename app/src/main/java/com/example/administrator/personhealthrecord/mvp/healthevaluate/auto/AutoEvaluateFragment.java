@@ -53,6 +53,7 @@ public class AutoEvaluateFragment extends IHealthyEvaluateView{
     TextView mPhrBodyMassIndexUnit;
     @Override
     public void OnPHRReady(PHRBean bean) {
+        mPresenter.getPHRScore(bean);
         mPhrBodyMassIndex.setText(bean.getBodyMassIndex());
         mPhrTall.setText(bean.getHeight());
         mPhrWeight.setText(bean.getWeight());
@@ -75,7 +76,7 @@ public class AutoEvaluateFragment extends IHealthyEvaluateView{
         imageView=(WaveImageView)view.findViewById(R.id.healthy_evaluate_iamge_score);
         imageView.drawCircle();
         imageView.setColor();
-        imageView.setHight(20);
+        imageView.setHight(0);
         imageView.startAnimate();
         mPresenter.getPHRdata();
         return view;
@@ -115,5 +116,9 @@ public class AutoEvaluateFragment extends IHealthyEvaluateView{
     public void setMenuVisibility(boolean menuVisible) {
     }
 
+    public void onPHRScoreReady(int score)
+    {
+        imageView.SetHightAnimate(score);
+    }
 
 }

@@ -65,10 +65,17 @@ public class HealthyCheckOrderFragment extends IReserveOrderView{
         getList();
         adapter=new ReserveOrderRecycleVIewAdapter<ReserOrderBean>(0,list,this);
         recycleview.setAdapter(adapter);
+        adapter.bindToRecyclerView(recycleview);
+        adapter.setEmptyView(R.layout.empty_view);
     }
     @Override
     protected void initEvent() {
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getList();
+            }
+        });
     }
     public void OnPackageReady(List<ReserOrderBean> list)
     {
@@ -78,6 +85,7 @@ public class HealthyCheckOrderFragment extends IReserveOrderView{
             if(!list1.contains(bean))
                 adapter.addData(bean);
         adapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

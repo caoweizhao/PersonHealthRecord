@@ -31,4 +31,15 @@ public class HealthyEvaluateModleImpl extends IHealthyEvaluateModle{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
+
+    @Override
+    public void getPHRScore(Observer<AbstractObjectResult<Integer>> observer,PHRBean bean) {
+        Retrofit retrofit= RetrofitUtil.getRetrofit();
+        HealthyEvaluateService service=retrofit.create(HealthyEvaluateService.class);
+        service.getPHR(Contract.cookie,bean)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
 }

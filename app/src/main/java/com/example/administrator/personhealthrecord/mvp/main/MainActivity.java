@@ -105,13 +105,10 @@ public class MainActivity extends AMainActivity {
                         startActivity(phrIntent);
                         break;
                     case R.id.menu_health_assessment:
-                        if(Contract.IsLogin.equals(Contract.Login)) {
+
                             Intent intent3 = new Intent(MainActivity.this, HealthyEvaluateActivity.class);
                             startActivity(intent3);
-                        }else
-                        {
-                            gotToLogin();
-                        }
+
                         break;
                     default:
                         break;
@@ -223,22 +220,5 @@ public class MainActivity extends AMainActivity {
         mBottomBar.selectTabAtPosition(1);
     }
 
-    public void gotToLogin()
-    {
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("您还没有登录！")
-                .setContentText("是否去登录界面？")
-                .setCancelText("不了~")
-                .setConfirmText("去登陆->")
-                .showCancelButton(true)
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        sDialog.cancel();
-                        Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .show();
-    }
+
 }

@@ -19,4 +19,5 @@ public abstract class IHealthyEvaluateModle extends BaseModel<IHealthyEvaluatePr
         super(presenter);
     }
     public abstract void getPHRdaata(Observer<AbstractObjectResult<PHRBean>> observer);
+    public abstract void getPHRScore(Observer<AbstractObjectResult<Integer>> observer,PHRBean bean);
 }

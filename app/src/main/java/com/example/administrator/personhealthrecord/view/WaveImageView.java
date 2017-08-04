@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -161,7 +162,6 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
     public void setHight(int value)
     {
         this.value = value;
-         invalidate();
     }
 
     boolean drawCircle = false;
@@ -169,5 +169,17 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
         drawCircle = true;
     }
 
+    public void SetHightAnimate(int height)
+    {
+        ValueAnimator v=ValueAnimator.ofInt(0,height);
+                v.setDuration(1000);
+                v.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        value=(int)animation.getAnimatedValue();
+                    }
+                });
+        v.start();
+    }
 }
 
