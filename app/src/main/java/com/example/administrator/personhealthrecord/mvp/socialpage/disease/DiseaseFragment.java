@@ -1,9 +1,15 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.disease;
 
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.DiseaseDetailActivity;
 import com.example.administrator.personhealthrecord.bean.DiseaseBean;
 import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageBaseFragment;
 import com.google.gson.Gson;
@@ -44,6 +50,24 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
     @Override
     protected int getLayoutRes() {
         return R.layout.social_child_fragment;
+    }
+
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getContext(), DiseaseDetailActivity.class);
+                intent.putExtra("data", mAdapter.getItem(position));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(),
+                            view.findViewById(R.id.abstract_item__img), "image").toBundle());
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     /**

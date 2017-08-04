@@ -13,6 +13,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:background="@color/news_page"
         android:fitsSystemWindows="true"
         >
 
@@ -21,10 +22,10 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             android:minHeight="?android:attr/actionBarSize"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@color/news_page"
             app:expandedTitleGravity="left|center_vertical"
             app:layout_scrollFlags="scroll|enterAlways|snap|enterAlwaysCollapsed"
-            app:statusBarScrim="@color/colorPrimary"
+            app:statusBarScrim="@color/news_page"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:title="新闻详情"
             >

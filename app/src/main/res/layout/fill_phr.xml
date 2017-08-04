@@ -212,17 +212,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:entries="@array/choose_blood_type">
+                            android:entries="@array/blood_type">
                         </Spinner>
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
+                    <include layout="@layout/divider_view"/>
 
                     <!--心率-->
                     <LinearLayout
@@ -342,24 +336,27 @@
                     </LinearLayout>
 
                     <!--吸烟量-->
-                    <android.support.design.widget.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="吸烟量"
-                        >
+                        android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/edit_smoking_amount"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:numeric="integer"
-                            android:paddingLeft="@dimen/text_padding"
-                            android:singleLine="true"
+                            android:padding="@dimen/text_padding"
+                            android:text="@string/smoking_amount"
                             android:textSize="@dimen/text_size"/>
-                    </android.support.design.widget.TextInputLayout>
 
+                        <Spinner
+                            android:id="@+id/smoking_amount_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:entries="@array/smoking_amount">
+
+                        </Spinner>
+                    </LinearLayout>
+                    <include layout="@layout/divider_view"/>
                     <!--饮酒类型-->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -383,40 +380,37 @@
                         </Spinner>
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
+                    <include layout="@layout/divider_view"/>
 
                     <!--饮酒量-->
-                    <android.support.design.widget.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="饮酒量"
-                        >
+                        android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/edit_alcohol_comsuption"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:numeric="integer"
-                            android:paddingLeft="@dimen/text_padding"
-                            android:singleLine="true"
+                            android:padding="@dimen/text_padding"
+                            android:text="@string/alcohol_comsuption"
                             android:textSize="@dimen/text_size"/>
-                    </android.support.design.widget.TextInputLayout>
 
+                        <Spinner
+                            android:id="@+id/alcohol_comsuption_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:entries="@array/drinking_amount">
+
+                        </Spinner>
+                    </LinearLayout>
+
+                    <include layout="@layout/divider_view"/>
                     <!--饮酒频率-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/drinking_"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
@@ -432,13 +426,7 @@
                         </Spinner>
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
+                    <include layout="@layout/divider_view"/>
 
                     <!--体育锻炼情况-->
                     <LinearLayout
@@ -460,6 +448,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_frame"
                             android:minHeight="120dp"
+                            android:gravity="start|top"
                             android:padding="@dimen/edit_padding"
                             android:textSize="@dimen/text_size"/>
 
@@ -490,7 +479,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/edit_phr_btn_bg"
                         android:text="@string/commit_ok"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"/>

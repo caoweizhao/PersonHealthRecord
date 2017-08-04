@@ -37,10 +37,10 @@ public class AnimateUtil {
             width = view.getWidth();
             height = view.getHeight();
             //参数为动画的中心点X,动画的中心点Y，动画开始的半径，动画结束的半径
-            Animator animator = null;
-            animator = ViewAnimationUtils.createCircularReveal(view, 0, 0, 0,
-                    (float) Math.hypot(view.getWidth(), view.getHeight()));
-            animator.setDuration(1200);
+            Animator animator;
+            animator = ViewAnimationUtils.createCircularReveal(view, 0, 0, 0, (float) Math.hypot(
+                    width, height));
+            animator.setDuration(800);
             animator.setInterpolator(new AccelerateDecelerateInterpolator());
             animator.start();
         }

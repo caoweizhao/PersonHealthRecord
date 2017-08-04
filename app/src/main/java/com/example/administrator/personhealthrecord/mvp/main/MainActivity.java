@@ -1,11 +1,12 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
+import android.graphics.Outline;
+import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
@@ -15,15 +16,19 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.ProfileActivity;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.activity.TestActivity;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.healthevaluate.HealthyEvaluateActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
+import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -46,10 +51,54 @@ public class MainActivity extends AMainActivity {
     @BindView(R.id.main_drawerLayout)
     public DrawerLayout mDrawerLayout;
 
+    ImageView mAvator;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //mDrawerLayout.setScrimColor(0x00ffffff);
+    protected void initData() {
+        mAvator = (ImageView) mMainNavigationView.getHeaderView(0).findViewById(R.id.avator);
+
+        mAvator.post(new Runnable() {
+            @Override
+            public void run() {
+                final int width = mAvator.getWidth();
+                final int height = mAvator.getHeight();
+                int length = Math.min(width, height);
+
+                int centerX = width / 2;
+                int centerY = height / 2;
+
+                final int left;
+                final int top;
+                final int right;
+                final int bottom;
+
+                if (length == width) {
+                    left = 0;
+                    top = centerY - length / 2;
+                    right = width;
+                    bottom = centerY + length / 2;
+                } else {
+                    left = centerX - length / 2;
+                    top = 0;
+                    right = centerX + length / 2;
+                    bottom = height;
+                }
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    ViewOutlineProvider outlineProvider = new ViewOutlineProvider() {
+                        @Override
+                        public void getOutline(View view, Outline outline) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                Log.d("MainActivity", "getOutline" + view.getMeasuredWidth() + ":" + view.getMeasuredHeight());
+                                outline.setOval(left, top, right, bottom);
+                            }
+                        }
+                    };
+                    mAvator.setClipToOutline(true);
+                    mAvator.setOutlineProvider(outlineProvider);
+                }
+            }
+        });
     }
 
     @Override
@@ -60,6 +109,22 @@ public class MainActivity extends AMainActivity {
 
     @Override
     protected void initEvents() {
+        mAvator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAvator.setScaleY(0.5f);
+                mAvator.setScaleX(0.5f);
+                AnimateUtil.scaleShow(mAvator, null);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                            mAvator, "avator").toBundle());
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
+
         fragmentMgr = new FragmentMgr(this, mFrameLayout);
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {

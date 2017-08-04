@@ -1,6 +1,8 @@
 package com.example.administrator.personhealthrecord.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -46,7 +48,6 @@ public class EditPHRActivity extends BaseActivity {
 
     PHRBean mPHRBean;
     UserInfoBean mUserInfoBean;
-
     @BindView(R.id.edit_tall)
     EditText mEditTall;
     @BindView(R.id.edit_weight)
@@ -59,12 +60,12 @@ public class EditPHRActivity extends BaseActivity {
     EditText mEditPressureUP;
     @BindView(R.id.edit_diastolic)
     EditText mEditPressureDown;
-    @BindView(R.id.edit_smoking_amount)
-    EditText mEditSmokingAmount;
+    @BindView(R.id.smoking_amount_spinner)
+    Spinner mSmokingAmountSpinner;
     @BindView(R.id.drinking_type_spinner)
     Spinner mDrinkingTypeSpinner;
-    @BindView(R.id.edit_alcohol_comsuption)
-    EditText mEditAlcoholComsuption;
+    @BindView(R.id.alcohol_comsuption_spinner)
+    Spinner mAlcoholComsuptionSpinner;
     @BindView(R.id.drinking_frequency_spinner)
     Spinner mDrinkingFrequencySpinner;
     @BindView(R.id.edit_exercise_status)
@@ -81,20 +82,12 @@ public class EditPHRActivity extends BaseActivity {
     TextView mPhrBodyMassIndex;
     @BindView(R.id.phr_body_mass_index_unit)
     TextView mPhrBodyMassIndexUnit;
+    /**
+     * 使用map存储spinner下标
+     */
     Map<String, Integer> map = new HashMap<>();
-
-    {
-        map.put("偶尔", 0);
-        map.put("经常", 1);
-        map.put("白酒", 0);
-        map.put("红酒", 1);
-        map.put("A型", 0);
-        map.put("B型", 1);
-        map.put("AB型", 2);
-        map.put("O型", 3);
-    }
-
     EditPHRService mService;
+    Disposable mDisposable;
 
     @Override
     protected int getLayoutRes() {
@@ -113,6 +106,11 @@ public class EditPHRActivity extends BaseActivity {
         mService = RetrofitUtil.getRetrofit().create(EditPHRService.class);
         initToolbar("修改个人PHR", true, null);
 
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (intent != null) {
             mUserInfoBean = intent.getParcelableExtra("user");
@@ -163,10 +161,8 @@ public class EditPHRActivity extends BaseActivity {
                 mPHRBean.setBloodPressureUp(mEditPressureUP.getText().toString());
                 mPHRBean.setBloodPressureDown(mEditPressureDown.getText().toString());
                 mPHRBean.setHeartRate(mEditHeartRate.getText().toString());
-                mPHRBean.setSmokingVolume(mEditSmokingAmount.getText().toString());
                 mPHRBean.setMedicineAllergy(mEditAllergyHistory.getText().toString());
                 mPHRBean.setPhysicalExercise(mEditExerciseStatus.getText().toString());
-                mPHRBean.setAlcoholVolume(mEditAlcoholComsuption.getText().toString());
                 mDialog = new SweetAlertDialog(EditPHRActivity.this, SweetAlertDialog.PROGRESS_TYPE);
                 mDialog.setCancelable(false);
                 mDialog.setTitleText("正在提交，请稍后...");
@@ -189,7 +185,7 @@ public class EditPHRActivity extends BaseActivity {
                         mPHRBean.setBloodType("AB型");
                         break;
                     case 3:
-                        mPHRBean.setBloodType("0型");
+                        mPHRBean.setBloodType("O型");
                         break;
                     default:
                         break;
@@ -211,6 +207,12 @@ public class EditPHRActivity extends BaseActivity {
                     case 1:
                         mPHRBean.setDrinkingType("红酒");
                         break;
+                    case 2:
+                        mPHRBean.setDrinkingType("啤酒");
+                        break;
+                    case 3:
+                        mPHRBean.setDrinkingType("药酒");
+                        break;
                     default:
                         break;
                 }
@@ -226,10 +228,16 @@ public class EditPHRActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        mPHRBean.setDrinkingFrequency("偶尔");
+                        mPHRBean.setDrinkingFrequency("从不");
                         break;
                     case 1:
+                        mPHRBean.setDrinkingFrequency("偶尔");
+                        break;
+                    case 2:
                         mPHRBean.setDrinkingFrequency("经常");
+                        break;
+                    case 3:
+                        mPHRBean.setDrinkingFrequency("总是");
                         break;
                     default:
                         break;
@@ -241,6 +249,62 @@ public class EditPHRActivity extends BaseActivity {
 
             }
         });
+        mAlcoholComsuptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        mPHRBean.setAlcoholVolume("从不");
+                        break;
+                    case 1:
+                        mPHRBean.setAlcoholVolume("适当");
+                        break;
+                    case 2:
+                        mPHRBean.setAlcoholVolume("中等");
+                        break;
+                    case 3:
+                        mPHRBean.setAlcoholVolume("大量");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        mSmokingAmountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        mPHRBean.setSmokingVolume("从不");
+                        break;
+                    case 1:
+                        mPHRBean.setSmokingVolume("少量");
+                        break;
+                    case 2:
+                        mPHRBean.setSmokingVolume("中等");
+                        break;
+                    case 3:
+                        mPHRBean.setSmokingVolume("大量");
+                        break;
+                    case 4:
+                        mPHRBean.setSmokingVolume("上瘾");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     private void updatePHR() {
@@ -250,7 +314,7 @@ public class EditPHRActivity extends BaseActivity {
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        mDisposable = d;
                     }
 
                     @Override
@@ -275,6 +339,7 @@ public class EditPHRActivity extends BaseActivity {
 
                     @Override
                     public void onComplete() {
+                        mDialog.dismiss();
                         mDialog = new SweetAlertDialog(EditPHRActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("提交成功！")
                                 .setConfirmText("我知道了")
@@ -292,11 +357,7 @@ public class EditPHRActivity extends BaseActivity {
     }
 
     private void initValue() {
-
-        mPHRBean.setBloodType("A型");
-        mPHRBean.setDrinkingType("白酒");
-        mPHRBean.setDrinkingFrequency("偶尔");
-
+        initMap();
 
         mPhrName.setText(mUserInfoBean.getName());
         mPhrAge.setText(mUserInfoBean.getAge());
@@ -306,8 +367,6 @@ public class EditPHRActivity extends BaseActivity {
         mEditHeartRate.setText(mPHRBean.getHeartRate());
         mEditPressureUP.setText(mPHRBean.getBloodPressureUp());
         mEditPressureDown.setText(mPHRBean.getBloodPressureDown());
-        mEditSmokingAmount.setText(mPHRBean.getSmokingVolume());
-        mEditAlcoholComsuption.setText(mPHRBean.getAlcoholVolume());
         mEditExerciseStatus.setText(mPHRBean.getPhysicalExercise());
         mEditAllergyHistory.setText(mPHRBean.getMedicineAllergy());
         mPhrBodyMassIndex.setText(mPHRBean.getBodyMassIndex());
@@ -317,9 +376,62 @@ public class EditPHRActivity extends BaseActivity {
         mDrinkingTypeSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getDrinkingType()) ?
                 mPHRBean.getDrinkingType() : "白酒"));
         mDrinkingFrequencySpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getDrinkingFrequency()) ?
-                mPHRBean.getDrinkingFrequency() : "偶尔"));
+                mPHRBean.getDrinkingFrequency() : "从不"));
+        mSmokingAmountSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getSmokingVolume()) ?
+                mPHRBean.getSmokingVolume() : "从不"));
+        mAlcoholComsuptionSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getAlcoholVolume()) ?
+                mPHRBean.getAlcoholVolume() : "从不"));
+    }
 
+    private void initMap() {
+        /**
+         * 喝酒频率
+         */
+        map.put("从不", 0);
+        map.put("偶尔", 1);
+        map.put("经常", 2);
+        map.put("总是", 3);
 
+        /**
+         * 饮酒类型
+         */
+        map.put("白酒", 0);
+        map.put("红酒", 1);
+        map.put("啤酒", 2);
+        map.put("药酒", 2);
+
+        /**
+         * 血型
+         */
+        map.put("A型", 0);
+        map.put("B型", 1);
+        map.put("AB型", 2);
+        map.put("O型", 3);
+
+        /**
+         * 吸烟量
+         */
+        map.put("从不", 0);
+        map.put("少量", 1);
+        map.put("中等", 2);
+        map.put("大量", 3);
+        map.put("上瘾", 4);
+
+        /**
+         * 饮酒量
+         */
+        map.put("从不", 0);
+        map.put("适当", 1);
+        map.put("中等", 2);
+        map.put("大量", 3);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+        super.onDestroy();
     }
 
     interface EditPHRService {

@@ -1,6 +1,5 @@
 package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
-import android.content.Intent;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -25,10 +24,10 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -71,15 +70,21 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     private float width;
     private float height;
     private DisplayMetrics mMetrics;
-    private FloatingActionButton mFab;
+    @BindView(R.id.login_logo)
+    FloatingActionButton mFab;
     @BindView(R.id.login_container)
     LinearLayout mContainer;
+    private ObjectAnimator mAnimator;
+    private AnimatorSet mAnimatorSet;
+    private ObjectAnimator mObjectAnimator;
+    private Animator mCircularReveal;
 
     @Override
     protected void initEvents() {
         super.initEvents();
         login.setOnClickListener(this);
         regist.setOnClickListener(this);
+        mFab.setOnClickListener(this);
 
         Observable<CharSequence> userNameObservable = RxTextView.textChanges(usrname).share();
         userNameObservable.observeOn(AndroidSchedulers.mainThread())
@@ -168,44 +173,50 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         width = mMetrics.widthPixels;
         height = mMetrics.heightPixels;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         startAnimate();
     }
 
     private void startAnimate() {
         mFab = (FloatingActionButton) findViewById(R.id.login_logo);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mFab, "translationY", 0,
+        mAnimator = ObjectAnimator.ofFloat(mFab, "translationY",
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, mMetrics),
                 height * 8 / 10, height * 4 / 10, height * 6 / 10, height / 2);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setDuration(3000);
-        animator.addListener(new AnimatorListenerAdapter() {
+        mAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        mAnimator.setDuration(1500);
+        mAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-
-                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mFab, "translationY", height / 2,
+                mObjectAnimator = ObjectAnimator.ofFloat(mFab, "translationY", height / 2,
                         TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, mMetrics));
-                objectAnimator.setDuration(1500);
+                mObjectAnimator.setDuration(1500);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Animator animator = ViewAnimationUtils.createCircularReveal(mContainer, 0, 0, 0,
+                    mCircularReveal = ViewAnimationUtils.createCircularReveal(mContainer, 0, 0, 0,
                             (float) Math.hypot(mContainer.getWidth(), mContainer.getHeight()));
-                    animator.addListener(new AnimatorListenerAdapter() {
+                    mCircularReveal.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationStart(Animator animation) {
                             super.onAnimationStart(animation);
                             mContainer.setVisibility(View.VISIBLE);
                         }
                     });
-                    animator.setDuration(1500);
-                    AnimatorSet set = new AnimatorSet();
-                    set.playTogether(objectAnimator, animator);
-                    set.start();
+                    mCircularReveal.setDuration(1500);
+                    mAnimatorSet = new AnimatorSet();
+                    mAnimatorSet.setInterpolator(new DecelerateInterpolator());
+                    mAnimatorSet.playTogether(mObjectAnimator, mCircularReveal);
+                    mAnimatorSet.start();
                 } else {
-                    objectAnimator.start();
+                    mObjectAnimator.start();
                     AnimateUtil.scaleShow(mContainer, null);
                 }
             }
         });
-        animator.start();
+        mAnimator.start();
     }
 
     @Override
@@ -215,7 +226,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     public IRegistAndLoginPresenter createPresenter() {
-        mPresenter=new RegistAndLoginPresenterImpl(this);
+        mPresenter = new RegistAndLoginPresenterImpl(this);
         return mPresenter;
     }
 
@@ -239,6 +250,8 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
             case R.id.regist:
                 regist();
                 break;
+            case R.id.login_logo:
+                AnimateUtil.scaleShow(mFab, null);
             default:
                 break;
         }
@@ -269,11 +282,33 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     public void ShowSanck(String string) {
-        showMessage(frameLayout,string);
+        showMessage(frameLayout, string);
     }
 
-    public void SetAcount(String username,String password)
-    {
-        acount.setAccount(username,password);
+    public void SetAcount(String username, String password) {
+        acount.setAccount(username, password);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mAnimator != null && mAnimator.isRunning()) {
+            mAnimator.cancel();
+        }
+        if (mObjectAnimator != null && mObjectAnimator.isRunning()) {
+            mObjectAnimator.cancel();
+        }
+        if (mAnimatorSet != null && mAnimatorSet.isRunning()) {
+            mAnimatorSet.cancel();
+        }
+        if (mCircularReveal != null && mCircularReveal.isRunning()) {
+            mCircularReveal.cancel();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
     }
 }
