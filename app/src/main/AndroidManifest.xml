@@ -90,14 +90,18 @@
         <activity
             android:name=".activity.EditPHRActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
-            />
-        <activity android:name=".mvp.chat.ChatActivity"
+        />
+        <activity
+            android:name=".mvp.chat.ChatActivity"
             android:windowSoftInputMode="adjustResize"
-            ></activity>
+            />
         <activity android:name=".activity.TestActivity"/>
         <activity android:name=".activity.ImmuneDetailActivity"/>
         <activity android:name=".activity.MedicineDetailActivity"/>
         <activity android:name=".activity.DiseaseDetailActivity"/>
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:windowSoftInputMode="adjustUnspecified"/>
     </application>
 
 </manifest>

@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.administrator.personhealthrecord.bean.Loginbean;
 import com.example.administrator.personhealthrecord.bean.RegistBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.util.SnackBarUitl;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
 
 import io.reactivex.Observer;
@@ -17,45 +16,44 @@ import retrofit2.Response;
  */
 
 public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
-    private static final String TAG="RegistAndLoginPresenter";
+    private static final String TAG = "RegistAndLoginPresenter";
+    private Disposable mDisposable;
     private IRegistAndLoginModle modle;
-    public RegistAndLoginPresenterImpl(ILoginVIew loginVIew)
-    {
-        this.mView=loginVIew;
+
+    public RegistAndLoginPresenterImpl(ILoginVIew loginVIew) {
+        this.mView = loginVIew;
     }
 
     @Override
     public IRegistAndLoginModle createModel() {
-        mModel=new RegistAndyLoginModleImpl(this);
+        mModel = new RegistAndyLoginModleImpl(this);
         return mModel;
     }
+
     @Override
     void dologin(final String username, final String password) {
         Log.d(TAG, "dologin: ");
-        Observer<Response<Loginbean>> observer=new Observer<Response<Loginbean>>() {
+        Observer<Response<Loginbean>> observer = new Observer<Response<Loginbean>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                mDisposable = d;
             }
 
             @Override
             public void onNext(Response<Loginbean> value) {
-                Loginbean bean=(Loginbean)value.body();
-                Log.d(TAG, "onNext: "+((Loginbean)value.body()).getMessage());
+                Loginbean bean = (Loginbean) value.body();
+                Log.d(TAG, "onNext: " + ((Loginbean) value.body()).getMessage());
 
 
-                if(bean.getStatus().equals("fail"))
-                {
+                if (bean.getStatus().equals("fail")) {
                     ToastUitl.Toast(bean.getMessage());
-                }
-                else
-                {
+                } else {
                     ToastUitl.Toast(bean.getMessage());
-                    String cookie=value.headers().get("Set-Cookie").split(";")[0];
-                    Contract.cookie=cookie;
-                    Contract.IsLogin=Contract.Login;
-                    Log.d(TAG, "onNext: "+cookie.toString());
-                    ((LoginActivity)mView).SetAcount(username,password);
+                    String cookie = value.headers().get("Set-Cookie").split(";")[0];
+                    Contract.cookie = cookie;
+                    Contract.IsLogin = Contract.Login;
+                    Log.d(TAG, "onNext: " + cookie.toString());
+                    ((LoginActivity) mView).SetAcount(username, password);
                     mView.finishAcitvity();
                 }
 
@@ -63,7 +61,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: "+e.toString());
+                Log.d(TAG, "onError: " + e.toString());
                 mView.ShowSanck(e.toString());
 
             }
@@ -74,12 +72,12 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
             }
         };
 
-        mModel.Login(username,password,observer);
+        mModel.Login(username, password, observer);
     }
 
     @Override
     void regist(String username, String password) {
-        Observer<RegistBean> observer=new Observer<RegistBean>() {
+        Observer<RegistBean> observer = new Observer<RegistBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -87,15 +85,12 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
 
             @Override
             public void onNext(RegistBean value) {
-                Log.d(TAG, "onNext: "+value.getMessage());
+                Log.d(TAG, "onNext: " + value.getMessage());
 
-                if(value.getStatus().equals("success"))
-                {
+                if (value.getStatus().equals("success")) {
                     ToastUitl.Toast(value.getMessage());
                     mView.finish();
-                }
-                else
-                {
+                } else {
                     ToastUitl.Toast(value.getMessage());
                 }
 
@@ -103,7 +98,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: "+e.toString());
+                Log.d(TAG, "onError: " + e.toString());
                 mView.ShowSanck(e.toString());
             }
 
@@ -113,6 +108,14 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
             }
         };
 
-        mModel.regist(username,password,observer);
+        mModel.regist(username, password, observer);
     }
+
+    @Override
+    void onDetach() {
+        if(mDisposable != null){
+            mDisposable.dispose();
+        }
+    }
+
 }

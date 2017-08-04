@@ -10,4 +10,5 @@ import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
 public abstract class IRegistAndLoginPresenter extends BasePresenter<ILoginVIew,IRegistAndLoginModle>{
     abstract void dologin( String username, String password);
     abstract void regist( String username, String password);
+    abstract void onDetach();
 }

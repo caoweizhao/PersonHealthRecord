@@ -13,10 +13,10 @@ public class UserInfoBean implements Parcelable{
 
     /**
      * username : cwz
-     * credits :
-     * age :
-     * gender :
-     * phoneNumber :
+     * credits : 0积分
+     * age : 22
+     * gender : 男
+     * phoneNumber :13560321319
      * address :
      * name :
      * iconImage :

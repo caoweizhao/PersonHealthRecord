@@ -54,7 +54,7 @@ public class ImmuneDetailActivity extends BaseActivity implements View.OnClickLi
     TextView mAttentionViewTop;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.immune_detail_image)
+    @BindView(R.id.profile_bg)
     ImageView mImageView;
     @BindView(R.id.summary_view)
     TextView mSummaryView;

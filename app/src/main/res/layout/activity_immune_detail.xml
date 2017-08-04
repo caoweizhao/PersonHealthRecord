@@ -28,7 +28,7 @@
             >
 
             <ImageView
-                android:id="@+id/immune_detail_image"
+                android:id="@+id/profile_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"

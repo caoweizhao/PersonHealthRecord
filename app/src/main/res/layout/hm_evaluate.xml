@@ -329,7 +329,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:background="@null"
-                        android:entries="@array/alcohol_type"/>
+                        android:entries="@array/choose_drinking_type"/>
 
                     <ImageView
                         android:layout_width="10dp"
@@ -405,7 +405,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:background="@null"
-                        android:entries="@array/freq_type"/>
+                        android:entries="@array/choose_drinking_frequency"/>
 
                     <ImageView
                         android:layout_width="10dp"
