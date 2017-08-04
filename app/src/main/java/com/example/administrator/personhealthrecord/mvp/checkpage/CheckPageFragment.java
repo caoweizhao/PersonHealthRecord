@@ -19,8 +19,11 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.DoctorDetailActivity;
 import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
@@ -58,7 +61,7 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     @BindView(R.id.heath_check_banner01)
     Banner banner01;
     @BindView(R.id.heath_check_banner02)
-    Banner banner02;
+    ImageView discoutnImage;
     @BindView(R.id.healthy_check_projectlsit)
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
@@ -102,11 +105,6 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
         //banner设置方法全部调用完毕时最后调用
         banner01.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         banner01.start();
-        banner02.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        //banner设置方法全部调用完毕时最后调用
-        banner02.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        banner02.start();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new AbstractItemAdapter<CheckBean>(R.layout.abstract_item, checkBeanList, this.getContext());
         recyclerView.setAdapter(adapter);
@@ -151,6 +149,7 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
 
     @Override
     protected void initEvent() {
+        discoutnImage.setOnClickListener(this);
         reserve.setOnClickListener(this);
         reserveOrder.setOnClickListener(this);
         banner01.setOnBannerListener(new OnBannerListener() {
@@ -170,6 +169,10 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     @Override
     protected void initData() {
         imageBeanList=new ArrayList<>();
+        Glide.with(this)
+                .load(Contract.BASE_URL+"medical_package/getImageByFavourable")
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(discoutnImage);
     }
 
     @Override
@@ -197,6 +200,7 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                         {
                             case R.id.reserve_button:
                                 Intent intent=new Intent(getActivity(), ReserveActivity.class);
+                                intent.putExtra("IS_DISCOUNT",false);
                                 startActivity(intent);
                                 break;
                             case R.id.health_check_reserve_order_button:
@@ -208,7 +212,12 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                                 {
                                     gotToLogin();
                                 }
-
+                                break;
+                            case R.id.heath_check_banner02:
+                                Intent intent3=new Intent(getActivity(), ReserveActivity.class);
+                                intent3.putExtra("IS_DISCOUNT",true);
+                                startActivity(intent3);
+                                break;
                             default:
                                 break;
                         }

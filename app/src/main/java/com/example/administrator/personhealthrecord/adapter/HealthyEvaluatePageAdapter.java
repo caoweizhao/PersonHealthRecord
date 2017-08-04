@@ -5,6 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
+import com.example.administrator.personhealthrecord.mvp.healthevaluate.auto.AutoEvaluateFragment;
+import com.example.administrator.personhealthrecord.mvp.healthevaluate.manual.ManualEvaluateFragment;
+
 /**
  * Created by andy on 2017/8/3.
  */
@@ -24,6 +27,15 @@ public class HealthyEvaluatePageAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
+        switch(position)
+            {
+                case 0:
+                    return new AutoEvaluateFragment();
+                case 1:
+                    return new ManualEvaluateFragment();
+                default:
+                    break;
+            }
         return null;
     }
 

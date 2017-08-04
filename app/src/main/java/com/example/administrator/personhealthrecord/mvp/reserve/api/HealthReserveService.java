@@ -32,4 +32,10 @@ public interface HealthReserveService {
     @FormUrlEncoded
     @POST("/medical_order/new_medical_order")
     Observable<ResultUitlOfReserve> ReserveNow(@Header("Cookie")String cookie, @Field("startTime")Timestamp startTime, @Field("endTime")Timestamp endTime, @Field("name")String name, @Field("phoneNumber")String phoneNumber,@Field("medical_package_id")int id);
+
+    @GET("medical_package/package_favourable_hospital_list")
+    Observable<ResultUtilOfHospitalList> getDiscoutPackageHostpitalList();
+
+    @GET("medical_package/favourable_package_list_by_hospital_id/{hospital_id}")
+    Observable<ResultUtilOfPackageBean> getHospitalDiscoutPacakge(@Path("hospital_id") int id);
 }

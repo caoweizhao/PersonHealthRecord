@@ -17,6 +17,7 @@ import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.adapter.PackageInfoAdapter;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.PackageBean;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class ReserveActivity extends IReserveView {
+    private boolean IS_DISCOUNT=false;
     private String IsOnHospital="IsOnHospital";
     private String IsOnPackage="IsOnPackage";
     private String status;
@@ -48,6 +50,9 @@ public class ReserveActivity extends IReserveView {
 
     @Override
     protected void initData() {
+        Intent intent=getIntent();
+        IS_DISCOUNT=intent.getBooleanExtra("IS_DISCOUNT",false);
+        Contract.IS_DISCOUNT=IS_DISCOUNT;
         super.initData();
         status=IsOnHospital;
         initToolbar("体检机构",true,null);

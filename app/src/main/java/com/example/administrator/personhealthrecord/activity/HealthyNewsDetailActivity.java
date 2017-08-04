@@ -59,21 +59,13 @@ public class HealthyNewsDetailActivity extends BaseActivity {
         else
         mImageUrl=Contract.HealthyNewsImageUrl + mNewsBean.getImageUrl();
         Log.d("aaa", "initData" + mImageUrl);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            postponeEnterTransition();
-        }
         Glide.with(this)
                 .load(mImageUrl)
                 .asBitmap()
+                .placeholder(R.mipmap.ic_launcher)
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        imageView.setImageBitmap(resource);
-                        scheduleStartPostponedTransition(imageView);
-                    }
-                });
+                .into(imageView);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -97,16 +89,4 @@ public class HealthyNewsDetailActivity extends BaseActivity {
         return R.layout.activity_healthy_news_detali;
     }
 
-    private void scheduleStartPostponedTransition(final View sharedElement) {
-        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public boolean onPreDraw() {
-                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-                        startPostponedEnterTransition();
-                        return true;
-                    }
-                });
-    }
 }

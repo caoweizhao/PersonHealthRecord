@@ -5,7 +5,21 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
+    <com.example.administrator.personhealthrecord.view.WaveImageView
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/headerTextColor"
+        android:id="@+id/healthy_evaluate_iamge_score"
+        android:layout_width="match_parent"
+        android:layout_height="120dp" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:clipChildren="false"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,39 +29,39 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
 
 
 
-                <TextView
-                    android:id="@+id/test_eva1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="67dp"
-                    android:text="请输入您的正确数据"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/test_eva1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_marginTop="67dp"-->
+                    <!--android:text="请输入您的正确数据"/>-->
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0.5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_toLeftOf="@id/test_eva1"
-                    android:background="#525e71"/>
+                <!--<View-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_marginTop="40dp"-->
+                    <!--android:layout_toLeftOf="@id/test_eva1"-->
+                    <!--android:background="#525e71"/>-->
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0.5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_toRightOf="@id/test_eva1"
-                    android:background="#525e71"/>
-            </RelativeLayout>
+                <!--<View-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_marginTop="40dp"-->
+                    <!--android:layout_toRightOf="@id/test_eva1"-->
+                    <!--android:background="#525e71"/>-->
+            <!--</RelativeLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -69,16 +83,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="身高："/>
+                    android:text="身高：" />
 
                 <EditText
+                    android:id="@+id/manual_evaluate_"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/login_baground_white"
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textSize="15dp"
-                    tools:text="181cm"/>
+                    tools:text="181cm" />
             </LinearLayout>
 
             <View
@@ -146,14 +161,14 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:background="@null"
-                        android:entries="@array/blood_type"/>
+                        android:entries="@array/blood_type" />
 
                     <ImageView
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:layout_gravity="center"
                         android:layout_margin="9dp"
-                        android:src="@drawable/ic_action_name"/>
+                        android:src="@drawable/ic_action_name" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -489,55 +504,55 @@
                 android:layout_marginRight="10dp"
                 android:background="#525e71"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:paddingBottom="8dp">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="0dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:paddingBottom="8dp">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="病史："/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="病史："/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    tools:text="2017年1月1日 SSSSSSSSSS"/>
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--tools:text="2017年1月1日 SSSSSSSSSS"/>-->
+            <!--</LinearLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="10dp"
-                android:background="#525e71"/>
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:layout_marginLeft="43dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:background="#525e71"/>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:paddingBottom="8dp">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="0dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:paddingBottom="8dp">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="            "/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="            "/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    tools:text="2017年1月1日 DDDDDDDDDDDDDDDDDD"/>
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--tools:text="2017年1月1日 DDDDDDDDDDDDDDDDDD"/>-->
+            <!--</LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -558,5 +573,5 @@
         </LinearLayout>
 
     </ScrollView>
-
+    </android.support.v7.widget.CardView>
 </LinearLayout>

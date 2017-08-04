@@ -20,6 +20,8 @@ import android.widget.FrameLayout;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.activity.TestActivity;
+import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.mvp.healthevaluate.HealthyEvaluateActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.roughike.bottombar.BottomBar;
@@ -27,6 +29,7 @@ import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Administrator on 2017-7-17.
@@ -102,8 +105,13 @@ public class MainActivity extends AMainActivity {
                         startActivity(phrIntent);
                         break;
                     case R.id.menu_health_assessment:
-                        Intent intent3 = new Intent(MainActivity.this, TestActivity.class);
-                        startActivity(intent3);
+                        if(Contract.IsLogin.equals(Contract.Login)) {
+                            Intent intent3 = new Intent(MainActivity.this, HealthyEvaluateActivity.class);
+                            startActivity(intent3);
+                        }else
+                        {
+                            gotToLogin();
+                        }
                         break;
                     default:
                         break;
@@ -213,5 +221,24 @@ public class MainActivity extends AMainActivity {
 
     public void refreshBottom() {
         mBottomBar.selectTabAtPosition(1);
+    }
+
+    public void gotToLogin()
+    {
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("您还没有登录！")
+                .setContentText("是否去登录界面？")
+                .setCancelText("不了~")
+                .setConfirmText("去登陆->")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                        Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .show();
     }
 }
