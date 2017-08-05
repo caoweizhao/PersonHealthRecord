@@ -8,7 +8,7 @@
     <com.example.administrator.personhealthrecord.view.WaveImageView
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/headerTextColor"
-        android:id="@+id/healthy_evaluate_iamge_score"
+        android:id="@+id/manual_evaluate_iamge_score"
         android:layout_width="match_parent"
         android:layout_height="120dp" />
     <FrameLayout

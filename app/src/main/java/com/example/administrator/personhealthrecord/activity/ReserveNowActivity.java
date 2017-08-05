@@ -85,6 +85,7 @@ public class ReserveNowActivity extends IReserveView implements View.OnClickList
     private DateFormat dateFormat;
     private int Position;
     private SweetAlertDialog pDialog;
+    private String imageURL;
 private PackageBean bean;
     @Override
     protected void initData() {
@@ -95,8 +96,14 @@ private PackageBean bean;
         summary.setText(bean.getSummary());
         name.setText(bean.getName());
         count.setText("X1");
-        price.setText("￥"+bean.getPackagePrice());
-        Glide.with(this).load(Contract.PackageImageBase+bean.getImageUrl())
+        if(Contract.IS_DISCOUNT)
+            price.setText("￥"+bean.getFavorablePrice());
+        else
+            price.setText("￥"+bean.getPackagePrice());
+        Log.d(TAG, "initData: "+bean.getImageUrl());
+            imageURL=Contract.PackageImageBase+bean.getImageUrl();
+        Log.d(TAG, "initData: "+imageURL);
+        Glide.with(this).load(imageURL)
                 .into(imageView);
         initToolbar("提交预约",true,null);
         reserveNow.setEnabled(false);

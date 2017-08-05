@@ -32,6 +32,15 @@ public class PackageBean implements Parcelable{
     private double packagePrice;
     private int allocatedQuantity;
     private String imageUrl;
+    private double favorablePrice;
+
+    public double getFavorablePrice() {
+        return favorablePrice;
+    }
+
+    public void setFavorablePrice(double favorablePrice) {
+        this.favorablePrice = favorablePrice;
+    }
 
     public int getId() {
         return id;
@@ -89,6 +98,43 @@ public class PackageBean implements Parcelable{
         this.imageUrl = imageUrl;
     }
 
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeInt(id);
+//        dest.writeString(name);
+//        dest.writeString(summary);
+//        dest.writeString(packageDetail);
+//        dest.writeString(imageUrl);
+//        dest.writeInt(allocatedQuantity);
+//        dest.writeDouble(packagePrice);
+//    }
+//    public static final Parcelable.Creator<PackageBean> CREATOR= new Creator<PackageBean>() {
+//        @Override
+//        public PackageBean createFromParcel(Parcel source) {
+//            return new PackageBean(source);
+//        }
+//
+//        @Override
+//        public PackageBean[] newArray(int size) {
+//            return new PackageBean[size];
+//        }
+//    };
+//    private PackageBean(Parcel in)
+//    {
+//        id=in.readInt();
+//        name=in.readString();
+//        summary=in.readString();
+//        packageDetail=in.readString();
+//        imageUrl=in.readString();
+//        allocatedQuantity=in.readInt();
+//        packagePrice=in.readDouble();
+//    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -96,15 +142,31 @@ public class PackageBean implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(name);
-        dest.writeString(summary);
-        dest.writeString(packageDetail);
-        dest.writeString(imageUrl);
-        dest.writeInt(allocatedQuantity);
-        dest.writeDouble(packagePrice);
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.summary);
+        dest.writeString(this.packageDetail);
+        dest.writeDouble(this.packagePrice);
+        dest.writeInt(this.allocatedQuantity);
+        dest.writeString(this.imageUrl);
+        dest.writeDouble(this.favorablePrice);
     }
-    public static final Parcelable.Creator<PackageBean> CREATOR= new Creator<PackageBean>() {
+
+    public PackageBean() {
+    }
+
+    protected PackageBean(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.summary = in.readString();
+        this.packageDetail = in.readString();
+        this.packagePrice = in.readDouble();
+        this.allocatedQuantity = in.readInt();
+        this.imageUrl = in.readString();
+        this.favorablePrice = in.readDouble();
+    }
+
+    public static final Creator<PackageBean> CREATOR = new Creator<PackageBean>() {
         @Override
         public PackageBean createFromParcel(Parcel source) {
             return new PackageBean(source);
@@ -115,14 +177,4 @@ public class PackageBean implements Parcelable{
             return new PackageBean[size];
         }
     };
-    private PackageBean(Parcel in)
-    {
-        id=in.readInt();
-        name=in.readString();
-        summary=in.readString();
-        packageDetail=in.readString();
-        imageUrl=in.readString();
-        allocatedQuantity=in.readInt();
-        packagePrice=in.readDouble();
-    }
 }

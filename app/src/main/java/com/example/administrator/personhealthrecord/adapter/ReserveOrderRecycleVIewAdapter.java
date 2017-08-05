@@ -36,6 +36,7 @@ public class ReserveOrderRecycleVIewAdapter<T extends AbstractReserveBean> exten
     private String name;
     private String time;
     private String hostpitalName;
+    private String status;
 
     public ReserveOrderRecycleVIewAdapter(@LayoutRes int layoutResId, @Nullable List<T> data, Context context) {
         super(R.layout.healthy_reserve_order_item, data);
@@ -56,6 +57,7 @@ public class ReserveOrderRecycleVIewAdapter<T extends AbstractReserveBean> exten
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM");
                 time="体检时间:"+sdf.format(item.getStartTime());
                 hostpitalName="体检医院:"+item.getHosPitalNameTotal();
+                status=((ReserOrderBean) item).getMedicalStatus();
             }else if(item instanceof AppointmentBean)
             {
                 name=((AppointmentBean) item).getDoctorName();
@@ -63,6 +65,7 @@ public class ReserveOrderRecycleVIewAdapter<T extends AbstractReserveBean> exten
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM");
                 time="门诊时间:"+sdf.format(item.getStartTime());
                 hostpitalName="体检医院:"+item.getHosPitalNameTotal();
+                status=((AppointmentBean) item).getOrderStatus();
             }
 
 //        helper.setText(R.id.abstract_item__title, item.getTitle())
@@ -74,7 +77,8 @@ public class ReserveOrderRecycleVIewAdapter<T extends AbstractReserveBean> exten
 //        ((TextView) helper.getView(R.id.abstract_item_date)).setText(item.getdate());
         helper.setText(R.id.health_check_reserve_order_title,name)
                 .setText(R.id.health_check_reserve_order_time,time)
-                .setText(R.id.health_check_reserve_order_hospital,hostpitalName);
+                .setText(R.id.health_check_reserve_order_hospital,hostpitalName)
+        .setText(R.id.health_check_reserve_order_cancle,status);
         Glide.with(mContext)
                 .load(mImageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {

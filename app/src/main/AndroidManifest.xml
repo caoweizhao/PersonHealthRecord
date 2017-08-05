@@ -101,6 +101,7 @@
             android:windowSoftInputMode="adjustUnspecified" />
         <activity android:name=".mvp.healthevaluate.HealthyEvaluateActivity" />
         <activity android:name=".activity.AppointmentDeatil"></activity>
+        <activity android:name=".activity.ReserveOrderDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -9,91 +9,111 @@
 
    <include layout="@layout/toolbar"></include>
     <!--体检套餐详情-->
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="@dimen/card_view_margin_vertical"
+        android:layout_marginLeft="@dimen/card_view_margin_horizontal"
+        android:layout_marginRight="@dimen/card_view_margin_horizontal"
+        android:layout_marginTop="@dimen/card_view_margin_vertical"
+        app:cardCornerRadius="@dimen/card_corner"
+        app:cardElevation="@dimen/card_view_elevation"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/set_pic"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3.5dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="2.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/set_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    tools:text="项目2" />
+
+                <TextView
+                    android:id="@+id/healthtest_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight="2"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    tools:text="该体检简单描述2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/set_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:textColor="#de0e00"
+                        android:textSize="15sp"
+                        tools:text="¥10000元" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
-
-        <ImageView
-            android:id="@+id/set_pic"
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:adjustViewBounds="true"
-            tools:src="@drawable/set_pic"/>
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:clipChildren="false"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            >
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2">
 
-            <TextView
-                android:id="@+id/set_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                tools:text="项目2......"
-                android:textSize="20sp"
-                android:textColor="#000"/>
-
-            <TextView
-                android:id="@+id/set_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                tools:text="¥10000元"
-                android:textSize="18sp"
-                android:textColor="#de0e00"/>
-
-            <TextView
-                android:id="@+id/appointment_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                tools:text="已预约人数"
-                android:textSize="16sp"
-                android:textColor="#000"/>
-
-            <TextView
-                android:id="@+id/healthtest_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                tools:text="该体检描述2:"
-                android:textSize="18sp"
-                android:textColor="#000"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                tools:text="套餐详情:"
-                android:textSize="18sp"
-                android:textColor="#000">
-            </TextView>
-
-            <ScrollView
+            <android.support.v4.widget.NestedScrollView
+                android:scrollbars="none"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp">
 
                 <TextView
+                    android:padding="@dimen/dp_10"
                     android:id="@+id/set_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000" />
-            </ScrollView>
+            </android.support.v4.widget.NestedScrollView>
 
-        </LinearLayout>
-
+</android.support.v7.widget.CardView>
     </LinearLayout>
 
     <Button

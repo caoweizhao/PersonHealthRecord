@@ -38,7 +38,7 @@ public class ReserveOrderPresenterImpl extends IResreveOrderPresenter{
             public void onNext(ResultUtilOfHealthyOrderBean<ReserOrderBean> value) {
                 if(!value.getStatus().equals("success"))
                 {
-                    ToastUitl.Toast(value.getMessage());
+//                    ToastUitl.Toast(value.getMessage());
                 }else
                 {
                     if(!(value.getCollection()==null))
@@ -74,16 +74,16 @@ public class ReserveOrderPresenterImpl extends IResreveOrderPresenter{
 
             @Override
             public void onNext(ResultUtilOfHealthyOrderBean<AppointmentBean> value) {
-                if(value.getStatus().equals("status"))
-                {
-
-                }else
+                if(value.getStatus().equals("success"))
                 {
                     if(!(value.getCollection()==null))
                     {
                         Log.d(TAG, "onNext: "+value.getStatus());
                         ((AppointmentOrderFragment)mView).OnAppointmentReady(value.getCollection());
                     }
+                }else
+                {
+
 
                 }
 

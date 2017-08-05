@@ -23,6 +23,7 @@ import java.util.List;
  */
 
 public class PackageInfoAdapter extends BaseQuickAdapter<PackageBean,BaseViewHolder> {
+    private String imageURL;
     public PackageInfoAdapter(@LayoutRes int layoutResId, @Nullable List<PackageBean> data) {
         super(layoutResId, data);
     }
@@ -36,7 +37,8 @@ public class PackageInfoAdapter extends BaseQuickAdapter<PackageBean,BaseViewHol
                 .setText(R.id.health_check_item_reserve,mContext.getString(R.string.had_reserve)+item.getAllocatedQuantity())
                 .addOnClickListener(R.id.health_check_item_package_itemId);
         ((CardView)helper.getView(R.id.health_check_item_package_itemId)).setClickable(true);
-        Glide.with(mContext).load(Contract.PackageImageBase+item.getImageUrl())
+            imageURL=Contract.PackageImageBase+item.getImageUrl();
+        Glide.with(mContext).load(imageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

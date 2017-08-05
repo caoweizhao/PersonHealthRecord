@@ -24,8 +24,8 @@ import butterknife.ButterKnife;
  * Created by andy on 2017/7/27.
  */
 
-public class HospitalPackageDetailActivity extends BaseActivity implements View.OnClickListener{
-    private static final String TAG="HospitalPackageDetaily";
+public class HospitalPackageDetailActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = "HospitalPackageDetaily";
     @BindView(R.id.set_pic)
     ImageView imageView;
     @BindView(R.id.set_name)
@@ -34,13 +34,13 @@ public class HospitalPackageDetailActivity extends BaseActivity implements View.
     TextView price;
     @BindView(R.id.set_details)
     TextView detail;
-    @BindView(R.id.appointment_count)
-    TextView count;
+
     @BindView(R.id.healthtest_description)
     TextView description;
     @BindView(R.id.setorder_button)
     Button reserve;
     private PackageBean bean;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.set_detail_layout;
@@ -49,18 +49,24 @@ public class HospitalPackageDetailActivity extends BaseActivity implements View.
     @Override
     protected void initData() {
         super.initData();
-        Intent intent=getIntent();
-        bean=intent.getParcelableExtra("packagebean");
-        Log.d(TAG, "onCreate: "+bean.getName());
+        Intent intent = getIntent();
+        bean = intent.getParcelableExtra("packagebean");
+        Log.d(TAG, "onCreate: " + bean.getName());
         Glide.with(this)
-                .load(Contract.PackageImageBase+bean.getImageUrl())
+                .load(Contract.PackageImageBase + bean.getImageUrl())
                 .into(imageView);
         name.setText(bean.getName());
-        price.setText("￥"+bean.getPackagePrice());
+        //检查是否有优惠假如有则显示两个价格
+        if (Contract.IS_DISCOUNT)
+            price.setText("￥" + bean.getPackagePrice() + " 优惠后：" + "￥" + bean.getFavorablePrice());
+        else
+            price.setText("￥" + bean.getPackagePrice());
         detail.setText(bean.getPackageDetail());
         description.setText(bean.getSummary());
-        count.setText(bean.getAllocatedQuantity()+"");
-        initToolbar("套餐详情",true,null);
+        if (Contract.IS_DISCOUNT)
+            initToolbar("优惠套餐", true, null);
+        else
+            initToolbar("套餐详情", true, null);
     }
 
     @Override
@@ -71,15 +77,14 @@ public class HospitalPackageDetailActivity extends BaseActivity implements View.
 
     @Override
     public void onClick(View v) {
-                switch (v.getId())
-                        {
-                            case R.id.setorder_button:
-                                Intent intent=new Intent(HospitalPackageDetailActivity.this, ReserveNowActivity.class);
-                                intent.putExtra("package",bean);
-                                startActivity(intent);
-                                break;
-                            default:
-                                break;
-                        }
+        switch (v.getId()) {
+            case R.id.setorder_button:
+                Intent intent = new Intent(HospitalPackageDetailActivity.this, ReserveNowActivity.class);
+                intent.putExtra("package", bean);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

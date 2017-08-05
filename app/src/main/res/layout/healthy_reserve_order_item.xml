@@ -74,7 +74,7 @@
                     android:padding="2dp"
                     android:gravity="center"
                     android:textColor="@android:color/white"
-                    android:background="@drawable/cycle_imageview"
+                    android:background="@drawable/healthy_check_status"
                     android:id="@+id/health_check_reserve_order_cancle"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"

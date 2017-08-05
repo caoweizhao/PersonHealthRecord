@@ -53,7 +53,7 @@
         android:layout_height="match_parent"
         android:background="#ccc"
         android:clipToPadding="false"
-        android:paddingBottom="40dp"
+        android:paddingBottom="100dp"
         android:paddingTop="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -265,7 +265,7 @@
         android:gravity="center"
         android:textSize="20sp"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/clickable_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </android.support.design.widget.CoordinatorLayout>

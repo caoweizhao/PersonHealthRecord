@@ -26,7 +26,9 @@ import com.example.administrator.personhealthrecord.activity.ProfileActivity;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.activity.TestActivity;
 import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.mvp.healthevaluate.HealthyEvaluateActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
+import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
@@ -151,8 +153,8 @@ public class MainActivity extends AMainActivity {
                 // TODO: 2017-7-20
                 switch (item.getItemId()) {
                     case R.id.menu_my_book:
-//                        Intent intent1 = new Intent(MainActivity.this, TestActivity.class);
-//                        startActivity(intent1);
+                        Intent intent1 = new Intent(MainActivity.this, ReserveOrderActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.menu_account_info:
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -165,7 +167,7 @@ public class MainActivity extends AMainActivity {
                         startActivity(phrIntent);
                         break;
                     case R.id.menu_health_assessment:
-                        Intent intent3 = new Intent(MainActivity.this, TestActivity.class);
+                        Intent intent3 = new Intent(MainActivity.this, HealthyEvaluateActivity.class);
                         startActivity(intent3);
                         break;
                     default:

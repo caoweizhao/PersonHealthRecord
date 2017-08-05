@@ -88,12 +88,19 @@ public class HealthyCheckOrderFragment extends IReserveOrderView{
             }
         });
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getList();
+    }
+
     public void OnPackageReady(List<ReserOrderBean> list)
     {
         Log.d(TAG, "OnPackageReady: "+list.size());
         List<ReserOrderBean> list1=adapter.getData();
+        list1.clear();
         for(ReserOrderBean bean:list)
-            if(!list1.contains(bean))
                 adapter.addData(bean);
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
