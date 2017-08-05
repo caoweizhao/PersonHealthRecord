@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.reserveorder.appointmenorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.AppointmentDeatil;
 import com.example.administrator.personhealthrecord.adapter.ReserveOrderRecycleVIewAdapter;
 import com.example.administrator.personhealthrecord.bean.AppointmentBean;
 import com.example.administrator.personhealthrecord.bean.ReserOrderBean;
@@ -77,14 +80,23 @@ public class AppointmentOrderFragment extends IReserveOrderView{
                 getList();
             }
         });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent=new Intent(getActivity(), AppointmentDeatil.class);
+                intent.putExtra("Appointment",list.get(position));
+                startActivity(intent);
+            }
+        });
     }
     public void OnAppointmentReady(List<AppointmentBean> list)
     {
         Log.d(TAG, "OnAppointmentReady: "+list.size());
         List<AppointmentBean> list1=adapter.getData();
+        list1.clear();
         for(AppointmentBean bean:list)
         {
-            if(!list1.contains(bean))
+
                 adapter.addData(bean);
         }
         adapter.notifyDataSetChanged();

@@ -1,10 +1,13 @@
 package com.example.administrator.personhealthrecord.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by andy on 2017/8/2.
  */
 
-public class ReserOrderBean extends AbstractReserveBean{
+public class ReserOrderBean extends AbstractReserveBean implements Parcelable {
     //    {"timestamp":1501647273579,"status":"success","message":"列表返回成功",
 //            "collection":[{"orderId":5,"packageName":"高血压套餐","packageDetail"
 //        :"一般情况：身高、体重、体重指数、血压、心率。 内 科：心脏、肺部、腹部、肝、脾、神经系统。" +
@@ -124,4 +127,51 @@ public class ReserOrderBean extends AbstractReserveBean{
     public boolean equals(Object obj) {
         return orderId==((ReserOrderBean)obj).orderId;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.orderId);
+        dest.writeString(this.packageName);
+        dest.writeString(this.packageDetail);
+        dest.writeString(this.packagePrice);
+        dest.writeString(this.hospitalName);
+        dest.writeLong(this.startTime);
+        dest.writeLong(this.endTime);
+        dest.writeString(this.name);
+        dest.writeString(this.phoneNumber);
+        dest.writeString(this.medicalStatus);
+    }
+
+    public ReserOrderBean() {
+    }
+
+    protected ReserOrderBean(Parcel in) {
+        this.orderId = in.readInt();
+        this.packageName = in.readString();
+        this.packageDetail = in.readString();
+        this.packagePrice = in.readString();
+        this.hospitalName = in.readString();
+        this.startTime = in.readLong();
+        this.endTime = in.readLong();
+        this.name = in.readString();
+        this.phoneNumber = in.readString();
+        this.medicalStatus = in.readString();
+    }
+
+    public static final Parcelable.Creator<ReserOrderBean> CREATOR = new Parcelable.Creator<ReserOrderBean>() {
+        @Override
+        public ReserOrderBean createFromParcel(Parcel source) {
+            return new ReserOrderBean(source);
+        }
+
+        @Override
+        public ReserOrderBean[] newArray(int size) {
+            return new ReserOrderBean[size];
+        }
+    };
 }

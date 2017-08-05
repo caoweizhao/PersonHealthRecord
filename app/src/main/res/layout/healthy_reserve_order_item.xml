@@ -69,9 +69,10 @@
                 </LinearLayout>
 
 
-                <Button
+                <TextView
                     android:textSize="15sp"
                     android:padding="2dp"
+                    android:gravity="center"
                     android:textColor="@android:color/white"
                     android:background="@drawable/cycle_imageview"
                     android:id="@+id/health_check_reserve_order_cancle"
@@ -79,7 +80,7 @@
                     android:layout_height="33dp"
                     android:layout_gravity="end"
                     android:text="@string/cancle_reserve"
-                    tools:text="取消预约" />
+                    tools:text="正在预约" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.reserveorder.healthcheckorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.ReserveOrderDetailActivity;
 import com.example.administrator.personhealthrecord.adapter.ReserveOrderRecycleVIewAdapter;
 import com.example.administrator.personhealthrecord.bean.ReserOrderBean;
 import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
@@ -74,6 +77,14 @@ public class HealthyCheckOrderFragment extends IReserveOrderView{
             @Override
             public void onRefresh() {
                 getList();
+            }
+        });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent=new Intent(getActivity(), ReserveOrderDetailActivity.class);
+                intent.putExtra("ReserOrderBean",list.get(position));
+                startActivity(intent);
             }
         });
     }

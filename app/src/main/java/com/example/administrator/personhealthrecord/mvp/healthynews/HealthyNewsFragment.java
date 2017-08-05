@@ -83,7 +83,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         manager = new LinearLayoutManager(getContext());
 
         setHasOptionsMenu(true);
-        presenter.test();
+//        presenter.test();
     }
 
     @Nullable
