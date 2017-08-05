@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<com.example.administrator.personhealthrecord.view.DeletableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/card_view_margin_vertical"
-    android:layout_marginLeft="@dimen/card_view_margin_horizontal"
-    android:layout_marginRight="@dimen/card_view_margin_horizontal"
-    android:layout_marginTop="@dimen/card_view_margin_vertical"
-    app:cardCornerRadius="@dimen/card_corner"
-    app:cardElevation="@dimen/card_view_elevation"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/abstract_item__layout"
@@ -49,11 +41,11 @@
             <!--title-->
             <TextView
                 android:id="@+id/case_item__title"
+                tools:text="病历1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textSize="@dimen/text_size"
-                tools:text="病历1"
                 />
 
             <!--就诊医院-->
@@ -70,12 +62,12 @@
 
                 <TextView
                     android:id="@+id/case_item_location"
+                    tools:text="中山三院"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="5dp"
-                    tools:text="中山三院"
                     />
             </LinearLayout>
 
@@ -92,15 +84,29 @@
 
                 <TextView
                     android:id="@+id/case_item_date"
+                    tools:text="2017-08-05"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="5dp"
-                    tools:text="2017-08-05"
                     />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#ff0000"
+        android:clickable="true"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_delete_forever_black_24dp"/>
+    </LinearLayout>
+</com.example.administrator.personhealthrecord.view.DeletableLayout>
 

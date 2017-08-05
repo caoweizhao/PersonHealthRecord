@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -250,7 +249,6 @@ public class AddCaseActivity extends BaseActivity {
                    showMessage(mAddCaseCommit,"请输入正确的日期格式！");
                }else{
                    mLoadingDialog.show();
-                   Log.d("AddCaseActivity", "onClick" + mCaseBean.getHospitalName());
                    mService.addCase(mCaseBean, Contract.cookie)
                            .observeOn(AndroidSchedulers.mainThread())
                            .subscribeOn(Schedulers.io())
@@ -263,6 +261,8 @@ public class AddCaseActivity extends BaseActivity {
                                @Override
                                public void onNext(ResponseBody value) {
 
+                                   // TODO: 2017-8-5 根据返回信息判断是否成功    mSuccessDialog.show();
+
                                }
 
                                @Override
@@ -273,7 +273,6 @@ public class AddCaseActivity extends BaseActivity {
                                @Override
                                public void onComplete() {
                                    mLoadingDialog.dismiss();
-                                   mSuccessDialog.show();
                                }
                            });
                }
