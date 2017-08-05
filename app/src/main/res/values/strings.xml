@@ -13,6 +13,8 @@
     <string name="my_phr_management">个人PHR管理</string>
     <string name="health_assessment">健康指数评估</string>
     <string name="healthy_news_detail">健康新闻</string>
+    <string name="menu_about">关于</string>
+
 
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
@@ -125,4 +127,5 @@
     <string name="had_reserve">已经预约</string>
     <string name="healthy_package_detail">套餐详情</string>
     <string name="cancle_reserve">取消预约</string>
+
 </resources>

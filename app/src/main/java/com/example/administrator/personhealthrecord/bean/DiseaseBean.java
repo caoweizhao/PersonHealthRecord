@@ -101,9 +101,10 @@ public class DiseaseBean extends DataSupport implements AbstractItem {
 
     @Override
     public String getTitle() {
-        return getSummary();
+        return getName();
     }
 
+    @Override
     public String getSummary() {
         return summary;
     }

@@ -12,7 +12,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +21,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.AboutActivity;
+import com.example.administrator.personhealthrecord.activity.CaseListActivity;
 import com.example.administrator.personhealthrecord.activity.ProfileActivity;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
-import com.example.administrator.personhealthrecord.activity.TestActivity;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.healthevaluate.HealthyEvaluateActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
@@ -89,7 +89,6 @@ public class MainActivity extends AMainActivity {
                         @Override
                         public void getOutline(View view, Outline outline) {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                Log.d("MainActivity", "getOutline" + view.getMeasuredWidth() + ":" + view.getMeasuredHeight());
                                 outline.setOval(left, top, right, bottom);
                             }
                         }
@@ -161,6 +160,8 @@ public class MainActivity extends AMainActivity {
                         startActivity(intent);
                         break;
                     case R.id.menu_my_medical_record_folder:
+                        Intent caseIntent = new Intent(MainActivity.this, CaseListActivity.class);
+                        startActivity(caseIntent);
                         break;
                     case R.id.menu_my_phr_management:
                         Intent phrIntent = new Intent(MainActivity.this, SelfPHRActivity.class);
@@ -170,6 +171,10 @@ public class MainActivity extends AMainActivity {
                         Intent intent3 = new Intent(MainActivity.this, HealthyEvaluateActivity.class);
                         startActivity(intent3);
                         break;
+                    case R.id.about_app:
+                        Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
+                        startActivity(aboutIntent);
+                        return true;
                     default:
                         break;
                 }
@@ -222,7 +227,6 @@ public class MainActivity extends AMainActivity {
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                Log.d("MainActivity", "slideOffset" + slideOffset);
                 if (slideOffset < 0.5) {
                     sm.setStatusBarTintEnabled(true);
                 } else {

@@ -78,10 +78,8 @@ public class SelfPHRActivity extends BaseActivity {
     TextView mPhrAllergyHistory;
     @BindView(R.id.phr_body_mass_index_unit)
     TextView mPhrBodyMassIndexUnit;
-
     @BindView(R.id.container_)
     View view;
-
     PHRBean mPhrBean;
     UserInfoBean mUserInfoBean;
 

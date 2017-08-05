@@ -19,6 +19,7 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/menu_header"
         app:menu="@menu/menu_view"
+        app:itemIconTint="@color/colorPrimaryLight"
         />
 
 </android.support.v4.widget.DrawerLayout>
