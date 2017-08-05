@@ -82,5 +82,4 @@ public class Contract {
     public static final String CheckPageAdvertismentImageUrl=BASE_URL+"/advertisement/getImage/";
     public static final String AppointMnetImageUrl=BASE_URL+"rro/getImage/";
     public static boolean IS_DISCOUNT=false;
-    public static final String CheckPageAdvertismentImageUrl = BASE_URL + "/advertisement/getImage/";
 }

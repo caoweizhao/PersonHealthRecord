@@ -3,6 +3,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
@@ -17,8 +18,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="新增病历"
         />
 
@@ -55,76 +56,81 @@
                     android:padding="30dp"
                     >
 
-                    <android.support.design.widget.TextInputLayout
+                    <!--姓名-->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="姓名"
                         >
 
-                        <EditText
-                            android:id="@+id/edit_name"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawablePadding="@dimen/drawable_padding"
-                            android:imeOptions="actionNext"
-                            android:inputType="textPersonName"
-                            android:singleLine="true"
+                            android:padding="@dimen/text_padding"
+                            android:text="姓名："
                             android:textSize="@dimen/text_size"/>
-                    </android.support.design.widget.TextInputLayout>
 
+                        <TextView
+                            android:id="@+id/add_case_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/text_padding"
+                            android:textSize="@dimen/text_size"
+                            tools:text="曹伟钊"
+                            />
+                    </LinearLayout>
                     <!--年龄-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical">
 
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:hint="年龄"
-                            >
+                            android:padding="@dimen/text_padding"
+                            android:textSize="@dimen/text_size"
+                            android:text="年龄："
+                            />
 
-                            <EditText
-                                android:id="@+id/edit_age"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="@dimen/drawable_padding"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:numeric="integer"
-                                android:singleLine="true"
-                                android:textSize="@dimen/text_size"/>
-                        </android.support.design.widget.TextInputLayout>
+                        <TextView
+                            android:id="@+id/add_case_age_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/text_padding"
+                            android:textSize="@dimen/text_size"
+                            tools:text="22"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/text_padding"
+                            android:textSize="@dimen/text_size"
+                            android:text="岁"
+                            />
+                    </LinearLayout>
+                    <!--性别-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="岁"
+                            android:padding="@dimen/text_padding"
                             android:textSize="@dimen/text_size"
+                            android:text="性别："
+                            />
+
+                        <TextView
+                            android:id="@+id/add_case_gender_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/text_padding"
+                            android:textSize="@dimen/text_size"
+                            tools:text="男"
                             />
                     </LinearLayout>
-
-                    <!--户籍-->
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="户籍：如广州"
-                        >
-
-                        <EditText
-                            android:id="@+id/edit_household"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_home_page"
-                            android:drawablePadding="@dimen/drawable_padding"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:numeric="integer"
-                            android:singleLine="true"
-                            android:textSize="@dimen/text_size"/>
-                    </android.support.design.widget.TextInputLayout>
-
                     <!--就诊医院-->
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -136,7 +142,7 @@
                             android:id="@+id/edit_hospital"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_home_page"
+                            android:drawableLeft="@drawable/ic_hospital"
                             android:drawablePadding="@dimen/drawable_padding"
                             android:imeOptions="actionNext"
                             android:inputType="text"
@@ -144,9 +150,9 @@
                             android:singleLine="true"
                             android:textSize="@dimen/text_size"/>
                     </android.support.design.widget.TextInputLayout>
-
                     <!--就诊时间-->
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/date_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="就诊时间:如2017-07-26"
@@ -156,7 +162,7 @@
                             android:id="@+id/edit_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_home_page"
+                            android:drawableLeft="@drawable/ic_health_check_package_select_time"
                             android:drawablePadding="@dimen/drawable_padding"
                             android:imeOptions="actionNext"
                             android:inputType="datetime"
@@ -164,7 +170,6 @@
                             android:singleLine="true"
                             android:textSize="@dimen/text_size"/>
                     </android.support.design.widget.TextInputLayout>
-
                     <!--身体状况-->
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -176,14 +181,13 @@
                             android:id="@+id/edit_condition"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_home_page"
+                            android:drawableLeft="@drawable/ic_physical_examination"
                             android:drawablePadding="@dimen/drawable_padding"
                             android:inputType="text"
                             android:numeric="integer"
                             android:singleLine="true"
                             android:textSize="@dimen/text_size"/>
                     </android.support.design.widget.TextInputLayout>
-
                     <!--药物处方-->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -211,7 +215,6 @@
 
                             />
                     </LinearLayout>
-
                     <!--治疗日程-->
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -223,7 +226,7 @@
                             android:id="@+id/edit_schedule"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_home_page"
+                            android:drawableLeft="@drawable/ic_health_check_package_select_date2"
                             android:drawablePadding="@dimen/drawable_padding"
                             android:imeOptions="actionNext"
                             android:inputType="text"
@@ -231,7 +234,6 @@
                             android:singleLine="true"
                             android:textSize="@dimen/text_size"/>
                     </android.support.design.widget.TextInputLayout>
-
                     <!--待办事件-->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -261,20 +263,14 @@
                             />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
-
+                    <!--提交按钮-->
                     <Button
-                        android:id="@+id/add_ok"
+                        android:id="@+id/add_case_commit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:background="@color/colorPrimary"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/login_bg_enable"
                         android:text="确认添加"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"

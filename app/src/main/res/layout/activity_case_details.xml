@@ -5,19 +5,11 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
 
     <!--标题栏-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="病历详情"
-        />
+    <include layout="@layout/toolbar"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -46,8 +38,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="30dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="25dp">
 
                     <!--姓名-->
                     <LinearLayout
@@ -100,6 +92,7 @@
                             android:id="@+id/age_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="20dp"
                             android:padding="@dimen/text_padding"
                             android:textSize="@dimen/text_size"
                             tools:text="22"
@@ -108,7 +101,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/margin_right"
                             android:text="岁"
                             android:textSize="@dimen/text_size"/>
 
@@ -122,7 +114,7 @@
                         android:layout_marginRight="@dimen/view_margin"
                         android:background="@android:color/black"/>
 
-                    <!--户籍-->
+                    <!--性别-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -132,17 +124,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
-                            android:text="@string/patient_household"
+                            android:text="性别："
                             android:textSize="@dimen/text_size"
                             />
 
                         <TextView
-                            android:id="@+id/household_text"
+                            android:id="@+id/gender_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
                             android:textSize="@dimen/text_size"
-                            tools:text="广东汕头"
+                            tools:text="女"
                             />
 
                     </LinearLayout>
@@ -258,7 +250,7 @@
                     <!--药物处方-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="@dimen/text_padding"
                         >
@@ -273,32 +265,29 @@
                         <TextView
                             android:id="@+id/prescription_text"
                             android:layout_width="match_parent"
-                            android:layout_height="110dp"
-                            android:paddingTop="3dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:minHeight="120dp"
+                            android:padding="5dp"
                             android:textSize="@dimen/text_size"
                             tools:text="XXX药 一天三次 XXX"/>
 
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
 
                     <!--治疗日程-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/text_padding"
+                        >
 
                         <TextView
                             android:id="@+id/schedule"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/text_padding"
                             android:text="@string/schedule"
                             android:textSize="@dimen/text_size"
                             />
@@ -307,25 +296,20 @@
                             android:id="@+id/schedule_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/text_padding"
+                            android:background="@drawable/input_bg"
+                            android:minHeight="120dp"
+                            android:padding="5dp"
                             android:textSize="@dimen/text_size"
                             tools:text="15天后复诊"
                             />
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
 
                     <!--待办事件-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="@dimen/text_padding"
                         >
@@ -340,34 +324,15 @@
                         <TextView
                             android:id="@+id/remark_text"
                             android:layout_width="match_parent"
-                            android:layout_height="110dp"
-                            android:paddingTop="3dp"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/input_bg"
-                            android:textSize="@dimen/text_size"/>
-
-
+                            android:minHeight="120dp"
+                            android:padding="5dp"
+                            android:textSize="@dimen/text_size"
+                            tools:text="暂无"/>
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/view_margin"
-                        android:layout_marginRight="@dimen/view_margin"
-                        android:background="@android:color/black"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp">
-
-                    </LinearLayout>
-
-
                 </LinearLayout>
-
             </ScrollView>
         </android.support.v7.widget.CardView>
     </FrameLayout>
-
-
 </LinearLayout>
