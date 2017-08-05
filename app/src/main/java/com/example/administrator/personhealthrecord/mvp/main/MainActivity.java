@@ -20,13 +20,14 @@ import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.ProfileActivity;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.activity.TestActivity;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
-import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -109,9 +110,6 @@ public class MainActivity extends AMainActivity {
         mAvator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAvator.setScaleY(0.5f);
-                mAvator.setScaleX(0.5f);
-                AnimateUtil.scaleShow(mAvator, null);
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
@@ -185,6 +183,13 @@ public class MainActivity extends AMainActivity {
         return new MainPresenter();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Contract.IsLogin.equals(Contract.Login)) {
+            mPresenter.requestAvator();
+        }
+    }
 
     @Override
     public void setFragment(int position) {
@@ -195,6 +200,14 @@ public class MainActivity extends AMainActivity {
     public void openMenu() {
         mDrawerLayout.openDrawer(Gravity.START);
         sm.setStatusBarTintEnabled(false);
+    }
+
+    @Override
+    public void updateAvator(String url) {
+        Glide.with(this)
+                .load(url)
+                .error(R.drawable.chat_left_human)
+                .into(mAvator);
     }
 
     ActionBarDrawerToggle toggle;
