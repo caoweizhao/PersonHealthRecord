@@ -28,8 +28,6 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:transitionName="image"
-                app:layout_collapseMode="parallax"
                 tools:src="@drawable/profile_bg"/>
 
 
@@ -46,22 +44,34 @@
 
             <ImageView
                 android:id="@+id/profile_avator"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/chat_left_human"
                 android:transitionName="avator"/>
 
-            <TextView
-                android:id="@+id/profile_age_text"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:padding="@dimen/text_padding"
-                android:text="22岁"
-                android:textSize="20sp"
-                />
+                android:gravity="center_vertical"
+                android:layout_gravity="center_horizontal|bottom">
+
+                <TextView
+                    android:id="@+id/profile_age_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_padding"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="岁"
+                    android:textSize="20sp"
+                    />
+            </LinearLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -124,7 +134,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
-                            android:text="曹伟钊"
                             android:textSize="@dimen/text_size"
                             />
                     </FrameLayout>
@@ -168,7 +177,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
-                            android:text="男"
                             android:textSize="@dimen/text_size"
                             />
                     </FrameLayout>
@@ -211,7 +219,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
-                            android:text="13560321319"
                             android:textSize="@dimen/text_size"
                             />
                     </FrameLayout>
@@ -254,7 +261,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
-                            android:text="广东清远"
                             android:textSize="@dimen/text_size"
                             />
                     </FrameLayout>
@@ -298,7 +304,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/text_padding"
-                            android:text="0积分"
                             android:textSize="@dimen/text_size"
                             />
                     </FrameLayout>

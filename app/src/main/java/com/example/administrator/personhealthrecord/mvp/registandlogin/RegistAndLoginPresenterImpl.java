@@ -62,8 +62,9 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: " + e.toString());
-                mView.ShowSanck(e.toString());
-
+                if (mView != null) {
+                    mView.ShowSanck(e.toString());
+                }
             }
 
             @Override
@@ -113,7 +114,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
 
     @Override
     void onDetach() {
-        if(mDisposable != null){
+        if (mDisposable != null) {
             mDisposable.dispose();
         }
     }

@@ -170,4 +170,19 @@ public class UserInfoBean implements Parcelable{
             return new UserInfoBean[size];
         }
     };
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name)
+                .append("-")
+                .append(age)
+                .append("-")
+                .append(phoneNumber)
+                .append("-")
+                .append(gender)
+                .append("-")
+        ;
+        return sb.toString();
+    }
 }

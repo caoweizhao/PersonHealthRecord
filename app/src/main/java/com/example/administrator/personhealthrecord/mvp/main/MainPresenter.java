@@ -1,9 +1,9 @@
 package com.example.administrator.personhealthrecord.mvp.main;
 
 import android.support.annotation.IdRes;
-import android.util.Log;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.contract.Contract;
 
 /**
  * Created by Administrator on 2017-7-17.
@@ -36,5 +36,23 @@ public class MainPresenter extends AMainPresenter {
                 break;
         }
         mView.setFragment(index);
+    }
+
+    @Override
+    public void requestAvator() {
+        mModel.getAvatorUrl();
+    }
+
+    @Override
+    public void onAvatorUrlReady(String url) {
+        if (mView != null) {
+            String imageUrl = "";
+            if (url != null && !url.contains("http")) {
+                imageUrl = Contract.UserInfoBase + url;
+                mView.updateAvator(imageUrl);
+            } else {
+                mView.updateAvator(url);
+            }
+        }
     }
 }

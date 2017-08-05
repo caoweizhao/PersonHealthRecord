@@ -7,6 +7,7 @@
     <color name="colorPrimaryLight">#2195f2</color>
     <color name="colorAccent">#37d2f9</color>
 
+    <color name="scrim">#99323232</color>
     <color name="colorIndicator">#e7e7ec</color>
 
     <color name="class_a_color">#095b36</color>
