@@ -38,7 +38,6 @@
 
 
                 <TextView
-                    android:textColor="@android:color/black"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/health_check_reserve_order_title"
                     android:layout_width="wrap_content"
@@ -53,7 +52,6 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:textColor="@android:color/black"
                         android:id="@+id/health_check_reserve_order_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,7 +60,6 @@
                         tools:text="体检时间:2017年7月30号" />
 
                     <TextView
-                        android:textColor="@android:color/black"
                         android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:id="@+id/health_check_reserve_order_hospital"
@@ -72,16 +69,18 @@
                 </LinearLayout>
 
 
-                <Button
+                <TextView
                     android:textSize="15sp"
                     android:padding="2dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
                     android:background="@drawable/cycle_imageview"
                     android:id="@+id/health_check_reserve_order_cancle"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:layout_gravity="end"
                     android:text="@string/cancle_reserve"
-                    tools:text="取消预约" />
+                    tools:text="正在预约" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

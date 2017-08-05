@@ -29,22 +29,44 @@ public class ReserveModleImpl extends IReserveModle{
     public void getPackageHospitals(Observer<ResultUtilOfHospitalList> observer) {
         Retrofit retrofit= RetrofitUtil.getRetrofit();
         HealthReserveService api=retrofit.create(HealthReserveService.class);
-        api.getOwnPackageHostpitalList()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+        if(Contract.IS_DISCOUNT)
+        {
+            api.getDiscoutPackageHostpitalList()
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }else
+        {
+            api.getOwnPackageHostpitalList()
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }
+
     }
 
     @Override
     public void getPackage(Observer<ResultUtilOfPackageBean> observer, int id) {
         Retrofit retrofit= RetrofitUtil.getRetrofit();
         HealthReserveService api=retrofit.create(HealthReserveService.class);
-        api.getHospitalPacakge(id)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+        if(Contract.IS_DISCOUNT)
+        {
+            api.getHospitalDiscoutPacakge(id)
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }else
+        {
+            api.getHospitalPacakge(id)
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }
+
     }
 
     @Override

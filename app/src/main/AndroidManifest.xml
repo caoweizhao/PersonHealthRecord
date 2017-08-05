@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.administrator.personhealthrecord">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.administrator.personhealthrecord">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <!-- 允许程序打开网络套接字 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 允许程序获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 允许程序访问WiFi网络信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 允许程序读写手机状态和身份 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 用于申请调用A-GPS模块 -->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".application.MyApplication"
@@ -37,71 +35,72 @@
         tools:replace="android:icon">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="89005e7823bb733f0274ad9262517bce"/>
+            android:value="89005e7823bb733f0274ad9262517bce" />
 
         <activity
             android:name=".mvp.main.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.HealthyNewsDetailActivity"
             android:launchMode="singleTask"
-            android:theme="@style/HealthyNewsDetailStyle"/>
+            android:theme="@style/HealthyNewsDetailStyle" />
         <activity
             android:name=".mvp.registandlogin.LoginActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.MapAcitvity"
-            android:launchMode="singleTask"/>
+           />
 
         <service
             android:name="com.amap.api.location.APSService"
-            android:launchMode="singleTask"/>
+            />
 
         <activity
             android:name=".mvp.registandlogin.RegistActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".mvp.reserve.ReserveActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.HospitalPackageDetailActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.ReserveNowActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".mvp.reserveorder.ReserveOrderActivity"/>
-        <activity android:name=".activity.NewsDetailActivity"/>
-        <activity android:name=".activity.DoctorDetailActivity"/>
-        <activity android:name=".activity.HospitalListActivity"/>
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".mvp.reserveorder.ReserveOrderActivity" />
+        <activity android:name=".activity.NewsDetailActivity" />
+        <activity android:name=".activity.DoctorDetailActivity" />
+        <activity android:name=".activity.HospitalListActivity" />
         <activity
             android:name=".activity.SelfRegisterActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
-        <activity android:name=".activity.ExpertListActivity"/>
-        <activity android:name=".activity.SelfPHRActivity"/>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity android:name=".activity.ExpertListActivity" />
+        <activity android:name=".activity.SelfPHRActivity" />
         <activity
             android:name=".activity.EditPHRActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         />
         <activity
             android:name=".mvp.chat.ChatActivity"
-            android:windowSoftInputMode="adjustResize"
-            />
-        <activity android:name=".activity.TestActivity"/>
-        <activity android:name=".activity.ImmuneDetailActivity"/>
-        <activity android:name=".activity.MedicineDetailActivity"/>
-        <activity android:name=".activity.DiseaseDetailActivity"/>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.ImmuneDetailActivity" />
+        <activity android:name=".activity.MedicineDetailActivity" />
+        <activity android:name=".activity.DiseaseDetailActivity" />
         <activity
             android:name=".activity.ProfileActivity"
-            android:windowSoftInputMode="adjustUnspecified"/>
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity android:name=".mvp.healthevaluate.HealthyEvaluateActivity" />
+        <activity android:name=".activity.AppointmentDeatil"></activity>
     </application>
 
 </manifest>

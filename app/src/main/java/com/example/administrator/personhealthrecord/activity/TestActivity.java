@@ -19,6 +19,8 @@ import butterknife.BindView;
 
 public class TestActivity extends BaseActivity {
 
+
+
     @BindView(R.id.imageView)
     ImageView mImageView;
     @BindView(R.id.container_)
@@ -26,7 +28,7 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.activity_test_layout;
+        return R.layout.hm_evaluate;
     }
 
     @Override

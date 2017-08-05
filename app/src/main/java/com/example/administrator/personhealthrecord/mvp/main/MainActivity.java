@@ -26,6 +26,8 @@ import com.example.administrator.personhealthrecord.activity.ProfileActivity;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.activity.TestActivity;
 import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.mvp.healthevaluate.HealthyEvaluateActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.roughike.bottombar.BottomBar;
@@ -33,6 +35,7 @@ import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Administrator on 2017-7-17.
@@ -165,8 +168,10 @@ public class MainActivity extends AMainActivity {
                         startActivity(phrIntent);
                         break;
                     case R.id.menu_health_assessment:
-                        Intent intent3 = new Intent(MainActivity.this, TestActivity.class);
-                        startActivity(intent3);
+
+                            Intent intent3 = new Intent(MainActivity.this, HealthyEvaluateActivity.class);
+                            startActivity(intent3);
+
                         break;
                     default:
                         break;

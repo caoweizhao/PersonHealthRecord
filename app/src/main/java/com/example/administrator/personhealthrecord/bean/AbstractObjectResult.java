@@ -3,14 +3,14 @@ package com.example.administrator.personhealthrecord.bean;
 import java.util.List;
 
 /**
- * Created by andy on 2017/8/2.
+ * Created by andy on 2017/8/3.
  */
 
-public class AbstractResulUitl<T>{
-      public long timestamp;
+public class AbstractObjectResult <T>{
+    public long timestamp;
     public String status;
     public String message;
-    public List<T> collection;
+    public T object;
 
     public long getTimestamp() {
         return timestamp;
@@ -36,11 +36,11 @@ public class AbstractResulUitl<T>{
         this.message = message;
     }
 
-    public List<T> getCollection() {
-        return collection;
+    public T getObject() {
+        return object;
     }
 
-    public void setCollection(List<T> collection) {
-        this.collection = collection;
+    public void setObject(T object) {
+        this.object = object;
     }
 }

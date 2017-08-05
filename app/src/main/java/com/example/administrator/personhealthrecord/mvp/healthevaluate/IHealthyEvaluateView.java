@@ -1,5 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.healthevaluate;
 
+import com.example.administrator.personhealthrecord.bean.PHRBean;
 import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
 import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
 
@@ -8,4 +9,5 @@ import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
  */
 
 public abstract class IHealthyEvaluateView extends MvpFragment<IHealthyEvaluatePresenter>{
+    public abstract void OnPHRReady(PHRBean bean);
 }

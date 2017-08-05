@@ -277,12 +277,12 @@ private PackageBean bean;
         return true;
     }
 
-    public void ReserveNow()
-    {
+    public void ReserveNow() throws ParseException {
         if(editname.getText().toString().equals("")||editphoneNumber.getText().toString().equals(""))
             SnackBarUitl.ShowSnackBar(linearLayout,"请填完个人信息","OK!");
         else
         {
+            setTime();
             mPresenter.ReserveNow(stratTime.getTime(),endTime.getTime(),editname.getText().toString(),editphoneNumber.getText().toString(),bean.getId());
             loding();
         }
@@ -309,6 +309,18 @@ private PackageBean bean;
     public void ReserveSuccess()
     {
         pDialog.dismiss();
+        pDialog = new SweetAlertDialog(ReserveNowActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("预约成功！")
+                .setConfirmText("我知道了")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        pDialog.dismiss();
+                        finish();
+                    }
+                });
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
     public void loding()
     {

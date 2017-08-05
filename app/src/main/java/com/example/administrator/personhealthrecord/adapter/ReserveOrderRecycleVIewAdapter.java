@@ -58,8 +58,8 @@ public class ReserveOrderRecycleVIewAdapter<T extends AbstractReserveBean> exten
                 hostpitalName="体检医院:"+item.getHosPitalNameTotal();
             }else if(item instanceof AppointmentBean)
             {
-                name=item.getName();
-                mImageURL= Contract.ReserVeOrderHealthyCheckImageUrl+item.getImageId();
+                name=((AppointmentBean) item).getDoctorName();
+                mImageURL= Contract.AppointMnetImageUrl+((AppointmentBean) item).getRroId();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM");
                 time="门诊时间:"+sdf.format(item.getStartTime());
                 hostpitalName="体检医院:"+item.getHosPitalNameTotal();
