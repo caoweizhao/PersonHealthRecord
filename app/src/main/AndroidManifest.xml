@@ -105,7 +105,8 @@
         <activity android:name=".activity.CaseDetailActivity"/>
         <activity android:name=".activity.AddCaseActivity"/>
         <activity android:name=".activity.AboutActivity"/>
-        <activity android:name=".activity.ReserveOrderDetailActivity"/>
+        <activity android:name=".activity.HospitalDetailActivity"/>
+        <activity android:name=".activity.SearchResultActivity"/>
     </application>
 
 </manifest>
