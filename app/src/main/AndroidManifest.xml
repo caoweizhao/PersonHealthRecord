@@ -108,7 +108,9 @@
         <activity android:name=".activity.CaseListActivity"/>
         <activity android:name=".activity.CaseDetailActivity"/>
         <activity android:name=".activity.AddCaseActivity"/>
-        <activity android:name=".activity.AboutActivity"/>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:theme="@style/Translucent"/>
         <activity android:name=".activity.HospitalDetailActivity"/>
         <activity android:name=".activity.SearchResultActivity"/>
     </application>

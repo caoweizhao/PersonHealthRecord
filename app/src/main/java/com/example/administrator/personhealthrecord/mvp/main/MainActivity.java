@@ -180,7 +180,6 @@ public class MainActivity extends AMainActivity {
                     case R.id.about_app:
                         Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(aboutIntent);
-                        return true;
                     default:
                         break;
                 }
