@@ -72,7 +72,7 @@ public class HomePageModel extends AHomePageModel {
 
             @Override
             public void onError(Throwable e) {
-                mPresenter.onErrorHappened(e.getMessage());
+                mPresenter.onErrorHappened("连接失败");
             }
 
             @Override
@@ -125,7 +125,7 @@ public class HomePageModel extends AHomePageModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        mPresenter.onErrorHappened(e.getMessage());
+                        mPresenter.onErrorHappened("连接失败");
                     }
 
                     @Override

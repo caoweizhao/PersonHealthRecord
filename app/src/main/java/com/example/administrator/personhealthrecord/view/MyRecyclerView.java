@@ -18,9 +18,6 @@ public class MyRecyclerView extends RecyclerView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
-        if(e.getAction() == MotionEvent.ACTION_DOWN){
-            return false;
-        }
-        return true;
+        return e.getAction() != MotionEvent.ACTION_DOWN;
     }
 }

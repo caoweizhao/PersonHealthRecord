@@ -1,112 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.administrator.personhealthrecord.view.DeletableLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="@dimen/card_view_elevation"
+    app:cardCornerRadius="@dimen/card_corner"
+    android:layout_margin="5dp"
+    >
 
-    <LinearLayout
-        android:id="@+id/abstract_item__layout"
+    <com.example.administrator.personhealthrecord.view.DeletableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:clickable="true"
+        android:id="@+id/deletableLayout"
         >
-
-        <ImageView
-            android:id="@+id/case_item__img"
-            android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:layout_weight="1.2"
-            android:padding="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_case"
-            />
-
-        <include
-            layout="@layout/divider_view"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"/>
-
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/abstract_item_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:orientation="vertical"
-            android:padding="5dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             >
 
-            <!--title-->
-            <TextView
-                android:id="@+id/case_item__title"
-                tools:text="病历1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/case_item__img"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1.2"
                 android:padding="5dp"
-                android:textSize="@dimen/text_size"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_case"
                 />
 
-            <!--就诊医院-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="就诊医院："
-                    />
-
-                <TextView
-                    android:id="@+id/case_item_location"
-                    tools:text="中山三院"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:padding="5dp"
-                    />
-            </LinearLayout>
+            <include
+                layout="@layout/divider_view"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
 
+                <!--title-->
                 <TextView
+                    android:id="@+id/case_item__title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="就诊时间："
+                    android:textSize="@dimen/text_size"
+                    tools:text="病历1"
                     />
 
-                <TextView
-                    android:id="@+id/case_item_date"
-                    tools:text="2017-08-05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:padding="5dp"
-                    />
+                <!--就诊医院-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="就诊医院："
+                        />
+
+                    <TextView
+                        android:id="@+id/case_item_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        tools:text="中山三院"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="就诊时间："
+                        />
+
+                    <TextView
+                        android:id="@+id/case_item_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        tools:text="2017-08-05"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="#ff0000"
-        android:clickable="true"
-        android:gravity="center"
-        >
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#b31f1f"
+            android:clickable="true"
+            >
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_delete_forever_black_24dp"/>
-    </LinearLayout>
-</com.example.administrator.personhealthrecord.view.DeletableLayout>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_delete_forever_black_24dp"/>
+        </FrameLayout>
+    </com.example.administrator.personhealthrecord.view.DeletableLayout>
+</android.support.v7.widget.CardView>
 

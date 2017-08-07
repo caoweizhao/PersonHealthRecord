@@ -16,8 +16,6 @@ import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 
-import java.util.Date;
-
 import butterknife.BindView;
 
 
@@ -43,7 +41,6 @@ public class NewsDetailActivity extends BaseActivity {
     protected void initData() {
         initToolbar("新闻详情", true, null);
         mNewsBean = getIntent().getParcelableExtra("NewsBean");
-        Date date = new Date(mNewsBean.getTime());
         textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getdate());
         mTitleTextView.setText(mNewsBean.getTitle());
         String mImageUrl = mNewsBean.getImageUrl();

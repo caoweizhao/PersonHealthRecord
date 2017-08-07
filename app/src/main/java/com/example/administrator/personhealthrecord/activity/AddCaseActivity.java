@@ -16,11 +16,14 @@ import com.example.administrator.personhealthrecord.bean.UserInfoBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
+import com.example.administrator.personhealthrecord.util.ToastUitl;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -157,8 +160,8 @@ public class AddCaseActivity extends BaseActivity {
                 .filter(new Predicate<CharSequence>() {
                     @Override
                     public boolean test(CharSequence sequence) throws Exception {
-                        if(TextUtils.isEmpty(sequence)){
-                            if(mDateInputLayout.isErrorEnabled()){
+                        if (TextUtils.isEmpty(sequence)) {
+                            if (mDateInputLayout.isErrorEnabled()) {
                                 mDateInputLayout.setErrorEnabled(false);
                             }
                         }
@@ -245,37 +248,47 @@ public class AddCaseActivity extends BaseActivity {
         mAddCaseCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(mDateInputLayout.isErrorEnabled()){
-                   showMessage(mAddCaseCommit,"请输入正确的日期格式！");
-               }else{
-                   mLoadingDialog.show();
-                   mService.addCase(mCaseBean, Contract.cookie)
-                           .observeOn(AndroidSchedulers.mainThread())
-                           .subscribeOn(Schedulers.io())
-                           .subscribe(new Observer<ResponseBody>() {
-                               @Override
-                               public void onSubscribe(Disposable d) {
-                                   mDisposables.add(d);
-                               }
+                if (mDateInputLayout.isErrorEnabled() || TextUtils.isEmpty(mEditTime.getText())) {
+                    ToastUitl.Toast("请输入正确的日期格式！");
+                } else {
+                    mLoadingDialog.show();
+                    mService.addCase(mCaseBean, Contract.cookie)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(new Observer<ResponseBody>() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
+                                    mDisposables.add(d);
+                                }
 
-                               @Override
-                               public void onNext(ResponseBody value) {
+                                @Override
+                                public void onNext(ResponseBody value) {
 
-                                   // TODO: 2017-8-5 根据返回信息判断是否成功    mSuccessDialog.show();
+                                    // TODO: 2017-8-5 根据返回信息判断是否成功    mSuccessDialog.show();
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(value.string());
+                                        if (jsonObject.get("status").equals("success")) {
+                                            mSuccessDialog.show();
+                                        } else {
+                                            ToastUitl.Toast("提交失败");
+                                        }
+                                    } catch (JSONException | IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
 
-                               }
+                                @Override
+                                public void onError(Throwable e) {
+                                    ToastUitl.Toast("提交失败！");
+                                    mLoadingDialog.dismiss();
+                                }
 
-                               @Override
-                               public void onError(Throwable e) {
-                                   mLoadingDialog.dismiss();
-                               }
-
-                               @Override
-                               public void onComplete() {
-                                   mLoadingDialog.dismiss();
-                               }
-                           });
-               }
+                                @Override
+                                public void onComplete() {
+                                    mLoadingDialog.dismiss();
+                                }
+                            });
+                }
             }
         });
     }
