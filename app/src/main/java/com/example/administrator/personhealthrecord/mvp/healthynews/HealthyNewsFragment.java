@@ -22,18 +22,15 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.HealthyNewsDetailActivity;
-import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.adapter.HealthyNewsAdapter;
-import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
-import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.base.BaseFragment;
+import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by andy on 2017/7/19.
@@ -81,29 +78,28 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 //        list=new ArrayList<>();
 //        list=TestDate.excute();
         manager = new LinearLayoutManager(getContext());
-
-        setHasOptionsMenu(true);
 //        presenter.test();
+        setHasOptionsMenu(true);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.healthy_news_layout, container, false);
-        ButterKnife.bind(this, view);
         return view;
-
     }
 
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initToolbar("健康");
+        setUpWithActivity(view);
         adapter = new HealthyNewsAdapter<NewsBean>(R.layout.abstract_item, list, this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         presenter.getDBlist();
-////下拉刷新
+        ////下拉刷新
         layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -190,8 +186,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
             }
         });
         adapter.setPreLoadNumber(0);
-        initToolbar("健康");
-        setUpWithActivity(view);
+
     }
 
     @Override
@@ -232,7 +227,6 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
             }
         }, 500);
     }
-
 
     //一开始更新最新的消息
     @Override
@@ -279,6 +273,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d("HealthyNewsFragment","onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
     }
@@ -294,6 +289,4 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
             }
         });
     }
-
-
 }

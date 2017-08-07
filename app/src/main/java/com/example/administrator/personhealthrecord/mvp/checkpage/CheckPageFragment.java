@@ -1,11 +1,9 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,15 +16,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.activity.DoctorDetailActivity;
-import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.bean.ImageBean;
@@ -44,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -98,8 +92,15 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
         // Inflate the layout for this fragment
         checkBeanList = new ArrayList<>();
         View view = inflater.inflate(R.layout.fragment_check_page, container, false);
-        ButterKnife.bind(this, view);
         //设置图片加载器
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initToolbar("体检");
+        setUpWithActivity(view);
         banner01.setImageLoader(new GlideImageLoader());
         //设置图片集合
         //banner设置方法全部调用完毕时最后调用
@@ -109,14 +110,6 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
         adapter = new AbstractItemAdapter<CheckBean>(R.layout.abstract_item, checkBeanList, this.getContext());
         recyclerView.setAdapter(adapter);
         mPresenter.onRequestData();
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initToolbar("体检");
-        setUpWithActivity(view);
     }
 
     @Override
@@ -178,8 +171,8 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         Log.d(TAG, "onCreateOptionsMenu: " + "Check");
-        super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void setUpWithActivity(View view) {

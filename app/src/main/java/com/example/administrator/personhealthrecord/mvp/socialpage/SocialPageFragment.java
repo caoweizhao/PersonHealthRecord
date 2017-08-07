@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -187,8 +188,9 @@ public class SocialPageFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        Log.d("SocialPageFragment","onCreateOptionsMenu");
         menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -212,7 +214,7 @@ public class SocialPageFragment extends BaseFragment {
                 mFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(colorsLighter[pos]));
                 mFloatingActionButton.setImageResource(imgs[pos]);
 
-                AnimateUtil.scaleShow(mFloatingActionButton, null);
+                //AnimateUtil.scaleShow(mFloatingActionButton, null);
             }
 
             @Override

@@ -136,8 +136,10 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         MenuInflater menuInflater = getActivity().getMenuInflater();
+        super.onCreateOptionsMenu(menu, menuInflater);
+        Log.d("HomePageFragment","onCreateOptionsMenu");
         menuInflater.inflate(R.menu.menu, menu);
         MenuItem menuItem = menu.findItem(R.id.search_item);
         MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
