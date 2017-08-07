@@ -54,8 +54,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_gravity="center_horizontal|bottom">
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/profile_age_text"
@@ -124,9 +124,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="textPersonName"
                             android:padding="@dimen/text_padding"
-                            android:scaleX="0"
-                            android:scaleY="0"
                             android:textSize="@dimen/text_size"
+                            android:visibility="gone"
                             />
 
                         <TextView
@@ -168,9 +167,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="textPersonName"
                             android:padding="@dimen/text_padding"
-                            android:scaleX="0"
-                            android:scaleY="0"
-                            android:textSize="@dimen/text_size"/>
+                            android:textSize="@dimen/text_size"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/profile_gender_text_view"
@@ -212,7 +210,8 @@
                             android:inputType="phone"
                             android:padding="@dimen/text_padding"
                             android:textSize="@dimen/text_size"
-                            android:visibility="gone"/>
+                            android:visibility="gone"
+                            />
 
                         <TextView
                             android:id="@+id/profile_phone_text_view"
@@ -252,9 +251,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:padding="@dimen/text_padding"
-                            android:scaleX="0"
-                            android:scaleY="0"
-                            android:textSize="@dimen/text_size"/>
+                            android:textSize="@dimen/text_size"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/profile_address_text_view"
@@ -295,9 +293,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:padding="@dimen/text_padding"
-                            android:scaleX="0"
-                            android:scaleY="0"
-                            android:textSize="@dimen/text_size"/>
+                            android:textSize="@dimen/text_size"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/profile_credit_text_view"

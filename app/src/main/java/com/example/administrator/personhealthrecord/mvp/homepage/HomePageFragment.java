@@ -282,7 +282,6 @@ public class HomePageFragment extends AHomePageFragment {
                 startActivity(intent);
             }
         });
-
     }
 
     @Override

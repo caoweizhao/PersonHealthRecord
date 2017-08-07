@@ -2,13 +2,11 @@ package com.example.administrator.personhealthrecord.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,6 +24,7 @@ import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.util.RegexUtils;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
+import com.example.administrator.personhealthrecord.util.ToastUitl;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,6 +88,7 @@ public class SelfRegisterActivity extends BaseActivity {
     private SelfRegisterService mService;
 
     Disposable mDisposable;
+    private String mHour = "9:00";
 
     @Override
     protected int getLayoutRes() {
@@ -127,28 +127,27 @@ public class SelfRegisterActivity extends BaseActivity {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String hour;
                 switch (position) {
                     case 0:
-                        hour = "9:00";
+                        mHour = "9:00";
                         break;
                     case 1:
-                        hour = "10:00";
+                        mHour = "10:00";
                         break;
                     case 2:
-                        hour = "15:00";
+                        mHour = "15:00";
                         break;
                     case 3:
-                        hour = "16:00";
+                        mHour = "16:00";
                         break;
                     default:
-                        hour = "0:0";
+                        mHour = "0:0";
                         break;
                 }
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    mDate = sdf.parse(mSelfRegisterDate.getText() + " " + hour + ":00");
+                    mDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
                     mStartTime = mDate.getTime();
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(mDate);
@@ -172,12 +171,17 @@ public class SelfRegisterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
+                final Calendar now = Calendar.getInstance();
                 new DatePickerDialog(SelfRegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         calendar.set(year, month, dayOfMonth);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        mSelfRegisterDate.setText(sdf.format(calendar.getTime()));
+                        if (now.after(calendar)) {
+                            ToastUitl.Toast("选择日期有误，请重新选择！");
+                        } else {
+                            mSelfRegisterDate.setText(sdf.format(calendar.getTime()));
+                        }
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
                         .show();
@@ -200,6 +204,18 @@ public class SelfRegisterActivity extends BaseActivity {
                 // TODO: 2017-7-30 验证信息
                 mSelfRegisterBtn.setEnabled(false);
 
+                Calendar now = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date selectDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour);
+                    if (!selectDate.after(now.getTime())) {
+                        ToastUitl.Toast("预约时间有误，请重新选择！");
+                        mSelfRegisterBtn.setEnabled(true);
+                        return;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 /**
                  * 手机号不通过
                  */
@@ -305,8 +321,6 @@ public class SelfRegisterActivity extends BaseActivity {
                 }
             }
         });
-
-        fix(mSelfRegisteredContainer, mSelfRegisteredGetVertifyCode);
     }
 
     private boolean validateVertifyCode() {
@@ -349,6 +363,8 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisterDoctorDetails.setText(mExpertBean.getQualification());
         mSelfRegisterDoctorPosition.setText(mExpertBean.getDoctorTitle());
         mSelfRegisterDoctorWorkplace.setText(mExpertBean.getAddress());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        mSelfRegisterDate.setText(sdf.format(Calendar.getInstance().getTime()));
     }
 
     public void generateVertifyCode() {
@@ -372,23 +388,5 @@ public class SelfRegisterActivity extends BaseActivity {
                 @Field("phoneNumber") String phoneNumber);
     }
 
-    public static void fix(final NestedScrollView root, final View lastView) {
-        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Rect rect = new Rect();
-                root.getWindowVisibleDisplayFrame(rect);
-                int mainInvisibleHeight = root.getRootView().getHeight() - rect.bottom;
-                if (mainInvisibleHeight > 200) {
-                    int[] location = new int[2];
-                    lastView.getLocationInWindow(location);
-                    int deltaY = location[1] + lastView.getHeight() - rect.bottom;
-                    root.smoothScrollBy(0, deltaY);
-                } else {
-                    root.smoothScrollTo(0, 0);
-                }
-            }
-        });
-    }
 }
 

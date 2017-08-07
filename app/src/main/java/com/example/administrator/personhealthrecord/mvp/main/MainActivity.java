@@ -181,7 +181,6 @@ public class MainActivity extends AMainActivity {
                     case R.id.about_app:
                         Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(aboutIntent);
-                        return true;
                     default:
                         break;
                 }
@@ -220,6 +219,7 @@ public class MainActivity extends AMainActivity {
     public void updateAvator(String url) {
         Glide.with(this)
                 .load(url)
+                .crossFade()
                 .error(R.drawable.chat_left_human)
                 .into(mAvator);
     }

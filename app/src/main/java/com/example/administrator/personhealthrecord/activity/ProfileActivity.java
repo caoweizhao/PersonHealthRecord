@@ -418,7 +418,6 @@ public class ProfileActivity extends BaseActivity {
         }
 
         if (mUndoAnimator == null || !mUndoAnimator.isRunning()) {
-            mCreditAnimator = getAnimator(mProfileCreditTextView, mProfileAgeEditText);
             mUndoAnimator = ofFloat(mProfileUndoFab, "translationX", 0,
                     -TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, mMetrics));
             mUndoAnimator.setDuration(1000);
