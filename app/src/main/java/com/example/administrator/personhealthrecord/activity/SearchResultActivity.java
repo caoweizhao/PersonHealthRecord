@@ -18,6 +18,7 @@ import com.example.administrator.personhealthrecord.bean.MedicineBean;
 import com.example.administrator.personhealthrecord.bean.SearchBean;
 import com.example.administrator.personhealthrecord.bean.SearchSection;
 import com.example.administrator.personhealthrecord.contract.Contract;
+import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.example.administrator.personhealthrecord.util.ToastUitl;
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -59,6 +61,7 @@ public class SearchResultActivity extends BaseActivity {
 
     Disposable mDisposable;
 
+    SweetAlertDialog mLoadingDialog;
     String mQuery;
 
     @Override
@@ -73,6 +76,7 @@ public class SearchResultActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter.bindToRecyclerView(mRecyclerView);
         mAdapter.setEmptyView(R.layout.empty_view);
+        mLoadingDialog = DialogUtil.getLoadingDialog(this);
     }
 
     @Override
@@ -82,6 +86,7 @@ public class SearchResultActivity extends BaseActivity {
         mQuery = getIntent() != null ? getIntent().getStringExtra("data") : "";
         mAdapter.setQuery(mQuery);
         if (!TextUtils.isEmpty(mQuery)) {
+            mLoadingDialog.show();
             mService.doSearch(mQuery)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -104,17 +109,17 @@ public class SearchResultActivity extends BaseActivity {
                                             jsonObject.get("medicine").toString(),
                                             new TypeToken<List<MedicineBean>>() {
                                             }.getType());
-                                    mSearchSections.add(new SearchSection(true, "医院列表"));
+                                    mSearchSections.add(new SearchSection(true, "医院列表：" + hospitalBeanList.size() + "条记录"));
                                     for (HospitalBean hospital : hospitalBeanList) {
                                         mHospitalSections.add(new SearchSection(hospital));
                                     }
                                     mSearchSections.addAll(mHospitalSections);
-                                    mSearchSections.add(new SearchSection(true, "医生列表"));
+                                    mSearchSections.add(new SearchSection(true, "医生列表：" + expertBeanList.size() + "条记录"));
                                     for (ExpertBean expert : expertBeanList) {
                                         mExpertSections.add(new SearchSection(expert));
                                     }
                                     mSearchSections.addAll(mExpertSections);
-                                    mSearchSections.add(new SearchSection(true, "药物列表"));
+                                    mSearchSections.add(new SearchSection(true, "药物列表：" + medicineBeenList.size() + "条记录"));
                                     for (MedicineBean medicine : medicineBeenList) {
                                         mMedicineSections.add(new SearchSection(medicine));
                                     }
@@ -142,12 +147,13 @@ public class SearchResultActivity extends BaseActivity {
 
                         @Override
                         public void onError(Throwable e) {
-
+                            ToastUitl.Toast("连接失败");
+                            mLoadingDialog.dismiss();
                         }
 
                         @Override
                         public void onComplete() {
-
+                            mLoadingDialog.dismiss();
                         }
                     });
         }
@@ -186,6 +192,17 @@ public class SearchResultActivity extends BaseActivity {
 
     private void updateValue() {
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
+        }
+        super.onDestroy();
     }
 
     interface SearchService {
