@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.CaseAdapter;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
@@ -36,6 +35,8 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 /**
  * Created by Administrator on 2017-8-5.
@@ -85,14 +86,6 @@ public class CaseListActivity extends BaseActivity {
                 getCaseList();
             }
         });
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(CaseListActivity.this, CaseDetailActivity.class);
-                intent.putExtra("data", mAdapter.getItem(position));
-                startActivity(intent);
-            }
-        });
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +113,9 @@ public class CaseListActivity extends BaseActivity {
                                             new TypeToken<List<CaseBean>>() {
                                             }.getType());
                                     Collections.sort(caseBeanList);
+                                    for (int i = 0, n = caseBeanList.size(); i < n; i++) {
+                                        caseBeanList.get(i).setCaseName("病历" + (i + 1));
+                                    }
                                     return caseBeanList;
                                 }
                             } catch (JSONException | IOException e) {
@@ -158,7 +154,47 @@ public class CaseListActivity extends BaseActivity {
 
     private void updateCaseList(List<CaseBean> caseBeanList) {
         mAdapter.getData().clear();
-        mAdapter.addData(caseBeanList);
+        mAdapter.notifyDataSetChanged();
+        mAdapter = new CaseAdapter(caseBeanList);
+        mAdapter.bindToRecyclerView(mRecyclerView);
+        mAdapter.setEmptyView(R.layout.empty_view);
+        mAdapter.setContentListener(new CaseAdapter.ContentClickListener() {
+            @Override
+            public void onContentClickListener(int position) {
+                Intent intent = new Intent(CaseListActivity.this, CaseDetailActivity.class);
+                intent.putExtra("data", mAdapter.getItem(position));
+                startActivity(intent);
+            }
+        });
+        mAdapter.setDeleteListener(new CaseAdapter.DeleteListener() {
+            @Override
+            public void onItemDeleted(int position, CaseBean caseBean) {
+                mService.deleteCase(Contract.cookie, String.valueOf(caseBean.getRecordNumber()))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Observer<ResponseBody>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                mDisposable = d;
+                            }
+
+                            @Override
+                            public void onNext(ResponseBody value) {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+            }
+        });
     }
 
     @Override
@@ -172,5 +208,9 @@ public class CaseListActivity extends BaseActivity {
     interface CaseListService {
         @GET("medical_record/medical_record_list")
         Observable<ResponseBody> getCaseList(@Header("Cookie") String cookie);
+
+        @PUT("medical_record/delete_medical_record/{record_id}")
+        Observable<ResponseBody> deleteCase(@Header("Cookie") String cookie,
+                                            @Path("record_id") String case_record);
     }
 }

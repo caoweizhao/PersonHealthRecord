@@ -28,10 +28,10 @@ public class CaseBean implements Comparable, Parcelable {
      * treatmentSchedule : null
      * todoSomething : null
      */
+    private String caseName;
 
     @SerializedName("recordNumber")
     private int recordNumber;
-    private String caseName;
     @SerializedName("name")
     private String name;
     @SerializedName("age")
@@ -159,7 +159,7 @@ public class CaseBean implements Comparable, Parcelable {
 
     @Override
     public int compareTo(@NonNull Object o) {
-        return recordNumber - ((CaseBean) o).recordNumber;
+        return ((CaseBean) o).recordNumber - recordNumber;
     }
 
     @Override

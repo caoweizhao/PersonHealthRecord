@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 2017-7-19.
  */
 
-public class ExpertBean implements Parcelable{
+public class ExpertBean implements Parcelable,SearchBean{
 
     /**
      * code : H1-D1-D1
@@ -74,6 +74,16 @@ public class ExpertBean implements Parcelable{
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getSummary() {
+        return skill;
+    }
+
+    @Override
+    public int getType() {
+        return TYPE_DOCTOR;
     }
 
     public void setName(String name) {

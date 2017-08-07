@@ -11,7 +11,7 @@ import org.litepal.crud.DataSupport;
  * Created by Administrator on 2017-7-22.
  */
 
-public class MedicineBean extends DataSupport implements AbstractItem {
+public class MedicineBean extends DataSupport implements AbstractItem,SearchBean {
 
     /**
      * code : H10970410
@@ -185,6 +185,11 @@ public class MedicineBean extends DataSupport implements AbstractItem {
     @Override
     public String getSummary() {
         return getFunction();
+    }
+
+    @Override
+    public int getType() {
+        return TYPE_MEDICINE;
     }
 
     public String getImageUrl() {

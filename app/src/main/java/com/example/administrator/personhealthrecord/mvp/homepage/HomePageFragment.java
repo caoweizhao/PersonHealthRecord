@@ -25,13 +25,14 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.DoctorDetailActivity;
+import com.example.administrator.personhealthrecord.activity.HospitalDetailActivity;
 import com.example.administrator.personhealthrecord.activity.HospitalListActivity;
 import com.example.administrator.personhealthrecord.activity.MapAcitvity;
+import com.example.administrator.personhealthrecord.activity.SearchResultActivity;
 import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
@@ -159,7 +160,9 @@ public class HomePageFragment extends AHomePageFragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // TODO: 2017-7-21 搜索事件处理
-                Toast.makeText(getContext(), "Submit!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), SearchResultActivity.class);
+                intent.putExtra("data",query.replaceAll(" ",""));
+                startActivity(intent);
                 return true;
             }
 
@@ -212,7 +215,9 @@ public class HomePageFragment extends AHomePageFragment {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 AnimateUtil.createCircularReveal(view);
-                showMessage(((HospitalBean) adapter.getItem(position)).getName());
+                Intent intent = new Intent(getContext(), HospitalDetailActivity.class);
+                intent.putExtra("data", mHospitalAdapter.getItem(position));
+                startActivity(intent);
             }
         });
 
@@ -227,9 +232,9 @@ public class HomePageFragment extends AHomePageFragment {
                 intent.setAction("android.intent.action.VIEW");
                 Uri url = Uri.parse(mAdvertisementBeenList.get(position).getAdvertiseUrl());
                 intent.setData(url);
-                intent.addCategory(Intent. CATEGORY_DEFAULT);
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
 
-                Intent newIntent = Intent.createChooser(intent,"选择浏览器");
+                Intent newIntent = Intent.createChooser(intent, "选择浏览器");
                 startActivity(newIntent);
             }
         });
@@ -265,10 +270,13 @@ public class HomePageFragment extends AHomePageFragment {
             }
         });
 
+        /**
+         * 医疗咨询
+         */
         mMedicalConsultation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), ChatActivity.class);
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
             }
         });

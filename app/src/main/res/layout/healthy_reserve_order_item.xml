@@ -16,7 +16,7 @@
         app:cardElevation="@dimen/card_view_elevation">
 
         <LinearLayout
-            android:id="@+id/abstract_item__layout"
+            android:id="@+id/abstract_item_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">

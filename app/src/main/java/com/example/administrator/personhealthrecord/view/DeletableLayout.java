@@ -3,31 +3,52 @@ package com.example.administrator.personhealthrecord.view;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
+import android.support.v4.view.NestedScrollingChild;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
-import android.widget.Toast;
 
 /**
  * Created by Administrator on 2017-8-5.
  */
 
-public class DeletableLayout extends LinearLayout {
+public class DeletableLayout extends LinearLayout implements NestedScrollingChild {
+
+    private int mDeltaX;
+    private int mDeltaY;
+
+    public interface OnDeleteMenuClickListener {
+        void onDeleteMenuClick();
+    }
+
+    public interface onContentClickListener {
+        void onContentClick();
+    }
+
+    onContentClickListener mOnClickListener;
+
+    public void setContentClickListener(onContentClickListener listener) {
+        mOnClickListener = listener;
+    }
+
+    OnDeleteMenuClickListener mListener;
 
     View mContentView;
     View mRightMenuView;
     int mRightMenuViewWidth;
-
     Scroller mScroller;
 
     public DeletableLayout(Context context) {
         super(context);
         init();
+    }
+
+    public void setDeleteMenuListener(OnDeleteMenuClickListener listener) {
+        this.mListener = listener;
     }
 
     private void init() {
@@ -54,12 +75,11 @@ public class DeletableLayout extends LinearLayout {
 
         ViewGroup.LayoutParams lp2 = mRightMenuView.getLayoutParams();
         lp2.width = getMeasuredWidth() / 4;
-        Log.d("DeletableLayout", "onMeasure" + lp2.width);
         mRightMenuViewWidth = lp2.width;
         lp2.height = mContentView.getMeasuredHeight();
         mRightMenuView.setLayoutParams(lp2);
 
-        int width = mContentView.getMeasuredWidth() + mRightMenuView.getMeasuredWidth() +
+        int width = mContentView.getMeasuredWidth() + mRightMenuViewWidth +
                 getPaddingLeft() + getPaddingRight();
         int height = Math.max(mContentView.getMeasuredHeight(), mRightMenuView.getMeasuredHeight())
                 + getPaddingTop() + getPaddingBottom();
@@ -80,63 +100,94 @@ public class DeletableLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mLastX = (int) event.getX();
+                mDownTime = System.currentTimeMillis();
+                ddx = event.getX();
+                ddy = event.getY();
                 if (!mScroller.isFinished()) {
-                    return false;
+                    return true;
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
                 int dx = (int) (event.getX() - mLastX);
-
                 scrollBy(-dx, 0);
-
-                mLastX = (int) event.getX();
                 break;
             case MotionEvent.ACTION_UP:
 
-                int curX = getScrollX();
-                int deltaX;
-                if (curX >= mRightMenuViewWidth * 1.0f / 2) {
-                    deltaX = mRightMenuViewWidth - curX;
-                } else {
-                    deltaX = 0 - curX;
+                float deltaX = Math.abs(ddx - event.getX());
+                float deltaY = Math.abs(ddy - event.getY());
+                mUpTime = System.currentTimeMillis();
+                if (mUpTime - mDownTime < 100 && deltaX < 10 && deltaY < 10) {
+                    if (mOnClickListener != null) {
+                        mOnClickListener.onContentClick();
+                    }
                 }
-                mScroller.startScroll(curX, 0, deltaX, 0, 200);
+
+                int curX = getScrollX();
+                int deltaX2;
+                if (curX >= mRightMenuViewWidth * 1.0f / 2) {
+                    deltaX2 = mRightMenuViewWidth - curX;
+                } else {
+                    deltaX2 = 0 - curX;
+                }
+                mScroller.startScroll(curX, 0, deltaX2, 0, 200);
                 invalidate();
                 break;
         }
+        mLastX = (int) event.getX();
         return true;
     }
 
     int mLastX;
-    int mLastY;
+    int x;
+    int y;
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    long mDownTime;
+    long mUpTime;
+    float ddx = 0;
+    float ddy = 0;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 getParent().requestDisallowInterceptTouchEvent(true);
+
                 break;
             case MotionEvent.ACTION_MOVE:
-                int deltaX = (int) (event.getX() - mLastX);
-                int deltaY = (int) (event.getY() - mLastY);
-                if (deltaX < deltaY) {
+                mDeltaX = Math.abs((int) (event.getX() - x));
+                mDeltaY = Math.abs((int) (event.getY() - y));
+                if (mDeltaX < mDeltaY) {
                     getParent().requestDisallowInterceptTouchEvent(false);
+                    int c = getScrollX();
+                    int dx;
+                    if (c >= mRightMenuViewWidth * 1.0f / 2) {
+                        dx = mRightMenuViewWidth - c;
+                    } else {
+                        dx = 0 - c;
+                    }
+                    mScroller.startScroll(c, 0, dx, 0, 200);
+                    invalidate();
+                } else {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+
                 break;
         }
 
-        mLastX = (int) event.getX();
-        mLastY = (int) event.getY();
+        x = (int) event.getX();
+        y = (int) event.getY();
         return super.dispatchTouchEvent(event);
     }
 
     @Override
     public void scrollTo(@Px int x, @Px int y) {
         int value = (int) (mRightMenuViewWidth * 1.5f);
-        Log.d("DeletableLayout", "x:" + x + "value:" + value);
         if (x > value) {
             x = value;
         } else if (x < -value) {
@@ -156,14 +207,19 @@ public class DeletableLayout extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
         mContentView = getChildAt(0);
         mRightMenuView = getChildAt(1);
         mRightMenuView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Menu Clicked!", Toast.LENGTH_SHORT).show();
+                if (mListener != null) {
+                    mListener.onDeleteMenuClick();
+                }
             }
         });
+    }
+
+    public void closeDeleteMenu() {
+        scrollTo(0, 0);
     }
 }
