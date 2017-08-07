@@ -121,6 +121,7 @@ public class ExpertListActivity extends BaseActivity {
                                     jsonObject.get("collection").toString(),
                                     new TypeToken<List<ExpertBean>>() {
                                     }.getType());
+                            Collections.sort(expertBeanList);
                             return expertBeanList;
                         }
                         return Collections.emptyList();

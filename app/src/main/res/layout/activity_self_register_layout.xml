@@ -11,12 +11,12 @@
     <include layout="@layout/toolbar"/>
 
     <android.support.v4.widget.NestedScrollView
-        android:paddingBottom="20dp"
         android:id="@+id/self_registered_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
+        android:paddingBottom="20dp"
         >
 
         <LinearLayout
@@ -37,11 +37,11 @@
                 <ImageView
                     android:id="@+id/expert_item_img"
                     android:layout_width="0dp"
-                    android:transitionName="doctor_pic"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/person"/>
+                    android:src="@drawable/person"
+                    android:transitionName="doctor_pic"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -66,9 +66,9 @@
                             android:maxLines="1"
                             android:padding="5dp"
                             android:text="XXX"
-                            android:transitionName="doctor_name"
                             android:textColor="#000"
-                            android:textSize="25sp"/>
+                            android:textSize="25sp"
+                            android:transitionName="doctor_name"/>
 
                         <TextView
                             android:id="@+id/expert_item_title"
@@ -77,9 +77,9 @@
                             android:maxLines="1"
                             android:padding="2dp"
                             android:text="主任医师"
-                            android:transitionName="doctor_position"
                             android:textColor="#000"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp"
+                            android:transitionName="doctor_position"/>
                     </LinearLayout>
 
                     <!--隶属医院-->
@@ -87,10 +87,10 @@
                         android:id="@+id/expert_item_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:transitionName="doctor_eo"
                         android:text="中山大学附属第三医院天河医院-特诊医疗门诊[天河]"
                         android:textColor="#2a4199"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:transitionName="doctor_eo"/>
 
                 </LinearLayout>
 
@@ -145,13 +145,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/textview_border"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_health_check_package_select_date"
                         android:padding="5dp"
                         android:text="2017-07-25"
                         android:textAlignment="center"
-                        android:drawablePadding="5dp"
-                        android:drawableRight="@drawable/ic_health_check_package_select_date"
                         android:textSize="18sp"/>
-
 
 
                 </LinearLayout>
@@ -254,11 +253,13 @@
                         />
                 </LinearLayout>
             </LinearLayout>
+
             <Button
                 android:id="@+id/self_register_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/login_bg_enable"
+                android:textColor="#484646"
                 android:text="立刻预约"
                 />
         </LinearLayout>

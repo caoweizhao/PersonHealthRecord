@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 2017-7-19.
  */
 
-public class ExpertBean implements Parcelable,SearchBean{
+public class ExpertBean implements Parcelable, SearchBean, Comparable {
 
     /**
      * code : H1-D1-D1
@@ -221,4 +222,9 @@ public class ExpertBean implements Parcelable,SearchBean{
             return new ExpertBean[size];
         }
     };
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return ((ExpertBean) o).code.compareTo(code);
+    }
 }
