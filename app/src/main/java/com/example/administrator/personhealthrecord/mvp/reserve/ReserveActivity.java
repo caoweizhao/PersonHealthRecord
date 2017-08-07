@@ -129,7 +129,10 @@ public class ReserveActivity extends IReserveView {
     @Override
     public void updatePackgets(List<PackageBean> list) {
         status=IsOnPackage;
-        initToolbar("体检套餐",true,null);
+        if(Contract.IS_DISCOUNT)
+            initToolbar("优惠套餐",true,null);
+        else
+            initToolbar("体检套餐",true,null);
         hospitalsRecycleview.setVisibility(View.GONE);
         packageZRecycleview.setVisibility(View.VISIBLE);
         Log.d(TAG, "updatePackgets: "+pacakges.size());
@@ -150,7 +153,10 @@ public class ReserveActivity extends IReserveView {
             hospitalsRecycleview.setVisibility(View.VISIBLE);
             packageZRecycleview.setVisibility(View.GONE);
             status=IsOnHospital;
-            initToolbar("体检机构",true,null);
+            if(Contract.IS_DISCOUNT)
+                initToolbar("优惠机构",true,null);
+            else
+                initToolbar("体检机构",true,null);
         }else
         {
             super.onBackPressed();

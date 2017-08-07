@@ -66,12 +66,18 @@ public class AppointmentOrderFragment extends IReserveOrderView{
     protected void initData() {
         recycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
         list=new ArrayList<>();
-        getList();
         adapter=new ReserveOrderRecycleVIewAdapter<AppointmentBean>(0,list,this);
         recycleview.setAdapter(adapter);
         adapter.bindToRecyclerView(recycleview);
         adapter.setEmptyView(R.layout.empty_view);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getList();
+    }
+
     @Override
     protected void initEvent() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,9 +100,10 @@ public class AppointmentOrderFragment extends IReserveOrderView{
         Log.d(TAG, "OnAppointmentReady: "+list.size());
         List<AppointmentBean> list1=adapter.getData();
         list1.clear();
+        Log.d(TAG, "OnAppointmentReady: "+list1.toString());
+        Log.d(TAG, "OnAppointmentReady: "+list.toString());
         for(AppointmentBean bean:list)
         {
-
                 adapter.addData(bean);
         }
         adapter.notifyDataSetChanged();

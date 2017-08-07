@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PersonHealthRecord</string>
+    <string name="app_name">PHR</string>
 
     <string name="home_page">首页</string>
     <string name="health">健康</string>

@@ -98,6 +98,19 @@ public class EditPHRActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            mUserInfoBean = intent.getParcelableExtra("user");
+            mPHRBean = intent.getParcelableExtra("phr");
+            if (mPHRBean != null && mUserInfoBean != null) {
+                initValue();
+            }
+        }
+
+        if(mPHRBean==null)
+        {
+            mPHRBean=new PHRBean();
+        }
         SpannableString ss = new SpannableString("kg/m2");
         SuperscriptSpan sss = new SuperscriptSpan();
         ss.setSpan(sss, 4, 5, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -111,14 +124,7 @@ public class EditPHRActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        if (intent != null) {
-            mUserInfoBean = intent.getParcelableExtra("user");
-            mPHRBean = intent.getParcelableExtra("phr");
-            if (mPHRBean != null && mUserInfoBean != null) {
-                initValue();
-            }
-        }
+
 
     }
 

@@ -64,7 +64,8 @@ public class HealthyEvaluatePresenter extends IHealthyEvaluatePresenter{
             public void onNext(AbstractObjectResult<Integer> value) {
                 if(value.getStatus().equals("success"))
                 {
-                    ((AutoEvaluateFragment)mView).onPHRScoreReady(value.getObject());
+                    mView.OnPHRScoreReady(value.getObject());
+
                 }else
                 {
                     ToastUitl.Toast(value.getMessage());

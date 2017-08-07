@@ -10,4 +10,6 @@ import com.example.administrator.personhealthrecord.mvp.base.MvpFragment;
 
 public abstract class IHealthyEvaluateView extends MvpFragment<IHealthyEvaluatePresenter>{
     public abstract void OnPHRReady(PHRBean bean);
+    //获取PHR分数
+    public abstract void OnPHRScoreReady(int score);
 }

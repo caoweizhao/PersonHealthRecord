@@ -1,6 +1,5 @@
 package com.example.administrator.personhealthrecord.mvp.healthevaluate.auto;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -69,11 +68,17 @@ public class AutoEvaluateFragment extends IHealthyEvaluateView{
         mPhrAllergyHistory.setText(bean.getMedicineAllergy());
         mPhrBodyMassIndexUnit.setText(bean.getBodyMassIndex());
     }
+
+    @Override
+    public void OnPHRScoreReady(int score) {
+        imageView.SetHightAnimate(score);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.auto_evaluate,container,false);
-        imageView=(WaveImageView)view.findViewById(R.id.healthy_evaluate_iamge_score);
+        imageView=(WaveImageView)view.findViewById(R.id.manual_evaluate_iamge_score);
         imageView.drawCircle();
         imageView.setColor();
         imageView.setHight(0);
@@ -116,9 +121,5 @@ public class AutoEvaluateFragment extends IHealthyEvaluateView{
     public void setMenuVisibility(boolean menuVisible) {
     }
 
-    public void onPHRScoreReady(int score)
-    {
-        imageView.SetHightAnimate(score);
-    }
 
 }

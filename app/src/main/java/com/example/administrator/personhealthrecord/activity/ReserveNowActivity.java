@@ -85,6 +85,7 @@ public class ReserveNowActivity extends IReserveView implements View.OnClickList
     private DateFormat dateFormat;
     private int Position;
     private SweetAlertDialog pDialog;
+    private String imageURL;
 private PackageBean bean;
     @Override
     protected void initData() {
@@ -95,8 +96,14 @@ private PackageBean bean;
         summary.setText(bean.getSummary());
         name.setText(bean.getName());
         count.setText("X1");
-        price.setText("￥"+bean.getPackagePrice());
-        Glide.with(this).load(Contract.PackageImageBase+bean.getImageUrl())
+        if(Contract.IS_DISCOUNT)
+            price.setText("￥"+bean.getFavorablePrice());
+        else
+            price.setText("￥"+bean.getPackagePrice());
+        Log.d(TAG, "initData: "+bean.getImageUrl());
+            imageURL=Contract.PackageImageBase+bean.getImageUrl();
+        Log.d(TAG, "initData: "+imageURL);
+        Glide.with(this).load(imageURL)
                 .into(imageView);
         initToolbar("提交预约",true,null);
         reserveNow.setEnabled(false);
@@ -125,7 +132,20 @@ private PackageBean bean;
                     public void accept(Object o) throws Exception {
                         if(Contract.IsLogin.equals(Contract.Login))//判断是否有登录
                         {
-                            ReserveNow();
+                            if(editname.getText().toString().equals("")||editphoneNumber.getText().toString().equals(""))
+                                SnackBarUitl.ShowSnackBar(linearLayout,"请填完个人信息","OK!");
+                            else {
+                                setTime();
+                                long time=System.currentTimeMillis();
+                                final Calendar calendar=Calendar.getInstance();
+                                calendar.setTimeInMillis(time);
+                                Date date=calendar.getTime();
+                                if(stratTime.after(date))
+                                    ReserveNow();
+                                else
+                                    ToastUitl.Toast("请选择当前时间之后的时间");
+                            }
+
                         }else
                         {
                             gotToLogin();
@@ -237,7 +257,7 @@ private PackageBean bean;
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        date.setText(  year + "-" + monthOfYear
+                        date.setText(  year + "-" + (monthOfYear+1)
                                 + "-" + dayOfMonth );
                     }
                 }
@@ -278,14 +298,9 @@ private PackageBean bean;
     }
 
     public void ReserveNow() throws ParseException {
-        if(editname.getText().toString().equals("")||editphoneNumber.getText().toString().equals(""))
-            SnackBarUitl.ShowSnackBar(linearLayout,"请填完个人信息","OK!");
-        else
-        {
-            setTime();
+
             mPresenter.ReserveNow(stratTime.getTime(),endTime.getTime(),editname.getText().toString(),editphoneNumber.getText().toString(),bean.getId());
             loding();
-        }
     }
 
     public void gotToLogin()

@@ -197,14 +197,9 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                                 startActivity(intent);
                                 break;
                             case R.id.health_check_reserve_order_button:
-                                if(Contract.IsLogin.equals(Contract.Login))
-                                {
                                     Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
                                     startActivity(intent2);
-                                }else
-                                {
-                                    gotToLogin();
-                                }
+
                                 break;
                             case R.id.heath_check_banner02:
                                 Intent intent3=new Intent(getActivity(), ReserveActivity.class);
@@ -216,24 +211,24 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                         }
     }
 
-    public void gotToLogin()
-    {
-        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("您还没有登录！")
-                .setContentText("是否去登录界面？")
-                .setCancelText("不了~")
-                .setConfirmText("去登陆->")
-                .showCancelButton(true)
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        sDialog.cancel();
-                        Intent intent=new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .show();
-    }
+//    public void gotToLogin()
+//    {
+//        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+//                .setTitleText("您还没有登录！")
+//                .setContentText("是否去登录界面？")
+//                .setCancelText("不了~")
+//                .setConfirmText("去登陆->")
+//                .showCancelButton(true)
+//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                    @Override
+//                    public void onClick(SweetAlertDialog sDialog) {
+//                        sDialog.cancel();
+//                        Intent intent=new Intent(getActivity(), LoginActivity.class);
+//                        startActivity(intent);
+//                    }
+//                })
+//                .show();
+//    }
 
     @Override
     public void onDestroy() {

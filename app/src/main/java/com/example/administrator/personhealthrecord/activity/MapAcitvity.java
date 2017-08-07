@@ -42,6 +42,7 @@ public class MapAcitvity extends BaseActivity implements LocationSource,AMapLoca
 
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        sm.setStatusBarTintEnabled(false);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)

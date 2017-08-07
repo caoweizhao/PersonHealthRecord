@@ -11,10 +11,12 @@
     <include layout="@layout/toolbar"/>
 
     <android.support.v4.widget.NestedScrollView
+        android:paddingBottom="20dp"
         android:id="@+id/self_registered_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:clipToPadding="false"
         >
 
         <LinearLayout
@@ -132,7 +134,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/text_padding"
-                        android:text="选择体检日期："
+                        android:text="选择挂号日期："
                         android:textColor="#000"
                         android:textSize="16sp"
                         />
@@ -252,14 +254,14 @@
                         />
                 </LinearLayout>
             </LinearLayout>
+            <Button
+                android:id="@+id/self_register_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="立刻预约"
+                />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/self_register_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="立刻预约"
-        />
 </LinearLayout>

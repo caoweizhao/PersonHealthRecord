@@ -5,6 +5,7 @@ import com.example.administrator.personhealthrecord.bean.RegistBean;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
 
 import io.reactivex.Observer;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 /**
@@ -17,4 +18,5 @@ public abstract class IRegistAndLoginModle extends BaseModel<IRegistAndLoginPres
     }
     abstract void Login(String usernem, String password, Observer<Response<Loginbean>> observer);
     abstract void regist(String usernem, String password, Observer<RegistBean> observer);
+    abstract void loginOUt(Observer<ResponseBody> observer);
 }
