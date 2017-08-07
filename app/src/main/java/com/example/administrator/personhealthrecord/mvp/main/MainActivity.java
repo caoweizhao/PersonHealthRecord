@@ -219,6 +219,7 @@ public class MainActivity extends AMainActivity {
     public void updateAvator(String url) {
         Glide.with(this)
                 .load(url)
+                .crossFade()
                 .error(R.drawable.chat_left_human)
                 .into(mAvator);
     }
