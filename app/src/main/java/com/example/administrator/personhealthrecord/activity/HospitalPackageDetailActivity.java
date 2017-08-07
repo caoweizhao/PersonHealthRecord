@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +61,12 @@ public class HospitalPackageDetailActivity extends BaseActivity implements View.
         name.setText(bean.getName());
         //检查是否有优惠假如有则显示两个价格
         if (Contract.IS_DISCOUNT)
-            price.setText("￥" + bean.getPackagePrice() + " 优惠后：" + "￥" + bean.getFavorablePrice());
+        {
+            SpannableString before=new SpannableString(bean.getPackagePrice()+"");
+            StrikethroughSpan span=new StrikethroughSpan();
+            before.setSpan(span,0,before.length(),SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+            price.setText("￥" + before + " 优惠后：" + "￥" + bean.getFavorablePrice());
+        }
         else
             price.setText("￥" + bean.getPackagePrice());
         detail.setText(bean.getPackageDetail());

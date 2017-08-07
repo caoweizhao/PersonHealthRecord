@@ -3,6 +3,7 @@ package com.example.administrator.personhealthrecord.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,6 +70,7 @@ public class ReserveOrderDetailActivity extends BaseActivity {
     protected void initData() {
         super.initData();
         bean = getIntent().getParcelableExtra("ReserOrderBean");
+        Log.d(TAG, "initData: "+bean.getMedicalStatus());
         if(bean.getMedicalStatus().equals("正在预约"))
         {
             reserveOrderDetailCancle.setEnabled(true);
@@ -81,9 +83,9 @@ public class ReserveOrderDetailActivity extends BaseActivity {
                 .into(appointmentImage);
         reserveOrderDetailPackageName.setText(bean.getPackageName());
         reserveOrderDetailPackagedetail.setText(bean.getPackageDetail());
-        reserveOrderDetailPackagePrice.setText(bean.getPackagePrice()+"￥");
+        reserveOrderDetailPackagePrice.setText("￥"+bean.getPackagePrice());
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:MM");
-        appointmentTime.setText(format.format(new Date(bean.getStartTime()))+format.format(new Date(bean.getEndTime())));
+        appointmentTime.setText(format.format(new Date(bean.getStartTime()))+" - "+format.format(new Date(bean.getEndTime())));
         appointmentPhoneNumber.setText(bean.getPhoneNumber());
         reserveOrderDetailHospital.setText(bean.getHospitalName());
         appointmentStatus.setText(bean.getMedicalStatus());

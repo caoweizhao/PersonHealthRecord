@@ -2,6 +2,7 @@ package com.example.administrator.personhealthrecord.mvp.registandlogin;
 
 import com.example.administrator.personhealthrecord.bean.Loginbean;
 import com.example.administrator.personhealthrecord.bean.RegistBean;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.api.LoginApi;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
@@ -9,6 +10,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -37,6 +39,17 @@ public class RegistAndyLoginModleImpl extends IRegistAndLoginModle {
         Retrofit retrofit= RetrofitUtil.getRetrofit();
         LoginApi api=retrofit.create(LoginApi.class);
         api.regist(usernem,password)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    @Override
+    void loginOUt(Observer<ResponseBody> observer) {
+        Retrofit retrofit= RetrofitUtil.getRetrofit();
+        LoginApi api=retrofit.create(LoginApi.class);
+        api.loginOut(Contract.cookie)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

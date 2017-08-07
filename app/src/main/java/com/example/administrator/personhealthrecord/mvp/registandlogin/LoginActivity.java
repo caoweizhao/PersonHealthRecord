@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,13 +33,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
 import com.example.administrator.personhealthrecord.application.MyApplication;
+import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.sharepreference.Acount;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.view.WaveImageView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiFunction;
@@ -78,13 +82,14 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     private AnimatorSet mAnimatorSet;
     private ObjectAnimator mObjectAnimator;
     private Animator mCircularReveal;
-
+    private SweetAlertDialog pDialog;
     @Override
     protected void initEvents() {
         super.initEvents();
         login.setOnClickListener(this);
         regist.setOnClickListener(this);
         mFab.setOnClickListener(this);
+
 
         Observable<CharSequence> userNameObservable = RxTextView.textChanges(usrname).share();
         userNameObservable.observeOn(AndroidSchedulers.mainThread())
@@ -134,8 +139,16 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         acount = new Acount(MyApplication.getContext());
         usrname.setText(acount.getUser());
         password.setText(acount.getPassword());
+        SpannableString spannableString;
+        if(!Contract.IsLogin.equals(Contract.Login))
+            spannableString = new SpannableString("SIGN  IN");
+        else
+        {
+            spannableString = new SpannableString("LOGIN  OUT");
+            usrname.setEnabled(false);
+            password.setEnabled(false);
+        }
 
-        SpannableString spannableString = new SpannableString("SIGN  IN");
 
         SparseArray<Integer> colors = new SparseArray<>();
         colors.put(0, R.color.google_play_blue);
@@ -245,7 +258,10 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         AnimateUtil.createCircularReveal(v);
         switch (v.getId()) {
             case R.id.login_login:
+                if(!Contract.IsLogin.equals(Contract.Login))
                 dologin();
+                else
+                   loginout();
                 break;
             case R.id.regist:
                 regist();
@@ -259,7 +275,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     void dologin() {
-
+        loding();
         mPresenter.dologin(usrname.getText().toString(), password.getText().toString());
         Log.d(TAG, "dologin: username" + usrname + "   password" + "");
 
@@ -276,7 +292,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
 
     @Override
     public void finishAcitvity() {
-        finish();
+        loginSuccess();
         Log.d(TAG, "dologin: username" + usrname.getText().toString() + "   password" + password.getText().toString());
     }
 
@@ -310,5 +326,86 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     protected void onDestroy() {
         mPresenter.onDetach();
         super.onDestroy();
+    }
+    public void loginout()
+    {
+        loding();
+        mPresenter.logOut();
+    }
+    public void onLoginDown()
+    {
+        loginoutSuccess();
+        usrname.setEnabled(true);
+        password.setEnabled(true);
+        SpannableString spannableString;
+        if(!Contract.IsLogin.equals(Contract.Login))
+            spannableString = new SpannableString("SIGN  IN");
+        else
+        {
+            spannableString = new SpannableString("LOGIN  OUT");
+            usrname.setEnabled(false);
+            password.setEnabled(false);
+        }
+
+
+        SparseArray<Integer> colors = new SparseArray<>();
+        colors.put(0, R.color.google_play_blue);
+        colors.put(1, R.color.google_play_yellow);
+        colors.put(2, R.color.google_play_red);
+        colors.put(3, R.color.google_play_green);
+        for (int i = 0; i < spannableString.length(); i++) {
+            Log.d("LoginActivity", "initData" + i);
+            ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources().getColor(colors.get(i % 4)));
+            spannableString.setSpan(colorSpan, i, i + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        }
+        RelativeSizeSpan relativeSpan = new RelativeSizeSpan(1.5f);
+        RelativeSizeSpan relativeSpan2 = new RelativeSizeSpan(1.3f);
+        spannableString.setSpan(relativeSpan, 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(relativeSpan2, 6, 7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+        StyleSpan styleSpan = new StyleSpan(Typeface.ITALIC);
+        spannableString.setSpan(styleSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        login.setText(spannableString);
+    }
+
+    public void loginSuccess()
+    {
+        pDialog.dismiss();
+        pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("登录成功！")
+                .setConfirmText("我知道了")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        pDialog.dismiss();
+                        finish();
+                    }
+                });
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+    public void loding()
+    {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+    public void loginoutSuccess()
+    {
+        pDialog.dismiss();
+        pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("退出登录成功！")
+                .setConfirmText("我知道了")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        pDialog.dismiss();
+                        finish();
+                    }
+                });
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 }

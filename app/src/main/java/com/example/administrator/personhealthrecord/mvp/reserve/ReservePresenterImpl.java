@@ -115,7 +115,6 @@ public class ReservePresenterImpl extends IResrevePresenter{
                 Log.d(TAG, "onNext: "+value.getObject().getMedicalStatus());
                 if(value.getStatus().equals("success"))
                 {
-                    ToastUitl.Toast(value.getMessage());
                     ((ReserveNowActivity)mView).ReserveSuccess();
                 }else
                 {

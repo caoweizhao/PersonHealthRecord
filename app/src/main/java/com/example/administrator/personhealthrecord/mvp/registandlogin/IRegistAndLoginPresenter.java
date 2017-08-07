@@ -11,4 +11,5 @@ public abstract class IRegistAndLoginPresenter extends BasePresenter<ILoginVIew,
     abstract void dologin( String username, String password);
     abstract void regist( String username, String password);
     abstract void onDetach();
+    abstract void logOut();
 }

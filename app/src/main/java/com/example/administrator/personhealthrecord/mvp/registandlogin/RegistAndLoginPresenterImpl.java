@@ -9,6 +9,7 @@ import com.example.administrator.personhealthrecord.util.ToastUitl;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 /**
@@ -48,7 +49,6 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
                 if (bean.getStatus().equals("fail")) {
                     ToastUitl.Toast(bean.getMessage());
                 } else {
-                    ToastUitl.Toast(bean.getMessage());
                     String cookie = value.headers().get("Set-Cookie").split(";")[0];
                     Contract.cookie = cookie;
                     Contract.IsLogin = Contract.Login;
@@ -117,6 +117,34 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
         if (mDisposable != null) {
             mDisposable.dispose();
         }
+    }
+
+    @Override
+    void logOut() {
+        Observer<ResponseBody> observer=new Observer<ResponseBody>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(ResponseBody value) {
+                Contract.IsLogin=Contract.Unlogin;
+                Contract.cookie=null;
+                ((LoginActivity)mView).onLoginDown();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+        mModel.loginOUt(observer);
     }
 
 }
