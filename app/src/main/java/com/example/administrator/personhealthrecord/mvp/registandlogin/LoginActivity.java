@@ -342,7 +342,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
             spannableString = new SpannableString("SIGN  IN");
         else
         {
-            spannableString = new SpannableString("LOGIN  OUT");
+            spannableString = new SpannableString("SIGN  OUT");
             usrname.setEnabled(false);
             password.setEnabled(false);
         }
@@ -403,6 +403,22 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         pDialog.dismiss();
                         finish();
+                    }
+                });
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    public void loginFail(String message)
+    {
+        pDialog.dismiss();
+        pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(message)
+                .setConfirmText("我知道了")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        pDialog.dismiss();
                     }
                 });
         pDialog.setCancelable(false);

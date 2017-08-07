@@ -107,6 +107,7 @@
         <activity android:name=".activity.AboutActivity"/>
         <activity android:name=".activity.HospitalDetailActivity"/>
         <activity android:name=".activity.SearchResultActivity"/>
+        <activity android:name=".activity.ReserveOrderDetailActivity"></activity>
     </application>
 
 </manifest>

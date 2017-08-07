@@ -109,7 +109,10 @@ public class AppointmentOrderFragment extends IReserveOrderView{
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
     }
-
+    public void NoPackage()
+    {
+        swipeRefreshLayout.setRefreshing(false);
+    }
     @Override
     public void getList() {
         mPresenter.getAppoitmentList();

@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/text_padding"
-                android:text="等级；"
+                android:text="等级:"
                 android:textSize="@dimen/text_size"
                 android:textStyle="bold|italic"
                 />

@@ -106,6 +106,10 @@ public class HealthyCheckOrderFragment extends IReserveOrderView{
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    public void NoPackage()
+    {
+        swipeRefreshLayout.setRefreshing(false);
+    }
     @Override
     public void getList() {
         mPresenter.getHealthCheckeList();

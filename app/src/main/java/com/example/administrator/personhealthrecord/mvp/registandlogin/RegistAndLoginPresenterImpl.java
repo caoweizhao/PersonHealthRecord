@@ -47,7 +47,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
 
 
                 if (bean.getStatus().equals("fail")) {
-                    ToastUitl.Toast(bean.getMessage());
+                    ((LoginActivity) mView).loginFail(value.body().getMessage());
                 } else {
                     String cookie = value.headers().get("Set-Cookie").split(";")[0];
                     Contract.cookie = cookie;

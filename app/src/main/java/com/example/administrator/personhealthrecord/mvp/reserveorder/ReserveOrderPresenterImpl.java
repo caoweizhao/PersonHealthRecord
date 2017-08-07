@@ -38,13 +38,16 @@ public class ReserveOrderPresenterImpl extends IResreveOrderPresenter{
             public void onNext(ResultUtilOfHealthyOrderBean<ReserOrderBean> value) {
                 if(!value.getStatus().equals("success"))
                 {
-//                    ToastUitl.Toast(value.getMessage());
+                    ((HealthyCheckOrderFragment)mView).NoPackage();
                 }else
                 {
                     if(!(value.getCollection()==null))
                     {
                         ((HealthyCheckOrderFragment)mView).OnPackageReady(value.getCollection());
                         Log.d(TAG, "onNext: "+value.getCollection().get(0).getHospitalName());
+                    }else
+                    {
+                        ((HealthyCheckOrderFragment)mView).NoPackage();
                     }
 
                 }
@@ -53,12 +56,11 @@ public class ReserveOrderPresenterImpl extends IResreveOrderPresenter{
 
             @Override
             public void onError(Throwable e) {
-
+                ((AppointmentOrderFragment)mView).NoPackage();
             }
 
             @Override
             public void onComplete() {
-
             }
         };
         mModel.getHealthyCheckList(observer);
@@ -80,10 +82,13 @@ public class ReserveOrderPresenterImpl extends IResreveOrderPresenter{
                     {
                         Log.d(TAG, "onNext: "+value.getStatus());
                         ((AppointmentOrderFragment)mView).OnAppointmentReady(value.getCollection());
+                    }else
+                    {
+                        ((AppointmentOrderFragment)mView).NoPackage();
                     }
                 }else
                 {
-
+                    ((AppointmentOrderFragment)mView).NoPackage();
 
                 }
 
@@ -91,12 +96,11 @@ public class ReserveOrderPresenterImpl extends IResreveOrderPresenter{
 
             @Override
             public void onError(Throwable e) {
-
+                ((AppointmentOrderFragment)mView).NoPackage();
             }
 
             @Override
             public void onComplete() {
-
             }
         };
         mModel.getAppoitmentList(observer);
