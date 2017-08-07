@@ -62,10 +62,10 @@ public class HospitalPackageDetailActivity extends BaseActivity implements View.
         //检查是否有优惠假如有则显示两个价格
         if (Contract.IS_DISCOUNT)
         {
-            SpannableString before=new SpannableString(bean.getPackagePrice()+"");
+            SpannableString before=new SpannableString("￥" + bean.getPackagePrice() + " 优惠后：" + "￥" + bean.getFavorablePrice());
             StrikethroughSpan span=new StrikethroughSpan();
-            before.setSpan(span,0,before.length(),SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-            price.setText("￥" + before + " 优惠后：" + "￥" + bean.getFavorablePrice());
+            before.setSpan(span,1,(bean.getPackagePrice()+"").length()+1,SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+            price.setText(before);
         }
         else
             price.setText("￥" + bean.getPackagePrice());

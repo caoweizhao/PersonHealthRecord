@@ -107,7 +107,7 @@ public class ReserveOrderDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+        sm.setStatusBarTintEnabled(false);
     }
 
     public void cancleHealthyCheckOrder() {
