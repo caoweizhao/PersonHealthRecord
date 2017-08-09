@@ -208,11 +208,11 @@ public class SelfRegisterActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 try {
                     Date selectDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour);
-                    if (!selectDate.after(now.getTime())) {
-                        ToastUitl.Toast("预约时间有误，请重新选择！");
-                        mSelfRegisterBtn.setEnabled(true);
-                        return;
-                    }
+//                    if (!selectDate.after(now.getTime())) {
+//                        ToastUitl.Toast("预约时间有误，请重新选择！");
+//                        mSelfRegisterBtn.setEnabled(true);
+//                        return;
+//                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

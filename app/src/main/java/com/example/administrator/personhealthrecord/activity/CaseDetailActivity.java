@@ -1,6 +1,7 @@
 package com.example.administrator.personhealthrecord.activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
@@ -54,6 +55,8 @@ public class CaseDetailActivity extends BaseActivity {
     }
 
     private void initValue() {
+
+
         mNameText.setText(mCaseBean.getName());
         mAgeText.setText(String.valueOf(mCaseBean.getAge()));
         mGenderText.setText(mCaseBean.getGender());
@@ -64,4 +67,6 @@ public class CaseDetailActivity extends BaseActivity {
         mScheduleText.setText(mCaseBean.getTreatmentSchedule());
         mRemarkText.setText(mCaseBean.getTodoSomething());
     }
+
+
 }

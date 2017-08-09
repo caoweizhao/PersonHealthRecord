@@ -64,6 +64,7 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
                 Log.d(TAG, "onError: " + e.toString());
                 if (mView != null) {
                     mView.ShowSanck(e.toString());
+                    ((LoginActivity) mView).loginFail(e.toString());
                 }
             }
 
