@@ -14,8 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -79,7 +77,6 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 //        list=TestDate.excute();
         manager = new LinearLayoutManager(getContext());
 //        presenter.test();
-        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -268,14 +265,6 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 adapter.loadMoreComplete();
             }
         }, 500);
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.menu3,menu);
     }
 
     private void setUpWithActivity(View view) {

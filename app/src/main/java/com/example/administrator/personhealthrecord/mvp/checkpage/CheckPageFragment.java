@@ -11,8 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -75,13 +73,6 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     public static CheckPageFragment newInstance() {
         return new CheckPageFragment();
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -163,13 +154,6 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                 .load(Contract.BASE_URL+"medical_package/getImageByFavourable")
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(discoutnImage);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.menu4,menu);
     }
 
     private void setUpWithActivity(View view) {

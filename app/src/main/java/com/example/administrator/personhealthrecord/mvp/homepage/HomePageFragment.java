@@ -2,13 +2,13 @@ package com.example.administrator.personhealthrecord.mvp.homepage;
 
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,11 +16,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -74,7 +72,8 @@ public class HomePageFragment extends AHomePageFragment {
     RecyclerView mHomePageRecyclerView;
     @BindView(R.id.home_page_img_banner)
     Banner mImageBanner;
-    private SearchView mSearchView;
+    @BindView(R.id.search_view)
+    SearchView mSearchView;
 
     private boolean isExpand = false;
     private HospitalAdapter mHospitalAdapter;
@@ -100,7 +99,6 @@ public class HomePageFragment extends AHomePageFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -125,16 +123,14 @@ public class HomePageFragment extends AHomePageFragment {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isExpand) {
-                    getActivity().onBackPressed();
-                } else {
-                    ((MainActivity) getActivity()).openMenu();
-                }
+                hideKeyBoard();
+                mSearchView.clearFocus();
+                ((MainActivity) getActivity()).openMenu();
             }
         });
     }
 
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater);
         menu.clear();
@@ -155,6 +151,12 @@ public class HomePageFragment extends AHomePageFragment {
             }
         });
         mSearchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+    }*/
+
+    @Override
+    protected void initEvent() {
+        mSearchView.setIconified(true);
         mSearchView.setSubmitButtonEnabled(true);
         mSearchView.setQueryHint(getResources().getString(R.string.search_hint));
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -164,7 +166,7 @@ public class HomePageFragment extends AHomePageFragment {
                 Intent intent = new Intent(getContext(), SearchResultActivity.class);
                 intent.putExtra("data", query.replaceAll(" ", ""));
                 startActivity(intent);
-                return true;
+                return false;
             }
 
             @Override
@@ -172,10 +174,7 @@ public class HomePageFragment extends AHomePageFragment {
                 return false;
             }
         });
-    }
 
-    @Override
-    protected void initEvent() {
         /**
          * 地图
          */
@@ -375,5 +374,10 @@ public class HomePageFragment extends AHomePageFragment {
         if (mExpertsBanner != null) {
             mExpertsBanner.stopAutoPlay();
         }
+    }
+
+    private void hideKeyBoard() {
+        InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(mCardView.getWindowToken(),0);
     }
 }
