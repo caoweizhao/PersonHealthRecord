@@ -52,7 +52,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initData();
 
-    protected void initToolbar(String title) {
+    protected void  initToolbar(String title) {
         if (mToolbar != null) {
             mToolbar.setTitle(title);
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);

@@ -95,7 +95,6 @@
         <activity
             android:name=".mvp.chat.ChatActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
-        <activity android:name=".activity.TestActivity"/>
         <activity android:name=".activity.ImmuneDetailActivity"/>
         <activity android:name=".activity.MedicineDetailActivity"/>
         <activity android:name=".activity.DiseaseDetailActivity"/>

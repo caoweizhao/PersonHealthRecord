@@ -273,9 +273,9 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.d("HealthyNewsFragment","onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
+        inflater.inflate(R.menu.menu3,menu);
     }
 
     private void setUpWithActivity(View view) {

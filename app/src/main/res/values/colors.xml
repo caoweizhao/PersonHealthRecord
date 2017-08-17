@@ -12,35 +12,21 @@
 
     <color name="class_a_color">#095b36</color>
 
-    <color name="titleTextColor">#a0050202</color>
-    <color name="headerTextColor">#eddede</color>
-
     <color name="google_play_green">#267f40</color>
     <color name="google_play_red">#b63528</color>
     <color name="google_play_yellow">#c19502</color>
     <color name="google_play_blue">#3268bf</color>
 
-    <color name="toolbar_bg_color">#8805d09b</color>
-
     <color name="news_text_color">#aa000000</color>
-    <color name="card_blue">#0096a6</color>
     <color name="card_gray">#f5bace</color>
-    <color name="card_dark_blue">#8800786b</color>
-    <color name="card_second_dark_blue">#009587</color>
-    <color name="primary_text_color">#fcfcfc</color>
-    <color name="secondary_text_color">#747475</color>
-    <color name="divider_color">#bbbcbc</color>
 
     <color name="news_page">#ff5d4037</color>
-    <color name="news_page_lighter">#ff785548</color>
     <color name="medical_page">#ff00786b</color>
-    <color name="medical_page_lighter">#ff009587</color>
     <color name="disease_page">#ff455a64</color>
     <color name="disease_page_lighter">#ff607c8a</color>
     <color name="immune_page">#ff0096a6</color>
     <color name="immune_page_lighter">#ff4ebcc7</color>
 
-    <color name="test">#1c9e22</color>
 
 
 </resources>

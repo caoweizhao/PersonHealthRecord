@@ -119,7 +119,7 @@ public class AddCaseActivity extends BaseActivity {
             @Override
             public void onNext(UserInfoBean value) {
                 mCaseBean.setName(value.getName());
-                mCaseBean.setAge(Integer.valueOf(value.getAge()));
+                mCaseBean.setAge(Integer.valueOf(!TextUtils.isEmpty(value.getAge()) ? value.getAge() : "0"));
                 mCaseBean.setGender(value.getGender());
                 mAddCaseNameText.setText(value.getName());
                 mAddCaseGenderText.setText(value.getGender());

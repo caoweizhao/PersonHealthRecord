@@ -10,10 +10,9 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.os.Build;
+import android.graphics.Xfermode;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.example.administrator.personhealthrecord.R;
 
@@ -24,12 +23,13 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class WaveImageView extends android.support.v7.widget.AppCompatImageView {
-    private static final String TAG="WaveImageView";
-    private int myHeight=100;
+    private static final String TAG = "WaveImageView";
+    private int myHeight = 100;
     Path path = new Path();
     Paint mPaint = new Paint();
-    private int myColor=Color.WHITE;
+    private int myColor = Color.WHITE;
     private Context context;
+    private Xfermode mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
     private int value = 0;
     /**
      * 初始倍数
@@ -49,26 +49,31 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
     Bitmap bitmap;
 
     Canvas mCanvas;
+    private Paint mTextPaint = new Paint();
 
     public WaveImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
+        this.context = context;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-         bitmap = Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(bitmap);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        }
+        if (mCanvas == null) {
+            mCanvas = new Canvas(bitmap);
+        }
         mCanvas.drawColor(Color.WHITE);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        imageH=h;
-        imageW=w;
+        imageH = h;
+        imageW = w;
     }
 
     ReentrantLock lock = new ReentrantLock();
@@ -116,8 +121,8 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         myHeight = 100;
-        if(value!=0){
-            myHeight=(int)(getHeight()*(value*1.0f/100));
+        if (value != 0) {
+            myHeight = (int) (getHeight() * (value * 1.0f / 100));
         }
 
         mPaint.setColor(myColor);
@@ -134,51 +139,49 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
         path.close();
         canvas.drawPath(path, mPaint);
 
-        if(drawCircle)
-        {
-
-            Paint textPaint = new Paint();          // 创建画笔
-            textPaint.setColor(0xffffffff);        // 设置颜色
-            textPaint.setStyle(Paint.Style.FILL);   // 设置样式
-            textPaint.setTextSize(120);
-            Rect targetRect = new Rect((imageW-imageH)/2, 0,imageH+(imageW-imageH)/2, imageH);
+        if (drawCircle) {
+            // 创建画笔
+            mTextPaint.setColor(0xffffffff);        // 设置颜色
+            mTextPaint.setStyle(Paint.Style.FILL);   // 设置样式
+            mTextPaint.setTextSize(120);
+            Rect targetRect = new Rect((imageW - imageH) / 2, 0, imageH + (imageW - imageH) / 2, imageH);
 //            textPaint.measureText("",0,1);
             Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
             int baseline = (targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2;
-            textPaint.setTextAlign(Paint.Align.CENTER);
-            canvas.drawText(value+"分", targetRect.centerX(), baseline+50, textPaint);
+            mTextPaint.setTextAlign(Paint.Align.CENTER);
+            canvas.drawText(value + "分", targetRect.centerX(), baseline + 50, mTextPaint);
         }
-        if (drawCircle ) {
-            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-            mCanvas.drawCircle(imageW/2,imageH/2,Math.min(imageW,imageH)/2,mPaint);
-            canvas.drawBitmap(bitmap,0,0,null);
+        if (drawCircle) {
+            mPaint.setXfermode(mXfermode);
+            mCanvas.drawCircle(imageW / 2, imageH / 2, Math.min(imageW, imageH) / 2, mPaint);
+            canvas.drawBitmap(bitmap, 0, 0, null);
         }
 
     }
-   public void   setColor()
-   {
-       myColor=getResources().getColor(R.color.colorPrimary);
-   }
-    public void setHight(int value)
-    {
+
+    public void setColor() {
+        myColor = getResources().getColor(R.color.colorPrimary);
+    }
+
+    public void setHight(int value) {
         this.value = value;
     }
 
     boolean drawCircle = false;
-    public void drawCircle(){
+
+    public void drawCircle() {
         drawCircle = true;
     }
 
-    public void SetHightAnimate(int height)
-    {
-        ValueAnimator v=ValueAnimator.ofInt(0,height);
-                v.setDuration(1000);
-                v.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        value=(int)animation.getAnimatedValue();
-                    }
-                });
+    public void SetHightAnimate(int height) {
+        ValueAnimator v = ValueAnimator.ofInt(0, height);
+        v.setDuration(1000);
+        v.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                value = (int) animation.getAnimatedValue();
+            }
+        });
         v.start();
     }
 }

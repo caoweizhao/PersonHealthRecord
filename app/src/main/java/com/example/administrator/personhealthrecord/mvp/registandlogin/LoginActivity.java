@@ -20,7 +20,7 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
-import com.example.administrator.personhealthrecord.activity.ReserveNowActivity;
 import com.example.administrator.personhealthrecord.application.MyApplication;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.sharepreference.Acount;
@@ -83,6 +82,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
     private ObjectAnimator mObjectAnimator;
     private Animator mCircularReveal;
     private SweetAlertDialog pDialog;
+
     @Override
     protected void initEvents() {
         super.initEvents();
@@ -140,23 +140,20 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         usrname.setText(acount.getUser());
         password.setText(acount.getPassword());
         SpannableString spannableString;
-        if(!Contract.IsLogin.equals(Contract.Login))
+        if (!Contract.IsLogin.equals(Contract.Login))
             spannableString = new SpannableString("SIGN  IN");
-        else
-        {
+        else {
             spannableString = new SpannableString("LOGIN  OUT");
             usrname.setEnabled(false);
             password.setEnabled(false);
         }
 
-
-        SparseArray<Integer> colors = new SparseArray<>();
+        SparseIntArray colors = new SparseIntArray();
         colors.put(0, R.color.google_play_blue);
         colors.put(1, R.color.google_play_yellow);
         colors.put(2, R.color.google_play_red);
         colors.put(3, R.color.google_play_green);
         for (int i = 0; i < spannableString.length(); i++) {
-            Log.d("LoginActivity", "initData" + i);
             ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources().getColor(colors.get(i % 4)));
             spannableString.setSpan(colorSpan, i, i + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         }
@@ -258,10 +255,10 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         AnimateUtil.createCircularReveal(v);
         switch (v.getId()) {
             case R.id.login_login:
-                if(!Contract.IsLogin.equals(Contract.Login))
-                dologin();
+                if (!Contract.IsLogin.equals(Contract.Login))
+                    dologin();
                 else
-                   loginout();
+                    loginout();
                 break;
             case R.id.regist:
                 regist();
@@ -327,28 +324,27 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         mPresenter.onDetach();
         super.onDestroy();
     }
-    public void loginout()
-    {
+
+    public void loginout() {
         loding();
         mPresenter.logOut();
     }
-    public void onLoginDown()
-    {
+
+    public void onLoginDown() {
         loginoutSuccess();
         usrname.setEnabled(true);
         password.setEnabled(true);
         SpannableString spannableString;
-        if(!Contract.IsLogin.equals(Contract.Login))
+        if (!Contract.IsLogin.equals(Contract.Login))
             spannableString = new SpannableString("SIGN  IN");
-        else
-        {
+        else {
             spannableString = new SpannableString("SIGN  OUT");
             usrname.setEnabled(false);
             password.setEnabled(false);
         }
 
 
-        SparseArray<Integer> colors = new SparseArray<>();
+        SparseIntArray colors = new SparseIntArray();
         colors.put(0, R.color.google_play_blue);
         colors.put(1, R.color.google_play_yellow);
         colors.put(2, R.color.google_play_red);
@@ -368,8 +364,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         login.setText(spannableString);
     }
 
-    public void loginSuccess()
-    {
+    public void loginSuccess() {
         pDialog.dismiss();
         pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("登录成功！")
@@ -384,16 +379,16 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         pDialog.setCancelable(false);
         pDialog.show();
     }
-    public void loding()
-    {
+
+    public void loding() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Loading");
         pDialog.setCancelable(false);
         pDialog.show();
     }
-    public void loginoutSuccess()
-    {
+
+    public void loginoutSuccess() {
         pDialog.dismiss();
         pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("退出登录成功！")
@@ -409,8 +404,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         pDialog.show();
     }
 
-    public void loginFail(String message)
-    {
+    public void loginFail(String message) {
         pDialog.dismiss();
         pDialog = new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(message)

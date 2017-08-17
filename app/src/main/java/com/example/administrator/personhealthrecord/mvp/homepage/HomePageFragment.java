@@ -135,11 +135,10 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        MenuInflater menuInflater = getActivity().getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater);
-        Log.d("HomePageFragment","onCreateOptionsMenu");
+        menu.clear();
+        Log.d("HomePageFragment", "onCreateOptionsMenu");
         menuInflater.inflate(R.menu.menu, menu);
         MenuItem menuItem = menu.findItem(R.id.search_item);
         MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
@@ -163,7 +162,7 @@ public class HomePageFragment extends AHomePageFragment {
             public boolean onQueryTextSubmit(String query) {
                 // TODO: 2017-7-21 搜索事件处理
                 Intent intent = new Intent(getContext(), SearchResultActivity.class);
-                intent.putExtra("data",query.replaceAll(" ",""));
+                intent.putExtra("data", query.replaceAll(" ", ""));
                 startActivity(intent);
                 return true;
             }

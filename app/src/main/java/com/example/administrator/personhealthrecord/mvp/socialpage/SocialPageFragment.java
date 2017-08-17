@@ -16,10 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -69,10 +66,6 @@ public class SocialPageFragment extends BaseFragment {
             R.drawable.ic_disease_icon, R.drawable.ic_immune_icon};
     private Matrix mImageMatrix;
 
-    public SocialPageFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -87,7 +80,7 @@ public class SocialPageFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
     }
 
     @Override
@@ -184,13 +177,6 @@ public class SocialPageFragment extends BaseFragment {
                 ((MainActivity) getActivity()).openMenu();
             }
         });
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.d("SocialPageFragment","onCreateOptionsMenu");
-        menu.clear();
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
