@@ -72,6 +72,7 @@ public class FragmentMgr {
 
     public void ExecuteAdapter(int position) {
         Fragment fragment = (Fragment) mFragmentPagerAdapter.instantiateItem(content, position);
+        fragment.setHasOptionsMenu(true);
         mFragmentPagerAdapter.setPrimaryItem(content, 0, fragment);
         mFragmentPagerAdapter.finishUpdate(content);
         if (position == 1) {

@@ -10,10 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,7 +24,6 @@ import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.bean.ImageBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
 import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
@@ -39,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,13 +73,6 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     public static CheckPageFragment newInstance() {
         return new CheckPageFragment();
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -166,13 +154,6 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                 .load(Contract.BASE_URL+"medical_package/getImageByFavourable")
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(discoutnImage);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.d(TAG, "onCreateOptionsMenu: " + "Check");
-        menu.clear();
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void setUpWithActivity(View view) {

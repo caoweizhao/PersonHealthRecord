@@ -5,7 +5,25 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:elevation="4dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end">
+
+        </android.support.v7.widget.SearchView>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -55,10 +73,10 @@
                     <!--自助挂号-->
                     <LinearLayout
                         android:id="@+id/self_registered"
-                        android:background="@drawable/button_ripple_bg"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/button_ripple_bg"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
                         >
@@ -106,7 +124,7 @@
                             android:paddingRight="10dp"
                             android:text="私人医生"/>
 
-                        <include layout="@layout/divider_view" />
+                        <include layout="@layout/divider_view"/>
                         <!--医疗咨询-->
                         <TextView
                             android:id="@+id/medical_consultation"
@@ -114,9 +132,9 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:background="@drawable/button_ripple_bg"
+                            android:clickable="true"
                             android:drawableRight="@drawable/ic_medical_consultation"
                             android:gravity="center"
-                            android:clickable="true"
                             android:paddingRight="10dp"
                             android:text="医疗咨询"/>
 
@@ -172,8 +190,8 @@
                     <com.youth.banner.Banner
                         android:id="@+id/home_page_expert_banner"
                         android:layout_width="match_parent"
-                        android:transitionName="image"
-                        android:layout_height="@dimen/expert_banner_height"/>
+                        android:layout_height="@dimen/expert_banner_height"
+                        android:transitionName="image"/>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
