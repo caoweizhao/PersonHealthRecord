@@ -42,8 +42,8 @@ public class RegistAndLoginPresenterImpl extends IRegistAndLoginPresenter {
 
             @Override
             public void onNext(Response<Loginbean> value) {
-                Loginbean bean = (Loginbean) value.body();
-                Log.d(TAG, "onNext: " + ((Loginbean) value.body()).getMessage());
+                Loginbean bean = value.body();
+                Log.d(TAG, "onNext: " + value.body().getMessage());
 
 
                 if (bean.getStatus().equals("fail")) {

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -148,6 +149,7 @@ public class SelfRegisterActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
                     mDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
+                    Log.d(TAG, "onItemSelected: "+mDate.getTime());
                     mStartTime = mDate.getTime();
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(mDate);
@@ -202,20 +204,21 @@ public class SelfRegisterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // TODO: 2017-7-30 验证信息
-                mSelfRegisterBtn.setEnabled(false);
+//                mSelfRegisterBtn.setEnabled(false);
 
                 Calendar now = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    Date selectDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour);
-//                    if (!selectDate.after(now.getTime())) {
-//                        ToastUitl.Toast("预约时间有误，请重新选择！");
-//                        mSelfRegisterBtn.setEnabled(true);
-//                        return;
-//                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+////                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                try {
+////                    Date selectDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour);
+                Log.d(TAG, "onClick: mydate"+mSelfRegisterDate.getText() + " " + mHour + ":00"+"   current"+(new Date(System.currentTimeMillis()).toString()));
+                    if (!mDate.after(new Date(System.currentTimeMillis()))) {
+                        ToastUitl.Toast("预约时间有误，请重新选择！");
+                        mSelfRegisterBtn.setEnabled(true);
+                        return;
+                    }
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
                 /**
                  * 手机号不通过
                  */
@@ -234,6 +237,13 @@ public class SelfRegisterActivity extends BaseActivity {
                          * 已登录，提交预约
                          */
                         if (Contract.IsLogin.equals(Contract.Login)) {
+//                            Date d=new Date(System.currentTimeMillis());
+//                            Log.d(TAG, "onClick: "+d.getTime());
+//                            if(mDate.after(d))
+//                            {
+//                                ToastUitl.Toast("预约时间有误，请重新选择！");
+//                                return;
+//                            }
                             mService.commitRegister(Contract.cookie, mExpertBean.getCode(),
                                     new Timestamp(mStartTime), new Timestamp(mEndTime),
                                     mSelfRegisterInputPhoneNumber.getText().toString())
@@ -344,10 +354,7 @@ public class SelfRegisterActivity extends BaseActivity {
      * @return
      */
     private boolean validatePhoneNumber() {
-        if (RegexUtils.isMobileExact(mSelfRegisterInputPhoneNumber.getText())) {
-            return true;
-        }
-        return false;
+        return RegexUtils.isMobileExact(mSelfRegisterInputPhoneNumber.getText());
     }
 
     /**

@@ -21,7 +21,7 @@ public class Contract {
 
 
     public static String cookie = "";
-    public static final String BASE_URL = "http://106.14.136.52:8080/";//http://192.168.13.39:8080/    106.14.136.52
+    public static final String BASE_URL = "http://192.168.13.70:8080/";//http://192.168.13.70:8080/    106.14.136.52
 
 
     //专家推荐类型

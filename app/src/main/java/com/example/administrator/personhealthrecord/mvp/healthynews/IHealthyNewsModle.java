@@ -16,10 +16,10 @@ import retrofit2.Response;
  */
 
 public interface IHealthyNewsModle {
-    public void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, long date);
-    public void getTodayNews(Observer<ResultUtilOfNewsBean> observer);
-    public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer,long date);
-    public void savaToDatabase(List<NewsBean> list);
-    public List<NewsBean> getDBlist();
-    public void test(Observer<ResponseBody> observer);
+    void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, long date);
+    void getTodayNews(Observer<ResultUtilOfNewsBean> observer);
+    void getNewsBefore(Observer<ResultUtilOfNewsBean> observer, long date);
+    void savaToDatabase(List<NewsBean> list);
+    List<NewsBean> getDBlist();
+    void test(Observer<ResponseBody> observer);
 }

@@ -36,7 +36,7 @@ public class PackageInfoAdapter extends BaseQuickAdapter<PackageBean,BaseViewHol
                 .setText(R.id.health_check_item_money,mContext.getString(R.string.yuan)+item.getPackagePrice())
                 .setText(R.id.health_check_item_reserve,mContext.getString(R.string.had_reserve)+item.getAllocatedQuantity())
                 .addOnClickListener(R.id.health_check_item_package_itemId);
-        ((CardView)helper.getView(R.id.health_check_item_package_itemId)).setClickable(true);
+        helper.getView(R.id.health_check_item_package_itemId).setClickable(true);
             imageURL=Contract.PackageImageBase+item.getImageUrl();
         Glide.with(mContext).load(imageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {

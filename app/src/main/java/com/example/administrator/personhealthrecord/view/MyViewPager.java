@@ -31,11 +31,7 @@ public class MyViewPager extends ViewPager {
             case MotionEvent.ACTION_MOVE:
                 float deltaX = Math.abs(x - mLastX);
                 float deltaY = Math.abs(y - mLastY);
-                if (deltaX > deltaY) {
-                    intercepted = true;
-                } else {
-                    intercepted = false;
-                }
+                intercepted = deltaX > deltaY;
                 break;
             case MotionEvent.ACTION_UP:
                 intercepted = false;

@@ -44,7 +44,7 @@ public class ChatRecycleviewAdapter extends RecyclerView.Adapter<ChatRecycleview
             viewHolder.rightLayout.setVisibility(View.GONE);
             viewHolder.head2.setVisibility(View.GONE);
             viewHolder.leftMsg.setText(bean.getContent());
-        } else if(bean.getType() == bean.TYPE_SEND) {
+        } else if(bean.getType() == ChatMessageBean.TYPE_SEND) {
             viewHolder.rightLayout.setVisibility(View.VISIBLE);
             viewHolder.head2.setVisibility(View.VISIBLE);
             viewHolder.leftLayout.setVisibility(View.GONE);

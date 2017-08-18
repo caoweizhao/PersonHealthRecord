@@ -624,6 +624,7 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
+                    Log.d(TAG, "onResponse: "+"respone is nulllllllllllllllll"+response.toString());
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.get("status").equals("success")) {
                         Gson gson = new Gson();

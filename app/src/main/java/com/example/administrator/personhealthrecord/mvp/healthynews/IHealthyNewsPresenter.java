@@ -5,9 +5,9 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
  */
 
 public interface IHealthyNewsPresenter {
-    public void getNewsAfter(long string);
-    public void getTodayNews();
-    public void getNewsBefore(long date);
-    public void getDBlist();
-    public void test();
+    void getNewsAfter(long string);
+    void getTodayNews();
+    void getNewsBefore(long date);
+    void getDBlist();
+    void test();
 }

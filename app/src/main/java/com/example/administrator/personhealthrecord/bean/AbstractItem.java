@@ -7,12 +7,12 @@ import android.os.Parcelable;
  */
 
 public interface AbstractItem extends Comparable, Parcelable {
-    public abstract String getTitle();
+    String getTitle();
 
-    public abstract String getSummary();
+    String getSummary();
 
-    public abstract String getImageUrl();
+    String getImageUrl();
 
-    public abstract String getdate();
+    String getdate();
 
 }
