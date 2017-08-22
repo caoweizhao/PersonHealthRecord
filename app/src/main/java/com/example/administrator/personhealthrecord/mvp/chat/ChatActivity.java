@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -74,6 +75,8 @@ public class ChatActivity extends IChatVIew {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editText.getText().toString().matches("\\s*"))
+                    return;
                 ChatMessageBean bean=new ChatMessageBean(editText.getText().toString(),ChatMessageBean.TYPE_SEND);
                 list.add(bean);
                 getRespone(editText.getText().toString());

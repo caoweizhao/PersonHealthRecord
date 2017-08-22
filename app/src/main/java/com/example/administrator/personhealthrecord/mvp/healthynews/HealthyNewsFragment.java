@@ -34,7 +34,10 @@ import butterknife.BindView;
  * Created by andy on 2017/7/19.
  */
 public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFragment {
-
+    private int upPage=0;//上面的刷新的page
+    private long upTime;//上面的请求时间
+    private int downPage=0;//下面的时间
+    private long downTime;//下面的时间
     private boolean isfirsttime = true;
     private static final String TAG = "HealthyNewsFragment";
     private static HealthyNewsFragment mHealthyNewsFragment = null;
@@ -109,7 +112,11 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                     if (list.size() > 0) {
                         NewsBean bean = list.get(0);
                         Log.d(TAG, "onRefresh: "+bean.getTitle()+bean.getTime());
-                        presenter.getNewsAfter(bean.getTime());
+                        if(upPage==1)
+                        {
+                            upTime=bean.getTime();
+                        }
+                        presenter.getNewsAfter(upTime,upPage);
                     }
                 } else {
                     presenter.getTodayNews();//假如是第一次的时候进行gettodaynews
@@ -127,31 +134,6 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 }, 2000);
             }
         });
-
-//        adapter.setUpFetchEnable(true);
-//        adapter.setUpFetchListener(new BaseQuickAdapter.UpFetchListener() {
-//            @Override public void onUpFetch() {
-//                Log.d(TAG, "onUpFetch: ");
-//                // adapter.setUpFetching(true);
-//                if(!isfirsttime)
-//                    adapter.setEnableLoadMore(false);
-//                else
-//                    presenter.getTodayNews();//假如是第一次的时候进行gettodaynews
-//                Log.d(TAG, "onUpFetch: "+adapter.isUpFetching());
-//
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        adapter.setEnableLoadMore(true);
-//                        adapter.setUpFetchEnable(true);
-//                        adapter.setUpFetching(false);
-//                        if(isfirsttime)
-//                            isfirsttime=false;
-//                    }
-//                },2000);
-//            }
-//        });
-
         //上拉加载更多
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -160,10 +142,15 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 Collections.sort(list);
                 NewsBean bean = list.get(list.size() - 1);
                 Log.d(TAG, "onLoadMoreRequested: " + adapter.getData().size() + "    " + adapter.getItemCount() + bean.getTime());
-                presenter.getNewsBefore(bean.getTime());
+                if(downPage==0)
+                    downTime=bean.getTime();
+                presenter.getNewsBefore(downTime,downPage);
             }
         });
 
+/**
+ * 为RcycleVIew的Item设置点击listner
+ */
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -208,12 +195,14 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     }
 
     @Override
-    public void updateAfterNews(List<NewsBean> list) {
+    public void updateAfterNews(final List<NewsBean> list) {
         final List<NewsBean> list1 = list;
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(list.size()>0)
+                    upPage++;
                 for (NewsBean bean : list1) {
                     if (!(adapter.getData().contains(bean)))
                         adapter.addData(bean);
@@ -232,6 +221,8 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(list1.size()>0)
+                    upPage++;
                 for (NewsBean bean : list1) {
                     if (!(adapter.getData().contains(bean)))
                         adapter.addData(0, bean);
@@ -246,11 +237,13 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     }
 
     @Override
-    public void updatebeforeNews(List<NewsBean> list) {
+    public void updatebeforeNews(final List<NewsBean> list) {
         final List<NewsBean> list1 = list;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(list.size()>0)
+                    downPage++;
                 Log.d(TAG, "run: " + "loadmoreBefor" + list1.size());
                 if (!(list1.size() == 0)) {
                     for (NewsBean bean : list1) {
@@ -263,6 +256,29 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                     adapter.setEnableLoadMore(false);
                 adapter.notifyDataSetChanged();
                 adapter.loadMoreComplete();
+            }
+        }, 500);
+    }
+
+    /**
+     * 更新获得数据库的消息
+     * @param list
+     */
+    @Override
+    public void updateallBDsNews(List<NewsBean> list) {
+        final List<NewsBean> list1 = list;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (NewsBean bean : list1) {
+                    if (!(adapter.getData().contains(bean)))
+                        adapter.addData(0, bean);
+                }
+                Collections.sort(adapter.getData());
+                adapter.notifyDataSetChanged();
+                adapter.loadMoreComplete();
+                adapter.setEnableLoadMore(true);
+                adapter.setUpFetchEnable(true);
             }
         }, 500);
     }

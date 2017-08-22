@@ -6,17 +6,14 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 <include layout="@layout/toolbar"></include>
-    <LinearLayout
-        android:background="@drawable/chat_machin_backgroud"
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1">
         <ListView
+            android:background="@drawable/chat_machin_backgroud"
+            android:layout_weight="1"
             android:id="@+id/chat_list_Listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:divider="#0000"/>
-    </LinearLayout>
+
 
 
     <LinearLayout

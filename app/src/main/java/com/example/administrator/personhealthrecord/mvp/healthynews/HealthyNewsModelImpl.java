@@ -1,11 +1,10 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews;
 
-import android.os.Build;
 import android.util.Log;
-import android.webkit.WebSettings;
 
-import com.example.administrator.personhealthrecord.application.MyApplication;
+import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
 import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
+import com.example.administrator.personhealthrecord.bean.NewHealthyNewsBean;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
@@ -13,18 +12,14 @@ import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
 import org.litepal.crud.DataSupport;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
@@ -37,10 +32,25 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
     private Retrofit retrofit;
 
     @Override
-    public void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, long date) {
+    public void getNewsAfter(Observer<AbstractObjectResult<NewHealthyNewsBean>> observer, long date,int page) {
         retrofit = RetrofitUtil.getRetrofit();
         HealthyNewsApi api = retrofit.create(HealthyNewsApi.class);
-        api.getNewsAfter(date)
+        api.getNewsAfter(date,page,10)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    /**
+     * 获取今天的消息
+     * @param observer
+     */
+    @Override
+    public void getTodayNews(Observer<AbstractObjectResult<NewHealthyNewsBean>> observer) {
+        retrofit = RetrofitUtil.getRetrofit();
+        HealthyNewsApi api = retrofit.create(HealthyNewsApi.class);
+        api.getNewsToday(0,10)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,23 +58,12 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
     }
 
     @Override
-    public void getTodayNews(Observer<ResultUtilOfNewsBean> observer) {
-        retrofit = RetrofitUtil.getRetrofit();
-        HealthyNewsApi api = retrofit.create(HealthyNewsApi.class);
-        api.getNewsToday()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
-
-    @Override
-    public void getNewsBefore(Observer<ResultUtilOfNewsBean> observer, long date) {
+    public void getNewsBefore(Observer<AbstractObjectResult<NewHealthyNewsBean>> observer, long date,int page) {
         retrofit = RetrofitUtil.getRetrofit();
         HealthyNewsApi api = retrofit.create(HealthyNewsApi.class);
 
 
-        api.getNewsBefore(date)
+        api.getNewsBefore(date,page,10)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -75,8 +74,8 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
     @Override
     public void savaToDatabase(List<NewsBean> list) {
         List<HealthyNewBean> dblist = DataSupport.findAll(HealthyNewBean.class);
-        List<HealthyNewBean> Mylist = ConverToH(list);
-        for (HealthyNewBean bean : Mylist) {
+
+        for (HealthyNewBean bean : ConverToH(list)) {
             if (!dblist.contains(bean))
                 bean.save();
         }
@@ -88,7 +87,6 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
         for (HealthyNewBean bean : list)
             Log.d(TAG, "getDBlist: " + bean.getTitle());
         Collections.sort(list);
-
         return ConverToN(list);
     }
 
@@ -105,6 +103,11 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
                 .subscribe(observer);
     }
 
+    /**
+     * 将News转化为HealthNews
+     * @param list
+     * @return
+     */
     public List<HealthyNewBean> ConverToH(List<NewsBean> list) {
         List<HealthyNewBean> Hlist = new ArrayList<>();
         for (NewsBean bean : list) {
@@ -113,6 +116,12 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
         }
         return Hlist;
     }
+
+    /**
+     * 将HealthNews转化为News
+     * @param list
+     * @return
+     */
 
     public List<NewsBean> ConverToN(List<HealthyNewBean> list) {
         List<NewsBean> Hlist = new ArrayList<>();

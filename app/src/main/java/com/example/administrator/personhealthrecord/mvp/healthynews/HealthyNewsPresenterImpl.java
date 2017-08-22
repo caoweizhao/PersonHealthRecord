@@ -3,6 +3,9 @@ package com.example.administrator.personhealthrecord.mvp.healthynews;
 
 import android.util.Log;
 
+import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
+import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
+import com.example.administrator.personhealthrecord.bean.NewHealthyNewsBean;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
@@ -21,7 +24,7 @@ import retrofit2.Response;
 public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
     private static final String TAG="HealthyNewsPresenter";
     IHealthyNewsFragment fragment;
-    IHealthyNewsModle healthyNewsModle;
+    HealthyNewsModelImpl healthyNewsModle;
     public HealthyNewsPresenterImpl(IHealthyNewsFragment fragments)
     {
         this.fragment=fragments;
@@ -29,22 +32,22 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
     }
 
     @Override//八、返回比时间参数之前的5条数据
-    public void getNewsAfter(long date) {
-        Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
+    public void getNewsAfter(long date,int page) {
+        Observer<AbstractObjectResult<NewHealthyNewsBean>> observer=new Observer<AbstractObjectResult<NewHealthyNewsBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(ResultUtilOfNewsBean value) {
+            public void onNext(AbstractObjectResult<NewHealthyNewsBean> value) {
                 int i;
-                for(i=0;i<value.getCollection().size();i++)
+                for(i=0;i<value.getObject().getContent().size();i++)
                 {
-                    Log.d(TAG, "onNext: "+value.getCollection().get(i).getImageUrl());
+                    Log.d(TAG, "onNext: "+value.getObject().getContent().get(i).getImageUrl());
                 }
-                fragment.updateAfterNews(value.getCollection());
-                healthyNewsModle.savaToDatabase(value.getCollection());
+                fragment.updateAfterNews(healthyNewsModle.ConverToN(value.getObject().getContent()));
+                healthyNewsModle.savaToDatabase(healthyNewsModle.ConverToN(value.getObject().getContent()));
             }
 
             @Override
@@ -59,29 +62,30 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
             }
         };
 
-        healthyNewsModle.getNewsAfter(observer,date);
+        healthyNewsModle.getNewsAfter(observer,date,page);
     }
 
     @Override//九、返回今天的资讯数据
     public void getTodayNews() {
-        Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
+        Observer<AbstractObjectResult<NewHealthyNewsBean>> observer=new Observer<AbstractObjectResult<NewHealthyNewsBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(ResultUtilOfNewsBean value) {
+            public void onNext(AbstractObjectResult<NewHealthyNewsBean> value) {
                 if(value.getStatus().equals("success"))
                 {
-                    List<NewsBean> list=value.getCollection();
+                    List<HealthyNewBean> list=value.getObject().getContent();
                     for(int i=0;i<list.size();i++)
                     {
                         Log.d(TAG, "onNext: "+list.get(i).getImageUrl());
                     }
-                    fragment.updateTodayNews(list);
-                    healthyNewsModle.savaToDatabase(list);
+                    fragment.updateTodayNews(healthyNewsModle.ConverToN(list));
+                    healthyNewsModle.savaToDatabase(healthyNewsModle.ConverToN(list));
                 }
+                Log.d(TAG, "onNext: "+value.getObject().getContent().size());
 
             }
 
@@ -100,23 +104,23 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
         healthyNewsModle.getTodayNews(observer);
     }
 
-    @Override//返回比时间参数之前的5条数据
-    public void getNewsBefore(long date) {
-        Observer<ResultUtilOfNewsBean> observer=new Observer<ResultUtilOfNewsBean>() {
+    @Override //返回比时间参数之前的5条数据
+    public void getNewsBefore(long date,int page) {
+        Observer<AbstractObjectResult<NewHealthyNewsBean>> observer=new Observer<AbstractObjectResult<NewHealthyNewsBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(ResultUtilOfNewsBean value) {
+            public void onNext(AbstractObjectResult<NewHealthyNewsBean> value) {
                 int i;
-                for(i=0;i<value.getCollection().size();i++)
+                for(i=0;i<value.getObject().getContent().size();i++)
                 {
-                    Log.d(TAG, "onNext: "+value.getCollection().get(i).getTitle());
+                    Log.d(TAG, "onNext: "+value.getObject().getContent().get(i).getTitle());
                 }
-                fragment.updatebeforeNews(value.getCollection());
-                healthyNewsModle.savaToDatabase(value.getCollection());
+                fragment.updatebeforeNews(healthyNewsModle.ConverToN(value.getObject().getContent()));
+                healthyNewsModle.savaToDatabase(healthyNewsModle.ConverToN(value.getObject().getContent()));
             }
 
             @Override
@@ -131,12 +135,12 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
             }
         };
 
-        healthyNewsModle.getNewsBefore(observer,date);
+        healthyNewsModle.getNewsBefore(observer,date,page);
     }
 
     @Override
     public void getDBlist() {
-        fragment.updateTodayNews(healthyNewsModle.getDBlist());
+        fragment.updateallBDsNews(healthyNewsModle.getDBlist());
     }
 
     @Override

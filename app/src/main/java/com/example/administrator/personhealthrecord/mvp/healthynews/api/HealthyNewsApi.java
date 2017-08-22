@@ -1,17 +1,18 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews.api;
 
-import com.example.administrator.personhealthrecord.bean.NewsBean;
-import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
+import android.util.Size;
 
-import java.util.List;
+import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
+import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
+import com.example.administrator.personhealthrecord.bean.NewHealthyNewsBean;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
-import retrofit2.Response;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 
 /**
@@ -19,15 +20,17 @@ import retrofit2.http.Query;
  */
 
 public interface HealthyNewsApi {
-    @GET("health_info/health_info_list_today")
-    Observable<ResultUtilOfNewsBean> getNewsToday();
+    @FormUrlEncoded
+    @POST("health_info/health_info_list_today")
+    Observable<AbstractObjectResult<NewHealthyNewsBean>> getNewsToday(@Field("page")int page,@Field("size") int size);
 
-    @GET("health_info/health_info_list_after/{time}")
-    Observable<ResultUtilOfNewsBean> getNewsAfter(@Path("time") long time);
+    @FormUrlEncoded
+    @POST("health_info/health_info_list_after")
+    Observable<AbstractObjectResult<NewHealthyNewsBean>> getNewsAfter(@Field("time") long time,@Field("page")int page,@Field("size")int size);
 
-
-    @GET("health_info/health_info_list_before/{time}")
-    Observable<ResultUtilOfNewsBean> getNewsBefore(@Path("time") long time);
+    @FormUrlEncoded
+    @POST("health_info/health_info_list_before")
+    Observable<AbstractObjectResult<NewHealthyNewsBean>> getNewsBefore(@Field("time") long time,@Field("page")int page,@Field("size")int size);
 
     @GET("/user/test")
     Observable<ResponseBody> test();

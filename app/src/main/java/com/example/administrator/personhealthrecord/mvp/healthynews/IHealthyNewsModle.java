@@ -1,14 +1,14 @@
 package com.example.administrator.personhealthrecord.mvp.healthynews;
 
+import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
+import com.example.administrator.personhealthrecord.bean.NewHealthyNewsBean;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import okhttp3.ResponseBody;
-import retrofit2.Response;
 
 
 /**
@@ -16,9 +16,9 @@ import retrofit2.Response;
  */
 
 public interface IHealthyNewsModle {
-    void getNewsAfter(Observer<ResultUtilOfNewsBean> observer, long date);
-    void getTodayNews(Observer<ResultUtilOfNewsBean> observer);
-    void getNewsBefore(Observer<ResultUtilOfNewsBean> observer, long date);
+    void getNewsAfter(Observer<AbstractObjectResult<NewHealthyNewsBean>> observer, long date,int page);
+    void getTodayNews(Observer<AbstractObjectResult<NewHealthyNewsBean>> observer);
+    void getNewsBefore(Observer<AbstractObjectResult<NewHealthyNewsBean>> observer, long date,int page);
     void savaToDatabase(List<NewsBean> list);
     List<NewsBean> getDBlist();
     void test(Observer<ResponseBody> observer);

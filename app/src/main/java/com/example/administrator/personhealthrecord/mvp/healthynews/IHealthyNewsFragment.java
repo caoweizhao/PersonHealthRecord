@@ -18,4 +18,6 @@ public interface IHealthyNewsFragment {
     void updateTodayNews(List<NewsBean> list);
 
     void updatebeforeNews(List<NewsBean> list);
+
+    void updateallBDsNews(List<NewsBean> list);
 }
