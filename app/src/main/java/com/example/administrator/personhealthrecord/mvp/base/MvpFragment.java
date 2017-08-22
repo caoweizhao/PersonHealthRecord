@@ -33,14 +33,15 @@ public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment 
         super.onDestroy();
     }
 
-    Snackbar mSnackbar;
+    Snackbar mSnackBar;
 
     public void showMessage(String message) {
-        if (mSnackbar == null) {
-            mSnackbar = Snackbar.make(((MainActivity) getActivity()).mDrawerLayout, message, Snackbar.LENGTH_SHORT);
+        if (mSnackBar == null) {
+            mSnackBar = Snackbar.make(((MainActivity) getActivity()).mDrawerLayout, message,
+                    Snackbar.LENGTH_SHORT);
         } else {
-            mSnackbar.setText(message);
+            mSnackBar.setText(message);
         }
-        mSnackbar.show();
+        mSnackBar.show();
     }
 }

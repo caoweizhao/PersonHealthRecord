@@ -1,6 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.chat.api;
 
-import com.example.administrator.personhealthrecord.bean.AIResponeBean;
+import com.example.administrator.personhealthrecord.bean.AIResponseBean;
 import com.example.administrator.personhealthrecord.bean.AIResponeHelpBean;
 
 import io.reactivex.Observable;
@@ -19,6 +19,6 @@ public interface ChatService {
 
     @FormUrlEncoded
     @POST("ai_chat/question")
-    Observable<AIResponeBean> getRespone(@Field("question")String question);
+    Observable<AIResponseBean> getResponse(@Field("question")String question);
 
 }

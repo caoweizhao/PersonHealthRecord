@@ -24,9 +24,9 @@ import java.util.List;
 
 public class SearchAdapter extends BaseSectionQuickAdapter<SearchSection, BaseViewHolder> {
 
-    Context mContext;
+    private Context mContext;
 
-    String mQuery = "";
+    private String mQuery = "";
 
     public void setQuery(String query) {
         mQuery = query;
@@ -61,7 +61,7 @@ public class SearchAdapter extends BaseSectionQuickAdapter<SearchSection, BaseVi
 
         SpannableString summaryString = new SpannableString(item.t.getSummary());
         index = item.t.getSummary().indexOf(mQuery);
-        if(index != -1 && index+length < summaryString.length()){
+        if (index != -1 && index + length < summaryString.length()) {
             summaryString.setSpan(f, index, index + length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         }
 

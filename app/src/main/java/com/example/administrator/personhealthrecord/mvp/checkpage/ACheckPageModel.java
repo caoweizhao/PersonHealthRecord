@@ -1,7 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
-import com.example.administrator.personhealthrecord.bean.AbstractReserveBean;
-import com.example.administrator.personhealthrecord.bean.AbstractResulUitl;
+import com.example.administrator.personhealthrecord.bean.AbstractResultUtil;
 import com.example.administrator.personhealthrecord.bean.ImageBean;
 import com.example.administrator.personhealthrecord.mvp.base.BaseModel;
 
@@ -17,7 +16,7 @@ public abstract class ACheckPageModel extends BaseModel<ACheckPagePresenter> {
         super(presenter);
     }
 
-    public abstract void getImageRes(Observer<AbstractResulUitl<ImageBean>> observer);
+    public abstract void getImageRes(Observer<AbstractResultUtil<ImageBean>> observer);
 
     public abstract void getCheckItems();
 

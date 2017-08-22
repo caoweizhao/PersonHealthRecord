@@ -9,7 +9,7 @@ import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.bean.HospitalBean;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.util.ToastUtil;
 
 import java.util.List;
 
@@ -20,14 +20,12 @@ import io.reactivex.disposables.Disposable;
  * Created by Administrator on 2017-7-19.
  */
 
-public class HomePagePresenter extends AHomePagePresenter {
+class HomePagePresenter extends AHomePagePresenter {
     private static final String TAG = "HomePagePresenter";
 
     @Override
     public AHomePageModel createModel() {
-        // TODO: 2017-7-19
         return new HomePageModel(this);
-       /* return new TestModel(this);*/
     }
 
     @Override
@@ -77,7 +75,7 @@ public class HomePagePresenter extends AHomePagePresenter {
 
     @Override
     public void getHospitalLis() {
-        onHospitalReady(mModel.getBDlist());//先从数据库取出列表然后在进行网络请求
+        onHospitalReady(mModel.getDBList());//先从数据库取出列表然后在进行网络请求
         Observer<ResultUtilOfHospitalList> observer = new Observer<ResultUtilOfHospitalList>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -95,7 +93,7 @@ public class HomePagePresenter extends AHomePagePresenter {
                     mView.updateHospitals(value.getCollection());
                     mModel.saveToDB(value.getCollection());
                 } else {
-                    ToastUitl.Toast(value.getMessage());
+                    ToastUtil.Toast(value.getMessage());
                 }
             }
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -26,79 +25,75 @@ import java.util.List;
 import butterknife.BindView;
 
 public class ReserveActivity extends IReserveView {
-    private boolean IS_DISCOUNT=false;
-    private String IsOnHospital="IsOnHospital";
-    private String IsOnPackage="IsOnPackage";
+    private boolean IS_DISCOUNT = false;
+    private String IsOnHospital = "IsOnHospital";
+    private String IsOnPackage = "IsOnPackage";
     private String status;
-    private List<PackageBean> pacakges;
+    private List<PackageBean> mPackages;
     private HospitalAdapter adapter;
-    private List<HospitalBean> hospitals;
     private PackageInfoAdapter packageAdapter;
     @BindView(R.id.health_check_itme_list)
-    RecyclerView hospitalsRecycleview;
+    RecyclerView hospitalsRecyclerView;
     @BindView(R.id.health_check_package_list)
-    RecyclerView packageZRecycleview;
+    RecyclerView packageZRecyclerView;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_reserve;
     }
 
     @Override
-    public IResrevePresenter createPresenter() {
+    public IReservePresenter createPresenter() {
         return new ReservePresenterImpl();
     }
 
     @Override
     protected void initData() {
-        Intent intent=getIntent();
-        IS_DISCOUNT=intent.getBooleanExtra("IS_DISCOUNT",false);
-        Contract.IS_DISCOUNT=IS_DISCOUNT;
+        Intent intent = getIntent();
+        IS_DISCOUNT = intent.getBooleanExtra("IS_DISCOUNT", false);
+        Contract.IS_DISCOUNT = IS_DISCOUNT;
         super.initData();
-        status=IsOnHospital;
-        initToolbar("体检机构",true,null);
-        hospitals=new ArrayList<>();
-        adapter=new HospitalAdapter(R.layout.hospital_item,hospitals);
-        hospitalsRecycleview.setLayoutManager(new LinearLayoutManager(this));
-        hospitalsRecycleview.setAdapter(adapter);
+        status = IsOnHospital;
+        initToolbar("体检机构", true, null);
+        List<HospitalBean> hospitals = new ArrayList<>();
+        adapter = new HospitalAdapter(R.layout.hospital_item, hospitals);
+        hospitalsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        hospitalsRecyclerView.setAdapter(adapter);
         getPackageHospitals();
-        pacakges=new ArrayList<>();
-        packageAdapter=new PackageInfoAdapter(R.layout.health_check_package_item,pacakges);
-        packageZRecycleview.setLayoutManager(new LinearLayoutManager(this));
-        packageZRecycleview.setAdapter(packageAdapter);
-
+        mPackages = new ArrayList<>();
+        packageAdapter = new PackageInfoAdapter(R.layout.health_check_package_item, mPackages);
+        packageZRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        packageZRecyclerView.setAdapter(packageAdapter);
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
-       adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-           @Override
-           public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-               AnimateUtil.createCircularReveal(view);
-              HospitalBean bean=(HospitalBean) adapter.getData().get(position);
-               Log.d(TAG, "onItemChildClick: "+position);
-               getPackage(bean.getId());
-           }
-       });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                AnimateUtil.createCircularReveal(view);
+                HospitalBean bean = (HospitalBean) adapter.getData().get(position);
+                Log.d(TAG, "onItemChildClick: " + position);
+                getPackage(bean.getId());
+            }
+        });
         packageAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 AnimateUtil.createCircularReveal(view);
-                Log.d(TAG, "onItemChildClick: aaaaaaaaaaa");
-                Intent intent=new Intent(ReserveActivity.this, HospitalPackageDetailActivity.class);
-                intent.putExtra("packagebean",(PackageBean)adapter.getData().get(position));
+                Intent intent = new Intent(ReserveActivity.this, HospitalPackageDetailActivity.class);
+                intent.putExtra("packagebean", (PackageBean) adapter.getData().get(position));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ReserveActivity.this,
                             Pair.create(view.findViewById(R.id.health_check_item__img), "image"),
                             Pair.create(view.findViewById(R.id.health_check_item__title), "title"))
                             .toBundle());
-                }else
-                {
+                } else {
                     startActivity(intent);
                 }
             }
         });
-
     }
 
     @Override
@@ -117,7 +112,7 @@ public class ReserveActivity extends IReserveView {
     }
 
     @Override
-    public void updataHostpitals(List<HospitalBean> list) {
+    public void updateHospitals(List<HospitalBean> list) {
         adapter.addData(list);
     }
 
@@ -127,38 +122,33 @@ public class ReserveActivity extends IReserveView {
     }
 
     @Override
-    public void updatePackgets(List<PackageBean> list) {
-        status=IsOnPackage;
-        if(Contract.IS_DISCOUNT)
-            initToolbar("优惠套餐",true,null);
+    public void updatePackages(List<PackageBean> list) {
+        status = IsOnPackage;
+        if (Contract.IS_DISCOUNT)
+            initToolbar("优惠套餐", true, null);
         else
-            initToolbar("体检套餐",true,null);
-        hospitalsRecycleview.setVisibility(View.GONE);
-        packageZRecycleview.setVisibility(View.VISIBLE);
-        Log.d(TAG, "updatePackgets: "+pacakges.size());
-         int i;
-                 for(i=0;i<pacakges.size();i++)
-                 {
-                     pacakges.remove(0);
-                 }
+            initToolbar("体检套餐", true, null);
+        hospitalsRecyclerView.setVisibility(View.GONE);
+        packageZRecyclerView.setVisibility(View.VISIBLE);
+        int i;
+        for (i = 0; i < mPackages.size(); i++) {
+            mPackages.remove(0);
+        }
         packageAdapter.notifyDataSetChanged();
         packageAdapter.addData(list);
     }
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed: ");
-        if(status.equals(IsOnPackage))
-        {
-            hospitalsRecycleview.setVisibility(View.VISIBLE);
-            packageZRecycleview.setVisibility(View.GONE);
-            status=IsOnHospital;
-            if(Contract.IS_DISCOUNT)
-                initToolbar("优惠机构",true,null);
+        if (status.equals(IsOnPackage)) {
+            hospitalsRecyclerView.setVisibility(View.VISIBLE);
+            packageZRecyclerView.setVisibility(View.GONE);
+            status = IsOnHospital;
+            if (Contract.IS_DISCOUNT)
+                initToolbar("优惠机构", true, null);
             else
-                initToolbar("体检机构",true,null);
-        }else
-        {
+                initToolbar("体检机构", true, null);
+        } else {
             super.onBackPressed();
         }
 

@@ -8,7 +8,7 @@ import retrofit2.http.GET;
  * Created by Administrator on 2017-7-19.
  */
 
-public interface MedicineService {
+interface MedicineService {
 
     @GET("medicine/medicine_list")
     Observable<ResponseBody> getMedicineInfos();

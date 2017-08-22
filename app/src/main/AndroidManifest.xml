@@ -55,11 +55,11 @@
             android:launchMode="singleTask"
             android:theme="@style/HealthyNewsDetailStyle"/>
         <activity
-            android:name=".mvp.registandlogin.LoginActivity"
+            android:name=".mvp.register_and_login.LoginActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-            android:name=".activity.MapAcitvity"
+            android:name=".activity.MapActivity"
             />
 
         <service
@@ -67,7 +67,7 @@
             />
 
         <activity
-            android:name=".mvp.registandlogin.RegistActivity"
+            android:name=".mvp.register_and_login.RegisterActivity"
             android:launchMode="singleTask"/>
         <activity
             android:name=".mvp.reserve.ReserveActivity"
@@ -79,7 +79,7 @@
             android:name=".activity.ReserveNowActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".mvp.reserveorder.ReserveOrderActivity"/>
+        <activity android:name=".mvp.reserve_order.ReserveOrderActivity"/>
         <activity android:name=".activity.NewsDetailActivity"/>
         <activity android:name=".activity.DoctorDetailActivity"/>
         <activity android:name=".activity.HospitalListActivity"/>
@@ -101,8 +101,8 @@
         <activity
             android:name=".activity.ProfileActivity"
             android:windowSoftInputMode="adjustUnspecified"/>
-        <activity android:name=".mvp.healthevaluate.HealthyEvaluateActivity"/>
-        <activity android:name=".activity.AppointmentDeatil"/>
+        <activity android:name=".mvp.health_evaluate.HealthyEvaluateActivity"/>
+        <activity android:name=".activity.AppointmentDetailActivity"/>
         <activity android:name=".activity.CaseListActivity"/>
         <activity android:name=".activity.CaseDetailActivity"/>
         <activity android:name=".activity.AddCaseActivity"/>
@@ -111,7 +111,7 @@
             android:theme="@style/Translucent"/>
         <activity android:name=".activity.HospitalDetailActivity"/>
         <activity android:name=".activity.SearchResultActivity"/>
-        <activity android:name=".activity.ReserveOrderDetailActivity"></activity>
+        <activity android:name=".activity.ReserveOrderDetailActivity"/>
     </application>
 
 </manifest>

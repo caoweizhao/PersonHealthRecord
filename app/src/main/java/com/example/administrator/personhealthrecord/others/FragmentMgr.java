@@ -18,10 +18,7 @@ import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageFra
 
 public class FragmentMgr {
     private static final String TAG = "FragmentMgr";
-    public CheckPageFragment mCheckPageFragment;
-    public HomePageFragment mHomePageFragment;
-    public HealthyNewsFragment mHealthyNewsFragement;
-    public SocialPageFragment mSocialPageFragment;
+    private SocialPageFragment mSocialPageFragment;
 
     private AppCompatActivity context;
     private FrameLayout content;
@@ -53,7 +50,6 @@ public class FragmentMgr {
         };
     }
 
-
     public Fragment getFragment(int pos) {
         if (pos == 0) {
             ExecuteAdapter(0);
@@ -70,17 +66,18 @@ public class FragmentMgr {
         return null;
     }
 
-    public void ExecuteAdapter(int position) {
+    private void ExecuteAdapter(int position) {
         Fragment fragment = (Fragment) mFragmentPagerAdapter.instantiateItem(content, position);
-        fragment.setHasOptionsMenu(true);
         mFragmentPagerAdapter.setPrimaryItem(content, 0, fragment);
         mFragmentPagerAdapter.finishUpdate(content);
         if (position == 1) {
             int pos = ((SocialPageFragment) fragment).getCurrentPosition();
             ((MainActivity) context).setBottomBarTint(Contract.colors[pos]);
             ((SocialPageFragment) fragment).startImageAnim();
-            //((MainActivity) context).refreshBottom();
         } else {
+            /**
+             * 暂停SocialPage中的图片缩放动画
+             */
             if (mSocialPageFragment != null) {
                 mSocialPageFragment.stopImageAnim();
             }

@@ -1,6 +1,6 @@
 package com.example.administrator.personhealthrecord.mvp.checkpage;
 
-import com.example.administrator.personhealthrecord.bean.AbstractResulUitl;
+import com.example.administrator.personhealthrecord.bean.AbstractResultUtil;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.bean.ImageBean;
 import com.example.administrator.personhealthrecord.mvp.checkpage.api.CheckPageService;
@@ -27,7 +27,7 @@ public class CheckPageModel extends ACheckPageModel {
     }
 
     @Override
-    public void getImageRes(Observer<AbstractResulUitl<ImageBean>> observer) {
+    public void getImageRes(Observer<AbstractResultUtil<ImageBean>> observer) {
         mCheckPageService.getImagesUrl()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

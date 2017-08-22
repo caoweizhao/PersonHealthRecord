@@ -9,7 +9,7 @@ import retrofit2.http.Header;
  * Created by Administrator on 2017-8-4.
  */
 
-public interface MainService {
+interface MainService {
 
     @GET("user_info/search")
     Observable<ResponseBody> getSelfInfo(@Header("Cookie") String cookie);

@@ -22,10 +22,10 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
+import com.example.administrator.personhealthrecord.mvp.register_and_login.LoginActivity;
 import com.example.administrator.personhealthrecord.util.RegexUtils;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.util.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -149,7 +149,7 @@ public class SelfRegisterActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
                     mDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
-                    Log.d(TAG, "onItemSelected: "+mDate.getTime());
+                    Log.d(TAG, "onItemSelected: " + mDate.getTime());
                     mStartTime = mDate.getTime();
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(mDate);
@@ -180,7 +180,7 @@ public class SelfRegisterActivity extends BaseActivity {
                         calendar.set(year, month, dayOfMonth);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         if (now.after(calendar)) {
-                            ToastUitl.Toast("选择日期有误，请重新选择！");
+                            ToastUtil.Toast("选择日期有误，请重新选择！");
                         } else {
                             mSelfRegisterDate.setText(sdf.format(calendar.getTime()));
                         }
@@ -193,7 +193,7 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisteredGetVertifyCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateVertifyCode();
+                generateVerifyCode();
             }
         });
 
@@ -203,22 +203,11 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017-7-30 验证信息
-//                mSelfRegisterBtn.setEnabled(false);
-
-                Calendar now = Calendar.getInstance();
-////                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                try {
-////                    Date selectDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour);
-                Log.d(TAG, "onClick: mydate"+mSelfRegisterDate.getText() + " " + mHour + ":00"+"   current"+(new Date(System.currentTimeMillis()).toString()));
-                    if (!mDate.after(new Date(System.currentTimeMillis()))) {
-                        ToastUitl.Toast("预约时间有误，请重新选择！");
-                        mSelfRegisterBtn.setEnabled(true);
-                        return;
-                    }
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
+                if (!mDate.after(new Date(System.currentTimeMillis()))) {
+                    ToastUtil.Toast("预约时间有误，请重新选择！");
+                    mSelfRegisterBtn.setEnabled(true);
+                    return;
+                }
                 /**
                  * 手机号不通过
                  */
@@ -229,7 +218,7 @@ public class SelfRegisterActivity extends BaseActivity {
                     /**
                      * 验证码不通过
                      */
-                    if (!validateVertifyCode()) {
+                    if (!validateVerifyCode()) {
                         mSelfRegisterInputVertifyCode.setError("验证码错误！");
                         mSelfRegisterBtn.setEnabled(true);
                     } else {
@@ -241,7 +230,7 @@ public class SelfRegisterActivity extends BaseActivity {
 //                            Log.d(TAG, "onClick: "+d.getTime());
 //                            if(mDate.after(d))
 //                            {
-//                                ToastUitl.Toast("预约时间有误，请重新选择！");
+//                                ToastUtil.Toast("预约时间有误，请重新选择！");
 //                                return;
 //                            }
                             mService.commitRegister(Contract.cookie, mExpertBean.getCode(),
@@ -283,9 +272,7 @@ public class SelfRegisterActivity extends BaseActivity {
                                                                 }
                                                             }).show();
                                                 }
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            } catch (IOException e) {
+                                            } catch (JSONException | IOException e) {
                                                 e.printStackTrace();
                                             }
                                         }
@@ -333,11 +320,10 @@ public class SelfRegisterActivity extends BaseActivity {
         });
     }
 
-    private boolean validateVertifyCode() {
-        if (!TextUtils.isDigitsOnly(mSelfRegisterInputVertifyCode.getText().toString())) {
-            return false;
-        }
-        return mSelfRegisterInputVertifyCode.getText().toString().equals(mSelfRegisteredGetVertifyCode.getText());
+    private boolean validateVerifyCode() {
+        return TextUtils.isDigitsOnly(mSelfRegisterInputVertifyCode.getText().toString())
+                && mSelfRegisterInputVertifyCode.getText().toString()
+                .equals(mSelfRegisteredGetVertifyCode.getText());
     }
 
     @Override
@@ -351,7 +337,6 @@ public class SelfRegisterActivity extends BaseActivity {
     /**
      * 验证手机号码是否正确
      *
-     * @return
      */
     private boolean validatePhoneNumber() {
         return RegexUtils.isMobileExact(mSelfRegisterInputPhoneNumber.getText());
@@ -374,7 +359,7 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisterDate.setText(sdf.format(Calendar.getInstance().getTime()));
     }
 
-    public void generateVertifyCode() {
+    public void generateVerifyCode() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 4; i++) {

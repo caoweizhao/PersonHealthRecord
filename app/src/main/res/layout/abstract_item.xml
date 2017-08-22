@@ -17,19 +17,19 @@
         android:id="@+id/abstract_item_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:orientation="horizontal"
         >
 
         <ImageView
-            android:id="@+id/abstract_item__img"
+            android:id="@+id/abstract_item_img"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            tools:src="@mipmap/ic_launcher_round"
             android:transitionName="image"
+            tools:src="@mipmap/ic_launcher_round"
             />
 
         <LinearLayout
@@ -42,7 +42,7 @@
 
 
             <TextView
-                android:id="@+id/abstract_item__title"
+                android:id="@+id/abstract_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

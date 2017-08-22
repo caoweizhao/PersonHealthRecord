@@ -1,6 +1,5 @@
 package com.example.administrator.personhealthrecord.mvp.homepage;
 
-
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +27,7 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.DoctorDetailActivity;
 import com.example.administrator.personhealthrecord.activity.HospitalDetailActivity;
 import com.example.administrator.personhealthrecord.activity.HospitalListActivity;
-import com.example.administrator.personhealthrecord.activity.MapAcitvity;
+import com.example.administrator.personhealthrecord.activity.MapActivity;
 import com.example.administrator.personhealthrecord.activity.SearchResultActivity;
 import com.example.administrator.personhealthrecord.adapter.HospitalAdapter;
 import com.example.administrator.personhealthrecord.bean.AdvertisementBean;
@@ -75,9 +73,7 @@ public class HomePageFragment extends AHomePageFragment {
     @BindView(R.id.search_view)
     SearchView mSearchView;
 
-    private boolean isExpand = false;
     private HospitalAdapter mHospitalAdapter;
-
     private List<String> mExpertsImageUrl = new ArrayList<>();
     private List<String> mAdvertisementImageUrl = new ArrayList<>();
     private List<ExpertBean> mExpertsBean = new ArrayList<>();
@@ -97,16 +93,10 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_home_page, container, false);
     }
 
     @Override
@@ -130,35 +120,12 @@ public class HomePageFragment extends AHomePageFragment {
         });
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        super.onCreateOptionsMenu(menu, menuInflater);
-        menu.clear();
-        Log.d("HomePageFragment", "onCreateOptionsMenu");
-        menuInflater.inflate(R.menu.menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.search_item);
-        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                isExpand = true;
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                isExpand = false;
-                return true;
-            }
-        });
-        mSearchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-    }*/
-
     @Override
     protected void initEvent() {
-        mSearchView.setIconified(true);
-        mSearchView.setSubmitButtonEnabled(true);
-        mSearchView.setQueryHint(getResources().getString(R.string.search_hint));
+
+        /**
+         * SearchView
+         */
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -181,7 +148,7 @@ public class HomePageFragment extends AHomePageFragment {
         mapTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MapAcitvity.class);
+                Intent intent = new Intent(getActivity(), MapActivity.class);
                 startActivity(intent);
             }
         });
@@ -284,6 +251,11 @@ public class HomePageFragment extends AHomePageFragment {
 
     @Override
     protected void initData() {
+
+        mSearchView.setIconified(true);
+        mSearchView.setSubmitButtonEnabled(true);
+        mSearchView.setQueryHint(getResources().getString(R.string.search_hint));
+
         mHospitalAdapter = new HospitalAdapter(R.layout.hospital_item, null);
         mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mHospitalAdapter.bindToRecyclerView(mHomePageRecyclerView);
@@ -324,7 +296,6 @@ public class HomePageFragment extends AHomePageFragment {
     @Override
     public void updateImages(List<AdvertisementBean> advertisementBeanList) {
         mAdvertisementBeenList = advertisementBeanList;
-        Log.d("HomePageFragment", "updateImages" + mAdvertisementBeenList.get(0).getImageUrl());
         mAdvertisementImageUrl.clear();
         for (int i = 0, n = mAdvertisementBeenList.size(); i < n; i++) {
             mAdvertisementImageUrl.add(Contract.AdvertisementBase +
@@ -334,27 +305,21 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     @Override
-    public void updateExperts(List<ExpertBean> expertBeenF) {
-        mExpertsBean = expertBeenF;
+    public void updateExperts(List<ExpertBean> expertBeanList) {
+        mExpertsBean = expertBeanList;
         mExpertsImageUrl.clear();
-        for (int i = 0, n = expertBeenF.size(); i < n; i++) {
-            mExpertsImageUrl.add(Contract.DoctorBase + expertBeenF.get(i).getImageUrl());
+        for (int i = 0, n = expertBeanList.size(); i < n; i++) {
+            mExpertsImageUrl.add(Contract.DoctorBase + expertBeanList.get(i).getImageUrl());
         }
         mExpertsBanner.update(mExpertsImageUrl);
     }
 
     @Override
     public void initHospitals(List<HospitalBean> hospitalBeanList) {
-        //mHospitalAdapter.addData(hospitalBeanList);
     }
 
     @Override
     public void updateHospitals(List<HospitalBean> hospitalBeanList) {
-        /*List<HospitalBean> nowList = mHospitalAdapter.getData();
-        for (HospitalBean bean : hospitalBeanList) {
-            if (!nowList.contains(bean))
-                mHospitalAdapter.addData(bean);
-        }*/
         mHospitalAdapter.getData().clear();
         mHospitalAdapter.addData(hospitalBeanList);
         mHospitalAdapter.notifyDataSetChanged();
@@ -377,7 +342,8 @@ public class HomePageFragment extends AHomePageFragment {
     }
 
     private void hideKeyBoard() {
-        InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        im.hideSoftInputFromWindow(mCardView.getWindowToken(),0);
+        InputMethodManager im = (InputMethodManager) getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(mCardView.getWindowToken(), 0);
     }
 }

@@ -14,6 +14,7 @@ import android.widget.Scroller;
 
 /**
  * Created by Administrator on 2017-8-5.
+ *
  */
 
 public class DeletableLayout extends LinearLayout implements NestedScrollingChild {

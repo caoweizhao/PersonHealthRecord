@@ -14,11 +14,9 @@ import io.reactivex.Observer;
  * Created by Administrator on 2017-7-19.
  */
 
-public abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
+abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
 
-
-
-    public AHomePageModel(AHomePagePresenter presenter) {
+    AHomePageModel(AHomePagePresenter presenter) {
         super(presenter);
     }
 
@@ -30,5 +28,5 @@ public abstract class AHomePageModel extends BaseModel<AHomePagePresenter> {
 
     public abstract void saveToDB(List<HospitalBean> list);
 
-    public abstract List<HospitalBean> getBDlist();
+    public abstract List<HospitalBean> getDBList();
 }

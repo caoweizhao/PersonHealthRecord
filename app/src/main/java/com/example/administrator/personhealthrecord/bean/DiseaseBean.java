@@ -182,7 +182,7 @@ public class DiseaseBean extends DataSupport implements AbstractItem {
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         return "";
     }
 

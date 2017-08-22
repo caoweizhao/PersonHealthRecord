@@ -6,7 +6,6 @@ package com.example.administrator.personhealthrecord.mvp.base;
 
 public interface IView<P> {
      P createPresenter();
-
      void showLoading();
      void dismissLoading();
 }

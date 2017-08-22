@@ -20,7 +20,7 @@ import com.example.administrator.personhealthrecord.bean.SearchSection;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.util.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -126,7 +126,7 @@ public class SearchResultActivity extends BaseActivity {
                                     mSearchSections.addAll(mMedicineSections);
                                     return mSearchSections;
                                 } else {
-                                    ToastUitl.Toast(jsonObject.get("message").toString());
+                                    ToastUtil.Toast(jsonObject.get("message").toString());
                                 }
                             } catch (JSONException | IOException e) {
                                 e.printStackTrace();
@@ -147,7 +147,7 @@ public class SearchResultActivity extends BaseActivity {
 
                         @Override
                         public void onError(Throwable e) {
-                            ToastUitl.Toast("连接失败");
+                            ToastUtil.Toast("连接失败");
                             mLoadingDialog.dismiss();
                         }
 

@@ -16,27 +16,39 @@ import android.util.AttributeSet;
 
 import com.example.administrator.personhealthrecord.R;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 /**
  * Created by Administrator on 2017-7-27.
  */
 
 public class WaveImageView extends android.support.v7.widget.AppCompatImageView {
     private static final String TAG = "WaveImageView";
-    private int myHeight = 100;
+    private int mHeight = 100;
     Path path = new Path();
     Paint mPaint = new Paint();
+    //波浪颜色
     private int myColor = Color.WHITE;
-    private Context context;
     private Xfermode mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
+    //是否绘制圆形
+    boolean drawCircle = false;
+    /**
+     * 分数值
+     */
     private int value = 0;
+    /**
+     * 图片高度
+     */
+    private int imageH;
+    /**
+     * 图片宽度
+     */
+    private int imageW;
     /**
      * 初始倍数
      */
-    private int imageH;
-    private int imageW;
     public static final int INIT_TIMES = 30;
+    /**
+     * 三角函数Y值倍数
+     */
     private float TIMES_Y = INIT_TIMES;
     /**
      * 三角函数周期
@@ -53,7 +65,6 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
 
     public WaveImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
     }
 
     @Override
@@ -76,7 +87,6 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
         imageW = w;
     }
 
-    ReentrantLock lock = new ReentrantLock();
     volatile boolean canAnimate = true;
 
     Thread thread;
@@ -91,12 +101,14 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
         stopAnim();
     }
 
+    /**
+     * 开始水波动画
+     */
     public void startAnimate() {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (canAnimate) {
-                    lock.lock();
                     try {
                         Thread.sleep(16);
                     } catch (InterruptedException e) {
@@ -104,13 +116,18 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
                         return;
                     }
                     OFFSET_X++;
+                    /**
+                     * 到达三角函数周期值后重置，平滑过渡
+                     */
                     if (OFFSET_X == CIRCLE) {
                         OFFSET_X -= CIRCLE;
                     }
                     float fraction = (OFFSET_X % getMeasuredWidth()) / getMeasuredWidth();
+                    /**
+                     * 高度在0.7-1.2倍之间切换
+                     */
                     TIMES_Y = INIT_TIMES * (Math.abs(fraction - 0.5f) + 0.7f);
                     postInvalidate();
-                    lock.unlock();
                 }
             }
         });
@@ -120,11 +137,14 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        myHeight = 100;
+        mHeight = 100;
         if (value != 0) {
-            myHeight = (int) (getHeight() * (value * 1.0f / 100));
+            mHeight = (int) (getHeight() * (value * 1.0f / 100));
         }
 
+        /**
+         * 绘制水波浪
+         **/
         mPaint.setColor(myColor);
         mPaint.setXfermode(null);
         mPaint.setStyle(Paint.Style.FILL);
@@ -132,7 +152,7 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
         path.moveTo(0, getMeasuredHeight() + 1);
         double y;
         for (double i = 0; i <= getMeasuredWidth(); i++) {
-            y = getMeasuredHeight() - (TIMES_Y * Math.sin((i - OFFSET_X) / 100) + myHeight);
+            y = getMeasuredHeight() - (TIMES_Y * Math.sin((i - OFFSET_X) / 100) + mHeight);
             path.lineTo((float) i, (float) y);
         }
         path.lineTo(getMeasuredWidth(), getMeasuredHeight() + 1);
@@ -156,24 +176,32 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
             mCanvas.drawCircle(imageW / 2, imageH / 2, Math.min(imageW, imageH) / 2, mPaint);
             canvas.drawBitmap(bitmap, 0, 0, null);
         }
-
     }
 
+    /**
+     * 设置水波浪的颜色
+     */
     public void setColor() {
         myColor = getResources().getColor(R.color.colorPrimary);
     }
 
-    public void setHight(int value) {
+    /**
+     * 设置分数值
+     *
+     * @param value
+     */
+    public void setValue(int value) {
         this.value = value;
     }
 
-    boolean drawCircle = false;
-
+    /**
+     * 设置是否绘制圆形
+     */
     public void drawCircle() {
         drawCircle = true;
     }
 
-    public void SetHightAnimate(int height) {
+    public void setHeightAnimate(int height) {
         ValueAnimator v = ValueAnimator.ofInt(0, height);
         v.setDuration(1000);
         v.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

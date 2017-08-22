@@ -57,7 +57,7 @@
                 android:background="@drawable/class_a_bg"
                 android:gravity="center_vertical"
                 android:text="一级甲等"
-                android:textColor="@color/class_a_color"
+                android:textColor="@color/hospital_class_color"
                 />
 
             <TextView

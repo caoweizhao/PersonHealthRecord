@@ -72,12 +72,10 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
                     public List<NewsBean> apply(ResultUtilOfNewsBean bean) throws Exception {
                         if (bean.getStatus().equals("success")) {
                             bean.getCollection();
-                            /**
-                             * 保存数据库
-                             */
+                            //保存数据库
                             List<NewsBean> localList = findAll(NewsBean.class);
                             List<NewsBean> networkList = bean.getCollection();
-                            List<NewsBean> resultList = new ArrayList<NewsBean>();
+                            List<NewsBean> resultList = new ArrayList<>();
                             for (NewsBean newsBean : networkList) {
                                 if (!localList.contains(newsBean)) {
                                     resultList.add(newsBean);
@@ -194,9 +192,7 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
     @Override
     protected void loadMoreData() {
 
-        /**
-         * 读取数据库
-         */
+        //读取数据库
         Observable<List<NewsBean>> localObservable = Observable.create(
                 new ObservableOnSubscribe<List<NewsBean>>() {
                     @Override
@@ -214,9 +210,7 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
                     }
                 }).subscribeOn(Schedulers.newThread());
 
-        /**
-         * 读取网络数据
-         */
+        //读取网络数据
         Observable<List<NewsBean>> networkObservable = mService.getOlderNews(
                 mDataList.get(mDataList.size() - 1).getTime())
                 .subscribeOn(Schedulers.newThread())
@@ -225,7 +219,6 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
                     public List<NewsBean> apply(ResultUtilOfNewsBean bean) throws Exception {
                         if (bean.getStatus().equals("success")) {
                             List<NewsBean> list = bean.getCollection();
-                            Log.d("NewsFragment","list:"+list);
                             Collections.sort(list);
                             DataSupport.saveAll(list);
                             return list;

@@ -11,7 +11,7 @@ import retrofit2.http.Path;
  * Created by andy on 2017/7/19.
  */
 
-public interface NewsService {
+interface NewsService {
 
     /**
      * 第一次进入页面，加载数据库信息，加载当天信息

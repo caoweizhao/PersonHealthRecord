@@ -13,15 +13,14 @@ import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.PHRBean;
 import com.example.administrator.personhealthrecord.bean.UserInfoBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
+import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
 import butterknife.BindView;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,12 +39,10 @@ import retrofit2.http.Header;
 public class SelfPHRActivity extends BaseActivity {
 
     Disposable mDisposable;
+    SelfPHRService mService;
 
     @BindView(R.id.edit_phr)
     ImageView mImageView;
-
-    SelfPHRService mService;
-    SweetAlertDialog mDialog;
     @BindView(R.id.phr_name)
     TextView mPhrName;
     @BindView(R.id.phr_age)
@@ -79,7 +76,7 @@ public class SelfPHRActivity extends BaseActivity {
     @BindView(R.id.phr_body_mass_index_unit)
     TextView mPhrBodyMassIndexUnit;
     @BindView(R.id.container_)
-    View view;
+    View mView;
     PHRBean mPhrBean;
     UserInfoBean mUserInfoBean;
 
@@ -90,7 +87,6 @@ public class SelfPHRActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
         SpannableString ss = new SpannableString("kg/m2");
         SuperscriptSpan sss = new SuperscriptSpan();
         ss.setSpan(sss, 4, 5, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -108,10 +104,10 @@ public class SelfPHRActivity extends BaseActivity {
 
     private void getSelfPHR() {
         if (Contract.IsLogin.equals(Contract.Login)) {
-            view.post(new Runnable() {
+            mView.post(new Runnable() {
                 @Override
                 public void run() {
-                    AnimateUtil.createCircularRevealFromTopLeftToRightBottom(view);
+                    AnimateUtil.createCircularRevealFromTopLeftToRightBottom(mView);
                 }
             });
             Observable<PHRBean> observable1 = mService.getSelfPHR(Contract.cookie)
@@ -123,9 +119,8 @@ public class SelfPHRActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(body.string());
                             if (jsonObject.get("status").equals("success")) {
                                 Gson gson = new Gson();
-                                PHRBean phrBean = gson.fromJson(jsonObject.get("object").toString(),
+                                return gson.fromJson(jsonObject.get("object").toString(),
                                         PHRBean.class);
-                                return phrBean;
                             }
                             return new PHRBean();
                         }
@@ -139,9 +134,8 @@ public class SelfPHRActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(body.string());
                             if (jsonObject.get("status").equals("success")) {
                                 Gson gson = new Gson();
-                                UserInfoBean userInfoBean = gson.fromJson(jsonObject.get("object").toString(),
+                                return gson.fromJson(jsonObject.get("object").toString(),
                                         UserInfoBean.class);
-                                return userInfoBean;
                             }
                             return new UserInfoBean();
                         }
@@ -177,27 +171,7 @@ public class SelfPHRActivity extends BaseActivity {
                     });
 
         } else {
-            mDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("登录提醒")
-                    .setContentText("当前操作需要您登录，是否前往登录？")
-                    .setCancelText("不了")
-                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            mDialog.dismiss();
-                            finish();
-                        }
-                    }).setConfirmText("好的")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            mDialog.dismiss();
-                            Intent intent = new Intent(SelfPHRActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-            mDialog.setCancelable(false);
-            mDialog.show();
+            DialogUtil.getLoginDialog(this).show();
         }
     }
 
@@ -254,11 +228,11 @@ public class SelfPHRActivity extends BaseActivity {
         Observable<ResponseBody> getSelfPHR(@Header("Cookie") String cookie);
     }
 
-    class PHRClass {
+    private class PHRClass {
         PHRBean mPHRBean;
         UserInfoBean mUserInfoBean;
 
-        public PHRClass(PHRBean phrBean, UserInfoBean userInfoBean) {
+        PHRClass(PHRBean phrBean, UserInfoBean userInfoBean) {
             this.mPHRBean = phrBean;
             this.mUserInfoBean = userInfoBean;
         }

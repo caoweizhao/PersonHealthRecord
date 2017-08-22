@@ -8,8 +8,10 @@ import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
 
 public abstract class IChatVIew extends MvpActivity<IChatPresenter> {
     public abstract void getHelp();
-    public abstract void getRespone(String question);
+
+    public abstract void getResponse(String question);
 
     public abstract void OnHelpMessageReady(String message);
+
     public abstract void OnSimpleMessageReady(String message);
 }

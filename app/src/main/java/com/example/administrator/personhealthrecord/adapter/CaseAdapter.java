@@ -21,14 +21,15 @@ public class CaseAdapter extends BaseQuickAdapter<CaseBean, BaseViewHolder> {
         super(R.layout.case_item, data);
     }
 
-    DeleteListener mListener;
+    private DeleteListener mListener;
+    private ContentClickListener mContentListener;
 
     public interface ContentClickListener {
         void onContentClickListener(int position);
     }
 
     public interface DeleteListener {
-        void onItemDeleted(int position,CaseBean caseBean);
+        void onItemDeleted(int position, CaseBean caseBean);
     }
 
     public void setDeleteListener(DeleteListener listener) {
@@ -38,8 +39,6 @@ public class CaseAdapter extends BaseQuickAdapter<CaseBean, BaseViewHolder> {
     public void setContentListener(ContentClickListener listener) {
         this.mContentListener = listener;
     }
-
-    ContentClickListener mContentListener;
 
     @Override
     protected void convert(final BaseViewHolder helper, CaseBean item) {
@@ -60,7 +59,7 @@ public class CaseAdapter extends BaseQuickAdapter<CaseBean, BaseViewHolder> {
             @Override
             public void onDeleteMenuClick() {
                 if (mListener != null) {
-                    mListener.onItemDeleted(helper.getLayoutPosition(),getItem(helper.getLayoutPosition()));
+                    mListener.onItemDeleted(helper.getLayoutPosition(), getItem(helper.getLayoutPosition()));
                 }
                 deletableLayout.closeDeleteMenu();
                 Log.d("CaseAdapter", "onDeleteMenuClick" + helper.getLayoutPosition());

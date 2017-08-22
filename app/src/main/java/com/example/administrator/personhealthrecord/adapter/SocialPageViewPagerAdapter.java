@@ -3,7 +3,6 @@ package com.example.administrator.personhealthrecord.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.administrator.personhealthrecord.mvp.socialpage.disease.DiseaseFragment;
@@ -17,8 +16,8 @@ import com.example.administrator.personhealthrecord.mvp.socialpage.news.NewsFrag
 
 public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
 
-    public SparseArray<String> mTitles = new SparseArray<>();
-    public SparseArray<Fragment> mFragmentSparseArray = new SparseArray<>();
+    private SparseArray<String> mTitles = new SparseArray<>();
+    private SparseArray<Fragment> mFragmentSparseArray = new SparseArray<>();
 
     {
         mTitles.put(0, "新闻管理");
@@ -26,8 +25,6 @@ public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
         mTitles.put(2, "慢病信息");
         mTitles.put(3, "计划免疫");
     }
-
-
 
     public SocialPageViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -44,7 +41,6 @@ public class SocialPageViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.d("aaa","getItem");
         return mFragmentSparseArray.get(position);
     }
 

@@ -10,7 +10,7 @@
     <color name="scrim">#dd323232</color>
     <color name="colorIndicator">#e7e7ec</color>
 
-    <color name="class_a_color">#095b36</color>
+    <color name="hospital_class_color">#095b36</color>
 
     <color name="google_play_green">#267f40</color>
     <color name="google_play_red">#b63528</color>
@@ -26,7 +26,5 @@
     <color name="disease_page_lighter">#ff607c8a</color>
     <color name="immune_page">#ff0096a6</color>
     <color name="immune_page_lighter">#ff4ebcc7</color>
-
-
 
 </resources>

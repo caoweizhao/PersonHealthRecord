@@ -13,12 +13,9 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.example.administrator.personhealthrecord.R;
-
-
 /**
- * Created by Administrator on 2017-7-21.
+ * 侧滑菜单栏HeaderView
  */
-
 public class HeaderView extends View {
 
     private Paint mPaint;

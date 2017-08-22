@@ -5,7 +5,6 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -80,7 +79,7 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneBean, ImmuneSer
                                         }.getType());
 
                                 List<ImmuneBean> localList = DataSupport.findAll(ImmuneBean.class);
-                                List<ImmuneBean> resultList = new ArrayList<ImmuneBean>();
+                                List<ImmuneBean> resultList = new ArrayList<>();
                                 for (ImmuneBean immuneBean : networkList) {
                                     if (!localList.contains(immuneBean)) {
                                         resultList.add(immuneBean);
@@ -163,10 +162,8 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneBean, ImmuneSer
                 .map(new Function<ResponseBody, List<ImmuneBean>>() {
                     @Override
                     public List<ImmuneBean> apply(ResponseBody body) throws Exception {
-                        Log.d("ImmuneFragment", "apply" + "net");
                         try {
                             String result = body.string();
-                            Log.d("ImmuneFragment", "body:" + result);
                             JSONObject jsonObject = new JSONObject(result);
                             if (jsonObject.get("status").equals("success")) {
                                 Gson gson = new Gson();
@@ -191,7 +188,6 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneBean, ImmuneSer
                 List<ImmuneBean> localMedicineList = DataSupport.limit(20)
                         .offset(offset)
                         .find(ImmuneBean.class);
-                Log.d("ImmuneFragment", "subscribe" + localMedicineList.size());
                 if (localMedicineList.size() == 0) {
                     e.onComplete();
                 } else {
@@ -240,7 +236,7 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneBean, ImmuneSer
                 intent.putExtra("data", mAdapter.getItem(position));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
-                            getActivity(), view.findViewById(R.id.abstract_item__img), "image"
+                            getActivity(), view.findViewById(R.id.abstract_item_img), "image"
                     ).toBundle());
                 } else {
                     startActivity(intent);

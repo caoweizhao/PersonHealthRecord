@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Administrator on 2017-7-19.
  */
 
-public abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment, AHomePageModel> {
+abstract class AHomePagePresenter extends BasePresenter<AHomePageFragment, AHomePageModel> {
 
     /**
      * 图片轮播数据请求完毕

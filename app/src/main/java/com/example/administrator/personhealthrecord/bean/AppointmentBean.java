@@ -91,7 +91,7 @@ public class AppointmentBean extends AbstractReserveBean implements Parcelable {
     }
 
     @Override
-    public String getHosPitalNameTotal() {
+    public String getHospitalNameTotal() {
         return hospitalName;
     }
 

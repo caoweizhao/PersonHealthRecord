@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.administrator.personhealthrecord.activity.MapAcitvity">
+    tools:context="com.example.administrator.personhealthrecord.activity.MapActivity">
 <com.amap.api.maps2d.MapView
     android:id="@+id/my_map_view"
     android:layout_width="match_parent"

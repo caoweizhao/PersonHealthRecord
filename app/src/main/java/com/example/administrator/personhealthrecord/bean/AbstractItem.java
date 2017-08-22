@@ -13,6 +13,6 @@ public interface AbstractItem extends Comparable, Parcelable {
 
     String getImageUrl();
 
-    String getdate();
+    String getDate();
 
 }

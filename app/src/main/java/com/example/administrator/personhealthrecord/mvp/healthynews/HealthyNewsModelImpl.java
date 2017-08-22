@@ -6,7 +6,6 @@ import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
 import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
 import com.example.administrator.personhealthrecord.bean.NewHealthyNewsBean;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
-import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 import com.example.administrator.personhealthrecord.mvp.healthynews.api.HealthyNewsApi;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 
@@ -27,7 +26,7 @@ import retrofit2.Retrofit;
  * Created by andy on 2017/7/19.
  */
 
-public class HealthyNewsModelImpl implements IHealthyNewsModle {
+public class HealthyNewsModelImpl implements IHealthyNewsModel {
     private static final String TAG = "HealthyNewsModelImpl";
     private Retrofit retrofit;
 
@@ -72,7 +71,7 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
     }
 
     @Override
-    public void savaToDatabase(List<NewsBean> list) {
+    public void saveToDatabase(List<NewsBean> list) {
         List<HealthyNewBean> dblist = DataSupport.findAll(HealthyNewBean.class);
 
         for (HealthyNewBean bean : ConverToH(list)) {
@@ -82,10 +81,10 @@ public class HealthyNewsModelImpl implements IHealthyNewsModle {
     }
 
     @Override
-    public List<NewsBean> getDBlist() {
+    public List<NewsBean> getDBList() {
         List<HealthyNewBean> list = DataSupport.findAll(HealthyNewBean.class);
         for (HealthyNewBean bean : list)
-            Log.d(TAG, "getDBlist: " + bean.getTitle());
+            Log.d(TAG, "getDBList: " + bean.getTitle());
         Collections.sort(list);
         return ConverToN(list);
     }

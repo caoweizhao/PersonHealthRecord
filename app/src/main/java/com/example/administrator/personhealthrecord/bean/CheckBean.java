@@ -70,7 +70,7 @@ public class CheckBean implements AbstractItem{
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         return "预约人数"+reverations;
     }
 

@@ -9,7 +9,7 @@ public abstract class AbstractReserveBean {
 
     public abstract long getStartTime();
 
-    public abstract String getHosPitalNameTotal();
+    public abstract String getHospitalNameTotal();
 
     public abstract String getName();
 

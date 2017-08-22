@@ -64,8 +64,8 @@ public class EditPHRActivity extends BaseActivity {
     Spinner mSmokingAmountSpinner;
     @BindView(R.id.drinking_type_spinner)
     Spinner mDrinkingTypeSpinner;
-    @BindView(R.id.alcohol_comsuption_spinner)
-    Spinner mAlcoholComsuptionSpinner;
+    @BindView(R.id.alcohol_consumption_spinner)
+    Spinner mAlcoholConsumptionSpinner;
     @BindView(R.id.drinking_frequency_spinner)
     Spinner mDrinkingFrequencySpinner;
     @BindView(R.id.edit_exercise_status)
@@ -85,7 +85,7 @@ public class EditPHRActivity extends BaseActivity {
     /**
      * 使用map存储spinner下标
      */
-    Map<String, Integer> map = new HashMap<>();
+    Map<String, Integer> mSpinnerIndex = new HashMap<>();
     EditPHRService mService;
     Disposable mDisposable;
 
@@ -255,7 +255,7 @@ public class EditPHRActivity extends BaseActivity {
 
             }
         });
-        mAlcoholComsuptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mAlcoholConsumptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
@@ -377,15 +377,15 @@ public class EditPHRActivity extends BaseActivity {
         mEditAllergyHistory.setText(mPHRBean.getMedicineAllergy());
         mPhrBodyMassIndex.setText(mPHRBean.getBodyMassIndex());
 
-        mBloodTypeSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getBloodType()) ?
+        mBloodTypeSpinner.setSelection(mSpinnerIndex.get(!TextUtils.isEmpty(mPHRBean.getBloodType()) ?
                 mPHRBean.getBloodType() : "A型"));
-        mDrinkingTypeSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getDrinkingType()) ?
+        mDrinkingTypeSpinner.setSelection(mSpinnerIndex.get(!TextUtils.isEmpty(mPHRBean.getDrinkingType()) ?
                 mPHRBean.getDrinkingType() : "白酒"));
-        mDrinkingFrequencySpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getDrinkingFrequency()) ?
+        mDrinkingFrequencySpinner.setSelection(mSpinnerIndex.get(!TextUtils.isEmpty(mPHRBean.getDrinkingFrequency()) ?
                 mPHRBean.getDrinkingFrequency() : "从不"));
-        mSmokingAmountSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getSmokingVolume()) ?
+        mSmokingAmountSpinner.setSelection(mSpinnerIndex.get(!TextUtils.isEmpty(mPHRBean.getSmokingVolume()) ?
                 mPHRBean.getSmokingVolume() : "从不"));
-        mAlcoholComsuptionSpinner.setSelection(map.get(!TextUtils.isEmpty(mPHRBean.getAlcoholVolume()) ?
+        mAlcoholConsumptionSpinner.setSelection(mSpinnerIndex.get(!TextUtils.isEmpty(mPHRBean.getAlcoholVolume()) ?
                 mPHRBean.getAlcoholVolume() : "从不"));
     }
 
@@ -393,43 +393,43 @@ public class EditPHRActivity extends BaseActivity {
         /**
          * 喝酒频率
          */
-        map.put("从不", 0);
-        map.put("偶尔", 1);
-        map.put("经常", 2);
-        map.put("总是", 3);
+        mSpinnerIndex.put("从不", 0);
+        mSpinnerIndex.put("偶尔", 1);
+        mSpinnerIndex.put("经常", 2);
+        mSpinnerIndex.put("总是", 3);
 
         /**
          * 饮酒类型
          */
-        map.put("白酒", 0);
-        map.put("红酒", 1);
-        map.put("啤酒", 2);
-        map.put("药酒", 2);
+        mSpinnerIndex.put("白酒", 0);
+        mSpinnerIndex.put("红酒", 1);
+        mSpinnerIndex.put("啤酒", 2);
+        mSpinnerIndex.put("药酒", 2);
 
         /**
          * 血型
          */
-        map.put("A型", 0);
-        map.put("B型", 1);
-        map.put("AB型", 2);
-        map.put("O型", 3);
+        mSpinnerIndex.put("A型", 0);
+        mSpinnerIndex.put("B型", 1);
+        mSpinnerIndex.put("AB型", 2);
+        mSpinnerIndex.put("O型", 3);
 
         /**
          * 吸烟量
          */
-        map.put("从不", 0);
-        map.put("少量", 1);
-        map.put("中等", 2);
-        map.put("大量", 3);
-        map.put("上瘾", 4);
+        mSpinnerIndex.put("从不", 0);
+        mSpinnerIndex.put("少量", 1);
+        mSpinnerIndex.put("中等", 2);
+        mSpinnerIndex.put("大量", 3);
+        mSpinnerIndex.put("上瘾", 4);
 
         /**
          * 饮酒量
          */
-        map.put("从不", 0);
-        map.put("适当", 1);
-        map.put("中等", 2);
-        map.put("大量", 3);
+        mSpinnerIndex.put("从不", 0);
+        mSpinnerIndex.put("适当", 1);
+        mSpinnerIndex.put("中等", 2);
+        mSpinnerIndex.put("大量", 3);
     }
 
     @Override

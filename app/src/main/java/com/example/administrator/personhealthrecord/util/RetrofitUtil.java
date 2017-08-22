@@ -26,7 +26,8 @@ public class RetrofitUtil {
     private static volatile Retrofit mRetrofit;
     private static File cacheDir = MyApplication.getApplication().getCacheDir();
     private static File cacheFile = new File(cacheDir, "cache");
-    private static HttpLoggingInterceptor mHttpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+    private static HttpLoggingInterceptor mHttpLoggingInterceptor = new HttpLoggingInterceptor(
+            new HttpLoggingInterceptor.Logger() {
         @Override
         public void log(String message) {
             Log.d("RetrofitUtil", "message:" + message);

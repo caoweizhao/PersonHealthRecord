@@ -87,7 +87,7 @@ public class HealthyNewBean extends DataSupport implements Comparable,Parcelable
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(time);
     }

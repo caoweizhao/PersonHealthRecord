@@ -11,13 +11,13 @@ import java.util.List;
 public interface IHealthyNewsFragment {
     void showProgressDialog();
 
-    void hidProgressDialog();
+    void hideProgressDialog();
 
     void updateAfterNews(List<NewsBean> list);
 
     void updateTodayNews(List<NewsBean> list);
 
-    void updatebeforeNews(List<NewsBean> list);
+    void updateBeforeNews(List<NewsBean> list);
 
-    void updateallBDsNews(List<NewsBean> list);
+    void updateAllBDsNews(List<NewsBean> list);
 }

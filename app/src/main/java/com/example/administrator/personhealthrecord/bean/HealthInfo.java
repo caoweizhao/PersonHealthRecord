@@ -30,7 +30,7 @@ public class HealthInfo implements AbstractItem{
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         return null;
     }
 

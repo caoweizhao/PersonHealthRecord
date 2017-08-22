@@ -280,7 +280,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/preventation_view"
+                        android:id="@+id/prevention_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/text_padding"

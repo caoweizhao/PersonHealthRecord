@@ -25,9 +25,9 @@ import okhttp3.ResponseBody;
 
 public class MainModel extends AMainModel {
 
-    MainService mService;
+    private MainService mService;
 
-    public MainModel(AMainPresenter presenter) {
+    MainModel(AMainPresenter presenter) {
         super(presenter);
         mService = RetrofitUtil.getRetrofit().create(MainService.class);
     }
