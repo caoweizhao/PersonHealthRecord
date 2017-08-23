@@ -12,6 +12,7 @@ import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
 import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
+import com.example.administrator.personhealthrecord.util.DialogUtil;
 
 import java.util.List;
 
@@ -33,37 +34,24 @@ public class ReserveOrderActivity extends BaseActivity {
     @Override
     protected void initData() {
         super.initData();
-        if(!Contract.IsLogin.equals(Contract.Login))
-        gotToLogin();
-        fmanager=getSupportFragmentManager();
-        viewPager.setAdapter(new ReserveOrderFragmentPageAdapter(fmanager));
-        viewPager.setOffscreenPageLimit(2);
-        mTabLayout.setupWithViewPager(viewPager);
         initToolbar("我的预约",true,null);
+    }
+
+    @Override
+    protected void onResume() {
+        if(Contract.IsLogin.equals(Contract.Login))
+        {
+            fmanager=getSupportFragmentManager();
+            viewPager.setAdapter(new ReserveOrderFragmentPageAdapter(fmanager));
+            viewPager.setOffscreenPageLimit(2);
+            mTabLayout.setupWithViewPager(viewPager);
+        }else
+            gotToLogin();
+        super.onResume();
     }
 
     public void gotToLogin()
     {
-        new SweetAlertDialog(ReserveOrderActivity.this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("您还没有登录！")
-                .setContentText("是否去登录界面？")
-                .setCancelText("不了~")
-                .setConfirmText("去登陆->")
-                .showCancelButton(true)
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        finish();
-                    }
-                })
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        sDialog.cancel();
-                        Intent intent=new Intent(ReserveOrderActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .show();
+        DialogUtil.getLoginDialog(this).show();
     }
 }
