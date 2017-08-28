@@ -40,7 +40,6 @@ dependencies {
     //轮播最新版本
     compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
     compile files('libs/AMap_Location_V3.4.1_20170629.jar')
-
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
@@ -61,4 +60,5 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.google.code.gson:gson:2.8.1'
 }

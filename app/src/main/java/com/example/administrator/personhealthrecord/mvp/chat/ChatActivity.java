@@ -1,30 +1,19 @@
 package com.example.administrator.personhealthrecord.mvp.chat;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.ChatListVIewAdapter;
-import com.example.administrator.personhealthrecord.adapter.ChatRecycleviewAdapter;
-import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ChatMessageBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ChatActivity extends IChatVIew {
 
@@ -39,23 +28,6 @@ public class ChatActivity extends IChatVIew {
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_chat;
-    }
-
-    public void Test()
-    {
-        ChatMessageBean bean1=new ChatMessageBean("hello!",ChatMessageBean.TYPE_RECEIVED);
-        ChatMessageBean bean2=new ChatMessageBean("hi!",ChatMessageBean.TYPE_SEND);
-        ChatMessageBean bean3=new ChatMessageBean("How are you!",ChatMessageBean.TYPE_RECEIVED);
-        ChatMessageBean bean4=new ChatMessageBean("I`m find!",ChatMessageBean.TYPE_SEND);
-        ChatMessageBean bean5=new ChatMessageBean("吃屎啦你 就你他妈话最多!",ChatMessageBean.TYPE_RECEIVED);
-        ChatMessageBean bean6=new ChatMessageBean("you too!",ChatMessageBean.TYPE_SEND);
-
-        list.add(bean1);
-        list.add(bean2);
-        list.add(bean3);
-        list.add(bean4);
-        list.add(bean5);
-        list.add(bean6);
     }
 
     @Override
@@ -79,7 +51,7 @@ public class ChatActivity extends IChatVIew {
                     return;
                 ChatMessageBean bean=new ChatMessageBean(editText.getText().toString(),ChatMessageBean.TYPE_SEND);
                 list.add(bean);
-                getRespone(editText.getText().toString());
+                getResponse(editText.getText().toString());
                 editText.setText("");
                 adapter.notifyDataSetChanged();
                 listView.smoothScrollToPosition(list.size());
@@ -112,12 +84,12 @@ public class ChatActivity extends IChatVIew {
 
     @Override
     public void getHelp() {
-        mPresenter.getHelpe();
+        mPresenter.getHelp();
     }
 
     @Override
-    public void getRespone(String question) {
-        mPresenter.getResone(question);
+    public void getResponse(String question) {
+        mPresenter.getResponse(question);
     }
 
     @Override

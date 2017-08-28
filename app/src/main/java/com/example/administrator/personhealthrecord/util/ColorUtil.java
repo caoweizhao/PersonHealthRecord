@@ -9,11 +9,11 @@ import android.graphics.Color;
 public class ColorUtil {
 
     /**
-     * 获取当前颜色值
-     * @param fraction
-     * @param startColor
-     * @param endColor
-     * @return
+     * 根据百分比获取当前颜色值
+     * @param fraction  百分比
+     * @param startColor    起始颜色
+     * @param endColor  终止颜色
+     * @return 当前颜色值
      */
     public static int getCurrentColor(float fraction, int startColor, int endColor) {
         int redCurrent;

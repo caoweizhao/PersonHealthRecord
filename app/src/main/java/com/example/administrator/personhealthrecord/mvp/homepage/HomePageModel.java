@@ -31,11 +31,11 @@ import okhttp3.ResponseBody;
  * Created by Administrator on 2017-7-19.
  */
 
-public class HomePageModel extends AHomePageModel {
+class HomePageModel extends AHomePageModel {
 
     private HomePageService mHomePageService;
 
-    public HomePageModel(AHomePagePresenter presenter) {
+    HomePageModel(AHomePagePresenter presenter) {
         super(presenter);
         mHomePageService = RetrofitUtil.getRetrofit().create(HomePageService.class);
     }
@@ -48,7 +48,7 @@ public class HomePageModel extends AHomePageModel {
                 .map(new Function<ResponseBody, List<AdvertisementBean>>() {
                     @Override
                     public List<AdvertisementBean> apply(ResponseBody body) throws Exception {
-                        List<AdvertisementBean> advertisementBeanList = new ArrayList<AdvertisementBean>();
+                        List<AdvertisementBean> advertisementBeanList;
                         JSONObject jsonObject = new JSONObject(body.string());
                         if (jsonObject.get("status").equals("success")) {
                             Gson gson = new Gson();
@@ -103,9 +103,7 @@ public class HomePageModel extends AHomePageModel {
                             } else {
                                 mPresenter.onErrorHappened((String) jsonObject.get("message"));
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
+                        } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }
                         return Observable.fromIterable(Collections.<ExpertBean>emptyList());
@@ -146,17 +144,10 @@ public class HomePageModel extends AHomePageModel {
 
     @Override
     public void saveToDB(List<HospitalBean> list) {
-       /* List<HospitalBean> DBlist= DataSupport.findAll(HospitalBean.class);
-        for(HospitalBean bean:list)
-        {
-            if(!DBlist.contains(bean))
-                bean.save();
-        }*/
     }
 
     @Override
-    public List<HospitalBean> getBDlist() {
-        //return DataSupport.findAll(HospitalBean.class);
+    public List<HospitalBean> getDBList() {
         return null;
     }
 }

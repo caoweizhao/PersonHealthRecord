@@ -54,7 +54,7 @@ public class ImmuneBean extends DataSupport implements AbstractItem, Parcelable 
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(time);
     }

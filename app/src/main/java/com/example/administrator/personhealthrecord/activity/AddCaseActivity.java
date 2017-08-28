@@ -16,7 +16,7 @@ import com.example.administrator.personhealthrecord.bean.UserInfoBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.util.ToastUtil;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -252,7 +252,7 @@ public class AddCaseActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (mDateInputLayout.isErrorEnabled() || TextUtils.isEmpty(mEditTime.getText())) {
-                    ToastUitl.Toast("请输入正确的日期格式！");
+                    ToastUtil.Toast("请输入正确的日期格式！");
                 } else {
                     mLoadingDialog.show();
                     mService.addCase(mCaseBean, Contract.cookie)
@@ -273,7 +273,7 @@ public class AddCaseActivity extends BaseActivity {
                                         if (jsonObject.get("status").equals("success")) {
                                             mSuccessDialog.show();
                                         } else {
-                                            ToastUitl.Toast("提交失败");
+                                            ToastUtil.Toast("提交失败");
                                         }
                                     } catch (JSONException | IOException e) {
                                         e.printStackTrace();
@@ -282,7 +282,7 @@ public class AddCaseActivity extends BaseActivity {
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    ToastUitl.Toast("提交失败！");
+                                    ToastUtil.Toast("提交失败！");
                                     mLoadingDialog.dismiss();
                                 }
 

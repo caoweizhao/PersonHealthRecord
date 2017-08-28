@@ -76,7 +76,7 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
                                         }.getType());
 
                                 List<MedicineBean> localList = DataSupport.findAll(MedicineBean.class);
-                                List<MedicineBean> resultList = new ArrayList<MedicineBean>();
+                                List<MedicineBean> resultList = new ArrayList<>();
                                 for (MedicineBean medicineBean : networkList) {
                                     if (!localList.contains(medicineBean)) {
                                         resultList.add(medicineBean);
@@ -170,9 +170,7 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
                                 DataSupport.saveAll(networkList);
                                 return networkList;
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
+                        } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }
                         return Collections.emptyList();
@@ -234,7 +232,7 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
                 intent.putExtra("data", mAdapter.getItem(position));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(),
-                            view.findViewById(R.id.abstract_item__img), "image").toBundle());
+                            view.findViewById(R.id.abstract_item_img), "image").toBundle());
                 } else {
                     startActivity(intent);
                 }

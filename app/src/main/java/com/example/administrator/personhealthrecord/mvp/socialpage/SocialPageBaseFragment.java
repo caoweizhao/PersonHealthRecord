@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +140,7 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
      */
     protected void loadMoreDataDone(List<B> datas) {
         int mDataCount = mAdapter.getItemCount();
-        mAdapter.addData(mDataCount-1, datas);
+        mAdapter.addData(mDataCount - 1, datas);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -152,10 +151,6 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
         Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass())
                 .getActualTypeArguments()[1];
-       /* Type t = SocialPageBaseFragment.class.getGenericSuperclass();
-        Type[] params = ((ParameterizedType) t).getActualTypeArguments();
-        Class<T> cls = (Class<T>) params[0];*/
-        Log.d("SocialPageBaseFragment", "class:" + entityClass);
         return mRetrofit.create(entityClass);
     }
 

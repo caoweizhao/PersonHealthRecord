@@ -9,7 +9,7 @@ import com.example.administrator.personhealthrecord.bean.ReserveBean;
 import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfHospitalList;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfPackageBean;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import io.reactivex.disposables.Disposable;
  * Created by andy on 2017/7/27.
  */
 
-public class ReservePresenterImpl extends IResrevePresenter{
+public class ReservePresenterImpl extends IReservePresenter {
     private static final String TAG="ReservePresenterImpl";
     @Override
     public void getPackageHospitals() {
@@ -39,7 +39,7 @@ public class ReservePresenterImpl extends IResrevePresenter{
                     OnhospitalReady(value.getCollection());
                 }else
                 {
-                    ToastUitl.Toast(value.getMessage());
+                    ToastUtil.Toast(value.getMessage());
                 }
             }
 
@@ -59,7 +59,7 @@ public class ReservePresenterImpl extends IResrevePresenter{
 
     @Override
     public void OnhospitalReady(List<HospitalBean> list) {
-        mView.updataHostpitals(list);
+        mView.updateHospitals(list);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class ReservePresenterImpl extends IResrevePresenter{
                     OnPackageReadey(value.getCollection());
                 }else
                 {
-                    ToastUitl.Toast(value.getMessage());
+                    ToastUtil.Toast(value.getMessage());
                 }
             }
 
@@ -98,7 +98,7 @@ public class ReservePresenterImpl extends IResrevePresenter{
 
     @Override
     public void OnPackageReadey(List<PackageBean> list) {
-        mView.updatePackgets(list);
+        mView.updatePackages(list);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class ReservePresenterImpl extends IResrevePresenter{
                     ((ReserveNowActivity)mView).ReserveSuccess();
                 }else
                 {
-                    ToastUitl.Toast(value.getMessage());
+                    ToastUtil.Toast(value.getMessage());
                 }
             }
 
@@ -142,7 +142,7 @@ public class ReservePresenterImpl extends IResrevePresenter{
     }
 
     @Override
-    public IReserveModle createModel() {
-        return new ReserveModleImpl(this);
+    public IReserveModel createModel() {
+        return new ReserveModelImpl(this);
     }
 }

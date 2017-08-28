@@ -3,7 +3,6 @@ package com.example.administrator.personhealthrecord.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class DiseaseDetailActivity extends BaseActivity {
 
-
     @BindView(R.id.disease_detail_image)
     ImageView mDiseaseDetailImage;
     @BindView(R.id.summary_view)
@@ -38,8 +36,8 @@ public class DiseaseDetailActivity extends BaseActivity {
     TextView mDiagnosisView;
     @BindView(R.id.treatment_view)
     TextView mTreatmentView;
-    @BindView(R.id.preventation_view)
-    TextView mPreventationView;
+    @BindView(R.id.prevention_view)
+    TextView mPreventionView;
 
     DiseaseBean mDiseaseBean;
 
@@ -77,7 +75,6 @@ public class DiseaseDetailActivity extends BaseActivity {
                 } else {
                     mImageURL = Contract.DiseaseBase + mDiseaseBean.getImageUrl();
                 }
-                Log.d("DiseaseDetailActivity", "onCreate" + mImageURL);
                 Glide.with(this)
                         .load(mImageURL)
                         .asBitmap()
@@ -97,6 +94,6 @@ public class DiseaseDetailActivity extends BaseActivity {
         mClinicalManifestationView.setText(mDiseaseBean.getClinicalManifestation());
         mDiagnosisView.setText(mDiseaseBean.getDiagnosis());
         mTreatmentView.setText(mDiseaseBean.getTreatment());
-        mPreventationView.setText(mDiseaseBean.getPrevention());
+        mPreventionView.setText(mDiseaseBean.getPrevention());
     }
 }

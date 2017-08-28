@@ -62,7 +62,7 @@ public class SocialPageFragment extends BaseFragment {
     @BindView(R.id.social_page_collapsingToolbarLayout)
     public CollapsingToolbarLayout mCollapsingToolbarLayout;
 
-    private int[] imgs = new int[]{R.drawable.ic_news_icon, R.drawable.ic_medicine_icon,
+    private int[] mImages = new int[]{R.drawable.ic_news_icon, R.drawable.ic_medicine_icon,
             R.drawable.ic_disease_icon, R.drawable.ic_immune_icon};
     private Matrix mImageMatrix;
 
@@ -87,8 +87,7 @@ public class SocialPageFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_social_page, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_social_page, container, false);
     }
 
     ValueAnimator animator;
@@ -198,9 +197,7 @@ public class SocialPageFragment extends BaseFragment {
                     mCollapsingToolbarLayout.setContentScrimColor(parseColor(colorsStr[pos]));
                 }
                 mFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(colorsLighter[pos]));
-                mFloatingActionButton.setImageResource(imgs[pos]);
-
-                //AnimateUtil.scaleShow(mFloatingActionButton, null);
+                mFloatingActionButton.setImageResource(mImages[pos]);
             }
 
             @Override

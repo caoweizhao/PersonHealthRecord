@@ -5,17 +5,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-import com.example.administrator.personhealthrecord.mvp.reserveorder.TestFragment;
-import com.example.administrator.personhealthrecord.mvp.reserveorder.appointmenorder.AppointmentOrderFragment;
-import com.example.administrator.personhealthrecord.mvp.reserveorder.healthcheckorder.HealthyCheckOrderFragment;
+import com.example.administrator.personhealthrecord.mvp.reserve_order.TestFragment;
+import com.example.administrator.personhealthrecord.mvp.reserve_order.appointmenorder.AppointmentOrderFragment;
+import com.example.administrator.personhealthrecord.mvp.reserve_order.healthcheckorder.HealthyCheckOrderFragment;
 
 
 /**
  * Created by andy on 2017/7/31.
  */
 
-public class ReserveOrderFragmentPageAdapter extends FragmentPagerAdapter{
-    public SparseArray<String> mTitles = new SparseArray<>();
+public class ReserveOrderFragmentPageAdapter extends FragmentPagerAdapter {
+    private SparseArray<String> mTitles = new SparseArray<>();
+
     public ReserveOrderFragmentPageAdapter(FragmentManager fm) {
         super(fm);
         mTitles.put(0, "门诊预约");
@@ -25,18 +26,16 @@ public class ReserveOrderFragmentPageAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        switch(position)
-            {
-                case 0:
-                    return new AppointmentOrderFragment();
-                case 1:
-                    return new HealthyCheckOrderFragment();
-                case 2:
-                    return new TestFragment();
-                default:
-
-                    break;
-            }
+        switch (position) {
+            case 0:
+                return new AppointmentOrderFragment();
+            case 1:
+                return new HealthyCheckOrderFragment();
+            case 2:
+                return new TestFragment();
+            default:
+                break;
+        }
         return null;
     }
 

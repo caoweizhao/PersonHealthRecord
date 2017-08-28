@@ -81,10 +81,10 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
 //        helper.setText(R.id.abstract_item__title, item.getTitle())
 //                .setText(R.id.abstract_item__summary, item.getSummary())
 //                .setImageResource(R.id.abstract_item__img, R.mipmap.ic_launcher_round)
-//                .setText(R.id.abstract_item_date,item.getdate());
-        ((TextView) helper.getView(R.id.abstract_item__title)).setText(item.getTitle());
+//                .setText(R.id.abstract_item_date,item.getDate());
+        ((TextView) helper.getView(R.id.abstract_item_title)).setText(item.getTitle());
         ((TextView) helper.getView(R.id.abstract_item__summary)).setText(item.getSummary());
-        ((TextView) helper.getView(R.id.abstract_item_date)).setText(item.getdate());
+        ((TextView) helper.getView(R.id.abstract_item_date)).setText(item.getDate());
         Glide.with(mContext)
                 .load(mImageURL)
                 .listener(new RequestListener<String, GlideDrawable>() {
@@ -105,7 +105,7 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .centerCrop()
-                .into((ImageView) helper.getView(R.id.abstract_item__img));
+                .into((ImageView) helper.getView(R.id.abstract_item_img));
 
     }
 

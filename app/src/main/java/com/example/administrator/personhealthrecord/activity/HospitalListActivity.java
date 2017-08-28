@@ -41,12 +41,9 @@ public class HospitalListActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
     HospitalAdapter mAdapter;
     private String mAddress;
-
     private HospitalService mService;
-
     Disposable mDisposable;
 
     @Override
@@ -147,15 +144,12 @@ public class HospitalListActivity extends BaseActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 HospitalBean hospitalBean = (HospitalBean) adapter.getItem(position);
-                Log.d("HospitalListActivity", "onItemChildClick" + hospitalBean.getId() +
-                        hospitalBean.getImageUrl());
                 Intent intent = new Intent(HospitalListActivity.this, ExpertListActivity.class);
                 intent.putExtra(Contract.HOSPITAL_KEY, String.valueOf(hospitalBean.getId()));
                 startActivity(intent);
 
             }
         });
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -176,5 +170,4 @@ public class HospitalListActivity extends BaseActivity {
         @GET("hospital/find_by/{address}")
         Observable<ResponseBody> getHospitals(@Path("address") String address);
     }
-
 }

@@ -31,7 +31,7 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.UserInfoBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
+import com.example.administrator.personhealthrecord.mvp.register_and_login.LoginActivity;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.google.gson.Gson;
@@ -75,7 +75,6 @@ import static android.animation.ObjectAnimator.ofFloat;
 
 public class ProfileActivity extends BaseActivity {
 
-
     @BindView(R.id.profile_avator)
     ImageView mProfileAvator;
     @BindView(R.id.profile_name_edit_text)
@@ -106,10 +105,8 @@ public class ProfileActivity extends BaseActivity {
     FloatingActionButton mProfileUndoFab;
     @BindView(R.id.profile_age_text)
     TextView mProfileAgeText;
-
     @BindView(R.id.profile_bg)
     ImageView mImageView;
-
     @BindView(R.id.credit_text)
     TextView mCreditText;
 
@@ -550,7 +547,7 @@ public class ProfileActivity extends BaseActivity {
                 if (editText.getId() == R.id.profile_age_edit_text) {
                     editText.setText(mProfileAgeText.getText());
                 } else {
-                    editText.setText(textView.getText());
+                    editText.setText(mHealthyNewsDetailTextView.getText());
                 }
             }*/
 
@@ -624,7 +621,7 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    Log.d(TAG, "onResponse: "+"respone is nulllllllllllllllll"+response.toString());
+                    Log.d(TAG, "onResponse: " + "respone is nulllllllllllllllll" + response.toString());
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.get("status").equals("success")) {
                         Gson gson = new Gson();
@@ -644,7 +641,6 @@ public class ProfileActivity extends BaseActivity {
         });
     }
 
-
     interface ProfileService {
 
         @PUT("user_info/update")
@@ -657,6 +653,6 @@ public class ProfileActivity extends BaseActivity {
         @Multipart
         @POST("user_info/updateImage")
         Call<ResponseBody> updateAvator(@Header("Cookie") String cookie, @Part MultipartBody.Part icon,
-                                        @Part("description") RequestBody description);
+                                        @Part("mDescription") RequestBody description);
     }
 }

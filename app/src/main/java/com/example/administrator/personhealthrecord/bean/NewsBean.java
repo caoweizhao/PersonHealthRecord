@@ -87,7 +87,7 @@ public class NewsBean extends DataSupport implements Parcelable, AbstractItem {
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(time);
     }

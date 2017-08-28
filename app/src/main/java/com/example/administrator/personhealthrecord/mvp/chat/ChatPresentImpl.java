@@ -3,7 +3,7 @@ package com.example.administrator.personhealthrecord.mvp.chat;
 
 import android.util.Log;
 
-import com.example.administrator.personhealthrecord.bean.AIResponeBean;
+import com.example.administrator.personhealthrecord.bean.AIResponseBean;
 import com.example.administrator.personhealthrecord.bean.AIResponeHelpBean;
 
 import io.reactivex.Observer;
@@ -16,7 +16,7 @@ import io.reactivex.disposables.Disposable;
 public class ChatPresentImpl extends IChatPresenter{
     private static final String TAG="ChatPresentImpl";
     @Override
-    void getHelpe() {
+    void getHelp() {
         Observer<AIResponeHelpBean> observer=new Observer<AIResponeHelpBean>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -43,15 +43,15 @@ public class ChatPresentImpl extends IChatPresenter{
     }
 
     @Override
-    void getResone(String question) {
-        Observer<AIResponeBean> observer=new Observer<AIResponeBean>() {
+    void getResponse(String question) {
+        Observer<AIResponseBean> observer=new Observer<AIResponseBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(AIResponeBean value) {
+            public void onNext(AIResponseBean value) {
                 Log.d(TAG, "onNext: "+value.getObject());
                 mView.OnSimpleMessageReady(value.getObject());
             }
@@ -66,11 +66,11 @@ public class ChatPresentImpl extends IChatPresenter{
 
             }
         };
-        mModel.getRespone(observer,question);
+        mModel.getResponse(observer,question);
     }
 
     @Override
-    public IChatModle createModel() {
-        return new ChatModleImpl(this);
+    public IChatModel createModel() {
+        return new ChatModelImpl(this);
     }
 }

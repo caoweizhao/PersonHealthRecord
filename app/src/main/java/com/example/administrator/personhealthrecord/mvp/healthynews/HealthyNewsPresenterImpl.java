@@ -6,8 +6,6 @@ import android.util.Log;
 import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
 import com.example.administrator.personhealthrecord.bean.HealthyNewBean;
 import com.example.administrator.personhealthrecord.bean.NewHealthyNewsBean;
-import com.example.administrator.personhealthrecord.bean.NewsBean;
-import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +13,6 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
-import retrofit2.Response;
 
 /**
  * Created by andy on 2017/7/19.
@@ -47,13 +44,13 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
                     Log.d(TAG, "onNext: "+value.getObject().getContent().get(i).getImageUrl());
                 }
                 fragment.updateAfterNews(healthyNewsModle.ConverToN(value.getObject().getContent()));
-                healthyNewsModle.savaToDatabase(healthyNewsModle.ConverToN(value.getObject().getContent()));
+                healthyNewsModle.saveToDatabase(healthyNewsModle.ConverToN(value.getObject().getContent()));
             }
 
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: "+e.toString());
-                fragment.hidProgressDialog();
+                fragment.hideProgressDialog();
             }
 
             @Override
@@ -83,7 +80,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
                         Log.d(TAG, "onNext: "+list.get(i).getImageUrl());
                     }
                     fragment.updateTodayNews(healthyNewsModle.ConverToN(list));
-                    healthyNewsModle.savaToDatabase(healthyNewsModle.ConverToN(list));
+                    healthyNewsModle.saveToDatabase(healthyNewsModle.ConverToN(list));
                 }
                 Log.d(TAG, "onNext: "+value.getObject().getContent().size());
 
@@ -92,7 +89,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: "+e.toString());
-                fragment.hidProgressDialog();
+                fragment.hideProgressDialog();
             }
 
             @Override
@@ -119,14 +116,14 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
                 {
                     Log.d(TAG, "onNext: "+value.getObject().getContent().get(i).getTitle());
                 }
-                fragment.updatebeforeNews(healthyNewsModle.ConverToN(value.getObject().getContent()));
-                healthyNewsModle.savaToDatabase(healthyNewsModle.ConverToN(value.getObject().getContent()));
+                fragment.updateBeforeNews(healthyNewsModle.ConverToN(value.getObject().getContent()));
+                healthyNewsModle.saveToDatabase(healthyNewsModle.ConverToN(value.getObject().getContent()));
             }
 
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: "+e.toString());
-                fragment.hidProgressDialog();
+                fragment.hideProgressDialog();
             }
 
             @Override
@@ -140,7 +137,7 @@ public class HealthyNewsPresenterImpl implements IHealthyNewsPresenter {
 
     @Override
     public void getDBlist() {
-        fragment.updateallBDsNews(healthyNewsModle.getDBlist());
+        fragment.updateAllBDsNews(healthyNewsModle.getDBList());
     }
 
     @Override

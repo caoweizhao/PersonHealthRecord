@@ -301,7 +301,6 @@ public class ImmuneDetailActivity extends BaseActivity implements View.OnClickLi
     /**
      * 显示切换
      *
-     * @param view
      */
     private void toggleVisibility(View view) {
         if (view.getVisibility() == View.VISIBLE) {

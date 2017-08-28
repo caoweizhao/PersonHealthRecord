@@ -197,7 +197,7 @@ public class MedicineBean extends DataSupport implements AbstractItem,SearchBean
     }
 
     @Override
-    public String getdate() {
+    public String getDate() {
         return "";
     }
 

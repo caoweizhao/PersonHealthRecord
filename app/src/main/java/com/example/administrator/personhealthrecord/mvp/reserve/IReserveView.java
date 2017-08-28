@@ -10,9 +10,12 @@ import java.util.List;
  * Created by andy on 2017/7/27.
  */
 
-public abstract class IReserveView extends MvpActivity<IResrevePresenter>{
+public abstract class IReserveView extends MvpActivity<IReservePresenter> {
     public abstract void getPackageHospitals();
-    public abstract void updataHostpitals(List<HospitalBean> list);
+
+    public abstract void updateHospitals(List<HospitalBean> list);
+
     public abstract void getPackage(int id);
-    public abstract void updatePackgets(List<PackageBean> list);
+
+    public abstract void updatePackages(List<PackageBean> list);
 }

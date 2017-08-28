@@ -126,15 +126,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         ((MyApplication) MyApplication.getContext()).removeActivity(this);
     }
 
-    Snackbar mSnackbar;
+    Snackbar mSnackBar;
 
     protected void showMessage(View view, String msg) {
-        if (mSnackbar == null) {
-            mSnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+        if (mSnackBar == null) {
+            mSnackBar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
         } else {
-            mSnackbar.setText(msg);
+            mSnackBar.setText(msg);
         }
-        mSnackbar.setAction("我知道了", null);
-        mSnackbar.show();
+        mSnackBar.setAction("我知道了", null);
+        mSnackBar.show();
     }
 }

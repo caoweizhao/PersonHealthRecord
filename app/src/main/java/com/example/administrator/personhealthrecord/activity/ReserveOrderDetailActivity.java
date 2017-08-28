@@ -13,18 +13,16 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.AbstractObjectResult;
-import com.example.administrator.personhealthrecord.bean.AppointmentBean;
-import com.example.administrator.personhealthrecord.bean.ReserOrderBean;
+import com.example.administrator.personhealthrecord.bean.ReserveOrderBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.reserveorder.api.ReserveOrderService;
+import com.example.administrator.personhealthrecord.mvp.reserve_order.api.ReserveOrderService;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
-import com.example.administrator.personhealthrecord.util.ToastUitl;
+import com.example.administrator.personhealthrecord.util.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,27 +38,28 @@ public class ReserveOrderDetailActivity extends BaseActivity {
 
 
     @BindView(R.id.appointment_image)
-    ImageView appointmentImage;
+    ImageView mAppointmentImage;
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @BindView(R.id.reserve_order_detail_packageName)
-    TextView reserveOrderDetailPackageName;
+    TextView mReserveOrderDetailPackageName;
     @BindView(R.id.reserve_order_detail_packagedetail)
-    TextView reserveOrderDetailPackagedetail;
+    TextView mReserveOrderDetailPackageDetail;
     @BindView(R.id.reserve_order_detail_package_price)
-    TextView reserveOrderDetailPackagePrice;
+    TextView mReserveOrderDetailPackagePrice;
     @BindView(R.id.reserve_order_detail_time)
-    TextView appointmentTime;
+    TextView mAppointmentTime;
     @BindView(R.id.reserve_order_detail_phoneNumber)
-    TextView appointmentPhoneNumber;
+    TextView mAppointmentPhoneNumber;
     @BindView(R.id.reserve_order_detail_hospital)
-    TextView reserveOrderDetailHospital;
+    TextView mReserveOrderDetailHospital;
     @BindView(R.id.reserve_order_detail_status)
-    TextView appointmentStatus;
+    TextView mAppointmentStatus;
     @BindView(R.id.reserve_order_detail_cancle)
-    Button reserveOrderDetailCancle;
-    ReserOrderBean bean;
+    Button mReserveOrderDetailCancel;
+    ReserveOrderBean mReserveOrderBean;
     private SweetAlertDialog pDialog;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_my_reserve_order_detail;
@@ -69,36 +68,34 @@ public class ReserveOrderDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         super.initData();
-        bean = getIntent().getParcelableExtra("ReserOrderBean");
-        Log.d(TAG, "initData: "+bean.getMedicalStatus());
-        if(bean.getMedicalStatus().equals("正在预约"))
-        {
-            reserveOrderDetailCancle.setEnabled(true);
-        }else
-        {
-            reserveOrderDetailCancle.setEnabled(false);
+        mReserveOrderBean = getIntent().getParcelableExtra("ReserveOrderBean");
+        Log.d(TAG, "initData: " + mReserveOrderBean.getMedicalStatus());
+        if (mReserveOrderBean.getMedicalStatus().equals("正在预约")) {
+            mReserveOrderDetailCancel.setEnabled(true);
+        } else {
+            mReserveOrderDetailCancel.setEnabled(false);
         }
         Glide.with(this)
-                .load(Contract.ReserVeOrderHealthyCheckImageUrl + bean.getOrderId())
-                .into(appointmentImage);
-        reserveOrderDetailPackageName.setText(bean.getPackageName());
-        reserveOrderDetailPackagedetail.setText(bean.getPackageDetail());
-        reserveOrderDetailPackagePrice.setText("￥"+bean.getPackagePrice());
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:MM");
-        appointmentTime.setText(format.format(new Date(bean.getStartTime()))+" - "+format.format(new Date(bean.getEndTime())));
-        appointmentPhoneNumber.setText(bean.getPhoneNumber());
-        reserveOrderDetailHospital.setText(bean.getHospitalName());
-        appointmentStatus.setText(bean.getMedicalStatus());
+                .load(Contract.ReserveOrderHealthyCheckImageUrl + mReserveOrderBean.getOrderId())
+                .into(mAppointmentImage);
+        mReserveOrderDetailPackageName.setText(mReserveOrderBean.getPackageName());
+        mReserveOrderDetailPackageDetail.setText(mReserveOrderBean.getPackageDetail());
+        mReserveOrderDetailPackagePrice.setText("￥" + mReserveOrderBean.getPackagePrice());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:MM");
+        mAppointmentTime.setText(format.format(new Date(mReserveOrderBean.getStartTime())) + " - " + format.format(new Date(mReserveOrderBean.getEndTime())));
+        mAppointmentPhoneNumber.setText(mReserveOrderBean.getPhoneNumber());
+        mReserveOrderDetailHospital.setText(mReserveOrderBean.getHospitalName());
+        mAppointmentStatus.setText(mReserveOrderBean.getMedicalStatus());
         initToolbar("套餐详情：", true, null);
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
-        reserveOrderDetailCancle.setOnClickListener(new View.OnClickListener() {
+        mReserveOrderDetailCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancleHealthyCheckOrder();
+                cancelHealthyCheckOrder();
             }
         });
     }
@@ -106,25 +103,24 @@ public class ReserveOrderDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         sm.setStatusBarTintEnabled(false);
     }
 
-    public void cancleHealthyCheckOrder() {
-        loding();
-        Observer<AbstractObjectResult<ReserOrderBean>> observer = new Observer<AbstractObjectResult<ReserOrderBean>>() {
+    public void cancelHealthyCheckOrder() {
+        loading();
+        Observer<AbstractObjectResult<ReserveOrderBean>> observer = new Observer<AbstractObjectResult<ReserveOrderBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(AbstractObjectResult<ReserOrderBean> value) {
+            public void onNext(AbstractObjectResult<ReserveOrderBean> value) {
                 if (value.getStatus().equals("success")) {
                     ReserveSuccess();
                 } else {
                     pDialog.dismiss();
-                    ToastUitl.Toast("取消失败");
+                    ToastUtil.Toast("取消失败");
                 }
             }
 
@@ -140,14 +136,14 @@ public class ReserveOrderDetailActivity extends BaseActivity {
         };
         Retrofit client = RetrofitUtil.getRetrofit();
         ReserveOrderService service = client.create(ReserveOrderService.class);
-        service.cancleHealthyCheck(Contract.cookie,bean.getOrderId())
+        service.cancelHealthyCheck(Contract.cookie, mReserveOrderBean.getOrderId())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
 
-    public void loding() {
+    public void loading() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Loading");
@@ -156,8 +152,8 @@ public class ReserveOrderDetailActivity extends BaseActivity {
     }
 
     public void ReserveSuccess() {
-        reserveOrderDetailCancle.setEnabled(false);
-        appointmentStatus.setText("已取消预约");
+        mReserveOrderDetailCancel.setEnabled(false);
+        mAppointmentStatus.setText("已取消预约");
         pDialog.dismiss();
         pDialog = new SweetAlertDialog(ReserveOrderDetailActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("成功取消！")

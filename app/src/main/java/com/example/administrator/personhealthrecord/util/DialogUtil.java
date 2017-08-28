@@ -3,7 +3,7 @@ package com.example.administrator.personhealthrecord.util;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
+import com.example.administrator.personhealthrecord.mvp.register_and_login.LoginActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -45,7 +45,8 @@ public class DialogUtil {
         return sweetAlertDialog;
     }
 
-    public static SweetAlertDialog getSuccessDialog(final Activity activity, String msg, final boolean confirmToQuit) {
+    public static SweetAlertDialog getSuccessDialog(final Activity activity, String msg,
+                                                    final boolean confirmToQuit) {
         SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(activity, SweetAlertDialog.SUCCESS_TYPE);
         sweetAlertDialog.setTitleText(msg);
         sweetAlertDialog.setCancelable(false);

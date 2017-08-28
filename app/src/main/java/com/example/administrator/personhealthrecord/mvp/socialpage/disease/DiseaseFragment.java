@@ -1,10 +1,8 @@
 package com.example.administrator.personhealthrecord.mvp.socialpage.disease;
 
-
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -34,14 +32,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DiseaseFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, DiseaseService> {
     private List<Disposable> mDisposables = new ArrayList<>();
-    private int offset = 0;
+    private int mOffset = 0;
 
     public static DiseaseFragment newInstance() {
         return new DiseaseFragment();
@@ -62,7 +55,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
                 intent.putExtra("data", mAdapter.getItem(position));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(),
-                            view.findViewById(R.id.abstract_item__img), "image").toBundle());
+                            view.findViewById(R.id.abstract_item_img), "image").toBundle());
                 } else {
                     startActivity(intent);
                 }
@@ -92,7 +85,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
                                         }.getType());
 
                                 List<DiseaseBean> localList = DataSupport.findAll(DiseaseBean.class);
-                                List<DiseaseBean> resultList = new ArrayList<DiseaseBean>();
+                                List<DiseaseBean> resultList = new ArrayList<>();
                                 for (DiseaseBean DiseaseBean : networkList) {
                                     if (!localList.contains(DiseaseBean)) {
                                         resultList.add(DiseaseBean);
@@ -138,7 +131,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
     protected void loadMoreData() {
         List<DiseaseBean> localList = DataSupport
                 .limit(20)
-                .offset(offset)
+                .offset(mOffset)
                 .find(DiseaseBean.class);
         if (localList.size() == 0) {
             mAdapter.loadMoreEnd(true);
@@ -152,7 +145,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
                 resultList.add(DiseaseBean);
             }
         }
-        offset += localList.size();
+        mOffset += localList.size();
         loadMoreDataDone(resultList);
         mAdapter.loadMoreComplete();
     }
@@ -186,9 +179,7 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
                                 DataSupport.saveAll(networkList);
                                 return networkList;
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
+                        } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }
                         return Collections.emptyList();
@@ -200,12 +191,12 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
             @Override
             public void subscribe(ObservableEmitter<List<DiseaseBean>> e) throws Exception {
                 List<DiseaseBean> localMedicineList = DataSupport.limit(20)
-                        .offset(offset)
+                        .offset(mOffset)
                         .find(DiseaseBean.class);
                 if (localMedicineList.size() == 0) {
                     e.onComplete();
                 } else {
-                    offset += localMedicineList.size();
+                    mOffset += localMedicineList.size();
                     e.onNext(localMedicineList);
                 }
             }

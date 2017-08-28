@@ -9,7 +9,7 @@ import com.example.administrator.personhealthrecord.mvp.base.BasePresenter;
  * Created by Administrator on 2017-7-18.
  */
 
-public abstract class AMainPresenter extends BasePresenter<AMainActivity, AMainModel> {
+abstract class AMainPresenter extends BasePresenter<AMainActivity, AMainModel> {
 
 
     public abstract void onTabSelected(@IdRes int id);

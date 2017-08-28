@@ -9,7 +9,7 @@ import com.example.administrator.personhealthrecord.contract.Contract;
  * Created by Administrator on 2017-7-17.
  */
 
-public class MainPresenter extends AMainPresenter {
+class MainPresenter extends AMainPresenter {
 
     @Override
     public AMainModel createModel() {
@@ -46,7 +46,7 @@ public class MainPresenter extends AMainPresenter {
     @Override
     public void onAvatorUrlReady(String url) {
         if (mView != null) {
-            String imageUrl = "";
+            String imageUrl;
             if (url != null && !url.contains("http")) {
                 imageUrl = Contract.UserInfoBase + url;
                 mView.updateAvator(imageUrl);

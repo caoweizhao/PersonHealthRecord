@@ -22,11 +22,11 @@ import butterknife.BindView;
 public class NewsDetailActivity extends BaseActivity {
 
     @BindView(R.id.news_detail_text)
-    public TextView textView;
+    public TextView mNewsDetailText;
     @BindView(R.id.toolbar)
-    public Toolbar toolbar;
+    public Toolbar mToolbar;
     @BindView(R.id.news_detail_image)
-    public ImageView imageView;
+    public ImageView mDetailImage;
     @BindView(R.id.news_text_title)
     TextView mTitleTextView;
     private NewsBean mNewsBean;
@@ -41,7 +41,7 @@ public class NewsDetailActivity extends BaseActivity {
     protected void initData() {
         initToolbar("新闻详情", true, null);
         mNewsBean = getIntent().getParcelableExtra("NewsBean");
-        textView.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getdate());
+        mNewsDetailText.setText(mNewsBean.getContent() + "\n" + "\n" + mNewsBean.getDate());
         mTitleTextView.setText(mNewsBean.getTitle());
         String mImageUrl = mNewsBean.getImageUrl();
         if (!mNewsBean.getImageUrl().contains("http")) {
@@ -63,7 +63,7 @@ public class NewsDetailActivity extends BaseActivity {
                 })
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .fitCenter()
-                .into(imageView);
+                .into(mDetailImage);
     }
 
     @Override

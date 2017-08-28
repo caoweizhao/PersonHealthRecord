@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity">
+    tools:context="com.example.administrator.personhealthrecord.mvp.reserve_order.ReserveOrderActivity">
 <include layout="@layout/toolbar"></include>
 
     <android.support.design.widget.TabLayout

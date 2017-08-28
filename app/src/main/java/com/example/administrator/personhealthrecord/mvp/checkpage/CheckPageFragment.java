@@ -25,7 +25,7 @@ import com.example.administrator.personhealthrecord.bean.ImageBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
 import com.example.administrator.personhealthrecord.mvp.reserve.ReserveActivity;
-import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
+import com.example.administrator.personhealthrecord.mvp.reserve_order.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -44,32 +44,24 @@ import butterknife.BindView;
 public class CheckPageFragment extends ACheckPageFragment implements View.OnClickListener{
 
     private static final String TAG = "CheckPageFragment";
-    private AbstractItemAdapter<CheckBean> adapter;
-    private List<CheckBean> checkBeanList;
-    private List<ImageBean> imageBeanList;
-    @BindView(R.id.heath_check_banner01)
-    Banner banner01;
-    @BindView(R.id.heath_check_banner02)
-    ImageView discoutnImage;
+    private AbstractItemAdapter<CheckBean> mAdapter;
+    private List<CheckBean> mCheckBeanList;
+    private List<ImageBean> mImageBeanList;
+    @BindView(R.id.heath_check_top_ad_banner)
+    Banner mTopADBanner;
+    @BindView(R.id.heath_check_discount_img)
+    ImageView mDiscountImage;
     @BindView(R.id.healthy_check_projectlsit)
-    RecyclerView recyclerView;
+    RecyclerView mRecyclerView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.reserve_button)
-    TextView reserve;
-    @BindView(R.id.health_check_reserve_order_button)
-    TextView reserveOrder;
+    @BindView(R.id.reserve_view)
+    TextView mReserveView;
+    @BindView(R.id.health_check_reserve_order_view)
+    TextView mReserveOrderView;
     public CheckPageFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SocialPageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CheckPageFragment newInstance() {
         return new CheckPageFragment();
     }
@@ -78,10 +70,9 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        checkBeanList = new ArrayList<>();
-        View view = inflater.inflate(R.layout.fragment_check_page, container, false);
+        mCheckBeanList = new ArrayList<>();
         //设置图片加载器
-        return view;
+        return inflater.inflate(R.layout.fragment_check_page, container, false);
     }
 
     @Override
@@ -89,14 +80,14 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
         super.onViewCreated(view, savedInstanceState);
         initToolbar("体检");
         setUpWithActivity(view);
-        banner01.setImageLoader(new GlideImageLoader());
+        mTopADBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
         //banner设置方法全部调用完毕时最后调用
-        banner01.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        banner01.start();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AbstractItemAdapter<CheckBean>(R.layout.abstract_item, checkBeanList, this.getContext());
-        recyclerView.setAdapter(adapter);
+        mTopADBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        mTopADBanner.start();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new AbstractItemAdapter<>(R.layout.abstract_item, mCheckBeanList, this.getContext());
+        mRecyclerView.setAdapter(mAdapter);
         mPresenter.onRequestData();
     }
 
@@ -115,30 +106,30 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     }
 
     @Override
-    public void updateImages(List<ImageBean> imageBeens) {
-        imageBeanList=imageBeens;
+    public void updateImages(List<ImageBean> imageBeanList) {
+        this.mImageBeanList =imageBeanList;
         List<String> urls=new ArrayList<>();
-        for(ImageBean bean: imageBeens)
-            urls.add(Contract.CheckPageAdvertismentImageUrl+bean.getImageUrl());
-        banner01.update(urls);
+        for(ImageBean bean: imageBeanList)
+            urls.add(Contract.CheckPageAdvertisementImageUrl +bean.getImageUrl());
+        mTopADBanner.update(urls);
     }
 
     @Override
     public void updateCheckItems(List<CheckBean> checkBeanList) {
-        adapter.addData(checkBeanList);
+        mAdapter.addData(checkBeanList);
     }
 
     @Override
     protected void initEvent() {
-        discoutnImage.setOnClickListener(this);
-        reserve.setOnClickListener(this);
-        reserveOrder.setOnClickListener(this);
-        banner01.setOnBannerListener(new OnBannerListener() {
+        mDiscountImage.setOnClickListener(this);
+        mReserveView.setOnClickListener(this);
+        mReserveOrderView.setOnClickListener(this);
+        mTopADBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                Uri url = Uri.parse(imageBeanList.get(position).getAdvertiseUrl());
+                Uri url = Uri.parse(mImageBeanList.get(position).getAdvertiseUrl());
                 intent.setData(url);
                 intent.addCategory(Intent. CATEGORY_DEFAULT);
                 Intent newIntent = Intent.createChooser(intent,"选择浏览器");
@@ -149,11 +140,11 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
 
     @Override
     protected void initData() {
-        imageBeanList=new ArrayList<>();
+        mImageBeanList =new ArrayList<>();
         Glide.with(this)
                 .load(Contract.BASE_URL+"medical_package/getImageByFavourable")
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(discoutnImage);
+                .into(mDiscountImage);
     }
 
     private void setUpWithActivity(View view) {
@@ -172,17 +163,17 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     public void onClick(View v) {
                 switch (v.getId())
                         {
-                            case R.id.reserve_button:
+                            case R.id.reserve_view:
                                 Intent intent=new Intent(getActivity(), ReserveActivity.class);
                                 intent.putExtra("IS_DISCOUNT",false);
                                 startActivity(intent);
                                 break;
-                            case R.id.health_check_reserve_order_button:
+                            case R.id.health_check_reserve_order_view:
                                     Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
                                     startActivity(intent2);
 
                                 break;
-                            case R.id.heath_check_banner02:
+                            case R.id.heath_check_discount_img:
                                 Intent intent3=new Intent(getActivity(), ReserveActivity.class);
                                 intent3.putExtra("IS_DISCOUNT",true);
                                 startActivity(intent3);
@@ -192,29 +183,10 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                         }
     }
 
-//    public void gotToLogin()
-//    {
-//        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("您还没有登录！")
-//                .setContentText("是否去登录界面？")
-//                .setCancelText("不了~")
-//                .setConfirmText("去登陆->")
-//                .showCancelButton(true)
-//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                        sDialog.cancel();
-//                        Intent intent=new Intent(getActivity(), LoginActivity.class);
-//                        startActivity(intent);
-//                    }
-//                })
-//                .show();
-//    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(banner01!=null)
-            banner01.stopAutoPlay();
+        if(mTopADBanner !=null)
+            mTopADBanner.stopAutoPlay();
     }
 }

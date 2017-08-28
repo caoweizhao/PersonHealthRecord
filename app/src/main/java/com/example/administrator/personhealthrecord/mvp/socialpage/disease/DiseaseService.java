@@ -8,7 +8,7 @@ import retrofit2.http.GET;
  * Created by Administrator on 2017-7-25.
  */
 
-public interface DiseaseService {
+interface DiseaseService {
 
     @GET("slow_disease/disease_list")
     Observable<ResponseBody> initDiseaseInfo();

@@ -26,9 +26,9 @@ import com.example.administrator.personhealthrecord.activity.CaseListActivity;
 import com.example.administrator.personhealthrecord.activity.ProfileActivity;
 import com.example.administrator.personhealthrecord.activity.SelfPHRActivity;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.healthevaluate.HealthyEvaluateActivity;
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
-import com.example.administrator.personhealthrecord.mvp.reserveorder.ReserveOrderActivity;
+import com.example.administrator.personhealthrecord.mvp.health_evaluate.HealthyEvaluateActivity;
+import com.example.administrator.personhealthrecord.mvp.register_and_login.LoginActivity;
+import com.example.administrator.personhealthrecord.mvp.reserve_order.ReserveOrderActivity;
 import com.example.administrator.personhealthrecord.others.FragmentMgr;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
@@ -107,6 +107,7 @@ public class MainActivity extends AMainActivity {
 
     @Override
     protected void initEvents() {
+        //头像
         mAvator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,10 +146,10 @@ public class MainActivity extends AMainActivity {
             }
         });
 
+        //菜单
         mMainNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // TODO: 2017-7-20
                 switch (item.getItemId()) {
                     case R.id.menu_my_book:
                         Intent intent1 = new Intent(MainActivity.this, ReserveOrderActivity.class);
@@ -191,6 +192,7 @@ public class MainActivity extends AMainActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //登录状态时获取头像
         if (Contract.IsLogin.equals(Contract.Login)) {
             mPresenter.requestAvator();
         }
