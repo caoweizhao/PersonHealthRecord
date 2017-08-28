@@ -8,6 +8,9 @@ import com.example.administrator.personhealthrecord.bean.ResultUtilOfHealthyOrde
 import com.example.administrator.personhealthrecord.mvp.reserve_order.appointmenorder.AppointmentOrderFragment;
 import com.example.administrator.personhealthrecord.mvp.reserve_order.healthcheckorder.HealthyCheckOrderFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -17,6 +20,8 @@ import io.reactivex.disposables.Disposable;
 
 public class ReserveOrderPresenterImpl extends IReserveOrderPresenter {
     private static final String TAG = "ReserveOrderPresenter";
+
+    private List<Disposable> mDisposables = new ArrayList<>();
 
     @Override
     public IReserveOrderModel createModel() {
@@ -28,7 +33,7 @@ public class ReserveOrderPresenterImpl extends IReserveOrderPresenter {
         Observer<ResultUtilOfHealthyOrderBean<ReserveOrderBean>> observer = new Observer<ResultUtilOfHealthyOrderBean<ReserveOrderBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                mDisposables.add(d);
             }
 
             @Override
@@ -64,7 +69,7 @@ public class ReserveOrderPresenterImpl extends IReserveOrderPresenter {
         Observer<ResultUtilOfHealthyOrderBean<AppointmentBean>> observer = new Observer<ResultUtilOfHealthyOrderBean<AppointmentBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                mDisposables.add(d);
             }
 
             @Override
@@ -95,4 +100,14 @@ public class ReserveOrderPresenterImpl extends IReserveOrderPresenter {
         mModel.getAppointmentList(observer);
     }
 
+    @Override
+    public void detach() {
+        super.detach();
+        for (Disposable disposable :
+                mDisposables) {
+            if (disposable != null) {
+                disposable.dispose();
+            }
+        }
+    }
 }

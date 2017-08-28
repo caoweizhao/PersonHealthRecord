@@ -115,4 +115,10 @@ public class AppointmentOrderFragment extends IReserveOrderView {
     @Override
     public void setMenuVisibility(boolean menuVisible) {
     }
+
+    @Override
+    public void onDestroy() {
+        mPresenter.detach();
+        super.onDestroy();
+    }
 }

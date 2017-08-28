@@ -57,6 +57,7 @@
         <activity
             android:name=".mvp.register_and_login.LoginActivity"
             android:launchMode="singleTask"
+            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".activity.MapActivity"
