@@ -84,7 +84,9 @@ public class SelfRegisterActivity extends BaseActivity {
     private long mEndTime;
     private Date mDate;
     private Date mCurDate = new Date();
-    SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat mSecondSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat mDaySdf = new SimpleDateFormat("yyyy-MM-d");
+
     SweetAlertDialog mDialog;
 
     private SelfRegisterService mService;
@@ -148,13 +150,8 @@ public class SelfRegisterActivity extends BaseActivity {
                 }
 
                 try {
-                    mDate = mSdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
-                    Log.d(TAG, "onItemSelected: " + mSdf.format(mDate));
-                    mStartTime = mDate.getTime();
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(mDate);
-                    calendar.add(Calendar.HOUR_OF_DAY, 1);
-                    mEndTime = calendar.getTimeInMillis();
+                    mDate = mSecondSdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
+                    Log.d(TAG, "onItemSelected: " + mSecondSdf.format(mDate));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -175,10 +172,9 @@ public class SelfRegisterActivity extends BaseActivity {
                 final Calendar selectedDate = Calendar.getInstance();
                 final Calendar now = Calendar.getInstance();
 
-                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date d;
                 try {
-                    d = sdf.parse(mSelfRegisterDate.getText().toString());
+                    d = mDaySdf.parse(mSelfRegisterDate.getText().toString());
                     now.setTime(d);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -193,8 +189,8 @@ public class SelfRegisterActivity extends BaseActivity {
                         Date nowTime = new Date();
                         Date selectedTime = new Date();
                         try {
-                            nowTime = sdf.parse(sdf.format(now.getTime()));
-                            selectedTime = sdf.parse(sdf.format(selectedDate.getTime()));
+                            nowTime = mDaySdf.parse(mDaySdf.format(now.getTime()));
+                            selectedTime = mDaySdf.parse(mDaySdf.format(selectedDate.getTime()));
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -202,8 +198,8 @@ public class SelfRegisterActivity extends BaseActivity {
                             ToastUtil.Toast("选择日期有误，请重新选择！");
                         } else {
                             try {
-                                mSelfRegisterDate.setText(sdf.format(selectedTime));
-                                mDate = mSdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
+                                mSelfRegisterDate.setText(mDaySdf.format(selectedTime));
+                                mDate = mSecondSdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -250,13 +246,13 @@ public class SelfRegisterActivity extends BaseActivity {
                          * 已登录，提交预约
                          */
                         if (Contract.IsLogin.equals(Contract.Login)) {
-//                            Date d=new Date(System.currentTimeMillis());
-//                            Log.d(TAG, "onClick: "+d.getTime());
-//                            if(mDate.after(d))
-//                            {
-//                                ToastUtil.Toast("预约时间有误，请重新选择！");
-//                                return;
-//                            }
+                            Log.d("SelfRegisterActivity", "date" + mSecondSdf.format(mDate));
+                            mStartTime = mDate.getTime();
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(mDate);
+                            calendar.add(Calendar.HOUR_OF_DAY, 1);
+                            mEndTime = calendar.getTimeInMillis();
+
                             mService.commitRegister(Contract.cookie, mExpertBean.getCode(),
                                     new Timestamp(mStartTime), new Timestamp(mEndTime),
                                     mSelfRegisterInputPhoneNumber.getText().toString())
@@ -358,8 +354,7 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisterDoctorDetails.setText(mExpertBean.getQualification());
         mSelfRegisterDoctorPosition.setText(mExpertBean.getDoctorTitle());
         mSelfRegisterDoctorWorkplace.setText(mExpertBean.getAddress());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        mSelfRegisterDate.setText(sdf.format(Calendar.getInstance().getTime()));
+        mSelfRegisterDate.setText(mDaySdf.format(Calendar.getInstance().getTime()));
     }
 
     public void generateVerifyCode() {
