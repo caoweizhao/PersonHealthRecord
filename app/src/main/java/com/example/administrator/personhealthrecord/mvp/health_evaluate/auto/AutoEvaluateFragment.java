@@ -2,6 +2,9 @@ package com.example.administrator.personhealthrecord.mvp.health_evaluate.auto;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.SuperscriptSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +70,11 @@ public class AutoEvaluateFragment extends IHealthyEvaluateView {
         mDrinkingFrequency.setText(bean.getDrinkingFrequency());
         mPhrExerciseStatus.setText(bean.getPhysicalExercise());
         mPhrAllergyHistory.setText(bean.getMedicineAllergy());
-        mPhrBodyMassIndexUnit.setText(bean.getBodyMassIndex());
+
+        SpannableString ss = new SpannableString("kg/m2");
+        SuperscriptSpan sss = new SuperscriptSpan();
+        ss.setSpan(sss, 4, 5, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        mPhrBodyMassIndexUnit.setText(ss);
     }
 
     @Override
