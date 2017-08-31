@@ -22,7 +22,7 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.ExpertBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.register_and_login.LoginActivity;
+import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RegexUtils;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.example.administrator.personhealthrecord.util.ToastUtil;
@@ -83,7 +83,8 @@ public class SelfRegisterActivity extends BaseActivity {
     private long mStartTime;
     private long mEndTime;
     private Date mDate;
-
+    private Date mCurDate = new Date();
+    SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SweetAlertDialog mDialog;
 
     private SelfRegisterService mService;
@@ -142,14 +143,13 @@ public class SelfRegisterActivity extends BaseActivity {
                         mHour = "16:00";
                         break;
                     default:
-                        mHour = "0:0";
+                        mHour = "00:00";
                         break;
                 }
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    mDate = sdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
-                    Log.d(TAG, "onItemSelected: " + mDate.getTime());
+                    mDate = mSdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
+                    Log.d(TAG, "onItemSelected: " + mSdf.format(mDate));
                     mStartTime = mDate.getTime();
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(mDate);
@@ -172,20 +172,44 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisterDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
+                final Calendar selectedDate = Calendar.getInstance();
                 final Calendar now = Calendar.getInstance();
+
+                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date d;
+                try {
+                    d = sdf.parse(mSelfRegisterDate.getText().toString());
+                    now.setTime(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 new DatePickerDialog(SelfRegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        calendar.set(year, month, dayOfMonth);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        if (now.after(calendar)) {
+                        selectedDate.set(year, month, dayOfMonth);
+
+                        Calendar now = Calendar.getInstance();
+                        Date nowTime = new Date();
+                        Date selectedTime = new Date();
+                        try {
+                            nowTime = sdf.parse(sdf.format(now.getTime()));
+                            selectedTime = sdf.parse(sdf.format(selectedDate.getTime()));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (nowTime.after(selectedTime)) {
                             ToastUtil.Toast("选择日期有误，请重新选择！");
                         } else {
-                            mSelfRegisterDate.setText(sdf.format(calendar.getTime()));
+                            try {
+                                mSelfRegisterDate.setText(sdf.format(selectedTime));
+                                mDate = mSdf.parse(mSelfRegisterDate.getText() + " " + mHour + ":00");
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+                }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE))
                         .show();
             }
         });
@@ -203,7 +227,7 @@ public class SelfRegisterActivity extends BaseActivity {
         mSelfRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mDate.after(new Date(System.currentTimeMillis()))) {
+                if (!mDate.after(mCurDate)) {
                     ToastUtil.Toast("预约时间有误，请重新选择！");
                     mSelfRegisterBtn.setEnabled(true);
                     return;
@@ -292,27 +316,7 @@ public class SelfRegisterActivity extends BaseActivity {
                             /**
                              * 未登录，弹出对话框是否前往登录
                              */
-                            mDialog = new SweetAlertDialog(SelfRegisterActivity.this, SweetAlertDialog.WARNING_TYPE);
-                            mDialog.setCancelable(false);
-                            mDialog.setTitleText("您尚未登录，请前往登录")
-                                    .setConfirmText("前往登录")
-                                    .setCancelText("不了")
-                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                            Intent intent = new Intent(SelfRegisterActivity.this, LoginActivity.class);
-                                            startActivity(intent);
-                                            mSelfRegisterBtn.setEnabled(true);
-                                            mDialog.dismiss();
-                                        }
-                                    }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    mSelfRegisterBtn.setEnabled(true);
-                                    mDialog.dismiss();
-                                }
-                            }).setContentText("需要您登录后才能继续当前操作，是否前往登录？")
-                                    .show();
+                            DialogUtil.getLoginDialog(SelfRegisterActivity.this).show();
                         }
                     }
                 }
@@ -336,7 +340,6 @@ public class SelfRegisterActivity extends BaseActivity {
 
     /**
      * 验证手机号码是否正确
-     *
      */
     private boolean validatePhoneNumber() {
         return RegexUtils.isMobileExact(mSelfRegisterInputPhoneNumber.getText());
