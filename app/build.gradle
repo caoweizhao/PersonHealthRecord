@@ -41,6 +41,8 @@ dependencies {
     compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
     compile files('libs/AMap_Location_V3.4.1_20170629.jar')
     testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile "org.mockito:mockito-core:1.+"
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     compile 'com.roughike:bottom-bar:2.3.1'

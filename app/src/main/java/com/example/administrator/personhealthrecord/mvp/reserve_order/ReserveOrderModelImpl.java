@@ -31,7 +31,6 @@ class ReserveOrderModelImpl extends IReserveOrderModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
-
     @Override
     public void getAppointmentList(Observer<ResultUtilOfHealthyOrderBean<AppointmentBean>> observer) {
         Retrofit client = RetrofitUtil.getRetrofit();

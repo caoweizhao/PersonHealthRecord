@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.administrator.personhealthrecord.R;
+import com.example.administrator.personhealthrecord.activity.CaseListActivity;
 import com.example.administrator.personhealthrecord.adapter.AbstractItemAdapter;
 import com.example.administrator.personhealthrecord.bean.CheckBean;
 import com.example.administrator.personhealthrecord.bean.ImageBean;
@@ -59,6 +60,8 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
     TextView mReserveView;
     @BindView(R.id.health_check_reserve_order_view)
     TextView mReserveOrderView;
+    @BindView(R.id.healthy_check_myreport)
+    TextView myReport;
     public CheckPageFragment() {
         // Required empty public constructor
     }
@@ -121,6 +124,7 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
 
     @Override
     protected void initEvent() {
+        myReport.setOnClickListener(this);
         mDiscountImage.setOnClickListener(this);
         mReserveView.setOnClickListener(this);
         mReserveOrderView.setOnClickListener(this);
@@ -171,13 +175,15 @@ public class CheckPageFragment extends ACheckPageFragment implements View.OnClic
                             case R.id.health_check_reserve_order_view:
                                     Intent intent2=new Intent(getActivity(), ReserveOrderActivity.class);
                                     startActivity(intent2);
-
                                 break;
                             case R.id.heath_check_discount_img:
                                 Intent intent3=new Intent(getActivity(), ReserveActivity.class);
                                 intent3.putExtra("IS_DISCOUNT",true);
                                 startActivity(intent3);
                                 break;
+                            case R.id.healthy_check_myreport:
+                                Intent intent4=new Intent(getActivity(), CaseListActivity.class);
+                                startActivity(intent4);
                             default:
                                 break;
                         }

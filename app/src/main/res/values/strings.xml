@@ -46,8 +46,8 @@
     <string-array name="healthy_check_time">
         <item>9:00-10:00</item>
         <item>10:00-11:00</item>
-        <item>3:00-4:00</item>
-        <item>4:00-5:00</item>
+        <item>15:00–16:00</item>
+        <item>16:00–17:00</item>
     </string-array>
 
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>

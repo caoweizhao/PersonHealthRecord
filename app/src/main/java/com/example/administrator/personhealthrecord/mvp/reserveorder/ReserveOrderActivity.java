@@ -1,6 +1,5 @@
 package com.example.administrator.personhealthrecord.mvp.reserveorder;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -8,16 +7,10 @@ import android.support.v4.view.ViewPager;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.adapter.ReserveOrderFragmentPageAdapter;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
-import com.example.administrator.personhealthrecord.bean.ResultUitlOfReserve;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.base.MvpActivity;
-import com.example.administrator.personhealthrecord.mvp.registandlogin.LoginActivity;
 import com.example.administrator.personhealthrecord.util.DialogUtil;
 
-import java.util.List;
-
 import butterknife.BindView;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ReserveOrderActivity extends BaseActivity {
 

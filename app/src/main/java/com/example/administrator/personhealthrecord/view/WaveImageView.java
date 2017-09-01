@@ -166,10 +166,10 @@ public class WaveImageView extends android.support.v7.widget.AppCompatImageView 
             mTextPaint.setTextSize(120);
             Rect targetRect = new Rect((imageW - imageH) / 2, 0, imageH + (imageW - imageH) / 2, imageH);
 //            textPaint.measureText("",0,1);
-            Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
+            Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();
             int baseline = (targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2;
             mTextPaint.setTextAlign(Paint.Align.CENTER);
-            canvas.drawText(value + "分", targetRect.centerX(), baseline + 50, mTextPaint);
+            canvas.drawText(value + "分", targetRect.centerX(), baseline , mTextPaint);
         }
         if (drawCircle) {
             mPaint.setXfermode(mXfermode);

@@ -80,6 +80,7 @@ public class ReserveNowActivity extends IReserveView implements View.OnClickList
     @Override
     protected void initData() {
         super.initData();
+
         mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mPackageBean = getIntent().getParcelableExtra("package");
         Log.d(TAG, "initData: " + mPackageBean.getName());
