@@ -139,10 +139,12 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         mUsername.setText(mAccount.getUser());
         mPassword.setText(mAccount.getPassword());
         SpannableString spannableString;
+        String signIn = "SIGN  IN";
+        String logOut = "LOG  OUT";
         if (!Contract.IsLogin.equals(Contract.Login))
-            spannableString = new SpannableString("SIGN  IN");
+            spannableString = new SpannableString(signIn);
         else {
-            spannableString = new SpannableString("LOGIN  OUT");
+            spannableString = new SpannableString(logOut);
             mUsername.setEnabled(false);
             mPassword.setEnabled(false);
         }
@@ -159,7 +161,7 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
         RelativeSizeSpan relativeSpan = new RelativeSizeSpan(1.5f);
         RelativeSizeSpan relativeSpan2 = new RelativeSizeSpan(1.3f);
         spannableString.setSpan(relativeSpan, 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(relativeSpan2, 6, 7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(relativeSpan2, logOut.lastIndexOf("O"), logOut.lastIndexOf("O") + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 
         StyleSpan styleSpan = new StyleSpan(Typeface.ITALIC);
         spannableString.setSpan(styleSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
@@ -380,7 +382,6 @@ public class LoginActivity extends ILoginVIew implements View.OnClickListener {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         pDialog.dismiss();
-                        finish();
                     }
                 });
         pDialog.setCancelable(false);

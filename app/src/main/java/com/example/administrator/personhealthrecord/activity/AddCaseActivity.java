@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -80,6 +81,7 @@ public class AddCaseActivity extends BaseActivity {
     SweetAlertDialog mLoadingDialog;
     SweetAlertDialog mSuccessDialog;
     List<Disposable> mDisposables = new ArrayList<>();
+    Calendar mCalendar = Calendar.getInstance();
 
     @Override
     protected int getLayoutRes() {
@@ -173,16 +175,28 @@ public class AddCaseActivity extends BaseActivity {
                 }).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence sequence) throws Exception {
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = sdf.parse(sequence.toString());
-                    mCaseBean.setTime(date.getTime());
-                    if (mDateInputLayout.isErrorEnabled()) {
-                        mDateInputLayout.setErrorEnabled(false);
+
+                if (validateDateInput(sequence.toString())) {
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = sdf.parse(sequence.toString());
+                        if (date.after(mDate)) {
+                            mDateInputLayout.setError("日期不允许在当前日期之后！");
+                        } else {
+                            mCaseBean.setTime(date.getTime());
+                            if (mDateInputLayout.isErrorEnabled()) {
+                                mDateInputLayout.setErrorEnabled(false);
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        mDateInputLayout.setError("日期格式不正确");
+                        mCaseBean.setTime(mDate.getTime());
                     }
-                } catch (Exception e) {
+                } else {
                     mDateInputLayout.setError("日期格式不正确");
                     mCaseBean.setTime(mDate.getTime());
+
                 }
             }
         });
@@ -294,6 +308,13 @@ public class AddCaseActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private boolean validateDateInput(String sequence) {
+        String pattern = "([1-9]\\d{3})" + "-"
+                + "((0?[1-9])|((1[1-2])))" + "-"
+                + "(0?([1-9])|([1-2]\\d)|(3[0,1]))";
+        return sequence.matches(pattern);
     }
 
     @Override

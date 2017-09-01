@@ -169,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:maxLines="1"
                         android:padding="@dimen/text_padding"
-                        android:text="体检时间："
+                        android:text="挂号时间："
                         android:textColor="#000"
                         android:textSize="16sp"/>
 
@@ -259,8 +259,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_bg_enable"
-                android:textColor="#484646"
                 android:text="立刻预约"
+                android:textColor="#484646"
                 />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
