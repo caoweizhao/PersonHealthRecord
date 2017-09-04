@@ -3,8 +3,9 @@ package com.example.administrator.personhealthrecord.mvp.socialpage.news;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 
 /**
@@ -24,24 +25,29 @@ interface NewsService {
      *
      * @return
      */
-    @GET("information/information_list_today")
-    Observable<ResultUtilOfNewsBean> getNewsToday();
+    @FormUrlEncoded
+    @POST("information/information_list_today")
+    Observable<ResultUtilOfNewsBean> getNewsToday(@Field("page") int page, @Field("size") int size);
 
     /**
      * 下拉刷新，传入第一条数据的时间戳，获取比该时间戳更新的数据
      *
-     * @param time
      * @return
      */
-    @GET("information/information_list_after/{time}")
-    Observable<ResultUtilOfNewsBean> getLatestNews(@Path("time") long time);
+    @FormUrlEncoded
+    @POST("information/information_list_after")
+    Observable<ResultUtilOfNewsBean> getLatestNews(@Field("time") long timeStamp,
+                                                   @Field("page") int page,
+                                                   @Field("size") int size);
 
     /**
      * 上拉加载更多，传入最后一条数据的时间戳，获取比该时间戳更旧的数据
      *
-     * @param time
      * @return
      */
-    @GET("information/information_list_before/{time}")
-    Observable<ResultUtilOfNewsBean> getOlderNews(@Path("time") long time);
+    @FormUrlEncoded
+    @POST("information/information_list_before")
+    Observable<ResultUtilOfNewsBean> getOlderNews(@Field("time") long timeStamp,
+                                                  @Field("page") int page,
+                                                  @Field("size") int size);
 }

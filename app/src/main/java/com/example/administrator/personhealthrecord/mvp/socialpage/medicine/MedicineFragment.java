@@ -216,7 +216,6 @@ public class MedicineFragment extends SocialPageBaseFragment<MedicineBean, Medic
                     @Override
                     public void onComplete() {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        showMessage(getString(R.string.success_msg));
                         mAdapter.setEnableLoadMore(true);
                     }
                 });

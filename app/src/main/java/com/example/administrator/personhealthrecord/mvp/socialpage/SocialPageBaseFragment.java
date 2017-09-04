@@ -117,6 +117,10 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
             if (!mDataList.contains(data)) {
                 mAdapter.addData(0, data);
                 mAdapter.notifyItemInserted(0);
+                if (mDataList.size() > 10) {
+                    mDataList.remove(mDataList.size() - 1);
+                    mAdapter.notifyItemRemoved(mDataList.size() - 1);
+                }
             }
         }
         mRecyclerView.scrollToPosition(0);

@@ -220,7 +220,6 @@ public class ImmuneFragment extends SocialPageBaseFragment<ImmuneBean, ImmuneSer
                     @Override
                     public void onComplete() {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        showMessage(getString(R.string.success_msg));
                         mAdapter.setEnableLoadMore(true);
                     }
                 });
