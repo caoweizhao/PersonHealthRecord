@@ -203,7 +203,7 @@ public class NewsFragment extends SocialPageBaseFragment<NewsBean, NewsService> 
                                     Log.d("NewsFragment", networkList.get(i).getTitle());
                                 }
                                 Log.d("NewsFragment", "onNext" + networkList.size());
-                                List<NewsBean> localList = findAll(NewsBean.class);
+                                List<NewsBean> localList = DataSupport.findAll(NewsBean.class);
                                 List<NewsBean> resultList = new ArrayList<>();
 
                                 if (!value.getObject().isLast()) {

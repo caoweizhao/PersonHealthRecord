@@ -128,7 +128,7 @@ public abstract class SocialPageBaseFragment<B extends AbstractItem, T> extends 
 
     protected void refreshDataDone(List<B> dataList) {
         mAdapter.addData(0, dataList);
-        mAdapter.notifyItemRangeInserted(0, dataList.size());
+        mAdapter.notifyItemRangeInserted(0, dataList.size()-1);
         mRecyclerView.scrollToPosition(0);
     }
 
