@@ -225,11 +225,8 @@ public class DiseaseFragment extends SocialPageBaseFragment<DiseaseBean, Disease
                     @Override
                     public void onComplete() {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        showMessage(getString(R.string.success_msg));
                         mAdapter.setEnableLoadMore(true);
                     }
                 });
     }
-
-
 }

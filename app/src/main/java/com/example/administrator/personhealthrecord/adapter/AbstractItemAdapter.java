@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,13 +55,11 @@ public class AbstractItemAdapter<T extends AbstractItem> extends BaseQuickAdapte
                 mImageURL = item.getImageUrl();
             else
                 mImageURL = Contract.ImageUrl + item.getImageUrl();
-            Log.d("AbstractItemAdapter", "url" + mImageURL);
         } else if (item instanceof MedicineBean) {
             if (item.getImageUrl().contains("http"))
                 mImageURL = item.getImageUrl();
             else
                 mImageURL = Contract.MedicalBase + item.getImageUrl();
-            Log.d("AbstractItemAdapter", "url" + mImageURL);
         } else if (item instanceof ImmuneBean) {
             if (item.getImageUrl().contains("http")) {
                 mImageURL = item.getImageUrl();
