@@ -3,7 +3,7 @@ package com.example.administrator.personhealthrecord.mvp.socialpage.news;
 import com.example.administrator.personhealthrecord.bean.ResultUtilOfNewsBean;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 
@@ -24,7 +24,7 @@ interface NewsService {
      *
      * @return
      */
-    @GET("information/information_list_today")
+    @POST("information/information_list_today")
     Observable<ResultUtilOfNewsBean> getNewsToday();
 
     /**
@@ -33,7 +33,7 @@ interface NewsService {
      * @param time
      * @return
      */
-    @GET("information/information_list_after/{time}")
+    @POST("information/information_list_after/{time}")
     Observable<ResultUtilOfNewsBean> getLatestNews(@Path("time") long time);
 
     /**
@@ -42,6 +42,6 @@ interface NewsService {
      * @param time
      * @return
      */
-    @GET("information/information_list_before/{time}")
+    @POST("information/information_list_before/{time}")
     Observable<ResultUtilOfNewsBean> getOlderNews(@Path("time") long time);
 }

@@ -16,6 +16,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.activity.HealthyNewsDetailActivity;
@@ -23,9 +24,11 @@ import com.example.administrator.personhealthrecord.adapter.HealthyNewsAdapter;
 import com.example.administrator.personhealthrecord.base.BaseFragment;
 import com.example.administrator.personhealthrecord.bean.NewsBean;
 import com.example.administrator.personhealthrecord.mvp.main.MainActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import butterknife.BindView;
 
 /**
@@ -243,7 +246,6 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
 
     /**
      * 更新获得数据库的消息
-     *
      */
     @Override
     public void updateAllBDsNews(List<NewsBean> list) {

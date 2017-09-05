@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@color/medical_page"
-        android:fitsSystemWindows="true"
-        >
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -22,8 +20,7 @@
             app:layout_scrollFlags="scroll|snap|enterAlwaysCollapsed|exitUntilCollapsed"
             app:statusBarScrim="@color/medical_page"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="医院详情"
-            >
+            app:title="医院详情">
 
             <ImageView
                 android:id="@+id/hospital_detail_image"
@@ -32,7 +29,7 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:transitionName="image"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -41,8 +38,7 @@
                 android:background="#00aaaaaa"
                 android:minHeight="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -50,15 +46,13 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -66,8 +60,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="名称："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_name"
@@ -75,8 +68,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,8 +76,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="英文名："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/english_name"
@@ -93,8 +84,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -102,8 +92,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="类别："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_category"
@@ -111,8 +100,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -120,8 +108,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="等级:"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_class"
@@ -129,8 +116,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -138,7 +124,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="地址："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"/>
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_address"
@@ -146,8 +132,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -155,8 +140,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="概要："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_summary"
@@ -164,8 +148,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -173,8 +156,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="规模："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_scale"
@@ -182,8 +164,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -191,8 +172,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="历史："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_history"
@@ -200,8 +180,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -209,8 +188,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="科室情况："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_department_status"
@@ -218,8 +196,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -227,8 +204,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="医疗团队："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_medical_team"
@@ -236,8 +212,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -245,8 +220,7 @@
                 android:padding="@dimen/text_padding"
                 android:text="医疗设备："
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/hospital_medical_equipment"
@@ -254,8 +228,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/hospital_text_bg"
                 android:padding="@dimen/text_padding"
-                android:text="暂无"
-                />
+                android:text="暂无" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

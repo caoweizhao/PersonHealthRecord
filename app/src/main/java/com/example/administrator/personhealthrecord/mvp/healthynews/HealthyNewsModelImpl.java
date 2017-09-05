@@ -118,7 +118,7 @@ public class HealthyNewsModelImpl implements IHealthyNewsModel {
 
     /**
      * 将HealthNews转化为News
-     * @param list
+     * @param list，
      * @return
      */
 

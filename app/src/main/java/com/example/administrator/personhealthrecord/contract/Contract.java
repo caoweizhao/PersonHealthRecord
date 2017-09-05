@@ -7,6 +7,8 @@ import android.support.annotation.IntDef;
  */
 
 public class Contract {
+
+    public static boolean IsTest = false;
     public static final String Login = "Login";
     public static final String UnLogin = "UnLogin";
     public static String IsLogin = UnLogin;
@@ -21,10 +23,12 @@ public class Contract {
 
 
     public static String cookie = "";
-    //public static final String BASE_URL = "http://192.168.13.70:8080/";
-    public static final String BASE_URL = "http://106.14.136.52:8080/";
-    // 远程http://106.14.136.52:8080/    192.168.13.70 本地
-
+    //远程URL
+    public static final String Remote_URL = "http://106.14.136.52:8080/";
+    //本地URL
+    public static final String Local_URL = "http://192.168.13.70:8080/";
+    //URL
+    public static String BASE_URL = getUrl();
 
     //专家推荐类型
     /**
@@ -83,4 +87,11 @@ public class Contract {
     public static final String CheckPageAdvertisementImageUrl = BASE_URL + "/advertisement/getImage/";
     public static final String AppointmentImageUrl = BASE_URL + "rro/getImage/";
     public static boolean IS_DISCOUNT = false;
+
+    private static String getUrl() {
+        if (IsTest)
+            return Local_URL;
+        else
+            return Remote_URL;
+    }
 }
