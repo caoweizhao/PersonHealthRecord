@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.personhealthrecord.R;
@@ -30,11 +32,16 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by andy on 2017/7/19.
  */
 public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFragment {
+    @BindView(R.id.health_news_linerlayout)
+    LinearLayout healthNewsLinerlayout;
+    Unbinder unbinder;
     private int mUpPage = 0;//上面的刷新的page
     private long mUpTime;//上面的请求时间
     private int mDownPage = 0;//下面的时间
@@ -42,6 +49,7 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     private boolean mIsFirstTime = true;
     private static final String TAG = "HealthyNewsFragment";
     private static HealthyNewsFragment mHealthyNewsFragment = null;
+    private Snackbar snackbar;
 
     public HealthyNewsFragment() {
 
@@ -82,7 +90,9 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.healthy_news_layout, container, false);
+        View view = inflater.inflate(R.layout.healthy_news_layout, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
 
@@ -236,8 +246,12 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                             mHealthyNewsAdapter.addData(bean);
                     }
                     Collections.sort(mHealthyNewsAdapter.getData());
-                } else
-                    mHealthyNewsAdapter.setEnableLoadMore(false);
+                } else {
+                    mHealthyNewsAdapter.loadMoreEnd(true);
+                     showMessage("没有更多消息");
+                    return;
+                }
+
                 mHealthyNewsAdapter.notifyDataSetChanged();
                 mHealthyNewsAdapter.loadMoreComplete();
             }
@@ -276,5 +290,28 @@ public class HealthyNewsFragment extends BaseFragment implements IHealthyNewsFra
                 ((MainActivity) getActivity()).openMenu();
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    protected void showMessage(String message) {
+        View view = healthNewsLinerlayout;
+        if (snackbar == null) {
+            snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+                    .setAction("我知道了", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            snackbar.dismiss();
+                        }
+                    });
+            snackbar.show();
+        } else {
+            snackbar.setText(message);
+            snackbar.show();
+        }
     }
 }

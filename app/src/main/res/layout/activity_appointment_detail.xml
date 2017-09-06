@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:padding="@dimen/text_padding"
-                        android:text="医院名字："
+                        android:text="@string/appointment_hostpital_name"
                         android:textSize="@dimen/text_size"
                         />
 
@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:padding="@dimen/text_padding"
-                        android:text="时间："
+                        android:text="@string/appotinment_time_all"
                         android:textSize="@dimen/text_size"
                         />
 
@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:padding="@dimen/text_padding"
-                        android:text="手机号码："
+                        android:text="@string/appointment_phone_nameber"
                         android:textSize="@dimen/text_size"
                         />
 
@@ -243,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:padding="@dimen/text_padding"
-                        android:text="预约状态："
+                        android:text="@string/appointment_status"
                         android:textSize="@dimen/text_size"
                         />
 

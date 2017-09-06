@@ -134,5 +134,9 @@
     <string name="contract_us">联系我们：  18819259390  1289504616@qq.com</string>
     <string name="appointment_doctor_name">医生名：</string>
     <string name="doctor_detail">医生简介：</string>
+    <string name="appointment_hostpital_name">医院名字：</string>
+    <string name="appotinment_time_all">时间：</string>
+    <string name="appointment_phone_nameber">手机号码：</string>
+    <string name="appointment_status">预约状态：</string>
 
 </resources>

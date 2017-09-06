@@ -15,6 +15,10 @@ import io.reactivex.disposables.Disposable;
 
 public class ChatPresentImpl extends IChatPresenter{
     private static final String TAG="ChatPresentImpl";
+
+    /**
+     * 获取帮助
+     */
     @Override
     void getHelp() {
         Observer<AIResponeHelpBean> observer=new Observer<AIResponeHelpBean>() {
@@ -42,6 +46,10 @@ public class ChatPresentImpl extends IChatPresenter{
         mModel.getHelper(observer);
     }
 
+    /**
+     * 根据问题返回答案
+     * @param question
+     */
     @Override
     void getResponse(String question) {
         Observer<AIResponseBean> observer=new Observer<AIResponseBean>() {
