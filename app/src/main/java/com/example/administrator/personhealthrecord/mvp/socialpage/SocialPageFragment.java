@@ -95,6 +95,7 @@ public class SocialPageFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //加载背景图，加载完毕后开启动画
         Glide.with(this)
                 .load(R.drawable.community2)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -112,6 +113,7 @@ public class SocialPageFragment extends BaseFragment {
                     }
                 })
                 .into(mImageView);
+
         FragmentManager fm = getChildFragmentManager();
         mViewPager.setAdapter(new SocialPageViewPagerAdapter(fm));
         mViewPager.setOffscreenPageLimit(3);
@@ -120,8 +122,12 @@ public class SocialPageFragment extends BaseFragment {
         setUpWithActivity(view);
     }
 
+    /**
+     * 初始化背景图，完成后开启动画
+     */
     private void initImageView() {
         mImageMatrix = new Matrix();
+        //缩放动画，1-1.5倍
         animator = ValueAnimator.ofFloat(1, 1.5f)
                 .setDuration(15000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -130,7 +136,8 @@ public class SocialPageFragment extends BaseFragment {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float s = (float) animation.getAnimatedValue();
                 if (mImageView != null) {
-                    mImageMatrix.setScale(s, s, mImageView.getWidth() * 1.0f / 2, mImageView.getHeight() * 1.0f / 2);
+                    mImageMatrix.setScale(s, s, mImageView.getWidth() * 1.0f / 2,
+                            mImageView.getHeight() * 1.0f / 2);
                     mImageView.setImageMatrix(mImageMatrix);
                 }
             }
@@ -140,6 +147,9 @@ public class SocialPageFragment extends BaseFragment {
         animator.start();
     }
 
+    /**
+     * 开启背景图缩放动画
+     */
     public void startImageAnim() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (animator != null && animator.isPaused()) {
@@ -156,6 +166,9 @@ public class SocialPageFragment extends BaseFragment {
         }
     }
 
+    /**
+     * 关闭背景图动画
+     */
     public void stopImageAnim() {
         if (animator != null && animator.isRunning()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -165,7 +178,6 @@ public class SocialPageFragment extends BaseFragment {
             }
         }
     }
-
 
     private void setUpWithActivity(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -214,10 +226,8 @@ public class SocialPageFragment extends BaseFragment {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 int color;
-                /**
-                 * 0->1
-                 */
                 int curPos = getCurrentPosition();
+                //从左往右
                 if ((position == 0 && curPos == 0) ||
                         (position == 1 && curPos == 1) ||
                         (position == 2 && curPos == 2)) {
@@ -233,35 +243,8 @@ public class SocialPageFragment extends BaseFragment {
                         ((MainActivity) getActivity()).refreshBottom();
                     }
                 }
-                /**
-                 * 1->2
-                 *//*
-                else if (position == 1 && getCurrentPosition() == 1) {
-                    AnimateUtil.scaleHide(mFloatingActionButton, positionOffset);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        int color = getCurrentColor(positionOffset, Color.parseColor(colorsStr[position]),
-                                Color.parseColor(colorsStr[position + 1]));
-                        mCollapsingToolbarLayout.setBackgroundColor(color);
-                        mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
-                        mCollapsingToolbarLayout.setContentScrimColor(color);
-                    }
-                }
-                *//**
-                 * 2->3
-                 *//*
-                else if (position == 2 && getCurrentPosition() == 2) {
-                    AnimateUtil.scaleHide(mFloatingActionButton, positionOffset);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        int color = getCurrentColor(positionOffset, Color.parseColor(colorsStr[position]),
-                                Color.parseColor(colorsStr[position + 1]));
-                        mCollapsingToolbarLayout.setBackgroundColor(color);
-                        mCollapsingToolbarLayout.setBackgroundTintMode(PorterDuff.Mode.SRC);
-                        mCollapsingToolbarLayout.setContentScrimColor(color);
-                    }
-                }*/
-                /**
-                 * 3->2
-                 */
+
+                //从右往左
                 else if ((position == 2 && getCurrentPosition() == 3 ||
                         position == 1 && getCurrentPosition() == 2 ||
                         position == 0 && getCurrentPosition() == 1)) {
@@ -277,18 +260,6 @@ public class SocialPageFragment extends BaseFragment {
                         ((MainActivity) getActivity()).refreshBottom();
                     }
                 }
-                /**
-                 * 2->1
-                 *//*
-                else if (position == 1 && getCurrentPosition() == 2) {
-                    AnimateUtil.scaleHide(mFloatingActionButton, 1 - positionOffset);
-                }
-                *//**
-                 * 1->0
-                 *//*
-                else if (position == 0 && getCurrentPosition() == 1) {
-                    AnimateUtil.scaleHide(mFloatingActionButton, 1 - positionOffset);
-                }*/
             }
 
             @Override

@@ -17,6 +17,11 @@ import com.example.administrator.personhealthrecord.mvp.socialpage.SocialPageFra
  */
 
 public class FragmentMgr {
+    public static final int HOME_PAGE = 0;
+    public static final int SOCIAL_PAGE = 1;
+    public static final int HEALTHY_NEWS_PAGE = 2;
+    public static final int CHECK_PAGE = 3;
+
     private static final String TAG = "FragmentMgr";
     private SocialPageFragment mSocialPageFragment;
 
@@ -31,18 +36,19 @@ public class FragmentMgr {
             @Override
             public Fragment getItem(int position) {
                 switch (position) {
-                    case 0:
+                    case HOME_PAGE:
                         return HomePageFragment.newInstance();
-                    case 1:
+                    case SOCIAL_PAGE:
                         return mSocialPageFragment = SocialPageFragment.newInstance();
-                    case 2:
+                    case HEALTHY_NEWS_PAGE:
                         return HealthyNewsFragment.getInstance();
-                    case 3:
+                    case CHECK_PAGE:
                         return CheckPageFragment.newInstance();
                     default:
                         return HomePageFragment.newInstance();
                 }
             }
+
             @Override
             public int getCount() {
                 return 4;
@@ -50,27 +56,15 @@ public class FragmentMgr {
         };
     }
 
-    public Fragment getFragment(int pos) {
-        if (pos == 0) {
-            ExecuteAdapter(0);
-        }
-        if (pos == 1) {
-            ExecuteAdapter(1);
-        }
-        if (pos == 2) {
-            ExecuteAdapter(2);
-        }
-        if (pos == 3) {
-            ExecuteAdapter(3);
-        }
-        return null;
+    public void setFragment(int pos) {
+        executeAdapter(pos);
     }
 
-    private void ExecuteAdapter(int position) {
+    private void executeAdapter(int position) {
         Fragment fragment = (Fragment) mFragmentPagerAdapter.instantiateItem(content, position);
         mFragmentPagerAdapter.setPrimaryItem(content, 0, fragment);
         mFragmentPagerAdapter.finishUpdate(content);
-        if (position == 1) {
+        if (position == SOCIAL_PAGE) {
             int pos = ((SocialPageFragment) fragment).getCurrentPosition();
             ((MainActivity) context).setBottomBarTint(Contract.colors[pos]);
             ((SocialPageFragment) fragment).startImageAnim();

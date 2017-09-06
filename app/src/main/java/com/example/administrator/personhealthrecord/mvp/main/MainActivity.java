@@ -200,7 +200,7 @@ public class MainActivity extends AMainActivity {
 
     @Override
     public void setFragment(int position) {
-        fragmentMgr.getFragment(position);
+        fragmentMgr.setFragment(position);
     }
 
     @Override

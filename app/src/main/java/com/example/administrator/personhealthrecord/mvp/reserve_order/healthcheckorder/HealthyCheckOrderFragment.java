@@ -31,7 +31,7 @@ import butterknife.BindView;
 
 public class HealthyCheckOrderFragment extends IReserveOrderView {
     private static final String TAG = "HealthyCheckOrder";
-    @BindView(R.id.reserve_order_recycleview)
+    @BindView(R.id.reserve_order_recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R.id.health_check_reserve_order_ProgressBar)
     SwipeRefreshLayout mSwipeRefreshLayout;

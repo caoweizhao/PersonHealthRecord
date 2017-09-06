@@ -29,7 +29,7 @@ import butterknife.BindView;
 
 public class AppointmentOrderFragment extends IReserveOrderView {
     private static final String TAG = "Appointment";
-    @BindView(R.id.reserve_order_recycleview)
+    @BindView(R.id.reserve_order_recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R.id.health_check_reserve_order_ProgressBar)
     SwipeRefreshLayout mSwipeRefreshLayout;

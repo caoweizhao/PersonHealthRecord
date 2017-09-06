@@ -12,8 +12,8 @@ import java.util.List;
 
 public abstract class IReservePresenter extends BasePresenter<IReserveView,IReserveModel>{
     public abstract void getPackageHospitals();
-    public abstract void OnhospitalReady(List<HospitalBean> collection);
+    public abstract void onHospitalReady(List<HospitalBean> collection);
     public abstract void getPackage(int id);
-    public abstract void OnPackageReadey(List<PackageBean> collection);
+    public abstract void OnPackageReady(List<PackageBean> collection);
     public abstract void ReserveNow(long StartTime,long EndTime,String name,String phoneNumber,int id);
 }
