@@ -53,6 +53,7 @@ public class SearchAdapter extends BaseSectionQuickAdapter<SearchSection, BaseVi
     @Override
     protected void convert(BaseViewHolder helper, SearchSection item) {
 
+        //设置搜索关键字颜色（名字、概要中的关键字）
         SpannableString nameString = new SpannableString(item.t.getName());
         int length = mQuery.length();
         int index = item.t.getName().indexOf(mQuery);

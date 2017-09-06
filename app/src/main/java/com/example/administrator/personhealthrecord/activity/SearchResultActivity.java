@@ -109,17 +109,25 @@ public class SearchResultActivity extends BaseActivity {
                                             jsonObject.get("medicine").toString(),
                                             new TypeToken<List<MedicineBean>>() {
                                             }.getType());
+                                    //加入医院列表头部
                                     mSearchSections.add(new SearchSection(true, "医院列表：" + hospitalBeanList.size() + "条记录"));
+                                    //加入医院列表
                                     for (HospitalBean hospital : hospitalBeanList) {
                                         mHospitalSections.add(new SearchSection(hospital));
                                     }
                                     mSearchSections.addAll(mHospitalSections);
+
+                                    //加入医生列表头部
                                     mSearchSections.add(new SearchSection(true, "医生列表：" + expertBeanList.size() + "条记录"));
+                                    //加入医生列表
                                     for (ExpertBean expert : expertBeanList) {
                                         mExpertSections.add(new SearchSection(expert));
                                     }
                                     mSearchSections.addAll(mExpertSections);
+
+                                    //加入药物列表头部
                                     mSearchSections.add(new SearchSection(true, "药物列表：" + medicineBeenList.size() + "条记录"));
+                                    //加入药物列表
                                     for (MedicineBean medicine : medicineBeenList) {
                                         mMedicineSections.add(new SearchSection(medicine));
                                     }
