@@ -76,7 +76,7 @@ public class ReserveOrderPresenterImpl extends IReserveOrderPresenter {
             public void onNext(ResultUtilOfHealthyOrderBean<AppointmentBean> value) {
                 if (value.getStatus().equals("success")) {
                     if (!(value.getCollection() == null)) {
-                        Log.d(TAG, "onNext: " + value.getStatus());
+                        Log.d(TAG, "onNext: " + value.getCollection().get(0).getStartTime());
                         ((AppointmentOrderFragment) mView).OnAppointmentReady(value.getCollection());
                     } else {
                         ((AppointmentOrderFragment) mView).NoPackage();

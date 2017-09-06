@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/text_padding"
-            android:text="开发小组成员：\n连浩逵、彭伟伦、曹伟钊\n刘剑璇、林绮婷、罗永楠"
+            android:text="@string/group_number"
             android:textColor="#fff"
             android:textSize="@dimen/text_size"
             />
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/text_padding"
-            android:text="简述：\n        当前版本APP所涉及的图片以及相关的文章均为公共网络资源，均仅做测试使用，如有侵犯个人权益信息，请及时联系项目组成员，立即删除并道歉，以免造成进一步的损失。\n        如有对APP建议的，也可以联系我们，欢迎各位提出建议，我们将进行考虑。"
+            android:text="@string/app_detail"
             android:textColor="#fff"
             android:textSize="@dimen/text_size"
             />
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.2"
             android:padding="@dimen/text_padding"
-            android:text="联系我们：\n   18819259390\n   1289504616@qq.com"
+            android:text="@string/contract_us"
             android:textColor="#fff"
             android:textIsSelectable="true"
             android:textSize="@dimen/text_size"

@@ -70,8 +70,8 @@ public class AppointmentDetailActivity extends BaseActivity {
         mAppointmentDoctorName.setText(mAppointmentBean.getDoctorName());
         mAppointmentDoctorDetail.setText(mAppointmentBean.getDoctorSkill());
         mAppointmentHospitalName.setText(mAppointmentBean.getHospitalName());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:MM");
-        mAppointmentTime.setText(format.format(new Date(mAppointmentBean.getStartTime())) + " - " + format.format(new Date(mAppointmentBean.getStartTime())));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        mAppointmentTime.setText(format.format(new Date(mAppointmentBean.getStartTime())) + " - " + format.format(new Date(mAppointmentBean.getEndTime())));
         mAppointmentPhoneNumber.setText(mAppointmentBean.getPhoneNumber());
         mAppointmentStatus.setText(mAppointmentBean.getOrderStatus());
     }

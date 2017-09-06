@@ -129,5 +129,10 @@
     <string name="cancle_reserve">取消预约</string>
     <string name="cancle_order_reserve">取消预约</string>
     <string name="reserve_hospital">医院：</string>
+    <string name="group_number">开发小组成员： 连浩逵、彭伟伦、曹伟钊 刘剑璇、林绮婷、罗永楠</string>
+    <string name="app_detail">简述：  当前版本APP所涉及的图片以及相关的文章均为公共网络资源，均仅做测试使用，如有侵犯个人权益信息，请及时联系项目组成员，立即删除并道歉，以免造成进一步的损失。  如有对APP建议的，也可以联系我们，欢迎各位提出建议，我们将进行考虑。</string>
+    <string name="contract_us">联系我们：  18819259390  1289504616@qq.com</string>
+    <string name="appointment_doctor_name">医生名：</string>
+    <string name="doctor_detail">医生简介：</string>
 
 </resources>
