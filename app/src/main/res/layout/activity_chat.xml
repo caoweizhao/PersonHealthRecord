@@ -29,7 +29,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/textview_border"
+            android:background="@drawable/text_view_border"
             android:hint="输入你想说的话"
             android:maxLines="2"
             android:paddingLeft="10dp" />

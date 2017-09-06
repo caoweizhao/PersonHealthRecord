@@ -1,11 +1,12 @@
 package com.example.administrator.personhealthrecord.activity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.example.administrator.personhealthrecord.util.ToastUtil;
 import com.google.gson.Gson;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.json.JSONException;
@@ -27,7 +29,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,8 +57,6 @@ public class AddCaseActivity extends BaseActivity {
     TextView mAddCaseGenderText;
     @BindView(R.id.edit_hospital)
     EditText mEditHospital;
-    @BindView(R.id.edit_time)
-    EditText mEditTime;
     @BindView(R.id.edit_condition)
     EditText mEditCondition;
     @BindView(R.id.prescription)
@@ -72,11 +71,10 @@ public class AddCaseActivity extends BaseActivity {
     EditText mEditRemark;
     @BindView(R.id.add_case_commit)
     Button mAddCaseCommit;
-    @BindView(R.id.date_input_layout)
-    TextInputLayout mDateInputLayout;
+    @BindView(R.id.add_case_date)
+    TextView mDateTextView;
 
     CaseBean mCaseBean = new CaseBean();
-    Date mDate = new Date();
     AddCaseService mService;
     SweetAlertDialog mLoadingDialog;
     SweetAlertDialog mSuccessDialog;
@@ -92,6 +90,8 @@ public class AddCaseActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initToolbar("添加病历", true, null);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        mDateTextView.setText(sdf.format(mCalendar.getTime()));
         mService = RetrofitUtil.getRetrofit().create(AddCaseService.class);
         mLoadingDialog = DialogUtil.getLoadingDialog(this);
         mSuccessDialog = DialogUtil.getSuccessDialog(this, "添加成功！", true);
@@ -158,48 +158,30 @@ public class AddCaseActivity extends BaseActivity {
                 mCaseBean.setHospitalName(sequence.toString());
             }
         });
-        /**
-         * 就诊时间
-         */
-        RxTextView.textChanges(mEditTime)
-                .filter(new Predicate<CharSequence>() {
-                    @Override
-                    public boolean test(CharSequence sequence) throws Exception {
-                        if (TextUtils.isEmpty(sequence)) {
-                            if (mDateInputLayout.isErrorEnabled()) {
-                                mDateInputLayout.setErrorEnabled(false);
-                            }
-                        }
-                        return !TextUtils.isEmpty(sequence);
-                    }
-                }).subscribe(new Consumer<CharSequence>() {
+        //就诊时间
+        RxView.clicks(mDateTextView).subscribe(new Consumer<Object>() {
             @Override
-            public void accept(CharSequence sequence) throws Exception {
+            public void accept(Object o) throws Exception {
+                new DatePickerDialog(AddCaseActivity.this, new DatePickerDialog.OnDateSetListener() {
 
-                if (validateDateInput(sequence.toString())) {
-                    try {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        Date date = sdf.parse(sequence.toString());
-                        if (date.after(mDate)) {
-                            mDateInputLayout.setError("日期不允许在当前日期之后！");
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mCalendar.set(year, month, dayOfMonth);
+                        Calendar now = Calendar.getInstance();
+                        if (mCalendar.after(now)) {
+                            ToastUtil.Toast("选择日期不能在当前日期之前！");
                         } else {
-                            mCaseBean.setTime(date.getTime());
-                            if (mDateInputLayout.isErrorEnabled()) {
-                                mDateInputLayout.setErrorEnabled(false);
-                            }
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            mCaseBean.setTime(mCalendar.getTime().getTime());
+                            mDateTextView.setText(sdf.format(mCalendar.getTime()));
                         }
 
-                    } catch (Exception e) {
-                        mDateInputLayout.setError("日期格式不正确");
-                        mCaseBean.setTime(mDate.getTime());
                     }
-                } else {
-                    mDateInputLayout.setError("日期格式不正确");
-                    mCaseBean.setTime(mDate.getTime());
-
-                }
+                }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DATE))
+                        .show();
             }
         });
+
         /**
          * 身体状况
          */
@@ -265,56 +247,45 @@ public class AddCaseActivity extends BaseActivity {
         mAddCaseCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDateInputLayout.isErrorEnabled() || TextUtils.isEmpty(mEditTime.getText())) {
-                    ToastUtil.Toast("请输入正确的日期格式！");
-                } else {
-                    mLoadingDialog.show();
-                    mService.addCase(mCaseBean, Contract.cookie)
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.io())
-                            .subscribe(new Observer<ResponseBody>() {
-                                @Override
-                                public void onSubscribe(Disposable d) {
-                                    mDisposables.add(d);
-                                }
+                mLoadingDialog.show();
+                mService.addCase(mCaseBean, Contract.cookie)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Observer<ResponseBody>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                mDisposables.add(d);
+                            }
 
-                                @Override
-                                public void onNext(ResponseBody value) {
+                            @Override
+                            public void onNext(ResponseBody value) {
 
-                                    // TODO: 2017-8-5 根据返回信息判断是否成功    mSuccessDialog.show();
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(value.string());
-                                        if (jsonObject.get("status").equals("success")) {
-                                            mSuccessDialog.show();
-                                        } else {
-                                            ToastUtil.Toast("提交失败");
-                                        }
-                                    } catch (JSONException | IOException e) {
-                                        e.printStackTrace();
+                                // TODO: 2017-8-5 根据返回信息判断是否成功    mSuccessDialog.show();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(value.string());
+                                    if (jsonObject.get("status").equals("success")) {
+                                        mSuccessDialog.show();
+                                    } else {
+                                        ToastUtil.Toast("提交失败");
                                     }
+                                } catch (JSONException | IOException e) {
+                                    e.printStackTrace();
                                 }
+                            }
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    ToastUtil.Toast("提交失败！");
-                                    mLoadingDialog.dismiss();
-                                }
+                            @Override
+                            public void onError(Throwable e) {
+                                ToastUtil.Toast("提交失败！");
+                                mLoadingDialog.dismiss();
+                            }
 
-                                @Override
-                                public void onComplete() {
-                                    mLoadingDialog.dismiss();
-                                }
-                            });
-                }
+                            @Override
+                            public void onComplete() {
+                                mLoadingDialog.dismiss();
+                            }
+                        });
             }
         });
-    }
-
-    private boolean validateDateInput(String sequence) {
-        String pattern = "([1-9]\\d{3})" + "-"
-                + "((0?[1-9])|((1[1-2])))" + "-"
-                + "(0?([1-9])|([1-2]\\d)|(3[0,1]))";
-        return sequence.matches(pattern);
     }
 
     @Override

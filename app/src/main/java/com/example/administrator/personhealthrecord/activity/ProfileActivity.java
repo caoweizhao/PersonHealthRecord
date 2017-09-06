@@ -31,8 +31,8 @@ import com.example.administrator.personhealthrecord.R;
 import com.example.administrator.personhealthrecord.base.BaseActivity;
 import com.example.administrator.personhealthrecord.bean.UserInfoBean;
 import com.example.administrator.personhealthrecord.contract.Contract;
-import com.example.administrator.personhealthrecord.mvp.register_and_login.LoginActivity;
 import com.example.administrator.personhealthrecord.util.AnimateUtil;
+import com.example.administrator.personhealthrecord.util.DialogUtil;
 import com.example.administrator.personhealthrecord.util.RetrofitUtil;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -110,6 +110,18 @@ public class ProfileActivity extends BaseActivity {
     @BindView(R.id.credit_text)
     TextView mCreditText;
 
+    @BindView(R.id.divider_view_1)
+    View divider_view_1;
+    @BindView(R.id.divider_view_2)
+    View divider_view_2;
+    @BindView(R.id.divider_view_3)
+    View divider_view_3;
+    @BindView(R.id.divider_view_4)
+    View divider_view_4;
+    @BindView(R.id.divider_view_5)
+    View divider_view_5;
+
+
     DisplayMetrics mMetrics = new DisplayMetrics();
     boolean isEditState;
     private ValueAnimator mUndoAnimator;
@@ -122,9 +134,9 @@ public class ProfileActivity extends BaseActivity {
     private ProfileService mService;
     private Disposable mDisposable;
     private UserInfoBean mUserInfoBean;
-    private SweetAlertDialog mDialog;
 
     private SweetAlertDialog mLoadingDialog;
+
 
     @Override
     protected int getLayoutRes() {
@@ -192,27 +204,8 @@ public class ProfileActivity extends BaseActivity {
                         }
                     });
         } else {
-            mDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
-            mDialog.setCancelable(false);
-            mDialog.setTitleText("登录提示")
-                    .setContentText("当前操作需要您登录，是否前往登录？")
-                    .setConfirmText("好的")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            mDialog.dismiss();
-                            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    }).setCancelText("不了")
-                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            mDialog.dismiss();
-                            finish();
-                        }
-                    });
-            mDialog.show();
+            SweetAlertDialog dialog = DialogUtil.getLoginDialog(this);
+            dialog.show();
         }
     }
 
@@ -310,6 +303,7 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
+        //编辑按钮点击
         RxView.clicks(mProfileEditFab)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -345,8 +339,7 @@ public class ProfileActivity extends BaseActivity {
                                         public void onComplete() {
                                             mLoadingDialog.dismiss();
                                             if (mProfileUndoFab.getScaleX() == 1) {
-                                                isEditState = false;
-                                                reverseAnimate();
+                                                toggleEditState();
                                                 initValue();
                                                 Toast.makeText(ProfileActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                             }
@@ -357,19 +350,56 @@ public class ProfileActivity extends BaseActivity {
                              * 当前为展示状态，切换为编辑状态
                              */
                             if (mProfileUndoFab.getScaleX() == 0) {
-                                isEditState = true;
-                                startAnimate();
+                                toggleEditState();
                             }
                         }
                     }
                 });
+        //撤销按钮点击
         mProfileUndoFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reverseAnimate();
-                isEditState = false;
+                //当前为编辑状态
+                toggleEditState();
             }
         });
+    }
+
+    /**
+     * 切换状态（展示、编辑）
+     */
+    private void toggleEditState() {
+        if (isEditState) {
+            reverseAnimate();
+            isEditState = false;
+            showDividerView();
+        } else {
+            isEditState = true;
+            startAnimate();
+            dismissDividerView();
+        }
+    }
+
+    /**
+     * 展示状态下，显示分割线
+     */
+    private void showDividerView() {
+        divider_view_1.setVisibility(View.VISIBLE);
+        divider_view_2.setVisibility(View.VISIBLE);
+        divider_view_3.setVisibility(View.VISIBLE);
+        divider_view_4.setVisibility(View.VISIBLE);
+        divider_view_5.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 编辑状态下，隐藏分割线
+     */
+    private void dismissDividerView() {
+        divider_view_1.setVisibility(View.INVISIBLE);
+        divider_view_2.setVisibility(View.INVISIBLE);
+        divider_view_3.setVisibility(View.INVISIBLE);
+        divider_view_4.setVisibility(View.INVISIBLE);
+        divider_view_5.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -599,6 +629,17 @@ public class ProfileActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isEditState) {
+            toggleEditState();
+        } else {
+            mProfileEditFab.setVisibility(View.GONE);
+            mProfileUndoFab.setVisibility(View.GONE);
+            super.onBackPressed();
+        }
+    }
+
     /**
      * 上传头像
      *
@@ -653,6 +694,6 @@ public class ProfileActivity extends BaseActivity {
         @Multipart
         @POST("user_info/updateImage")
         Call<ResponseBody> updateAvator(@Header("Cookie") String cookie, @Part MultipartBody.Part icon,
-                                        @Part("mDescription") RequestBody description);
+                                        @Part("description") RequestBody description);
     }
 }

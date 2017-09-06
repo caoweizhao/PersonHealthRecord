@@ -138,7 +138,9 @@
                     </FrameLayout>
                 </LinearLayout>
 
-                <include layout="@layout/divider_view"/>
+                <include
+                    android:id="@+id/divider_view_1"
+                    layout="@layout/divider_view"/>
 
                 <!--性别-->
                 <LinearLayout
@@ -181,7 +183,9 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/divider_view"/>
+                <include
+                    android:id="@+id/divider_view_2"
+                    layout="@layout/divider_view"/>
                 <!--电话-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -223,7 +227,9 @@
                     </FrameLayout>
                 </LinearLayout>
 
-                <include layout="@layout/divider_view"/>
+                <include
+                    android:id="@+id/divider_view_3"
+                    layout="@layout/divider_view"/>
                 <!--地址-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -264,7 +270,9 @@
                     </FrameLayout>
                 </LinearLayout>
 
-                <include layout="@layout/divider_view"/>
+                <include
+                    android:id="@+id/divider_view_4"
+                    layout="@layout/divider_view"/>
                 <!--积分-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -307,7 +315,9 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/divider_view"/>
+                <include
+                    android:id="@+id/divider_view_5"
+                    layout="@layout/divider_view"/>
 
             </LinearLayout>
         </ScrollView>

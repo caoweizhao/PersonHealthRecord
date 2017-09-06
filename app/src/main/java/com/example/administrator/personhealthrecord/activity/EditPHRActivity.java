@@ -1,8 +1,6 @@
 package com.example.administrator.personhealthrecord.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -88,6 +86,10 @@ public class EditPHRActivity extends BaseActivity {
     Map<String, Integer> mSpinnerIndex = new HashMap<>();
     EditPHRService mService;
     Disposable mDisposable;
+    public static final int BLOOD_TYPE_A = 0;
+    public static final int BLOOD_TYPE_B = 1;
+    public static final int BLOOD_TYPE_AB = 2;
+    public static final int BLOOD_TYPE_O = 3;
 
     @Override
     protected int getLayoutRes() {
@@ -107,9 +109,8 @@ public class EditPHRActivity extends BaseActivity {
             }
         }
 
-        if(mPHRBean==null)
-        {
-            mPHRBean=new PHRBean();
+        if (mPHRBean == null) {
+            mPHRBean = new PHRBean();
         }
         SpannableString ss = new SpannableString("kg/m2");
         SuperscriptSpan sss = new SuperscriptSpan();
@@ -118,13 +119,6 @@ public class EditPHRActivity extends BaseActivity {
 
         mService = RetrofitUtil.getRetrofit().create(EditPHRService.class);
         initToolbar("修改个人PHR", true, null);
-
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
 
     }
 
@@ -181,16 +175,16 @@ public class EditPHRActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0:
+                    case BLOOD_TYPE_A:
                         mPHRBean.setBloodType("A型");
                         break;
-                    case 1:
+                    case BLOOD_TYPE_B:
                         mPHRBean.setBloodType("B型");
                         break;
-                    case 2:
+                    case BLOOD_TYPE_AB:
                         mPHRBean.setBloodType("AB型");
                         break;
-                    case 3:
+                    case BLOOD_TYPE_O:
                         mPHRBean.setBloodType("O型");
                         break;
                     default:

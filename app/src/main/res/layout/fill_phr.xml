@@ -356,6 +356,7 @@
 
                         </Spinner>
                     </LinearLayout>
+
                     <include layout="@layout/divider_view"/>
                     <!--饮酒类型-->
                     <LinearLayout
@@ -447,37 +448,45 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_frame"
-                            android:minHeight="120dp"
                             android:gravity="start|top"
-                            android:padding="@dimen/edit_padding"
+                            android:minHeight="120dp"
+                            android:padding="10dp"
                             android:textSize="@dimen/text_size"/>
 
                     </LinearLayout>
 
                     <!--药物过敏史-->
-                    <android.support.design.widget.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="药物过敏史"
-                        >
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/text_padding"
+                            android:text="药物过敏史："
+                            android:textSize="@dimen/text_size"/>
 
                         <EditText
                             android:id="@+id/edit_allergy_history"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/input_frame"
+                            android:gravity="start|top"
                             android:imeOptions="actionNext"
                             android:inputType="text"
-                            android:numeric="integer"
-                            android:paddingLeft="@dimen/text_padding"
-                            android:singleLine="true"
+                            android:minHeight="120dp"
+                            android:padding="10dp"
                             android:textSize="@dimen/text_size"/>
-                    </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
 
                     <!--确认提交-->
                     <Button
                         android:id="@+id/commit_ok"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_gravity="bottom"
                         android:background="@drawable/edit_phr_btn_bg"
                         android:text="@string/commit_ok"

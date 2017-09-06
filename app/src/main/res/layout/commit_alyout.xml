@@ -147,7 +147,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/textview_border"
+                            android:background="@drawable/text_view_border"
                             android:textAlignment="center"
                             android:textColor="#000"
                             android:gravity="center"
@@ -186,7 +186,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="6dp"
-                            android:background="@drawable/textview_border"
+                            android:background="@drawable/text_view_border"
                             android:entries="@array/healthy_check_time" />
                         <!--<TextView-->
                         <!--android:id="@+id/healthtest_time"-->
@@ -195,7 +195,7 @@
                         <!--android:layout_margin="6dp"-->
                         <!--android:layout_marginLeft="28dp"-->
                         <!--android:layout_weight="0.8"-->
-                        <!--android:background="@drawable/textview_border"-->
+                        <!--android:background="@drawable/text_view_border"-->
                         <!--android:gravity="center"-->
                         <!--android:padding="2dp"-->
                         <!--android:textAlignment="center"-->
@@ -244,7 +244,7 @@
                         android:layout_margin="6dp"
                         android:layout_marginLeft="43dp"
                         android:layout_weight="1.89"
-                        android:background="@drawable/textview_border"
+                        android:background="@drawable/text_view_border"
                         android:gravity="center"
                         android:hint="请输入就诊人姓名"
                         android:maxLines="1"
@@ -283,7 +283,7 @@
                         android:layout_margin="6dp"
                         android:layout_marginLeft="28dp"
                         android:layout_weight="1.87"
-                        android:background="@drawable/textview_border"
+                        android:background="@drawable/text_view_border"
                         android:gravity="center"
                         android:hint="请输入就诊人电话号码"
                         android:inputType="number"

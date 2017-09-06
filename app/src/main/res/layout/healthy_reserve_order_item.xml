@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:padding="5dp"
-                        android:background="@drawable/textview_border"
+                        android:background="@drawable/text_view_border"
                         tools:text="体检时间:2017年7月30号" />
 
                     <TextView
