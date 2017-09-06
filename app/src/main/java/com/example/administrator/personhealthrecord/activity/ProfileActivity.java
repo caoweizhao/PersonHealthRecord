@@ -653,6 +653,6 @@ public class ProfileActivity extends BaseActivity {
         @Multipart
         @POST("user_info/updateImage")
         Call<ResponseBody> updateAvator(@Header("Cookie") String cookie, @Part MultipartBody.Part icon,
-                                        @Part("mDescription") RequestBody description);
+                                        @Part("description") RequestBody description);
     }
 }

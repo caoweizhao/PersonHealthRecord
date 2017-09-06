@@ -26,9 +26,9 @@ public class Contract {
     //远程URL
     public static final String Remote_URL = "http://106.14.136.52:8080/";
     //本地URL
-    public static final String Local_URL = "http://192.168.13.70:8080/";
+    public static final String Local_URL = "http://192.168.13.162:8080/";
     //URL
-    public static String BASE_URL = IsTest?Local_URL:Remote_URL;
+    public static String BASE_URL = getUrl();
 
     //专家推荐类型
     /**

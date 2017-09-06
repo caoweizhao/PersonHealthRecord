@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.example.administrator.personhealthrecord.base.BaseActivity;
+import com.example.administrator.personhealthrecord.contract.Contract;
 
 import org.litepal.LitePal;
 
@@ -38,6 +39,7 @@ public class MyApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        Contract.IsTest=true;
         myApplication = this;
         LitePal.initialize(this);
         activities = new LinkedList<>();
